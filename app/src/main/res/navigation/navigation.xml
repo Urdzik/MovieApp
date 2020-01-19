@@ -3,12 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/overviewFragment2">
+    app:startDestination="@id/overviewFragment">
     <fragment
-        android:id="@+id/overviewFragment2"
+        android:id="@+id/overviewFragment"
         android:name="com.example.movieapp.overview.OverviewFragment"
         android:label="overview_fragment"
-        tools:layout="@layout/overview_fragment" />
+        tools:layout="@layout/overview_fragment" >
+        <action
+            android:id="@+id/action_overviewFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.movieapp.detail.DetailFragment"
