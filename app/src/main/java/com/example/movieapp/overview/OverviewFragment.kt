@@ -8,26 +8,33 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.movieapp.R
+import com.example.movieapp.databinding.OverviewFragmentBinding
 
 class OverviewFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = OverviewFragment()
-    }
 
-    private lateinit var viewModel: OverviewViewModel
+
+    private val viewModel: OverviewViewModel by lazy {
+        ViewModelProviders.of(this).get(OverviewViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.overview_fragment, container, false)
+
+        val binding = OverviewFragmentBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+
+        binding.viewModel = viewModel
+        binding.recycler.adapter = MovieAdapter()
+
+
+
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(OverviewViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }
