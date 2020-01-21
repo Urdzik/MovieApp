@@ -5,19 +5,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieapp.R
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.network.MovieProperty
 
-class MovieAdapter : ListAdapter<MovieProperty, MovieAdapter.MovieViewHolder>(DiffCallback()) {
+class MovieAdapter(private val onClickListener: ClickListener) :
+    ListAdapter<MovieProperty, MovieAdapter.MovieViewHolder>(DiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-       return MovieViewHolder(ItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return MovieViewHolder(ItemBinding.inflate(
+            LayoutInflater.from(parent.context)
+        ))
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-       val item = getItem(position)
+        val item = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(item)
+        }
         holder.bind(item)
     }
 
@@ -39,4 +44,8 @@ class MovieAdapter : ListAdapter<MovieProperty, MovieAdapter.MovieViewHolder>(Di
         }
 
     }
+    class ClickListener(val clickListener: (movieProperty: MovieProperty) -> Unit) {
+        fun onClick(movieProperty: MovieProperty) = clickListener(movieProperty)
+    }
 }
+

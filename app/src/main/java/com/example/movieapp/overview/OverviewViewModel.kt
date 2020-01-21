@@ -27,6 +27,10 @@ class OverviewViewModel : ViewModel() {
     val property: LiveData<List<MovieProperty>>
         get() = _property
 
+    private val _navigateToSelectProperty = MutableLiveData<MovieProperty>()
+    val navigateToSelectProperty: LiveData<MovieProperty>
+        get() = _navigateToSelectProperty
+
     init {
         getMovieListProperty()
     }
@@ -46,6 +50,14 @@ class OverviewViewModel : ViewModel() {
                 Log.i("Message", e.message)
             }
         }
+    }
+
+    fun displayPropertyDetails(movieProperty: MovieProperty){
+        _navigateToSelectProperty.value = movieProperty
+    }
+
+    fun displayPropertyDetailsComlited(){
+        _navigateToSelectProperty.value = null
     }
 
     override fun onCleared() {

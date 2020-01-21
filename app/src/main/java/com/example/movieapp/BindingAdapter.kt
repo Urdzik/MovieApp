@@ -3,6 +3,7 @@ package com.example.movieapp
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -53,6 +54,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<MovieProperty>?) {
     val adapter = recyclerView.adapter as MovieAdapter
     adapter.submitList(data)
 }
+
 
 
 @BindingAdapter("movieApiStatus")

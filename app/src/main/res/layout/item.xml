@@ -16,14 +16,14 @@
         android:id="@+id/itemConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
 
         <ImageView
             android:id="@+id/poster"
             android:layout_width="70dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:cropToPadding="true"
             app:imageUrl="@{property.poster}"
