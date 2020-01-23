@@ -1,10 +1,9 @@
 package com.example.movieapp.network
 
-import android.os.Parcelable
 import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import com.squareup.moshi.JsonClass
 
-@Parcelize
+@JsonClass(generateAdapter = true)
 data class MovieProperty(
     @Json(name = "imdbID") val id: String,
 
@@ -13,7 +12,7 @@ data class MovieProperty(
     @Json(name = "Year") val year: Int,
     @Json(name = "Rated") val rated: String,
     @Json(name = "Plot") val plot: String
-) : Parcelable {
+) {
     val isR
         get() = rated == "R"
 }
