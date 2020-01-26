@@ -8,11 +8,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-private const val BASE_URL = "https://gist.githubusercontent.com/Urdzik/de477f8e3d7baf4366c9d797cfe63531/raw/ff40b0e1d00f19e561bd26d000f85201a968bffb"
+private const val BASE_URL = "https://api.myjson.com/bins/"
 
 interface MovieApiService {
-    @GET("Movie.json")
-    fun getPropertyAsync(): Deferred<MoviePropertyContainer>
+    @GET("x3756")
+    suspend fun getPropertyAsync(): MoviePropertyContainer
 }
 
 object MovieApi{
