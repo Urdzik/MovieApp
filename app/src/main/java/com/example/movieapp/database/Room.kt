@@ -27,7 +27,7 @@ fun getDatabase(context: Context): MovieDatabase {
                 context.applicationContext,
                 MovieDatabase::class.java,
                 "movies"
-            ).fallbackToDestructiveMigration().build()
+            ).build()
         }
     }
     return INSTANCE

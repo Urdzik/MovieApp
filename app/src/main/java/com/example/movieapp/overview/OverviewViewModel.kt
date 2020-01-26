@@ -1,13 +1,11 @@
 package com.example.movieapp.overview
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapp.database.getDatabase
 import com.example.movieapp.domian.Movie
-import com.example.movieapp.network.MovieProperty
 import com.example.movieapp.repository.MoviesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -47,7 +45,7 @@ class OverviewViewModel(application: Application) : ViewModel() {
         coroutineScope.launch {
             try {
                 _status.value = MovieApiStatus.LOADING
-                moviesRepository.refereshMovie()
+                moviesRepository.refreshMovie()
                 _status.value = MovieApiStatus.DONE
             } catch (e: Exception) {
                 if (playList.value!!.isEmpty()){

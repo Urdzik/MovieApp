@@ -11,8 +11,8 @@ import retrofit2.http.GET
 private const val BASE_URL = "https://api.myjson.com/bins/"
 
 interface MovieApiService {
-    @GET("x3756")
-    suspend fun getPropertyAsync(): MoviePropertyContainer
+    @GET("19tvhm")
+    suspend fun getPropertyAsync(): List<MovieProperty>
 }
 
 object MovieApi{

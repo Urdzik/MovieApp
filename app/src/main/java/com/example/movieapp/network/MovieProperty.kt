@@ -5,9 +5,6 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 
-@JsonClass(generateAdapter = true)
-data class MoviePropertyContainer(val movie: List<MovieProperty>)
-
 
 @JsonClass(generateAdapter = true)
 data class MovieProperty(
@@ -21,8 +18,8 @@ data class MovieProperty(
 )
 
 
-fun MoviePropertyContainer.asDatabaseModal(): List<DatabaseMovie>{
-    return movie.map{
+fun List<MovieProperty>.asDatabaseModal(): List<DatabaseMovie>{
+    return map{
         DatabaseMovie(
             id = it.id,
             title = it.title,

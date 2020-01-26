@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class MoviesRepository(private val movieDatabase: MovieDatabase){
-    suspend fun refereshMovie(){
+    suspend fun refreshMovie(){
         withContext(Dispatchers.IO){
             val playList = MovieApi.retrofitService.getPropertyAsync()
             movieDatabase.movieDao.insert(playList.asDatabaseModal())
