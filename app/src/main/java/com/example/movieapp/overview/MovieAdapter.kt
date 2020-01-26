@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
+import com.example.movieapp.domian.Movie
 import com.example.movieapp.network.MovieProperty
 
 class MovieAdapter(private val onClickListener: ClickListener) :
-    ListAdapter<MovieProperty, MovieAdapter.MovieViewHolder>(DiffCallback()) {
+    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(DiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -28,24 +29,26 @@ class MovieAdapter(private val onClickListener: ClickListener) :
 
     class MovieViewHolder(private val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movieProperty: MovieProperty) {
-            binding.property = movieProperty
+        fun bind(movie: Movie) {
+            binding.property = movie
             binding.executePendingBindings()
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<MovieProperty>() {
-        override fun areItemsTheSame(oldItem: MovieProperty, newItem: MovieProperty): Boolean {
+    class DiffCallback : DiffUtil.ItemCallback<Movie>() {
+        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: MovieProperty, newItem: MovieProperty): Boolean {
+        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
             return newItem.id == oldItem.id
         }
 
     }
-    class ClickListener(val clickListener: (movieProperty: MovieProperty) -> Unit) {
-        fun onClick(movieProperty: MovieProperty) = clickListener(movieProperty)
+
+
+    class ClickListener(val clickListener: (movie: Movie) -> Unit) {
+        fun onClick(movie: Movie) = clickListener(movie)
     }
 }
 

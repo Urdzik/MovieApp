@@ -6,7 +6,7 @@
 
         <variable
             name="property"
-            type="com.example.movieapp.network.MovieProperty" />
+            type="com.example.movieapp.domian.Movie" />
 
         <import type="android.view.View" />
 

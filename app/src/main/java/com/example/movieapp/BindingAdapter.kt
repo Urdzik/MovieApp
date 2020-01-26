@@ -9,6 +9,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.movieapp.domian.Movie
 import com.example.movieapp.network.MovieProperty
 import com.example.movieapp.overview.MovieAdapter
 import com.example.movieapp.overview.MovieApiStatus
@@ -50,7 +51,7 @@ fun TextView.bindYear(year: Int?) {
 }
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<MovieProperty>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
     val adapter = recyclerView.adapter as MovieAdapter
     adapter.submitList(data)
 }

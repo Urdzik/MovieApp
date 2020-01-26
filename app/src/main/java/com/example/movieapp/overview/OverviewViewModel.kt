@@ -1,11 +1,14 @@
 package com.example.movieapp.overview
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.network.MovieApi
+import com.example.movieapp.database.getDatabase
+import com.example.movieapp.domian.Movie
 import com.example.movieapp.network.MovieProperty
+import com.example.movieapp.repository.MoviesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -15,7 +18,7 @@ enum class MovieApiStatus {
     LOADING, DONE, ERROR
 }
 
-class OverviewViewModel : ViewModel() {
+class OverviewViewModel(application: Application) : ViewModel() {
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -23,13 +26,17 @@ class OverviewViewModel : ViewModel() {
     val status: LiveData<MovieApiStatus>
         get() = _status
 
-    private val _property = MutableLiveData<List<MovieProperty>>()
-    val property: LiveData<List<MovieProperty>>
+    private val _property = MutableLiveData<List<Movie>>()
+    val property: LiveData<List<Movie>>
         get() = _property
 
-    private val _navigateToSelectProperty = MutableLiveData<MovieProperty>()
-    val navigateToSelectProperty: LiveData<MovieProperty>
+    private val _navigateToSelectProperty = MutableLiveData<Movie>()
+    val navigateToSelectProperty: LiveData<Movie>
         get() = _navigateToSelectProperty
+
+
+    private val moviesRepository = MoviesRepository(getDatabase(application))
+    val playList = moviesRepository.movies
 
     init {
         getMovieListProperty()
@@ -38,25 +45,24 @@ class OverviewViewModel : ViewModel() {
 
     private fun getMovieListProperty() {
         coroutineScope.launch {
-            val getPropertyDeferred = MovieApi.retrofitService.getPropertyAsync()
             try {
                 _status.value = MovieApiStatus.LOADING
-                val listProperty = getPropertyDeferred.await()
-                _property.value = listProperty
+                moviesRepository.refereshMovie()
                 _status.value = MovieApiStatus.DONE
             } catch (e: Exception) {
-                _status.value = MovieApiStatus.ERROR
-                _property.value = ArrayList()
-                Log.i("Message", e.message)
+                if (playList.value!!.isEmpty()){
+                    _status.value = MovieApiStatus.ERROR
+                }
+
             }
         }
     }
 
-    fun displayPropertyDetails(movieProperty: MovieProperty){
-        _navigateToSelectProperty.value = movieProperty
+    fun displayPropertyDetails(movie: Movie) {
+        _navigateToSelectProperty.value = movie
     }
 
-    fun displayPropertyDetailsComlited(){
+    fun displayPropertyDetailsComlited() {
         _navigateToSelectProperty.value = null
     }
 

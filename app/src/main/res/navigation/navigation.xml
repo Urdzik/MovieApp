@@ -22,7 +22,7 @@
         tools:layout="@layout/detail_fragment">
         <argument
            android:name="movieProperty"
-            app:argType="com.example.movieapp.network.MovieProperty"
+            app:argType="com.example.movieapp.domian.Movie"
             />
         <action
             android:id="@+id/action_detailFragment_to_overviewFragment"
