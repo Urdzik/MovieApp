@@ -17,17 +17,11 @@ interface MovieApiService {
 
 object MovieApi{
 
-    private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
-
     private val retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .baseUrl(BASE_URL)
         .build()
 
-    val retrofitService: MovieApiService by lazy {
-        retrofit.create(MovieApiService::class.java)
-    }
+    val retrofitService: MovieApiService = retrofit.create(MovieApiService::class.java)
 }
