@@ -20,17 +20,17 @@ class OverviewViewModel(application: Application) : ViewModel() {
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _status = MutableLiveData<MovieApiStatus>()
-    val status: LiveData<MovieApiStatus>
-        get() = _status
-
-    private val _property = MutableLiveData<List<Movie>>()
-    val property: LiveData<List<Movie>>
-        get() = _property
-
     private val _navigateToSelectProperty = MutableLiveData<Movie>()
     val navigateToSelectProperty: LiveData<Movie>
         get() = _navigateToSelectProperty
+
+    private var _eventNetworkError = MutableLiveData<Boolean>(false)
+    val eventNetworkError: LiveData<Boolean>
+        get() = _eventNetworkError
+
+    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+    val isNetworkErrorShown: LiveData<Boolean>
+        get() = _isNetworkErrorShown
 
 
     private val moviesRepository = MoviesRepository(getDatabase(application))
@@ -44,12 +44,12 @@ class OverviewViewModel(application: Application) : ViewModel() {
     private fun getMovieListProperty() {
         coroutineScope.launch {
             try {
-                _status.value = MovieApiStatus.LOADING
                 moviesRepository.refreshMovie()
-                _status.value = MovieApiStatus.DONE
+                _eventNetworkError.value = false
+                _isNetworkErrorShown.value = false
             } catch (e: Exception) {
-                if (playList.value!!.isEmpty()){
-                    _status.value = MovieApiStatus.ERROR
+                if (playList.value!!.isEmpty()) {
+                    _eventNetworkError.value = true
                 }
 
             }
@@ -62,6 +62,10 @@ class OverviewViewModel(application: Application) : ViewModel() {
 
     fun displayPropertyDetailsComlited() {
         _navigateToSelectProperty.value = null
+    }
+
+    fun onNetworkErrorShown() {
+        _isNetworkErrorShown.value = true
     }
 
     override fun onCleared() {
