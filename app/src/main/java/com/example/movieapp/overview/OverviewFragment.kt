@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,8 +17,12 @@ class OverviewFragment : Fragment() {
 
 
     private val viewModel: OverviewViewModel by lazy {
-        ViewModelProviders.of(this).get(OverviewViewModel::class.java)
+        val activity = requireNotNull(this.activity) {}
+        ViewModelProviders.of(this, OverviewViewModelFactory(activity.application)).get(OverviewViewModel::class.java)
     }
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,10 +31,11 @@ class OverviewFragment : Fragment() {
 
         val binding = OverviewFragmentBinding.inflate(inflater)
         val myToolbar = binding.myToolbar
-
         (activity as AppCompatActivity).setSupportActionBar(myToolbar)
 
-        binding.lifecycleOwner = this
+
+
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = viewModel
         binding.recycler.adapter = MovieAdapter(MovieAdapter.ClickListener {
@@ -45,13 +51,17 @@ class OverviewFragment : Fragment() {
 
         })
 
-
-
-
-
+        viewModel.eventNetworkError.observe(this, Observer<Boolean> { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        })
 
         return binding.root
     }
 
-
+   private fun onNetworkError(){
+        if (!viewModel.isNetworkErrorShown.value!!){
+            Toast.makeText(activity, "Network error", Toast.LENGTH_LONG).show()
+            viewModel.onNetworkErrorShown()
+        }
+    }
 }

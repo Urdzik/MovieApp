@@ -2,14 +2,14 @@ package com.example.movieapp
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toolbar
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.movieapp.network.MovieProperty
+import com.example.movieapp.domian.Movie
 import com.example.movieapp.overview.MovieAdapter
 import com.example.movieapp.overview.MovieApiStatus
 
@@ -50,30 +50,19 @@ fun TextView.bindYear(year: Int?) {
 }
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<MovieProperty>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
     val adapter = recyclerView.adapter as MovieAdapter
     adapter.submitList(data)
 }
 
 
-
-@BindingAdapter("movieApiStatus")
-fun bindStatus(imageView: ImageView, status: MovieApiStatus?) {
-    when (status) {
-        MovieApiStatus.LOADING -> {
-            imageView.visibility = View.VISIBLE
-            imageView.setImageResource(R.drawable.loading_animation)
-        }
-        MovieApiStatus.DONE ->{
-            imageView.visibility = View.GONE
-        }
-        MovieApiStatus.ERROR -> {
-            imageView.visibility = View.VISIBLE
-            imageView.setImageResource(R.drawable.ic_connection_error)
-        }
+@BindingAdapter("isNetworkError", "playlist")
+fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {
+    view.visibility = if (playlist != null) View.GONE else View.VISIBLE
+    if (isNetWorkError) {
+        view.visibility = View.GONE
     }
 }
-
 
 
 

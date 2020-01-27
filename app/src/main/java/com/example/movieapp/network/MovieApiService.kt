@@ -8,27 +8,20 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-private const val BASE_URL = "https://api.myjson.com/"
-
-private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
-
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .baseUrl(BASE_URL)
-    .build()
-
-
+private const val BASE_URL = "https://api.myjson.com/bins/"
 
 interface MovieApiService {
-    @GET("bins/tb75m")
-    fun getPropertyAsync(): Deferred<List<MovieProperty>>
+    @GET("19tvhm")
+    suspend fun getPropertyAsync(): List<MovieProperty>
 }
 
 object MovieApi{
-    val retrofitService: MovieApiService by lazy {
-        retrofit.create(MovieApiService::class.java)
-    }
+
+    private val retrofit = Retrofit.Builder()
+        .addConverterFactory(MoshiConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .baseUrl(BASE_URL)
+        .build()
+
+    val retrofitService: MovieApiService = retrofit.create(MovieApiService::class.java)
 }

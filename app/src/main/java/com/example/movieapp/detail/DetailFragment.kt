@@ -20,9 +20,6 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
-
-
         val application = requireNotNull(activity).application
 
         val binding = DetailFragmentBinding.inflate(inflater)

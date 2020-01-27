@@ -22,8 +22,7 @@
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/Theme.AppCompat.DayNight"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
@@ -36,20 +35,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
-            app:listData="@{viewModel.property}"
+            app:listData="@{viewModel.playList}"
             app:spanCount="1"
             tools:listCount="16"
             tools:listitem="@layout/item" />
 
-        <ImageView
-            android:id="@+id/status_img"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <ProgressBar
+            style="@style/progressBarStyle"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:indeterminateTint="@color/appColor"
+            android:indeterminateTintMode="src_in"
+            app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
-            app:movieApiStatus="@{viewModel.status}" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:playlist="@{viewModel.playList}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
