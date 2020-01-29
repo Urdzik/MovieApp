@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.domian.Movie
 import com.example.movieapp.overview.MovieAdapter
-import com.example.movieapp.overview.MovieApiStatus
 
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imgUrl: String?) {

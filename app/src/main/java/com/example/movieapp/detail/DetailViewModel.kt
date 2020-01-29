@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.movieapp.domian.Movie
 import com.example.movieapp.network.MovieProperty
 
-class DetailViewModel(movieProperty: Movie, application: Application) : ViewModel() {
+class DetailViewModel(movieProperty: Movie) : ViewModel() {
 
     private val _selectProperty = MutableLiveData<Movie>()
     val selectProperty: LiveData<Movie>

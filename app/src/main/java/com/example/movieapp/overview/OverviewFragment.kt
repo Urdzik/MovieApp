@@ -11,17 +11,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.movieapp.databinding.OverviewFragmentBinding
-import java.util.*
 
 class OverviewFragment : Fragment() {
 
 
     private val viewModel: OverviewViewModel by lazy {
         val activity = requireNotNull(this.activity) {}
-        ViewModelProviders.of(this, OverviewViewModelFactory(activity.application)).get(OverviewViewModel::class.java)
+        ViewModelProviders.of(this, OverviewViewModelFactory(activity.application))
+            .get(OverviewViewModel::class.java)
     }
-
-
 
 
     override fun onCreateView(
@@ -58,8 +56,8 @@ class OverviewFragment : Fragment() {
         return binding.root
     }
 
-   private fun onNetworkError(){
-        if (!viewModel.isNetworkErrorShown.value!!){
+    private fun onNetworkError() {
+        if (!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(activity, "Network error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
         }

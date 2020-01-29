@@ -7,16 +7,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.domian.Movie
-import com.example.movieapp.network.MovieProperty
 
 class MovieAdapter(private val onClickListener: ClickListener) :
     ListAdapter<Movie, MovieAdapter.MovieViewHolder>(DiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(ItemBinding.inflate(
-            LayoutInflater.from(parent.context)
-        ))
+        return MovieViewHolder(
+            ItemBinding.inflate(
+                LayoutInflater.from(parent.context)
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {

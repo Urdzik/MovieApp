@@ -4,21 +4,14 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.movieapp.database.getDatabase
 import com.example.movieapp.domian.Movie
 import com.example.movieapp.repository.MoviesRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-enum class MovieApiStatus {
-    LOADING, DONE, ERROR
-}
 
 class OverviewViewModel(application: Application) : ViewModel() {
-    private val viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val _navigateToSelectProperty = MutableLiveData<Movie>()
     val navigateToSelectProperty: LiveData<Movie>
@@ -42,7 +35,7 @@ class OverviewViewModel(application: Application) : ViewModel() {
 
 
     private fun getMovieListProperty() {
-        coroutineScope.launch {
+        viewModelScope.launch {
             try {
                 moviesRepository.refreshMovie()
                 _eventNetworkError.value = false
@@ -68,8 +61,5 @@ class OverviewViewModel(application: Application) : ViewModel() {
         _isNetworkErrorShown.value = true
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
+
 }
