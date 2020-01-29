@@ -32,7 +32,6 @@ class OverviewFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(myToolbar)
 
 
-
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = viewModel
@@ -40,7 +39,7 @@ class OverviewFragment : Fragment() {
             viewModel.displayPropertyDetails(it)
         })
 
-        viewModel.navigateToSelectProperty.observe(this, Observer {
+        viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 this.findNavController()
                     .navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it))
@@ -49,9 +48,9 @@ class OverviewFragment : Fragment() {
 
         })
 
-        viewModel.eventNetworkError.observe(this, Observer<Boolean> { isNetworkError ->
-            if (isNetworkError) onNetworkError()
-        })
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+                if (isNetworkError) onNetworkError()
+            })
 
         return binding.root
     }
