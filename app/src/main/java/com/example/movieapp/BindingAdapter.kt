@@ -2,14 +2,13 @@ package com.example.movieapp
 
 import android.view.View
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.movieapp.domian.Movie
+import com.example.movieapp.domain.Movie
 import com.example.movieapp.overview.MovieAdapter
 
 @BindingAdapter("imageUrl")

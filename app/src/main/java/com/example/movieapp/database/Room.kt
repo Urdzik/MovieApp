@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
+
+// Database queries
 @Dao
 interface MovieDao {
     @Query("select * from database_movie")
@@ -13,13 +15,16 @@ interface MovieDao {
     fun insert(movie: List<DatabaseMovie>)
 }
 
+//Create DAO object
 @Database(entities = [DatabaseMovie::class], version = 1)
 abstract class MovieDatabase : RoomDatabase() {
     abstract val movieDao: MovieDao
 }
 
+
 private lateinit var INSTANCE: MovieDatabase
 
+// Function create database
 fun getDatabase(context: Context): MovieDatabase {
     synchronized(MovieDatabase::class.java) {
         if (!::INSTANCE.isInitialized) {

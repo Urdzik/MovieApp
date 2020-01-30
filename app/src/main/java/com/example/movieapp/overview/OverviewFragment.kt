@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.movieapp.databinding.OverviewFragmentBinding
 
@@ -17,7 +17,7 @@ class OverviewFragment : Fragment() {
 
     private val viewModel: OverviewViewModel by lazy {
         val activity = requireNotNull(this.activity) {}
-        ViewModelProviders.of(this, OverviewViewModelFactory(activity.application))
+        ViewModelProvider(this, OverviewViewModelFactory(activity.application))
             .get(OverviewViewModel::class.java)
     }
 
@@ -35,6 +35,7 @@ class OverviewFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = viewModel
+
         binding.recycler.adapter = MovieAdapter(MovieAdapter.ClickListener {
             viewModel.displayPropertyDetails(it)
         })

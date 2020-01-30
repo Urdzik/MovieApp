@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.database.getDatabase
-import com.example.movieapp.domian.Movie
+import com.example.movieapp.domain.Movie
 import com.example.movieapp.repository.MoviesRepository
 import kotlinx.coroutines.launch
 
@@ -44,7 +44,6 @@ class OverviewViewModel(application: Application) : ViewModel() {
                 if (playList.value!!.isEmpty()) {
                     _eventNetworkError.value = true
                 }
-
             }
         }
     }

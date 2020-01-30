@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.movieapp.database.MovieDatabase
 import com.example.movieapp.database.asDomainModel
-import com.example.movieapp.domian.Movie
+import com.example.movieapp.domain.Movie
 import com.example.movieapp.network.MovieApi
 import com.example.movieapp.network.asDatabaseModal
 

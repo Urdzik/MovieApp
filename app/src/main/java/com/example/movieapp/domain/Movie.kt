@@ -1,9 +1,14 @@
-package com.example.movieapp.domian
+package com.example.movieapp.domain
 
 import android.os.Parcelable
-import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * @see database for objects that are mapped to the database
+ * @see network for objects that parse or prepare network calls
+ * */
+
+//Movie represent a movie that can be played.
 @Parcelize
 data class Movie(
     val id: String,

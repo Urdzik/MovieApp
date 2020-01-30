@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
-import com.example.movieapp.domian.Movie
+import com.example.movieapp.domain.Movie
 
 class MovieAdapter(private val onClickListener: ClickListener) :
     ListAdapter<Movie, MovieAdapter.MovieViewHolder>(DiffCallback()) {
@@ -31,7 +31,7 @@ class MovieAdapter(private val onClickListener: ClickListener) :
     class MovieViewHolder(private val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
-            binding.property = movie
+            binding.movie = movie
             binding.executePendingBindings()
         }
     }

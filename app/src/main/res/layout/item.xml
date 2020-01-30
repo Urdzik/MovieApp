@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="property"
-            type="com.example.movieapp.domian.Movie" />
+            name="movie"
+            type="com.example.movieapp.domain.Movie" />
 
         <import type="android.view.View" />
 
@@ -26,7 +26,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:cropToPadding="true"
-            app:imageUrl="@{property.poster}"
+            app:imageUrl="@{movie.poster}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -54,7 +54,7 @@
             app:layout_constraintStart_toEndOf="@+id/poster"
             app:layout_constraintTop_toTopOf="@+id/poster"
             app:layout_constraintVertical_bias="0.0"
-            app:title="@{property.title}" />
+            app:title="@{movie.title}" />
 
         <TextView
             android:id="@+id/year"
@@ -66,7 +66,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/title"
-            app:year="@{property.year}" />
+            app:year="@{movie.year}" />
 
 
         <TextView
@@ -85,7 +85,7 @@
             app:layout_constraintStart_toStartOf="@+id/title"
             app:layout_constraintTop_toBottomOf="@+id/title"
             app:layout_constraintVertical_bias="0.0"
-            app:plot="@{property.plot}" />
+            app:plot="@{movie.plot}" />
 
         <ImageView
             android:id="@+id/rated"
@@ -94,7 +94,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:src="@drawable/no_18_years_old_sign"
-            android:visibility="@{ property.r ? View.GONE : View.VISIBLE }"
+            android:visibility="@{ movie.r ? View.GONE : View.VISIBLE }"
             app:layout_constraintBottom_toBottomOf="@+id/poster"
             app:layout_constraintEnd_toEndOf="@+id/poster"
             app:srcCompat="@drawable/no_18_years_old_sign" />
