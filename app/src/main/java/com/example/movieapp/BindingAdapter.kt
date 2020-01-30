@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.domain.Movie
 import com.example.movieapp.overview.MovieAdapter
 
+//Binding adapter used to display images from URL using Glide
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imgUrl: String?) {
     imgUrl?.let {
@@ -26,6 +27,7 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
     }
 }
 
+//Binding adapter used to display title from object
 @BindingAdapter("title")
 fun bindTitle(textView: TextView, title: String?) {
     title?.let {
@@ -33,6 +35,7 @@ fun bindTitle(textView: TextView, title: String?) {
     }
 }
 
+//Binding adapter used to display plot from object
 @BindingAdapter("plot")
 fun TextView.bindPlot(plot: String?) {
     plot?.let {
@@ -40,6 +43,7 @@ fun TextView.bindPlot(plot: String?) {
     }
 }
 
+//Binding adapter used to display year from object
 @BindingAdapter("year")
 fun TextView.bindYear(year: Int?) {
     year?.let {
@@ -47,13 +51,16 @@ fun TextView.bindYear(year: Int?) {
     }
 }
 
+//Binding adapter used to set adapter of RecyclerView
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
-    val adapter = recyclerView.adapter as MovieAdapter
-    adapter.submitList(data)
+    data?.let {
+        val adapter = recyclerView.adapter as MovieAdapter
+        adapter.submitList(data)
+    }
 }
 
-
+//Binding adapter used to hide the spinner once data is available.
 @BindingAdapter("isNetworkError", "playlist")
 fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {
     view.visibility = if (playlist != null) View.GONE else View.VISIBLE

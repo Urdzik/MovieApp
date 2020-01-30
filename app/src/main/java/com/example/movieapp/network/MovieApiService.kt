@@ -7,11 +7,14 @@ import retrofit2.http.GET
 
 private const val BASE_URL = "https://api.myjson.com/bins/"
 
+//A retrofit service to fetch movie playlist.
 interface MovieApiService {
     @GET("19tvhm")
     suspend fun getPropertyAsync(): List<MovieProperty>
 }
 
+
+//Main entry point for network access
 object MovieApi {
 
     private val retrofit = Retrofit.Builder()

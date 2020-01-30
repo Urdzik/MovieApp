@@ -49,6 +49,4 @@ class DetailFragment : Fragment() {
 
         return binding.root
     }
-
-
 }

@@ -4,9 +4,7 @@ import com.example.movieapp.database.DatabaseMovie
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-
-
-//
+//Network object of movie for REST
 @JsonClass(generateAdapter = true)
 data class MovieProperty(
     @Json(name = "imdbID") val id: String,

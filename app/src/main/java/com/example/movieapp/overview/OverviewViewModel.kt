@@ -13,28 +13,29 @@ import kotlinx.coroutines.launch
 
 class OverviewViewModel(application: Application) : ViewModel() {
 
+    //LiveData object of movie
     private val _navigateToSelectProperty = MutableLiveData<Movie>()
     val navigateToSelectProperty: LiveData<Movie>
         get() = _navigateToSelectProperty
 
+    //LiveData for show Progress Bar
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
+    //LiveData for show internet error
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
-
 
     private val moviesRepository = MoviesRepository(getDatabase(application))
     val playList = moviesRepository.movies
 
     init {
-        getMovieListProperty()
+        getMovieList()
     }
 
-
-    private fun getMovieListProperty() {
+    private fun getMovieList() {
         viewModelScope.launch {
             try {
                 moviesRepository.refreshMovie()
@@ -52,13 +53,11 @@ class OverviewViewModel(application: Application) : ViewModel() {
         _navigateToSelectProperty.value = movie
     }
 
-    fun displayPropertyDetailsComlited() {
+    fun displayPropertyDetailsCompleted() {
         _navigateToSelectProperty.value = null
     }
 
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
-
-
 }
