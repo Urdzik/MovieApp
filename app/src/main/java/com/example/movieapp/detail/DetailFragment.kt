@@ -22,9 +22,9 @@ class DetailFragment : Fragment() {
         val binding = DetailFragmentBinding.inflate(inflater)
 
         //Get movie object
-        val movieProperty = DetailFragmentArgs.fromBundle(arguments!!).movieProperty
+        val movie = DetailFragmentArgs.fromBundle(arguments!!).movie
 
-        val viewModel = ViewModelProvider(this, DetailViewModelFactory(movieProperty))
+        val viewModel = ViewModelProvider(this, DetailViewModelFactory(movie))
             .get(DetailViewModel::class.java)
 
         // Create Toolbar and button of back in toolbar
@@ -36,7 +36,7 @@ class DetailFragment : Fragment() {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             supportActionBar?.setHomeButtonEnabled(true)
             supportActionBar?.setDisplayShowTitleEnabled(false)
-            title = movieProperty.title
+            title = movie.title
         }
 
         //Button of back
