@@ -55,7 +55,7 @@
         tools:text="They Shall Not Grow Old" />
 
     <TextView
-        android:id="@+id/year_ditale"
+        android:id="@+id/year_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -68,15 +68,15 @@
         app:year="@{viewModel.selectProperty.year}"/>
 
     <TextView
-        android:id="@+id/genre_ditale"
+        android:id="@+id/genre_detail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/year_ditale"
-        app:layout_constraintTop_toBottomOf="@+id/year_ditale"
+        app:layout_constraintStart_toStartOf="@+id/year_detail"
+        app:layout_constraintTop_toBottomOf="@+id/year_detail"
         tools:text="Documentary, History, War" />
 
     <TextView
@@ -87,12 +87,12 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/genre_ditale"
-        app:layout_constraintTop_toBottomOf="@+id/genre_ditale"
+        app:layout_constraintStart_toStartOf="@+id/genre_detail"
+        app:layout_constraintTop_toBottomOf="@+id/genre_detail"
         tools:text="99 min" />
 
     <TextView
-        android:id="@+id/langue"
+        android:id="@+id/language"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
