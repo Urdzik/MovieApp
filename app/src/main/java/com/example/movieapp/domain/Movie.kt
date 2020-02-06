@@ -16,7 +16,12 @@ data class Movie(
     val poster: String,
     val year: Int,
     val rated: String,
-    val plot: String
+    val plot: String,
+    val genre: String,
+    val time: String,
+    val language: String,
+    val writer: String,
+    val actors: String
 ) : Parcelable {
     val isR
         get() = rated == "R"

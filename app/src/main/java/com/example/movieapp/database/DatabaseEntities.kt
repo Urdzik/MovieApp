@@ -17,7 +17,12 @@ data class DatabaseMovie(
     val poster: String,
     val year: Int,
     val rated: String,
-    val plot: String
+    val plot: String,
+    val genre: String,
+    val time: String,
+    val language: String,
+    val writer: String,
+    val actors: String
 )
 
 //Convert database object to movie object
@@ -29,7 +34,13 @@ fun List<DatabaseMovie>.asDomainModel(): List<Movie> {
             poster = it.poster,
             year = it.year,
             rated = it.rated,
-            plot = it.plot
+            plot = it.plot,
+            genre = it.genre,
+            time = it.time,
+            language = it.language,
+            writer = it.writer,
+            actors = it.actors
+
         )
     }
 }

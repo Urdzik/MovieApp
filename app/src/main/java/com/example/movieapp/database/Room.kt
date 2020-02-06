@@ -16,7 +16,7 @@ interface MovieDao {
 }
 
 //Create DAO object
-@Database(entities = [DatabaseMovie::class], version = 1)
+@Database(entities = [DatabaseMovie::class], version = 2)
 abstract class MovieDatabase : RoomDatabase() {
     abstract val movieDao: MovieDao
 }
@@ -32,7 +32,7 @@ fun getDatabase(context: Context): MovieDatabase {
                 context.applicationContext,
                 MovieDatabase::class.java,
                 "movies"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
         }
     }
     return INSTANCE
