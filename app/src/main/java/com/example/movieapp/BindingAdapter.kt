@@ -51,6 +51,47 @@ fun TextView.bindYear(year: Int?) {
     }
 }
 
+//Binding adapter used to display time from object
+@BindingAdapter("time")
+fun TextView.bindTime(time: String?) {
+    time?.let {
+        text = time
+    }
+}
+
+//Binding adapter used to display language from object
+@BindingAdapter("language")
+fun TextView.bindLanguage(language: String?) {
+    language?.let {
+        text = language
+    }
+}
+
+//Binding adapter used to display writer from object
+@BindingAdapter("writer")
+fun TextView.bindWriter(writer: String?) {
+    writer?.let {
+        text = writer
+    }
+}
+
+//Binding adapter used to display actors from object
+@BindingAdapter("actors")
+fun TextView.bindActors(actors: String?) {
+    actors?.let {
+        text = actors
+    }
+}
+
+//Binding adapter used to display genre from object
+@BindingAdapter("genre")
+fun TextView.bindGenre(genre: String?) {
+    genre?.let {
+        text = genre
+    }
+}
+
+
 //Binding adapter used to set adapter of RecyclerView
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
