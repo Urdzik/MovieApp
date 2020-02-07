@@ -50,20 +50,3 @@ fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {
         view.visibility = View.GONE
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

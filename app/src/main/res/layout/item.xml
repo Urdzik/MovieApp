@@ -52,8 +52,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/poster"
             app:layout_constraintTop_toTopOf="@+id/poster"
-            app:layout_constraintVertical_bias="0.0"
-            />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/year"
@@ -64,9 +63,7 @@
             android:textColor="#C1797979"
             app:layout_constraintBottom_toBottomOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/title"
-            />
-
+            app:layout_constraintTop_toTopOf="@+id/title" />
 
         <TextView
             android:id="@+id/plot"
@@ -92,7 +89,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:src="@drawable/no_18_years_old_sign"
-            android:visibility="@{ movie.r ? View.GONE : View.VISIBLE }"
+            android:visibility="@{movie.plus18}"
             app:layout_constraintBottom_toBottomOf="@+id/poster"
             app:layout_constraintEnd_toEndOf="@+id/poster"
             app:srcCompat="@drawable/no_18_years_old_sign" />

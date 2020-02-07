@@ -169,7 +169,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         tools:text="Mark Kermode, Peter Jackson" />
 
-
     <TextView
         android:id="@+id/textView11"
         android:layout_width="0dp"
@@ -182,4 +181,5 @@
         android:text="@{viewModel.selectProperty.plot}"
         tools:text="A documentary about World War I with never-before-seen footage to commemorate the centennial of the end of the war." />
 
-</androidx.constraintlayout.widget.ConstraintLayout></layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

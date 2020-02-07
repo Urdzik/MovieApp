@@ -53,6 +53,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:playlist="@{viewModel.playList}" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

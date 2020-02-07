@@ -51,4 +51,3 @@ class MovieAdapter(private val onClickListener: ClickListener) :
         fun onClick(movie: Movie) = clickListener(movie)
     }
 }
-
