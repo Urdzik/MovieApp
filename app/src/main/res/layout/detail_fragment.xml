@@ -51,7 +51,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:title="@{viewModel.selectProperty.title}"
+        android:text="@{viewModel.selectProperty.title}"
         tools:text="They Shall Not Grow Old" />
 
     <TextView
@@ -64,7 +64,7 @@
         app:layout_constraintStart_toStartOf="@+id/title_detail"
         app:layout_constraintTop_toBottomOf="@+id/title_detail"
         tools:text="2019"
-        app:year="@{viewModel.selectProperty.year}"/>
+        android:text="@{String.valueOf(viewModel.selectProperty.year)}" />
 
     <TextView
         android:layout_marginEnd="16dp"
@@ -77,7 +77,7 @@
         app:layout_constraintStart_toStartOf="@+id/year_ditale"
         app:layout_constraintTop_toBottomOf="@+id/year_ditale"
         tools:text="Documentary, History, War"
-        app:genre="@{viewModel.selectProperty.genre}"/>
+        android:text="@{viewModel.selectProperty.genre}" />
 
     <TextView
         android:layout_marginEnd="16dp"
@@ -90,7 +90,7 @@
         app:layout_constraintStart_toStartOf="@+id/genre_ditale"
         app:layout_constraintTop_toBottomOf="@+id/genre_ditale"
         tools:text="99 min"
-        app:time="@{viewModel.selectProperty.time}"/>
+        android:text="@{viewModel.selectProperty.time}" />
 
     <TextView
         android:layout_marginEnd="16dp"
@@ -103,7 +103,7 @@
         app:layout_constraintStart_toStartOf="@+id/runtimes_ditale"
         app:layout_constraintTop_toBottomOf="@+id/runtimes_ditale"
         tools:text="English"
-        app:language="@{viewModel.selectProperty.language}"/>
+        android:text="@{viewModel.selectProperty.language}" />
 
     <TextView
         android:id="@+id/textView4"
@@ -143,6 +143,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
+        android:text="@{viewModel.selectProperty.writer}"
         android:id="@+id/textView7"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -153,16 +154,15 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:writer="@{viewModel.selectProperty.writer}"
         tools:text="Peter Jackson" />
 
     <TextView
+        android:text="@{viewModel.selectProperty.actors}"
         android:id="@+id/textView8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        app:actors="@{viewModel.selectProperty.actors}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView7"
@@ -179,7 +179,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:plot="@{viewModel.selectProperty.plot}"
+        android:text="@{viewModel.selectProperty.plot}"
         tools:text="A documentary about World War I with never-before-seen footage to commemorate the centennial of the end of the war." />
 
 </androidx.constraintlayout.widget.ConstraintLayout></layout>

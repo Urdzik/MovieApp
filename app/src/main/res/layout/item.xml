@@ -43,10 +43,9 @@
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="TextView"
+            android:text="@{movie.title}"
             android:textColor="?attr/actionMenuTextColor"
             android:textSize="18sp"
-
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/poster"
             app:layout_constraintEnd_toStartOf="@+id/year"
@@ -54,19 +53,19 @@
             app:layout_constraintStart_toEndOf="@+id/poster"
             app:layout_constraintTop_toTopOf="@+id/poster"
             app:layout_constraintVertical_bias="0.0"
-            app:title="@{movie.title}" />
+            />
 
         <TextView
             android:id="@+id/year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:text="TextView"
+            android:text="@{String.valueOf(movie.year)}"
             android:textColor="#C1797979"
             app:layout_constraintBottom_toBottomOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/title"
-            app:year="@{movie.year}" />
+            />
 
 
         <TextView
@@ -78,14 +77,13 @@
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="TextView"
+            android:text="@{movie.plot}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/title"
             app:layout_constraintTop_toBottomOf="@+id/title"
-            app:layout_constraintVertical_bias="0.0"
-            app:plot="@{movie.plot}" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/rated"
