@@ -42,9 +42,6 @@ class OverviewViewModel(application: Application) : ViewModel() {
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
             } catch (e: Exception) {
-                if (playList.value!!.isEmpty()) {
-                    _eventNetworkError.value = true
-                }
             }
         }
     }
