@@ -2,7 +2,6 @@ package com.example.movieapp
 
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +14,12 @@ import com.example.movieapp.overview.MovieAdapter
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imgUrl: String?) {
     imgUrl?.let {
-        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+        val imgUri = imgUrl
+            .toUri()
+            .buildUpon()
+            .scheme("https")
+            .build()
+
         Glide.with(imageView.context)
             .load(imgUri)
             .apply(
@@ -24,70 +28,6 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
                     .error(R.drawable.ic_broken_image)
             )
             .into(imageView)
-    }
-}
-
-//Binding adapter used to display title from object
-@BindingAdapter("title")
-fun bindTitle(textView: TextView, title: String?) {
-    title?.let {
-        textView.text = title
-    }
-}
-
-//Binding adapter used to display plot from object
-@BindingAdapter("plot")
-fun TextView.bindPlot(plot: String?) {
-    plot?.let {
-        text = plot
-    }
-}
-
-//Binding adapter used to display year from object
-@BindingAdapter("year")
-fun TextView.bindYear(year: Int?) {
-    year?.let {
-        text = year.toString()
-    }
-}
-
-//Binding adapter used to display time from object
-@BindingAdapter("time")
-fun TextView.bindTime(time: String?) {
-    time?.let {
-        text = time
-    }
-}
-
-//Binding adapter used to display language from object
-@BindingAdapter("language")
-fun TextView.bindLanguage(language: String?) {
-    language?.let {
-        text = language
-    }
-}
-
-//Binding adapter used to display writer from object
-@BindingAdapter("writer")
-fun TextView.bindWriter(writer: String?) {
-    writer?.let {
-        text = writer
-    }
-}
-
-//Binding adapter used to display actors from object
-@BindingAdapter("actors")
-fun TextView.bindActors(actors: String?) {
-    actors?.let {
-        text = actors
-    }
-}
-
-//Binding adapter used to display genre from object
-@BindingAdapter("genre")
-fun TextView.bindGenre(genre: String?) {
-    genre?.let {
-        text = genre
     }
 }
 
@@ -109,20 +49,3 @@ fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {
         view.visibility = View.GONE
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

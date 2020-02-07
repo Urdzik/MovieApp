@@ -34,7 +34,6 @@ class MovieAdapter(private val onClickListener: ClickListener) :
         }
     }
 
-
     //Class for comparing the old list and the new one, and updating it
     class DiffCallback : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -51,4 +50,3 @@ class MovieAdapter(private val onClickListener: ClickListener) :
         fun onClick(movie: Movie) = clickListener(movie)
     }
 }
-

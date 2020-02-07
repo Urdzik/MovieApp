@@ -10,7 +10,6 @@ import com.example.movieapp.domain.Movie
 import com.example.movieapp.repository.MoviesRepository
 import kotlinx.coroutines.launch
 
-
 class OverviewViewModel(application: Application) : ViewModel() {
 
     //LiveData object of movie
@@ -42,7 +41,7 @@ class OverviewViewModel(application: Application) : ViewModel() {
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
             } catch (e: Exception) {
-                if (playList.value!!.isEmpty()) {
+                if (playList.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true
                 }
             }

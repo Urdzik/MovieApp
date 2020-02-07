@@ -51,9 +51,7 @@ class OverviewFragment : Fragment() {
         })
 
         //Looking for the internet connection
-        viewModel.eventNetworkError.observe(
-            viewLifecycleOwner,
-            Observer<Boolean> { isNetworkError ->
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
                 if (isNetworkError) onNetworkError()
             })
 

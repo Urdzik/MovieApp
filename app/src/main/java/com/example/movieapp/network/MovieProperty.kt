@@ -17,8 +17,7 @@ data class MovieProperty(
     @Json(name = "Runtime") val time: String,
     @Json(name = "Language") val language: String,
     @Json(name = "Writer") val writer: String,
-    @Json(name = "Actors") val actors:String
-
+    @Json(name = "Actors") val actors: String
 )
 
 //Convert network result to database object

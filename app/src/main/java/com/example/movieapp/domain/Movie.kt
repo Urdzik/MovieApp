@@ -1,6 +1,7 @@
 package com.example.movieapp.domain
 
 import android.os.Parcelable
+import android.view.View
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -23,6 +24,6 @@ data class Movie(
     val writer: String,
     val actors: String
 ) : Parcelable {
-    val isR
-        get() = rated == "R"
+
+    val plus18 = if (rated == "R") View.GONE else View.VISIBLE
 }
