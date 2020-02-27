@@ -1,4 +1,4 @@
-![](readme/Photo for github.png)
+![MovieApp](https://github.com/Urdzik/MovieApp/blob/readme-branch/readme/Photo%20for%20github.png?raw=true)
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-blue.svg)](https://kotlinlang.org)
 [![Dagger2](https://img.shields.io/badge/Dagger%202-2.26-red.svg)](https://github.com/google/dagger)
