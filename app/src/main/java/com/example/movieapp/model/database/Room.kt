@@ -1,4 +1,4 @@
-package com.example.movieapp.database
+package com.example.movieapp.model.database
 
 import android.content.Context
 import androidx.lifecycle.LiveData

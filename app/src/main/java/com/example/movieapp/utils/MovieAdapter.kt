@@ -1,15 +1,17 @@
-package com.example.movieapp.overview
+package com.example.movieapp.utils
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieapp.database.DatabaseMovie
+import com.example.movieapp.model.database.DatabaseMovie
 import com.example.movieapp.databinding.ItemBinding
 
 class MovieAdapter(private val onClickListener: ClickListener) :
-    ListAdapter<DatabaseMovie, MovieAdapter.MovieViewHolder>(DiffCallback()) {
+    ListAdapter<DatabaseMovie, MovieAdapter.MovieViewHolder>(
+        DiffCallback()
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(

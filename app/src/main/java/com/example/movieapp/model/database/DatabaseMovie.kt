@@ -1,4 +1,4 @@
-package com.example.movieapp.database
+package com.example.movieapp.model.database
 
 import android.os.Parcelable
 import android.view.View

@@ -1,9 +1,9 @@
-package com.example.movieapp.detail
+package com.example.movieapp.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.database.DatabaseMovie
+import com.example.movieapp.model.database.DatabaseMovie
 
 class DetailViewModel(movieProperty: DatabaseMovie) : ViewModel() {
 

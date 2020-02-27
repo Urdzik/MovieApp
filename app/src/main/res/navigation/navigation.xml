@@ -6,7 +6,7 @@
     app:startDestination="@id/overviewFragment">
     <fragment
         android:id="@+id/overviewFragment"
-        android:name="com.example.movieapp.overview.OverviewFragment"
+        android:name="com.example.movieapp.ui.overview.OverviewFragment"
         android:label="OverviewFragment"
         tools:layout="@layout/overview_fragment">
         <action
@@ -17,12 +17,12 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.movieapp.detail.DetailFragment"
+        android:name="com.example.movieapp.ui.detail.DetailFragment"
         android:label="DetailFragment"
         tools:layout="@layout/detail_fragment">
         <argument
            android:name="movie"
-            app:argType="com.example.movieapp.database.DatabaseMovie"
+            app:argType="com.example.movieapp.model.database.DatabaseMovie"
             />
         <action
             android:id="@+id/action_detailFragment_to_overviewFragment"

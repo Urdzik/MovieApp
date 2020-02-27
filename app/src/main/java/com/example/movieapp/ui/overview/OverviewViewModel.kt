@@ -1,12 +1,12 @@
-package com.example.movieapp.overview
+package com.example.movieapp.ui.overview
 
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapp.database.DatabaseMovie
-import com.example.movieapp.database.getDatabase
+import com.example.movieapp.model.database.DatabaseMovie
+import com.example.movieapp.model.database.getDatabase
 import com.example.movieapp.repository.MoviesRepository
 import kotlinx.coroutines.launch
 

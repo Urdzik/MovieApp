@@ -1,8 +1,8 @@
-package com.example.movieapp.detail
+package com.example.movieapp.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.movieapp.database.DatabaseMovie
+import com.example.movieapp.model.database.DatabaseMovie
 
 class DetailViewModelFactory(private val movie: DatabaseMovie) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")

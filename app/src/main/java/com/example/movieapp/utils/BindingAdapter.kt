@@ -1,16 +1,15 @@
-package com.example.movieapp
+package com.example.movieapp.utils
 
 import android.view.View
 import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.movieapp.database.DatabaseMovie
+import com.example.movieapp.R
+import com.example.movieapp.model.database.DatabaseMovie
 
-import com.example.movieapp.overview.MovieAdapter
+import com.example.movieapp.utils.MovieAdapter
 
 //Binding adapter used to display images from URL using Glide
 @BindingAdapter("imageUrl")

@@ -1,4 +1,4 @@
-package com.example.movieapp.network
+package com.example.movieapp.model.network
 
 import retrofit2.http.GET
 

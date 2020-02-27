@@ -1,6 +1,6 @@
-package com.example.movieapp.network
+package com.example.movieapp.model.network
 
-import com.example.movieapp.database.DatabaseMovie
+import com.example.movieapp.model.database.DatabaseMovie
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

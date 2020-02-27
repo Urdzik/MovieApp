@@ -1,4 +1,4 @@
-package com.example.movieapp.overview
+package com.example.movieapp.ui.overview
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.movieapp.databinding.OverviewFragmentBinding
+import com.example.movieapp.utils.MovieAdapter
 
 class OverviewFragment : Fragment() {
 
@@ -37,9 +38,10 @@ class OverviewFragment : Fragment() {
 
 
         //Listener of recycler view click
-        binding.recycler.adapter = MovieAdapter(MovieAdapter.ClickListener {
-            viewModel.displayPropertyDetails(it)
-        })
+        binding.recycler.adapter =
+            MovieAdapter(MovieAdapter.ClickListener {
+                viewModel.displayPropertyDetails(it)
+            })
 
         //Navigate to Detail Activity
         viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {

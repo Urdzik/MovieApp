@@ -6,7 +6,7 @@
 
         <variable
             name="movie"
-            type="com.example.movieapp.database.DatabaseMovie" />
+            type="com.example.movieapp.model.database.DatabaseMovie" />
 
         <import type="android.view.View" />
 
@@ -32,7 +32,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="?attr/actionModeSplitBackground" />
+            app:srcCompat="?attr/actionModeSplitBackground"
+            android:contentDescription="@string/mu" />
 
         <TextView
             android:id="@+id/title"
@@ -92,7 +93,8 @@
             android:visibility="@{movie.plus18}"
             app:layout_constraintBottom_toBottomOf="@+id/poster"
             app:layout_constraintEnd_toEndOf="@+id/poster"
-            app:srcCompat="@drawable/no_18_years_old_sign" />
+            app:srcCompat="@drawable/no_18_years_old_sign"
+            android:contentDescription="@string/mu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,11 +1,9 @@
 package com.example.movieapp.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import com.example.movieapp.database.MovieDatabase
+import com.example.movieapp.model.database.MovieDatabase
 
-import com.example.movieapp.network.MovieApi
-import com.example.movieapp.network.asDatabaseModal
+import com.example.movieapp.model.network.MovieApi
+import com.example.movieapp.model.network.asDatabaseModal
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
