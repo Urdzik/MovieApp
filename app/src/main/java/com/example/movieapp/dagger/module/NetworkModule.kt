@@ -1,7 +1,7 @@
 package com.example.movieapp.dagger.module
 
 import com.example.movieapp.model.network.MovieApi
-import com.example.movieapp.model.network.RemoteSource
+import com.example.movieapp.model.network.NetworkSource
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -26,6 +26,6 @@ class NetworkModule {
 
     @Provides
     @Reusable
-    internal fun provideRemoteSource(api: MovieApi): RemoteSource = RemoteSource(api)
+    internal fun provideRemoteSource(api: MovieApi): NetworkSource = NetworkSource(api)
 
 }

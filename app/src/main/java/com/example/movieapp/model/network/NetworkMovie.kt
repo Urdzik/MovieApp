@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 
 //Network object of movie for REST
 @JsonClass(generateAdapter = true)
-data class MovieProperty(
+data class NetworkMovie(
     @Json(name = "imdbID") val id: String,
     @Json(name = "Title") val title: String,
     @Json(name = "Poster") val poster: String,
@@ -21,7 +21,7 @@ data class MovieProperty(
 )
 
 //Convert network result to database object
-fun List<MovieProperty>.asDatabaseModal(): List<DatabaseMovie> {
+fun List<NetworkMovie>.asDatabaseModal(): List<DatabaseMovie> {
     return map {
         DatabaseMovie(
             id = it.id,

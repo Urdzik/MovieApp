@@ -1,5 +1,4 @@
-
-![](https://github.com/Urdzik/MovieApp/blob/dagger2/Photo%20for%20github.png?raw=true)
+![](https://github.com/Urdzik/MovieApp/blob/dagger2/Photo%20for%20github.png)
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-blue.svg)](https://kotlinlang.org)
 [![Dagger2](https://img.shields.io/badge/Dagger%202-2.26-red.svg)](https://github.com/google/dagger)
@@ -7,7 +6,7 @@
 [![Android Jetpack](https://img.shields.io/badge/-Android%20Jetpack-%2300db8a.svg)](https://developer.android.com/jetpack)
 
 
-### Application which retrieves data from Webserver (via Retrofit), saves it into Room and get from it if user is offline. There are applying MVVM architecture pattern and Dagger 2 example. 
+### Application which retrieves data from Webserver (via Retrofit), saves it into Room and get from it if user is offline. There are applying MVVM architecture pattern and Dagger 2 example.
 
 
 ## Overview:
@@ -24,15 +23,17 @@ It implements state saving reflected on configuration changes.
     - AndroidInjector applying for injecting into View components
     - Unit-testing simplifying
 
----------------
 
-![](readme/Screenshot_1582798408.png)
+<div align = "center">
+<img src = "readme/Screenshot_1582798408_framed.png" width="280">
+<img src = "readme/Screenshot_1582798427_framed.png" width="280">
+</div>
 
-## Applied technologies and libraries: 
+## Applied technologies and libraries:
 
 ### Model
 
-* #### Retrofit 2  
+* #### Retrofit 2
      * getting data from server into pojo-classes
  * #### SQLite
     * storing data fetched from server. User get data here if he is offline
@@ -40,7 +41,7 @@ It implements state saving reflected on configuration changes.
     - managing asynchronous database and network queries
     - using instead of callbacks
     - providing light asynchronous operations
- 
+
 ### ViewModel
 * #### LiveData
     * observer-pattern implementation for View interaction
