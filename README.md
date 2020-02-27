@@ -1,4 +1,4 @@
-![](https://github.com/Urdzik/MovieApp/blob/dagger2/Photo%20for%20github.png)
+![](readme/Photo for github.png)
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-blue.svg)](https://kotlinlang.org)
 [![Dagger2](https://img.shields.io/badge/Dagger%202-2.26-red.svg)](https://github.com/google/dagger)
@@ -9,47 +9,46 @@
 ### Application which retrieves data from Webserver (via Retrofit), saves it into Room and get from it if user is offline. There are applying MVVM architecture pattern and Dagger 2 example.
 
 
-## Overview:
+# Overview:
 
-* ### Model
+* ### __Model__
    Model is implemented as Repository pattern. Firstly it begins from internet connection checking. Consequently if it's alive we're retrieving data from the server (by using Retrofit 2) and inserting into the SQLite database. Otherwise we're trying to fetch data from the SQLite itself.
- * ### View
+ * ### __View__
    View is realised as 2 fragments. First one contains RecyclerView, second one depends on clicks on recycler-items and finally displays detailed data fetched from the Model.
 It implements state saving reflected on configuration changes.
-* ### ViewModel
+* ### __ViewModel__
   ViewModel is responsible for transferring data between view and model.
- * ### Dagger 2
+ * ### __Dagger 2__
     - Implementation of dependency injection for communication between app modules
     - AndroidInjector applying for injecting into View components
     - Unit-testing simplifying
 
 
 <div align = "center">
-<img src = "readme/Screenshot_1582798408_framed.png" width="280">
-<img src = "readme/Screenshot_1582798427_framed.png" width="280">
+<img src = "readme/Screenshot_1582798408_framed.png" width="330">
+<img src = "readme/Screenshot_1582798427_framed.png" width="330">
 </div>
 
-## Applied technologies and libraries:
+# Applied technologies and libraries:
 
-### Model
+* ## __Model__
+    ### Retrofit 2  
+    – getting data from server into pojo-classes
+    ### SQLite
+    – storing data fetched from server. User get data here if he is offline
+    ### Coroutines
+    – managing asynchronous database and network queries<br/>
+    – using instead of callbacks<br/>
+    – providing light asynchronous operations
 
-* #### Retrofit 2
-     * getting data from server into pojo-classes
- * #### SQLite
-    * storing data fetched from server. User get data here if he is offline
-* #### Coroutines
-    - managing asynchronous database and network queries
-    - using instead of callbacks
-    - providing light asynchronous operations
-
-### ViewModel
-* #### LiveData
-    * observer-pattern implementation for View interaction
+* ## __ViewModel__
+    ### LiveData
+    – observer-pattern implementation for View interaction
 
 
-### View
-* #### Fragments
-   * interactive displaying and click reflecting
-* #### Data Binding
-   * replace basic operations with UI (e.g. findViewById() ) to the XML
+* ## __View__
+    ### Fragments
+    – interactive displaying and click reflecting
+    ### Data Binding
+    – replace basic operations with UI (e.g. findViewById() ) to the XML
 
