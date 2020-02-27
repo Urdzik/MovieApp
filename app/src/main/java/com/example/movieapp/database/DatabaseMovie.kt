@@ -1,14 +1,17 @@
 package com.example.movieapp.database
 
+import android.os.Parcelable
+import android.view.View
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.movieapp.domain.Movie
+import kotlinx.android.parcel.Parcelize
 
 /**
  *  Database used this class for save entity in database.
  *  This class responsible for writing and reading from database
  *  */
 
+@Parcelize
 @Entity(tableName = "database_movie")
 data class DatabaseMovie(
     @PrimaryKey
@@ -23,24 +26,10 @@ data class DatabaseMovie(
     val language: String,
     val writer: String,
     val actors: String
-)
+) : Parcelable {
 
-//Convert database object to movie object
-fun List<DatabaseMovie>.asDomainModel(): List<Movie> {
-    return map {
-        Movie(
-            id = it.id,
-            title = it.title,
-            poster = it.poster,
-            year = it.year,
-            rated = it.rated,
-            plot = it.plot,
-            genre = it.genre,
-            time = it.time,
-            language = it.language,
-            writer = it.writer,
-            actors = it.actors
+    val plus18: Int
+        get() = if (rated == "R") View.GONE else View.VISIBLE
 
-        )
-    }
 }
+

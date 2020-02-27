@@ -5,23 +5,26 @@ import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.movieapp.domain.Movie
+import com.example.movieapp.database.DatabaseMovie
+
 import com.example.movieapp.overview.MovieAdapter
 
 //Binding adapter used to display images from URL using Glide
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imgUrl: String?) {
-    imgUrl?.let {
-        val imgUri = imgUrl
-            .toUri()
-            .buildUpon()
-            .scheme("https")
-            .build()
+//    imgUrl?.let {
+//        val imgUri = imgUrl
+//            .toUri()
+//            .buildUpon()
+//            .scheme("https")
+//            .build()
+
 
         Glide.with(imageView.context)
-            .load(imgUri)
+            .load(imgUrl)
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.loading_animation)
@@ -29,12 +32,12 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
             )
             .into(imageView)
     }
-}
+
 
 
 //Binding adapter used to set adapter of RecyclerView
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<DatabaseMovie>?) {
     data?.let {
         val adapter = recyclerView.adapter as MovieAdapter
         adapter.submitList(data)

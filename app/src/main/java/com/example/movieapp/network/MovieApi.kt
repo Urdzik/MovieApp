@@ -4,10 +4,13 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-private const val BASE_URL = "https://raw.githubusercontent.com/Urdzik/helper/master/"
+
+
 
 //Main entry point for network access
 object MovieApi {
+
+    private const val BASE_URL = "https://raw.githubusercontent.com/Urdzik/helper/master/"
 
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create())

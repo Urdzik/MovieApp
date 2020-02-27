@@ -22,7 +22,7 @@
         tools:layout="@layout/detail_fragment">
         <argument
            android:name="movie"
-            app:argType="com.example.movieapp.domain.Movie"
+            app:argType="com.example.movieapp.database.DatabaseMovie"
             />
         <action
             android:id="@+id/action_detailFragment_to_overviewFragment"

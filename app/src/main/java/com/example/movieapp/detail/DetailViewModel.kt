@@ -3,13 +3,13 @@ package com.example.movieapp.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.domain.Movie
+import com.example.movieapp.database.DatabaseMovie
 
-class DetailViewModel(movieProperty: Movie) : ViewModel() {
+class DetailViewModel(movieProperty: DatabaseMovie) : ViewModel() {
 
     //LiveData object of movie
-    private val _selectProperty = MutableLiveData<Movie>()
-    val selectProperty: LiveData<Movie>
+    private val _selectProperty = MutableLiveData<DatabaseMovie>()
+    val selectProperty: LiveData<DatabaseMovie>
         get() = _selectProperty
 
     init {

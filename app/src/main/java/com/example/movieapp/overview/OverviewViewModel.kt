@@ -5,16 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movieapp.database.DatabaseMovie
 import com.example.movieapp.database.getDatabase
-import com.example.movieapp.domain.Movie
 import com.example.movieapp.repository.MoviesRepository
 import kotlinx.coroutines.launch
 
 class OverviewViewModel(application: Application) : ViewModel() {
 
     //LiveData object of movie
-    private val _navigateToSelectProperty = MutableLiveData<Movie>()
-    val navigateToSelectProperty: LiveData<Movie>
+    private val _navigateToSelectProperty = MutableLiveData<DatabaseMovie>()
+    val navigateToSelectProperty: LiveData<DatabaseMovie>
         get() = _navigateToSelectProperty
 
     //LiveData for show Progress Bar
@@ -48,7 +48,7 @@ class OverviewViewModel(application: Application) : ViewModel() {
         }
     }
 
-    fun displayPropertyDetails(movie: Movie) {
+    fun displayPropertyDetails(movie: DatabaseMovie) {
         _navigateToSelectProperty.value = movie
     }
 

@@ -3,8 +3,7 @@ package com.example.movieapp.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.movieapp.database.MovieDatabase
-import com.example.movieapp.database.asDomainModel
-import com.example.movieapp.domain.Movie
+
 import com.example.movieapp.network.MovieApi
 import com.example.movieapp.network.asDatabaseModal
 
@@ -21,7 +20,7 @@ class MoviesRepository(private val movieDatabase: MovieDatabase) {
     }
 
     //Transformation database object to movie object
-    val movies: LiveData<List<Movie>> = Transformations.map(movieDatabase.movieDao.getMovies()) {
-        it.asDomainModel()
-    }
+    val movies = movieDatabase.movieDao.getMovies()
+
+
 }
