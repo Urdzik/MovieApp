@@ -35,26 +35,25 @@
 =======================================================
 
 * ### __Model__
-
-     <font size="3"><b>Retrofit 2 </b></font><br/>
-          – getting data from server into pojo-classes
-
-     <font size="3"><b>SQLite</b></font><br/>
-          – storing data fetched from server. User get data here if he is offline
-
-    <font size="3"><b>Coroutines</b></font><br/>
-          – managing asynchronous database and network queries<br/>
-          – using instead of callbacks<br/>
-          – providing light asynchronous operations
+   * __Retrofit 2__ <br/>
+     – getting data from server into pojo-classes
+      
+   * __SQLite__ <br/>
+       – storing data fetched from server. User get data here if he is offline
+       
+   * __Coroutines__ <br/>
+      – managing asynchronous database and network queries<br/>
+      – using instead of callbacks<br/>
+      – providing light asynchronous operations
 
 * ### __ViewModel__
-    <font size="3"><b>LiveData</b></font><br/>
-          – observer-pattern implementation for View interaction
-
+   * __LiveData__ <br/>
+      – observer-pattern implementation for View interaction
+         
 * ### __View__
-   <font size="2"><b>Fragments</b></font><br/>
-          – interactive displaying and click reflecting
+   * __Fragments__ <br/>
+     – interactive displaying and click reflecting
           
-   <font size="2"><b>Data Binding</b></font><br/>
-          – replace basic operations with UI (e.g. findViewById() ) to the XML
+  *  __Data Binding__ <br/>
+    – replace basic operations with UI (e.g. findViewById() ) to the XML
 
