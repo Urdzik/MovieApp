@@ -115,3 +115,9 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+
+/.idea/
+/.idea/codeStyles/
+.idea/caches/
+.idea/navEditor.xml
+.idea/render.experimental.xml
