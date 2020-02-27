@@ -1,5 +1,5 @@
 # MovieApp
-
+![GitHub Logo](MovieApp/app/src/main/ic_launcher-web.png)
 <h3>Application which retrieves data from Webserver (via Retrofit), saves it into Room and get from it if user is offline. <br/>
 There are applying MVVM architecture pattern and Dagger 2 example. </h3>
 <h3>Overview: </h3>
