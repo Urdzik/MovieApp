@@ -1,4 +1,4 @@
-![MovieApp](https://github.com/Urdzik/MovieApp/blob/readme-branch/readme/Photo%20for%20github.png?raw=true)
+![MovieApp](/readme/Photo%20for%20github.png?raw=true)
 
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-blue.svg)](https://kotlinlang.org)
@@ -18,8 +18,8 @@
     <br/><br/>
 
     <div align = "center">
-     <img src = "https://github.com/Urdzik/MovieApp/blob/readme-branch/readme/Screenshot_1582798408_framed.png?raw=true" width="330">
-     <img src = "https://github.com/Urdzik/MovieApp/blob/readme-branch/readme/Screenshot_1582798427_framed.png?raw=true" width="330">
+     <img src = "readme/Screenshot_1582798408_framed.png?raw=true" width="330">
+     <img src = "readme/Screenshot_1582798427_framed.png?raw=true" width="330">
     </div>
 
 *  ### __ViewModel__
