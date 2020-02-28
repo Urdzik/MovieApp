@@ -37,7 +37,7 @@ class OverviewViewModel(application: Application) : ViewModel() {
     private fun getMovieList() {
         viewModelScope.launch {
             try {
-                moviesRepository.refreshMovie()
+//                moviesRepository.refreshMovie()
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
             } catch (e: Exception) {

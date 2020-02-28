@@ -6,7 +6,7 @@ import retrofit2.http.GET
 //A retrofit service to fetch movie playlist.
 interface MovieApi {
     @GET("movie.json")
-    suspend fun getPropertyAsync(): List<MovieProperty>
+    suspend fun getPropertyAsync(): List<NetworkMovie>
 }
 
 

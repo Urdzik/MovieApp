@@ -4,10 +4,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class RemoteSource @Inject constructor(
+class NetworkSource @Inject constructor(
     private val api: MovieApi
 ) {
-    suspend fun retrieveData(): List<MovieProperty> = withContext(Dispatchers.IO) {
+    suspend fun retrieveData(): List<NetworkMovie> = withContext(Dispatchers.IO) {
         val playList = api.getPropertyAsync()
         playList
     }
