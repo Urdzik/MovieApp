@@ -7,7 +7,7 @@ import com.example.movieapp.model.database.DatabaseMovie
 import com.example.movieapp.model.network.NetworkMovie
 import javax.inject.Inject
 
-class DetailViewModel
+class DetailViewModel @Inject
 constructor(movieProperty: NetworkMovie) : ViewModel() {
 
     //LiveData object of movie

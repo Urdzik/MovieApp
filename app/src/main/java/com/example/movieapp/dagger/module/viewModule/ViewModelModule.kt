@@ -17,10 +17,10 @@ abstract class ViewModelModule {
     @ViewModelKey(OverviewViewModel::class)
     internal abstract fun bindOverviewViewModel(viewModel: OverviewViewModel): ViewModel
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(DetailViewModel::class)
-//    internal abstract fun bindDetailViewModel(viewModel: DetailViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailViewModel::class)
+    internal abstract fun bindDetailViewModel(viewModel: DetailViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

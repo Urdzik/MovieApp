@@ -1,6 +1,8 @@
 package com.example.movieapp.ui.overview
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
+import com.example.movieapp.ui.detail.DetailActivity
 
 import com.example.movieapp.utils.MovieAdapter
 import javax.inject.Inject
@@ -54,9 +57,9 @@ class OverviewFragment : Fragment() {
         //Navigate to Detail Activity
         viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                this.findNavController()
-                    .navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it))
-                viewModel.displayPropertyDetailsCompleted()
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra("movie", it)
+                startActivity(intent)
             }
         })
 
