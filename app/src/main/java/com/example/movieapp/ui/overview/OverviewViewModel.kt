@@ -1,20 +1,21 @@
 package com.example.movieapp.ui.overview
 
-import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapp.model.database.DatabaseMovie
-import com.example.movieapp.model.database.getDatabase
-import com.example.movieapp.repository.MoviesRepository
+import com.example.movieapp.model.network.NetworkMovie
+import com.example.movieapp.model.network.NetworkSource
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class OverviewViewModel(application: Application) : ViewModel() {
+class OverviewViewModel @Inject constructor(private val networkSource: NetworkSource) :
+    ViewModel() {
 
     //LiveData object of movie
-    private val _navigateToSelectProperty = MutableLiveData<DatabaseMovie>()
-    val navigateToSelectProperty: LiveData<DatabaseMovie>
+    private val _navigateToSelectProperty = MutableLiveData<NetworkMovie>()
+    val navigateToSelectProperty: LiveData<NetworkMovie>
         get() = _navigateToSelectProperty
 
     //LiveData for show Progress Bar
@@ -27,8 +28,11 @@ class OverviewViewModel(application: Application) : ViewModel() {
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    private val moviesRepository = MoviesRepository(getDatabase(application))
-    val playList = moviesRepository.movies
+
+    private var _playList = MutableLiveData<List<NetworkMovie>>()
+    val playList: LiveData<List<NetworkMovie>>
+        get() = _playList
+
 
     init {
         getMovieList()
@@ -37,7 +41,7 @@ class OverviewViewModel(application: Application) : ViewModel() {
     private fun getMovieList() {
         viewModelScope.launch {
             try {
-//                moviesRepository.refreshMovie()
+                _playList.value = networkSource.retrieveData()
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
             } catch (e: Exception) {
@@ -48,7 +52,7 @@ class OverviewViewModel(application: Application) : ViewModel() {
         }
     }
 
-    fun displayPropertyDetails(movie: DatabaseMovie) {
+    fun displayPropertyDetails(movie: NetworkMovie) {
         _navigateToSelectProperty.value = movie
     }
 

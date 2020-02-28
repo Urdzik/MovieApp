@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.R
 import com.example.movieapp.model.database.DatabaseMovie
+import com.example.movieapp.model.network.NetworkMovie
 
 import com.example.movieapp.utils.MovieAdapter
 
@@ -36,7 +37,7 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 
 //Binding adapter used to set adapter of RecyclerView
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<DatabaseMovie>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<NetworkMovie>?) {
     data?.let {
         val adapter = recyclerView.adapter as MovieAdapter
         adapter.submitList(data)

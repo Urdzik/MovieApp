@@ -6,7 +6,7 @@
 
         <variable
             name="movie"
-            type="com.example.movieapp.model.database.DatabaseMovie" />
+            type="com.example.movieapp.model.network.NetworkMovie" />
 
         <import type="android.view.View" />
 

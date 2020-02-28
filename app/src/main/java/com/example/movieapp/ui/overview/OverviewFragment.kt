@@ -10,21 +10,29 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.movieapp.dagger.App
+import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
+
 import com.example.movieapp.utils.MovieAdapter
+import javax.inject.Inject
 
 class OverviewFragment : Fragment() {
 
-    private val viewModel: OverviewViewModel by lazy {
-        val activity = requireNotNull(this.activity) {}
-        ViewModelProvider(this, OverviewViewModelFactory(activity.application))
-            .get(OverviewViewModel::class.java)
-    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModel: OverviewViewModel
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        App.appComponent.overviewInject(this)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
 
         val binding = OverviewFragmentBinding.inflate(inflater)
 
@@ -53,7 +61,9 @@ class OverviewFragment : Fragment() {
         })
 
         //Looking for the internet connection
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+        viewModel.eventNetworkError.observe(
+            viewLifecycleOwner,
+            Observer<Boolean> { isNetworkError ->
                 if (isNetworkError) onNetworkError()
             })
 
