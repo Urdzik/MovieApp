@@ -2,7 +2,7 @@ package com.example.movieapp.model.network
 
 import android.os.Parcelable
 import android.view.View
-import com.example.movieapp.model.database.DatabaseMovie
+
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
@@ -28,21 +28,3 @@ data class NetworkMovie(
         get() = if (rated == "R") View.GONE else View.VISIBLE
 }
 
-//Convert network result to database object
-//fun List<NetworkMovie>.asDatabaseModal(): List<DatabaseMovie> {
-//    return map {
-//        DatabaseMovie(
-//            id = it.id,
-//            title = it.title,
-//            poster = it.poster,
-//            year = it.year,
-//            rated = it.rated,
-//            plot = it.plot,
-//            genre = it.genre,
-//            time = it.time,
-//            language = it.language,
-//            writer = it.writer,
-//            actors = it.actors
-//        )
-//    }
-//}

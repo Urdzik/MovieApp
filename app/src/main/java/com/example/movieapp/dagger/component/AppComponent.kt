@@ -12,6 +12,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [NetworkModule::class, ViewModelModule::class, DetailModule::class])
 interface AppComponent{
-    fun overviewInject(overviewFragment: OverviewFragment)
-    fun detailInject(detailActivity: DetailActivity)
+    fun inject(overviewFragment: OverviewFragment)
+    fun inject(detailActivity: DetailActivity)
 }

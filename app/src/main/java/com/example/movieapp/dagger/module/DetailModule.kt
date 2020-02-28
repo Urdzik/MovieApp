@@ -7,10 +7,9 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class DetailModule(private val detailFragment: DetailActivity) {
+class DetailModule(private val networkMovie: DetailActivity) {
 
     @Provides
-    fun getThisMovie(): NetworkMovie {
-        return detailFragment.intent.getParcelableExtra("movie" )
+    fun getThisMovie(): DetailActivity = networkMovie
+
     }
-}

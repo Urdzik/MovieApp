@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.R
-import com.example.movieapp.model.database.DatabaseMovie
+
 import com.example.movieapp.model.network.NetworkMovie
 
 import com.example.movieapp.utils.MovieAdapter

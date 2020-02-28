@@ -33,7 +33,7 @@ class OverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        App.appComponent.overviewInject(this)
+        App.appComponent.inject(this)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
 

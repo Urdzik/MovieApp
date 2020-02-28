@@ -3,6 +3,7 @@ package com.example.movieapp.ui.overview
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.model.network.NetworkMovie
@@ -17,6 +18,7 @@ class OverviewViewModel @Inject constructor(private val networkSource: NetworkSo
     private val _navigateToSelectProperty = MutableLiveData<NetworkMovie>()
     val navigateToSelectProperty: LiveData<NetworkMovie>
         get() = _navigateToSelectProperty
+
 
     //LiveData for show Progress Bar
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
@@ -63,4 +65,6 @@ class OverviewViewModel @Inject constructor(private val networkSource: NetworkSo
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
+
+
 }
