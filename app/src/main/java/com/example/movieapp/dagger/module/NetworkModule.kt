@@ -47,8 +47,6 @@ class NetworkModule (private val application: Application) {
             .build()
     }
 
-
-
     @Provides
     @Reusable
     internal fun provideRetrofitInterface( okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()

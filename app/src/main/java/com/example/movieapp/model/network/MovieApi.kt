@@ -8,5 +8,3 @@ interface MovieApi {
     @GET("movie.json")
     suspend fun getPropertyAsync(): List<NetworkMovie>
 }
-
-

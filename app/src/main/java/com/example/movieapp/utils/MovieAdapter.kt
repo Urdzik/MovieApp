@@ -9,10 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.model.network.NetworkMovie
 
-class MovieAdapter(private val onClickListener: ClickListener) :
-    ListAdapter<NetworkMovie, MovieAdapter.MovieViewHolder>(
-        DiffCallback()
-    ) {
+class MovieAdapter(private val onClickListener: ClickListener) : ListAdapter<NetworkMovie, MovieAdapter.MovieViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
@@ -30,7 +27,8 @@ class MovieAdapter(private val onClickListener: ClickListener) :
         holder.bind(item)
     }
 
-    class MovieViewHolder(private val binding: ItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MovieViewHolder(private val binding: ItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: NetworkMovie) {
             binding.movie = movie
         }

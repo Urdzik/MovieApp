@@ -19,7 +19,6 @@ class OverviewViewModel @Inject constructor(private val networkSource: NetworkSo
     val navigateToSelectProperty: LiveData<NetworkMovie>
         get() = _navigateToSelectProperty
 
-
     //LiveData for show Progress Bar
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
     val eventNetworkError: LiveData<Boolean>

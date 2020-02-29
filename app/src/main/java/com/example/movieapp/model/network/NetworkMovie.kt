@@ -27,4 +27,3 @@ data class NetworkMovie(
     val plus18: Int
         get() = if (rated == "R") View.GONE else View.VISIBLE
 }
-
