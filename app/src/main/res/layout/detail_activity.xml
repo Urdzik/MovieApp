@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.movieapp.detail.DetailViewModel" />
+            type="com.example.movieapp.ui.detail.DetailViewModel" />
     </data>
 
 
@@ -13,7 +13,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailFragment">
+    tools:context=".ui.detail.DetailActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

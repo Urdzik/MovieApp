@@ -1,5 +1,6 @@
-package com.example.movieapp.overview
+package com.example.movieapp.ui.overview
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,21 +10,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import com.example.movieapp.dagger.App
+import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
+import com.example.movieapp.ui.detail.DetailActivity
+import com.example.movieapp.utils.MovieAdapter
+import javax.inject.Inject
 
 class OverviewFragment : Fragment() {
 
-    private val viewModel: OverviewViewModel by lazy {
-        val activity = requireNotNull(this.activity) {}
-        ViewModelProvider(this, OverviewViewModelFactory(activity.application))
-            .get(OverviewViewModel::class.java)
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModel: OverviewViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?): View? {
+        App.appComponent.inject(this)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
 
         val binding = OverviewFragmentBinding.inflate(inflater)
 
@@ -35,24 +40,25 @@ class OverviewFragment : Fragment() {
             title = "Movie App"
         }
 
-
         //Listener of recycler view click
-        binding.recycler.adapter = MovieAdapter(MovieAdapter.ClickListener {
-            viewModel.displayPropertyDetails(it)
-        })
+        binding.recycler.adapter =
+            MovieAdapter(MovieAdapter.ClickListener {
+                viewModel.displayPropertyDetails(it)
+            })
 
         //Navigate to Detail Activity
         viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                this.findNavController()
-                    .navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it))
+            it?.let {
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra("movie", it)
+                startActivity(intent)
                 viewModel.displayPropertyDetailsCompleted()
             }
         })
 
         //Looking for the internet connection
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
-                if (isNetworkError) onNetworkError()
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> {
+                if (it) onNetworkError()
             })
 
         binding.lifecycleOwner = viewLifecycleOwner

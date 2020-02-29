@@ -1,15 +1,15 @@
-package com.example.movieapp.overview
+package com.example.movieapp.utils
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieapp.databinding.ItemBinding
-import com.example.movieapp.domain.Movie
 
-class MovieAdapter(private val onClickListener: ClickListener) :
-    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(DiffCallback()) {
+import com.example.movieapp.databinding.ItemBinding
+import com.example.movieapp.model.network.NetworkMovie
+
+class MovieAdapter(private val onClickListener: ClickListener) : ListAdapter<NetworkMovie, MovieAdapter.MovieViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
@@ -27,26 +27,26 @@ class MovieAdapter(private val onClickListener: ClickListener) :
         holder.bind(item)
     }
 
-    class MovieViewHolder(private val binding: ItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie) {
+    class MovieViewHolder(private val binding: ItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(movie: NetworkMovie) {
             binding.movie = movie
-            binding.executePendingBindings()
         }
     }
 
     //Class for comparing the old list and the new one, and updating it
-    class DiffCallback : DiffUtil.ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+    class DiffCallback : DiffUtil.ItemCallback<NetworkMovie>() {
+        override fun areItemsTheSame(oldItem: NetworkMovie, newItem: NetworkMovie): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+        override fun areContentsTheSame(oldItem: NetworkMovie, newItem: NetworkMovie): Boolean {
             return newItem.id == oldItem.id
         }
     }
 
     //Class for click by element
-    class ClickListener(val clickListener: (movie: Movie) -> Unit) {
-        fun onClick(movie: Movie) = clickListener(movie)
+    class ClickListener(val clickListener: (movie: NetworkMovie) -> Unit) {
+        fun onClick(movie: NetworkMovie) = clickListener(movie)
     }
 }

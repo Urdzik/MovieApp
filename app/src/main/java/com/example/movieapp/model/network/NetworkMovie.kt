@@ -1,12 +1,16 @@
-package com.example.movieapp.network
+package com.example.movieapp.model.network
 
-import com.example.movieapp.database.DatabaseMovie
+import android.os.Parcelable
+import android.view.View
+
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
 //Network object of movie for REST
+@Parcelize
 @JsonClass(generateAdapter = true)
-data class MovieProperty(
+data class NetworkMovie(
     @Json(name = "imdbID") val id: String,
     @Json(name = "Title") val title: String,
     @Json(name = "Poster") val poster: String,
@@ -18,23 +22,8 @@ data class MovieProperty(
     @Json(name = "Language") val language: String,
     @Json(name = "Writer") val writer: String,
     @Json(name = "Actors") val actors: String
-)
-
-//Convert network result to database object
-fun List<MovieProperty>.asDatabaseModal(): List<DatabaseMovie> {
-    return map {
-        DatabaseMovie(
-            id = it.id,
-            title = it.title,
-            poster = it.poster,
-            year = it.year,
-            rated = it.rated,
-            plot = it.plot,
-            genre = it.genre,
-            time = it.time,
-            language = it.language,
-            writer = it.writer,
-            actors = it.actors
-        )
-    }
+): Parcelable
+{
+    val plus18: Int
+        get() = if (rated == "R") View.GONE else View.VISIBLE
 }
