@@ -22,7 +22,7 @@
 <!--        tools:layout="@layout/detail_activity">-->
 <!--        <argument-->
 <!--           android:name="movie"-->
-<!--            app:argType="com.example.movieapp.model.network.NetworkMovie"-->
+<!--            app:argType="com.example.movieapp.model.network.data.NetworkMovie"-->
 <!--            />-->
 <!--        <action-->
 <!--            android:id="@+id/action_detailFragment_to_overviewFragment"-->

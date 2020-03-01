@@ -32,7 +32,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:src="@android:color/background_dark"
-        app:imageUrl="@{viewModel.selectProperty.poster_path}"
+        app:imageUrl="@{viewModel.selectProperty.posterPath}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         android:contentDescription="@string/plot" />
@@ -64,7 +64,7 @@
         app:layout_constraintStart_toStartOf="@+id/title_detail"
         app:layout_constraintTop_toBottomOf="@+id/title_detail"
         tools:text="2019"
-        android:text="@{String.valueOf(viewModel.selectProperty.releaseDate)}" />
+        />
 
     <TextView
         android:layout_marginEnd="16dp"
@@ -77,7 +77,7 @@
         app:layout_constraintStart_toStartOf="@+id/year_ditale"
         app:layout_constraintTop_toBottomOf="@+id/year_ditale"
         tools:text="Documentary, History, War"
-        android:text="@{viewModel.selectProperty.backdropPath}" />
+         />
 
 
     <TextView

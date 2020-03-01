@@ -2,6 +2,7 @@ package com.example.movieapp.ui.detail
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -9,7 +10,6 @@ import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.DetailActivityBinding
-import com.example.movieapp.model.network.NetworkMovie
 import javax.inject.Inject
 
 
@@ -30,9 +30,11 @@ class DetailActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
 
-        val movie: NetworkMovie? = intent.getParcelableExtra("movie")
+        val movieId = intent.getIntExtra("movie", 0)
 
-        viewModel.getSelectMovie(movie)
+        Log.i("TAG", movieId.toString())
+
+        viewModel.getSelectMovie(movieId)
 
 
         // Create Toolbar and button of back in toolbar

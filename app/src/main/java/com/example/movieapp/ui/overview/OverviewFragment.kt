@@ -2,6 +2,7 @@ package com.example.movieapp.ui.overview
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,8 +42,7 @@ class OverviewFragment : Fragment() {
         }
 
         //Listener of recycler view click
-        binding.recycler.adapter =
-            MovieAdapter(MovieAdapter.ClickListener {
+        binding.recycler.adapter = MovieAdapter(MovieAdapter.ClickListener {
                 viewModel.displayPropertyDetails(it)
             })
 
@@ -50,7 +50,7 @@ class OverviewFragment : Fragment() {
         viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {
             it?.let {
                 val intent = Intent(context, DetailActivity::class.java)
-                intent.putExtra("movie", it)
+                intent.putExtra("movie", it.id)
                 startActivity(intent)
                 viewModel.displayPropertyDetailsCompleted()
             }

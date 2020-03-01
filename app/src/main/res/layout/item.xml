@@ -6,7 +6,7 @@
 
         <variable
             name="movie"
-            type="com.example.movieapp.model.network.NetworkMovie" />
+            type="com.example.movieapp.model.network.data.NetworkMovie" />
 
         <import type="android.view.View" />
 
@@ -85,18 +85,18 @@
             app:layout_constraintTop_toBottomOf="@+id/title"
             app:layout_constraintVertical_bias="0.0" />
 
-        <ImageView
-            android:id="@+id/rated"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/no_18_years_old_sign"
-            android:visibility="@{movie.plus18}"
-            app:layout_constraintBottom_toBottomOf="@+id/poster"
-            app:layout_constraintEnd_toEndOf="@+id/poster"
-            app:srcCompat="@drawable/no_18_years_old_sign"
-            android:contentDescription="@string/mu" />
+<!--        <ImageView-->
+<!--            android:id="@+id/rated"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="25dp"-->
+<!--            android:layout_marginEnd="5dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:src="@drawable/no_18_years_old_sign"-->
+<!--            android:visibility="@{movie.plus18}"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/poster"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/poster"-->
+<!--            app:srcCompat="@drawable/no_18_years_old_sign"-->
+<!--            android:contentDescription="@string/mu" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

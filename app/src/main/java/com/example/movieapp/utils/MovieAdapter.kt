@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.movieapp.databinding.ItemBinding
-import com.example.movieapp.model.network.NetworkMovie
+import com.example.movieapp.model.network.data.NetworkMovie
 
 class MovieAdapter(private val onClickListener: ClickListener) : ListAdapter<NetworkMovie, MovieAdapter.MovieViewHolder>(DiffCallback()) {
 

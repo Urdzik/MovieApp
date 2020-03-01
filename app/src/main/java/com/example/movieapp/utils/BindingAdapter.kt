@@ -1,5 +1,6 @@
 package com.example.movieapp.utils
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -7,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.R
-import com.example.movieapp.model.network.NetworkMovie
+import com.example.movieapp.model.network.data.NetworkMovie
 
 //Binding adapter used to display images from URL using Glide
 @BindingAdapter("imageUrl")
@@ -22,6 +23,7 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
         )
         .into(imageView)
 }
+
 
 //Binding adapter used to set adapter of RecyclerView
 @BindingAdapter("listData")
