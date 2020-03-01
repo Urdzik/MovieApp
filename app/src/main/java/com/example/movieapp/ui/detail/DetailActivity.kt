@@ -30,7 +30,7 @@ class DetailActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
 
-        val movie: NetworkMovie = intent.getParcelableExtra("movie")
+        val movie: NetworkMovie? = intent.getParcelableExtra("movie")
 
         viewModel.getSelectMovie(movie)
 

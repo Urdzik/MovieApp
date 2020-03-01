@@ -14,7 +14,7 @@ class DetailViewModel @Inject constructor() : ViewModel() {
         get() = _selectProperty
 
 
-    fun getSelectMovie(networkMovie: NetworkMovie) {
+    fun getSelectMovie(networkMovie: NetworkMovie?) {
         _selectProperty.value = networkMovie
     }
 }

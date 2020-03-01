@@ -14,7 +14,7 @@ import com.example.movieapp.model.network.NetworkMovie
 fun bindImage(imageView: ImageView, imgUrl: String?) {
 
     Glide.with(imageView.context)
-        .load(imgUrl)
+        .load("https://image.tmdb.org/t/p/w500$imgUrl")
         .apply(
             RequestOptions()
                 .placeholder(R.drawable.loading_animation)

@@ -25,15 +25,17 @@
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/mu"
             android:cropToPadding="true"
-            app:imageUrl="@{movie.poster}"
+            android:scaleType="center"
+            app:imageUrl="@{movie.poster_path}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="?attr/actionModeSplitBackground"
-            android:contentDescription="@string/mu" />
+            app:srcCompat="?attr/actionModeSplitBackground" />
 
         <TextView
             android:id="@+id/title"
@@ -60,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:text="@{String.valueOf(movie.year)}"
+            android:text="@{String.valueOf(movie.releaseDate)}"
             android:textColor="#C1797979"
             app:layout_constraintBottom_toBottomOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +77,7 @@
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{movie.plot}"
+            android:text="@{movie.overview}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

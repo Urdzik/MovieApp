@@ -9,6 +9,6 @@ class NetworkSource @Inject constructor(
 ) {
     suspend fun retrieveData(): List<NetworkMovie> = withContext(Dispatchers.IO) {
         val playList = api.getPropertyAsync()
-        playList
+       playList.networkMovie
     }
 }
