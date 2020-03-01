@@ -25,7 +25,7 @@ data class NetworkMovie(
     @Json(name = "id") val id: Int,
     @Json(name = "adult") val adult: Boolean,
     @Json(name = "backdrop_path") val backdropPath: String,
-    @Json(name = "original_language") val originalLanguage: String,
+    val original_language: String,
     @Json(name = "original_title") val originalTitle: String,
     @Json(name = "genre_ids") val genreIds: List<Int>,
     @Json(name = "title") val title: String,

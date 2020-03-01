@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:text="@{movie.release_date}"
+            android:text="@{movie.original_language}"
             android:textColor="#C1797979"
             app:layout_constraintBottom_toBottomOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +92,7 @@
 <!--            android:layout_marginEnd="5dp"-->
 <!--            android:layout_marginBottom="5dp"-->
 <!--            android:src="@drawable/no_18_years_old_sign"-->
-<!--            android:visibility="@{movie.plus18}"-->
+<!--            android:visibility="@{movie.}"-->
 <!--            app:layout_constraintBottom_toBottomOf="@+id/poster"-->
 <!--            app:layout_constraintEnd_toEndOf="@+id/poster"-->
 <!--            app:srcCompat="@drawable/no_18_years_old_sign"-->
