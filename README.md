@@ -1,6 +1,5 @@
 ![MovieApp](/readme/Photo%20for%20github.png?raw=true)
-
-
+<br/><br/>
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-blue.svg)](https://kotlinlang.org)
 [![Dagger2](https://img.shields.io/badge/Dagger%202-2.26-red.svg)](https://github.com/google/dagger)
 [![Material design](https://img.shields.io/badge/Material%20Design-1.2.0--alpha%205-%237464f2)](https://material.io)
