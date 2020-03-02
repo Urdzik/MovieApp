@@ -12,5 +12,4 @@ class ViewModelFactory @Inject constructor(private val viewModel: MutableMap<Cla
             ?: throw IllegalArgumentException(" model class $modelClass not found")
         return viewModelProvider.get() as T
     }
-
 }

@@ -52,7 +52,7 @@ class NetworkModule (private val application: Application) {
     internal fun provideRetrofitInterface( okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .baseUrl("https://raw.githubusercontent.com/Urdzik/helper/master/")
+        .baseUrl("https://api.themoviedb.org/3/movie/")
         .client(okHttpClient)
         .build()
 
