@@ -1,20 +1,26 @@
 package com.example.movieapp.ui.detail
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.model.network.NetworkMovie
+import androidx.lifecycle.viewModelScope
+import com.example.movieapp.model.network.MovieInfoSource
+import com.example.movieapp.model.network.data.MovieInfo
+import com.example.movieapp.model.network.data.NetworkMovie
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DetailViewModel @Inject constructor() : ViewModel() {
+class DetailViewModel @Inject constructor(private  val movieInfoSource: MovieInfoSource) : ViewModel() {
 
     //LiveData object of movie
-    private val _selectProperty = MutableLiveData<NetworkMovie>()
-    val selectProperty: LiveData<NetworkMovie>
+    private val _selectProperty = MutableLiveData<MovieInfo>()
+    val selectProperty: LiveData<MovieInfo>
         get() = _selectProperty
 
-
-    fun getSelectMovie(networkMovie: NetworkMovie) {
-        _selectProperty.value = networkMovie
+     fun getSelectMovie(id: Int) {
+        viewModelScope.launch {
+            _selectProperty.value = movieInfoSource.retrieveInfoData(id)
+        }
     }
 }

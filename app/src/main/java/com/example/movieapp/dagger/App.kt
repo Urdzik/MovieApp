@@ -6,7 +6,6 @@ import com.example.movieapp.dagger.component.DaggerAppComponent
 import com.example.movieapp.dagger.module.NetworkModule
 import com.example.movieapp.ui.detail.DetailActivity
 
-
 class App : Application(){
     companion object{
         lateinit var appComponent: AppComponent
@@ -19,5 +18,4 @@ class App : Application(){
             .networkModule(NetworkModule(this))
             .build()
     }
-
 }
