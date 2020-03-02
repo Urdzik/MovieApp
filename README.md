@@ -37,13 +37,13 @@
 * ### __Model__
 
 	* ### __Network__<br/>
-		 __Retrofit 2__ <br/>
-		 – getting data from server into pojo-classes
+	     __Retrofit 2__ <br/>
+		– getting data from server into pojo-classes
      
-		 __okHTTP__ <br/>
+	     __okHTTP__ <br/>
 			  –caching data from the server to display the movie offline
 		
-		__Moshi__ <br/>
+	     __Moshi__ <br/>
 			- converting  json to object
        
    * __Coroutines__ <br/>
