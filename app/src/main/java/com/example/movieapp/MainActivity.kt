@@ -14,7 +14,8 @@ class MainActivity : AppCompatActivity() {
 
         //Function for Light-Dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
-//
+
+
 //        val myNavHostFragment: NavHostFragment = nav_host_fragment as NavHostFragment
 //        val inflater = myNavHostFragment.navController.navInflater
 //        val graph = inflater.inflate(R.navigation.navigation)

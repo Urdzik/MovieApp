@@ -18,11 +18,9 @@ class DetailViewModel @Inject constructor(private  val movieInfoSource: MovieInf
     val selectProperty: LiveData<MovieInfo>
         get() = _selectProperty
 
-
      fun getSelectMovie(id: Int) {
         viewModelScope.launch {
             _selectProperty.value = movieInfoSource.retrieveInfoData(id)
-
         }
     }
 }

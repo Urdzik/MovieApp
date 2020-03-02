@@ -1,53 +1,50 @@
 package com.example.movieapp.model.network.data
 
-import com.google.gson.annotations.SerializedName
-import com.squareup.moshi.Json
-
 
 data class MovieInfo (
-    @Json(name = "adult") val adult: Boolean,
-                          val backdrop_path: String,
-    @Json(name = "belongs_to_collection") val belongsToCollection: String,
-    @Json(name = "budget") val budget: Int,
-    @Json(name = "genres") val genres: List<Genres>,
-    @Json(name = "homepage") val homepage: String,
-    @Json(name = "id") val id: Int,
-    @Json(name = "imdb_id") val imdbId: String,
+    val adult: Boolean,
+    val backdrop_path: String,
+    val belongs_to_collection: String,
+    val budget: Int,
+    val genres: List<Genres>,
+    val homepage: String,
+    val id: Int,
+    val imdb_id: String,
     val original_language: String,
-    @Json(name = "original_title") val originalTitle: String,
-    @Json(name = "overview") val overview: String,
-    @Json(name = "popularity") val popularity: Double,
-                               val poster_path: String,
-    @Json(name = "production_companies") val productionCompanies: List<ProductionCompanies>,
-    @Json(name = "production_countries") val productionCountries: List<ProductionCountries>,
-  val release_date: String,
-    @Json(name = "revenue") val revenue: Int,
-    @Json(name = "runtime") val runtime: Int,
-    @Json(name = "spoken_languages") val spokenLanguages: List<SpokenLanguages>,
-    @Json(name = "status") val status: String,
-    @Json(name = "tagline") val tagline: String,
-    @Json(name = "title") val title: String,
-    @Json(name = "video") val video: Boolean,
-    @Json(name = "vote_average") val voteAverage: Double,
-    @Json(name = "vote_count") val voteCount: Int
+    val original_title: String,
+    val overview: String,
+    val popularity: Double,
+    val poster_path: String,
+    val production_companies: List<ProductionCompanies>,
+    val production_countries: List<ProductionCountries>,
+    val release_date: String,
+    val revenue: Int,
+    val runtime: Int,
+    val spoken_languages: List<SpokenLanguages>,
+    val status: String,
+    val tagline: String,
+    val title: String,
+    val video: Boolean,
+    val vote_average: Double,
+    val vote_count: Int
 )
 
 data class SpokenLanguages (
-    @SerializedName("iso_639_1") val iso_639_1 : String,
-    @SerializedName("name") val name : String
+    val iso_639_1: String,
+    val name: String
 )
 data class ProductionCountries (
-    @SerializedName("iso_3166_1") val iso_3166_1 : String,
-    @SerializedName("name") val name : String
+    val iso_3166_1: String,
+    val name: String
 )
 data class ProductionCompanies (
-    @SerializedName("id") val id : Int,
-    @SerializedName("logo_path") val logoPath : String,
-    @SerializedName("name") val name : String,
-    @SerializedName("origin_country") val originCountry : String
+    val id: Int,
+    val logo_path: String,
+    val name: String,
+    val origin_country: String
 )
 
 data class Genres (
-    @SerializedName("id") val id : Int,
-    @SerializedName("name") val name : String
+    val id: Int,
+    val name: String
 )

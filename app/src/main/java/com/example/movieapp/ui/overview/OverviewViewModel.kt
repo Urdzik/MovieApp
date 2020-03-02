@@ -9,8 +9,7 @@ import com.example.movieapp.model.network.NetworkSource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class OverviewViewModel @Inject constructor(private val networkSource: NetworkSource) :
-    ViewModel() {
+class OverviewViewModel @Inject constructor(private val networkSource: NetworkSource) : ViewModel() {
 
     //LiveData object of movie
     private val _navigateToSelectProperty = MutableLiveData<NetworkMovie>()
@@ -27,11 +26,9 @@ class OverviewViewModel @Inject constructor(private val networkSource: NetworkSo
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-
     private var _playList = MutableLiveData<List<NetworkMovie>>()
     val playList: LiveData<List<NetworkMovie>>
         get() = _playList
-
 
     init {
         getMovieList()
@@ -62,6 +59,4 @@ class OverviewViewModel @Inject constructor(private val networkSource: NetworkSo
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
-
-
 }

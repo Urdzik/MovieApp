@@ -67,7 +67,6 @@ class OverviewFragment : Fragment() {
         return binding.root
     }
 
-
     //Function will show a toast when there is no internet
     private fun onNetworkError() {
         if (!viewModel.isNetworkErrorShown.value!!) {

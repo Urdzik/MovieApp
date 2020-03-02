@@ -15,26 +15,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:theme="@style/Theme.AppCompat.DayNight"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@{viewModel.selectProperty.title}"
-        app:titleTextColor="?attr/actionMenuTextColor"/>
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="240dp"
+        android:background="#FFFFFF"
         android:contentDescription="@string/plot"
         android:src="@android:color/background_dark"
         app:imageUrl="@{viewModel.selectProperty.backdrop_path}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#00000000"
+        android:theme="@style/Theme.AppCompat.DayNight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:titleTextColor="?attr/actionMenuTextColor" />
+
 
     <TextView
         android:id="@+id/title_detail"
@@ -65,16 +68,29 @@
 
 
     <TextView
+        android:id="@+id/year_ditale2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:genre="@{viewModel.selectProperty.genres}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/title_detail"
+        app:layout_constraintTop_toBottomOf="@+id/year_ditale"
+        tools:text="2019" />
+
+    <TextView
         android:id="@+id/langue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+
         android:layout_marginEnd="16dp"
         android:text="@{viewModel.selectProperty.original_language}"
-
+        app:layout_constraintBottom_toBottomOf="@+id/title_detail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/year_ditale"
-        app:layout_constraintTop_toBottomOf="@+id/year_ditale"
+        app:layout_constraintStart_toEndOf="@+id/title_detail"
+        app:layout_constraintTop_toTopOf="@+id/title_detail"
         tools:text="English" />
 
     <TextView
@@ -88,13 +104,14 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/langue" />
+        app:layout_constraintTop_toBottomOf="@+id/year_ditale2" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@{viewModel.selectProperty.overview}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView4"

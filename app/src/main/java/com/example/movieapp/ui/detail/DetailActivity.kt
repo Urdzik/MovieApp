@@ -32,8 +32,6 @@ class DetailActivity : AppCompatActivity() {
 
         val movieId = intent.getIntExtra("movie", 0)
 
-        Log.i("TAG", movieId.toString())
-
         viewModel.getSelectMovie(movieId)
 
 
@@ -47,17 +45,16 @@ class DetailActivity : AppCompatActivity() {
                 setHomeButtonEnabled(true)
                 setDisplayShowTitleEnabled(false)
             }
-
+            //Button of back
             setNavigationOnClickListener {
                 super.onBackPressed()
             }
         }
 
-        //Button of back
+
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
 
     }
 }
