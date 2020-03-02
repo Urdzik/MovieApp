@@ -18,9 +18,10 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="260dp"
         android:background="#FFFFFF"
         android:contentDescription="@string/plot"
+        android:scaleType="center"
         android:src="@android:color/background_dark"
         app:imageUrl="@{viewModel.selectProperty.backdrop_path}"
         app:layout_constraintEnd_toEndOf="parent"
