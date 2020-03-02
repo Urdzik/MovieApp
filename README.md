@@ -2,7 +2,8 @@
 <br/><br/>
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-blue.svg)](https://kotlinlang.org)
 [![Dagger2](https://img.shields.io/badge/Dagger%202-2.26-red.svg)](https://github.com/google/dagger)
-[![Material design](https://img.shields.io/badge/Material%20Design-1.2.0--alpha%205-%237464f2)](https://material.io)
+[![Material design](https://img.shields.io/badge/Material%20Design-1.2.0--alpha%205-%237464f2.svg)](https://material.io)
+[![The Movie DB](https://img.shields.io/badge/TMDB-V4-%2300d573.svg)](https://www.themoviedb.org/)
 
 <h3 size="1">Application which retrieves data from Webserver (via Retrofit), saves it into Room and get from it if user is offline. There are applying MVVM architecture pattern and Dagger 2 example.</h3><br/>
 
