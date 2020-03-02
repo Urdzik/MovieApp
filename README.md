@@ -9,8 +9,6 @@
 ### Application which retrieves data from Webserver (via Retrofit), saves it into cache and get from it if user is offline. There are applying MVVM architecture pattern and Dagger 2 example.
  # Overview:
 
-
-
 * ### __Model__
    Model is implemented as Repository pattern. Firstly it begins from internet connection checking. Consequently if it's alive we're retrieving data from the server (by using Retrofit 2). Otherwise we're trying to fetch data from the cache itself.
 * ### __View__
@@ -41,10 +39,10 @@
 		– getting data from server into pojo-classes
      
 	     __okHTTP__ <br/>
-			  –caching data from the server to display the movie offline
+	        – caching data from the server to display the movie offline
 		
 	     __Moshi__ <br/>
-			- converting  json to object
+		– converting  json to object
        
    * __Coroutines__ <br/>
       – managing asynchronous network queries<br/>
