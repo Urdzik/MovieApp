@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.overview
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,6 +30,8 @@ class OverviewViewModel @Inject constructor(private val networkSource: NetworkSo
     private var _playList = MutableLiveData<List<NetworkMovie>>()
     val playList: LiveData<List<NetworkMovie>>
         get() = _playList
+
+    val errorClickListener = View.OnClickListener { getMovieList() }
 
     init {
         getMovieList()

@@ -1,29 +1,20 @@
 package com.example.movieapp.dagger.module
 
 import android.app.Application
-import android.content.Context
-import com.example.movieapp.dagger.component.AppComponent
 import com.example.movieapp.model.network.MovieApi
 import com.example.movieapp.model.network.NetworkSource
-import com.example.movieapp.ui.overview.OverviewFragment
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import okhttp3.Cache
-import okhttp3.CacheControl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @Module
 class NetworkModule (private val application: Application) {
