@@ -4,4 +4,5 @@
     <string name="writer">Writer</string>
     <string name="actors">Actors</string>
     <string name="mu">mu</string>
+    <string name="retry">Повторить</string>
 </resources>

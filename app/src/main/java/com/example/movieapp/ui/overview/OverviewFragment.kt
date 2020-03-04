@@ -11,11 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
 import com.example.movieapp.ui.detail.DetailActivity
 import com.example.movieapp.utils.MovieAdapter
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class OverviewFragment : Fragment() {
@@ -23,6 +25,9 @@ class OverviewFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: OverviewViewModel
+    lateinit var binding: OverviewFragmentBinding
+
+    private var errorSnackbar: Snackbar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +36,7 @@ class OverviewFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
 
-        val binding = OverviewFragmentBinding.inflate(inflater)
+         binding = OverviewFragmentBinding.inflate(inflater)
 
         //Toolbar
         val myToolbar = binding.myToolbar
@@ -70,8 +75,9 @@ class OverviewFragment : Fragment() {
     //Function will show a toast when there is no internet
     private fun onNetworkError() {
         if (!viewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, "Network error", Toast.LENGTH_LONG).show()
-            viewModel.onNetworkErrorShown()
+            errorSnackbar = Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_INDEFINITE)
+            errorSnackbar?.setAction(R.string.retry, viewModel.errorClickListener)
+            errorSnackbar?.show()
         }
     }
 }
