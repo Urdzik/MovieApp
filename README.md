@@ -43,8 +43,11 @@
 		
 	     __Moshi__ <br/>
 		– converting  json to object
+		
+    * ### __Room Database__ 
+    	-Save for offline viewing of selected movies
        
-   * __Coroutines__ <br/>
+   * ### __Coroutines__ 
       – managing asynchronous network queries<br/>
       – using instead of callbacks<br/>
       – providing light asynchronous operations
@@ -66,6 +69,7 @@
 * Material Librarie 
 * Android Jetpack
 * Dagger 2
+* Room Database
 * Kotlin Coroutines
 * Retrofit 2
 * OkHTTP 3
