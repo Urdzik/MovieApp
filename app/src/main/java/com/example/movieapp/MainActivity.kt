@@ -31,10 +31,8 @@ class MainActivity : AppCompatActivity() {
         val inflater = myNavHostFragment.navController.navInflater
         val graph = inflater.inflate(R.navigation.navigation)
         myNavHostFragment.navController.graph = graph
-        setUpBottomNav(myNavHostFragment.navController)
+        bottom_navigation.setupWithNavController(myNavHostFragment.navController)
     }
 
-    private fun setUpBottomNav(navController: NavController) {
-        bottom_navigation?.setupWithNavController(navController)
-    }
+
 }
