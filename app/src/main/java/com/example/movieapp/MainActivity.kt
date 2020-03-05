@@ -20,19 +20,14 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
 
         //Toolbar
-
-        (this as AppCompatActivity).apply {
-            setSupportActionBar(my_toolbar)
-            title = "Movie App"
-        }
-
+        setSupportActionBar(my_toolbar)
+        title = "Movie App"
 
         val myNavHostFragment: NavHostFragment = nav_host_fragment as NavHostFragment
         val inflater = myNavHostFragment.navController.navInflater
         val graph = inflater.inflate(R.navigation.navigation)
         myNavHostFragment.navController.graph = graph
+
         bottom_navigation.setupWithNavController(myNavHostFragment.navController)
     }
-
-
 }

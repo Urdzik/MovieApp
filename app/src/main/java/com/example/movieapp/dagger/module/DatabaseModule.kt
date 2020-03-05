@@ -20,10 +20,8 @@ class DatabaseModule(private val context: Context) {
         "movies"
     ).fallbackToDestructiveMigration().build()
 
-
     @Provides
     @Reusable
     fun provideDao(movieDatabase: MovieDatabase): DatabaseDao = movieDatabase.dao()
-
 
 }
