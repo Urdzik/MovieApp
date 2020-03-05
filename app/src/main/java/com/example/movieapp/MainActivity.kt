@@ -16,6 +16,13 @@ class MainActivity : AppCompatActivity() {
         //Function for Light-Dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
 
+        //Toolbar
+
+        (this as AppCompatActivity).apply {
+            setSupportActionBar(my_toolbar)
+            title = "Movie App"
+        }
+
 //        val myNavHostFragment: NavHostFragment = nav_host_fragment as NavHostFragment
 //        val inflater = myNavHostFragment.navController.navInflater
 //        val graph = inflater.inflate(R.navigation.navigation)

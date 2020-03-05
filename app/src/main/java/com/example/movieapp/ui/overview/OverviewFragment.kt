@@ -38,13 +38,7 @@ class OverviewFragment : Fragment() {
 
          binding = OverviewFragmentBinding.inflate(inflater)
 
-        //Toolbar
-        val myToolbar = binding.myToolbar
 
-        (activity as AppCompatActivity).apply {
-            setSupportActionBar(myToolbar)
-            title = "Movie App"
-        }
 
         //Listener of recycler view click
         binding.recycler.adapter = MovieAdapter(MovieAdapter.ClickListener {

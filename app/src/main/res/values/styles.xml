@@ -9,7 +9,7 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
-    <style name="progressBarStyle" parent="Theme.AppCompat.DayNight">
+    <style name="progressBarStyle" parent="Theme.MaterialComponents.DayNight">
 <!--        <item name="android:indeterminateDrawable">@drawable/progress_bar</item>-->
         <item name="colorAccent">@color/appColor</item>
     </style>

@@ -5,4 +5,8 @@
     <string name="actors">Actors</string>
     <string name="mu">mu</string>
     <string name="retry">Повторить</string>
+    <string name="save">Save</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="news">News</string>
 </resources>
