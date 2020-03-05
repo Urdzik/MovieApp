@@ -6,13 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.databinding.NewsFragmentBinding
 
 class NewsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = NewsFragment()
-    }
 
     private lateinit var viewModel: NewsViewModel
 
@@ -21,14 +19,11 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = NewsFragmentBinding.inflate(inflater)
+        viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
     return binding.root
 
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }
