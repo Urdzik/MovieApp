@@ -36,8 +36,9 @@ class OverviewFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
 
-         binding = OverviewFragmentBinding.inflate(inflater)
+        binding = OverviewFragmentBinding.inflate(inflater)
 
+        viewModel.getMovieList(1)
 
 
         //Listener of recycler view click

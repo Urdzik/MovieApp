@@ -12,6 +12,8 @@ import javax.inject.Inject
 
 class OverviewViewModel @Inject constructor(private val networkSource: NetworkSource) : ViewModel() {
 
+    var page: Int = 1
+
     //LiveData object of movie
     private val _navigateToSelectProperty = MutableLiveData<NetworkMovie>()
     val navigateToSelectProperty: LiveData<NetworkMovie>
@@ -31,18 +33,16 @@ class OverviewViewModel @Inject constructor(private val networkSource: NetworkSo
     val playList: LiveData<List<NetworkMovie>>
         get() = _playList
 
-    val errorClickListener = View.OnClickListener { getMovieList() }
+    val errorClickListener = View.OnClickListener { getMovieList(1) }
 
-    init {
-        getMovieList()
-    }
 
-    private fun getMovieList() {
+     fun getMovieList(i :Int) {
         viewModelScope.launch {
             try {
-                _playList.value = networkSource.retrieveData()
+                _playList.value = networkSource.retrieveData(i)
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
+                page++
             } catch (e: Exception) {
                 if (playList.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true

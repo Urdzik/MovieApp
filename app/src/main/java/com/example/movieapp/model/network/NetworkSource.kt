@@ -7,8 +7,8 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class NetworkSource @Inject constructor(private val api: MovieApi) {
-    suspend fun retrieveData(): List<NetworkMovie> = withContext(Dispatchers.IO) {
-        val playList = api.getPropertyAsync()
+    suspend fun retrieveData(page: Int): List<NetworkMovie> = withContext(Dispatchers.IO) {
+        val playList = api.getPropertyAsync(page)
        playList.networkMovie
     }
 }

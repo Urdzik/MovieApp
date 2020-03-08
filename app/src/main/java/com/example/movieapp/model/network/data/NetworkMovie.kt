@@ -1,13 +1,14 @@
 package com.example.movieapp.model.network.data
 
 import android.view.View
+import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 //Network object of movie for REST
-@JsonClass(generateAdapter = true)
+
 data class Results(
-    @Json(name = "results") val networkMovie: List<NetworkMovie>,
+    @SerializedName("results") val networkMovie: List<NetworkMovie>,
     val page: Int,
     val total_results: Int,
     val total_pages: Int
