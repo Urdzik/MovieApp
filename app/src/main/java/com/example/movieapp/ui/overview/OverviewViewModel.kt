@@ -35,11 +35,14 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
 
     val errorClickListener = View.OnClickListener { getMovieList() }
 
-
-     fun getMovieList() {
+    fun getMovieList() {
         viewModelScope.launch {
             try {
-               _playList.value = networkSource.smallRetrieveData("top_rated" ,"26f381d6ab8dd659b22d983cab9aa255", "ru")
+                _playList.value = networkSource.retrievePoster(
+                    "top_rated",
+                    "26f381d6ab8dd659b22d983cab9aa255",
+                    "ru"
+                )
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
 
@@ -50,7 +53,6 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
             }
         }
     }
-
 
     fun displayPropertyDetails(movie: SmallMovieList) {
         _navigateToSelectProperty.value = movie

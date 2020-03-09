@@ -21,7 +21,7 @@ interface MovieApi {
 
 
     @GET("{category}")
-    suspend fun getSmallList(
+    suspend fun getListOfPosters(
         @Path("category") category: String,
         @Query("api_key") key: String = "26f381d6ab8dd659b22d983cab9aa255",
         @Query("language") language: String
