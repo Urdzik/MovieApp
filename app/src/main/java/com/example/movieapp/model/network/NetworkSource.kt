@@ -14,8 +14,9 @@ class NetworkSource @Inject constructor(private val api: MovieApi) {
        playList.networkMovie
     }
 }
+
 class SmallNetworkSource @Inject constructor(private val api: MovieApi) {
-    suspend fun smallRetrieveData(category: String, key: String, language: String,   page: Int): List<Small> = withContext(Dispatchers.IO) {
+    suspend fun smallRetrieveData(category: String, key: String, language: String,  page: Int): List<Small> = withContext(Dispatchers.IO) {
         val playList = api.getSmallList(category, key, language, page)
         playList.small
     }

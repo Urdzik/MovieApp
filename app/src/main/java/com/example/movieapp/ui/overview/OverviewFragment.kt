@@ -15,7 +15,7 @@ import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
 import com.example.movieapp.ui.detail.DetailActivity
-import com.example.movieapp.utils.MovieAdapter
+import com.example.movieapp.utils.adapters.MovieAdapter
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -41,13 +41,19 @@ class OverviewFragment : Fragment() {
         sendNewMovieList()
 
         //Listener of recycler view click
-        binding.recycler.adapter = MovieAdapter(
-            MovieAdapter.ClickListener { viewModel.displayPropertyDetails(it) },
-            mutableListOf()
-        )
+        binding.recyclerTopRated.adapter =
+            MovieAdapter(
+                MovieAdapter.ClickListener {
+                    viewModel.displayPropertyDetails(
+                        it
+                    )
+                },
+                mutableListOf()
+            )
         popularMoviesLayoutMgr = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.recycler.layoutManager = popularMoviesLayoutMgr
-        adapter = binding.recycler.adapter as MovieAdapter
+
+        binding.recyclerTopRated.layoutManager = popularMoviesLayoutMgr
+        adapter = binding.recyclerTopRated.adapter as MovieAdapter
 
         viewModel.playList.observe(viewLifecycleOwner, Observer {
             adapter.appendMovies(it)
@@ -92,14 +98,14 @@ class OverviewFragment : Fragment() {
 
 
     fun attachPopularMoviesOnScrollListener() {
-        binding.recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.recyclerTopRated.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val totalItemCount = popularMoviesLayoutMgr.itemCount
                 val visibleItemCount = popularMoviesLayoutMgr.childCount
                 val firstVisibleItem = popularMoviesLayoutMgr.findFirstVisibleItemPosition()
 
                 if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
-                    binding.recycler.removeOnScrollListener(this)
+                    binding.recyclerTopRated.removeOnScrollListener(this)
                     popularMoviesPage++
                     sendNewMovieList()
                 }

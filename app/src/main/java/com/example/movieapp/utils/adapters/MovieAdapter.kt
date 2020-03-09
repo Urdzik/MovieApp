@@ -1,12 +1,9 @@
-package com.example.movieapp.utils
+package com.example.movieapp.utils.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
-import com.example.movieapp.model.network.data.NetworkMovie
 import com.example.movieapp.model.network.data.Small
 
 class MovieAdapter(private val onClickListener: ClickListener, private var movies: MutableList<Small>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {

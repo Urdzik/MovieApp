@@ -1,4 +1,4 @@
-package com.example.movieapp.utils
+package com.example.movieapp.utils.adapters
 
 import android.view.View
 import android.widget.ImageView
