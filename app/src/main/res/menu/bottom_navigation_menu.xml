@@ -9,6 +9,11 @@
         android:id="@+id/newsFragment"
         android:icon="@drawable/ic_location_city_black_24dp"
         android:title="@string/news" />
+
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/search" />
     <item
         android:id="@+id/saveMovieFragment"
         android:icon="@drawable/ic_save_black_24dp"
