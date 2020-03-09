@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class OverviewViewModel @Inject constructor(private val networkSource: NetworkSource) : ViewModel() {
 
-    var page: Int = 1
+    var language: String = "ru"
 
     //LiveData object of movie
     private val _navigateToSelectProperty = MutableLiveData<NetworkMovie>()
@@ -29,20 +29,21 @@ class OverviewViewModel @Inject constructor(private val networkSource: NetworkSo
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+
     private var _playList = MutableLiveData<List<NetworkMovie>>()
     val playList: LiveData<List<NetworkMovie>>
         get() = _playList
 
-    val errorClickListener = View.OnClickListener { getMovieList(1) }
+    val errorClickListener = View.OnClickListener { getMovieList(1, language) }
 
 
-     fun getMovieList(i :Int) {
+     fun getMovieList(i :Int, language: String) {
         viewModelScope.launch {
             try {
-                _playList.value = networkSource.retrieveData(i)
+               _playList.value = networkSource.retrieveData("top_rated" ,"26f381d6ab8dd659b22d983cab9aa255", language, i)
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
-                page++
+
             } catch (e: Exception) {
                 if (playList.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true
@@ -50,6 +51,9 @@ class OverviewViewModel @Inject constructor(private val networkSource: NetworkSo
             }
         }
     }
+
+
+
 
     fun displayPropertyDetails(movie: NetworkMovie) {
         _navigateToSelectProperty.value = movie

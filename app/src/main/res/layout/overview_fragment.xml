@@ -28,11 +28,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toTopOf="parent"
-            app:listData="@{viewModel.playList}"
-            app:spanCount="1"
-            tools:listCount="16"
+            android:orientation="horizontal"
             tools:listitem="@layout/item" />
 
         <ProgressBar

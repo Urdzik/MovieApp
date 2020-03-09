@@ -2,15 +2,14 @@ package com.example.movieapp.ui.overview
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
@@ -26,25 +25,34 @@ class OverviewFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: OverviewViewModel
     lateinit var binding: OverviewFragmentBinding
+    lateinit var adapter: MovieAdapter
+    private lateinit var popularMoviesLayoutMgr: LinearLayoutManager
 
     private var errorSnackbar: Snackbar? = null
+    private var popularMoviesPage = 1
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         App.appComponent.inject(this)
-
-        viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
-
         binding = OverviewFragmentBinding.inflate(inflater)
-
-        viewModel.getMovieList(1)
-
+        viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
+        sendNewMovieList()
 
         //Listener of recycler view click
-        binding.recycler.adapter = MovieAdapter(MovieAdapter.ClickListener {
-                viewModel.displayPropertyDetails(it)
-            })
+        binding.recycler.adapter = MovieAdapter(
+            MovieAdapter.ClickListener { viewModel.displayPropertyDetails(it) },
+            mutableListOf()
+        )
+        popularMoviesLayoutMgr = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.recycler.layoutManager = popularMoviesLayoutMgr
+        adapter = binding.recycler.adapter as MovieAdapter
+
+        viewModel.playList.observe(viewLifecycleOwner, Observer {
+            adapter.appendMovies(it)
+        })
+
 
         //Navigate to Detail Activity
         viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {
@@ -57,7 +65,7 @@ class OverviewFragment : Fragment() {
         })
 
         //Looking for the internet connection
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> {
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
                 if (it) onNetworkError()
             })
 
@@ -67,6 +75,7 @@ class OverviewFragment : Fragment() {
         return binding.root
     }
 
+
     //Function will show a toast when there is no internet
     private fun onNetworkError() {
         if (!viewModel.isNetworkErrorShown.value!!) {
@@ -75,4 +84,27 @@ class OverviewFragment : Fragment() {
             errorSnackbar?.show()
         }
     }
+
+    fun sendNewMovieList() {
+        viewModel.getMovieList(popularMoviesPage, "ru")
+        attachPopularMoviesOnScrollListener()
+    }
+
+
+    fun attachPopularMoviesOnScrollListener() {
+        binding.recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val totalItemCount = popularMoviesLayoutMgr.itemCount
+                val visibleItemCount = popularMoviesLayoutMgr.childCount
+                val firstVisibleItem = popularMoviesLayoutMgr.findFirstVisibleItemPosition()
+
+                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
+                    binding.recycler.removeOnScrollListener(this)
+                    popularMoviesPage++
+                    sendNewMovieList()
+                }
+            }
+        })
+    }
+
 }

@@ -25,14 +25,6 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 }
 
 
-//Binding adapter used to set adapter of RecyclerView
-@BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<NetworkMovie>?) {
-    data?.let {
-        val adapter = recyclerView.adapter as MovieAdapter
-        adapter.submitList(data)
-    }
-}
 
 //Binding adapter used to hide the spinner once data is available.
 @BindingAdapter("isNetworkError", "playlist")
