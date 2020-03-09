@@ -30,8 +30,8 @@
         android:label="ProfileFragment"
         tools:layout="@layout/profile_fragment">
         <action
-            android:id="@+id/action_profileFragment_to_overviewFragment"
-            app:destination="@id/overviewFragment" />
+            android:id="@+id/action_profileFragment_to_searchFragment2"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/overviewFragment"
@@ -41,5 +41,14 @@
         <action
             android:id="@+id/action_overviewFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.movieapp.ui.search.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_overviewFragment"
+            app:destination="@id/overviewFragment" />
     </fragment>
 </navigation>

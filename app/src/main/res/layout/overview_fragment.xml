@@ -12,41 +12,89 @@
             type="com.example.movieapp.ui.overview.OverviewViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/overviewFragment"
-        tools:context="com.example.movieapp.MainActivity">
+        tools:context="com.example.movieapp.MainActivity"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/top_rated_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Топ рейтинг"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/recycler_top_rated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:clipToPadding="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item" />
+
+        <TextView
+            android:id="@+id/popular_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Популярные"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_popular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toTopOf="parent"
-            app:listData="@{viewModel.playList}"
-            app:spanCount="1"
-            tools:listCount="16"
             tools:listitem="@layout/item" />
 
-        <ProgressBar
-            style="@style/progressBarStyle"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:indeterminateTint="@color/appColor"
-            android:indeterminateTintMode="src_in"
-            app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:playlist="@{viewModel.playList}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+<!--        <ProgressBar-->
+<!--        style="@style/progressBarStyle"-->
+<!--        android:foregroundGravity="center"-->
+<!--        android:layout_width="64dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:indeterminateTint="@color/appColor"-->
+<!--        android:indeterminateTintMode="src_in"-->
+<!--        app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:playlist="@{viewModel.playList}" />-->
+    </ScrollView>
+
 </layout>

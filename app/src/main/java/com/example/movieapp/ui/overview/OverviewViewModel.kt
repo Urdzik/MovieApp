@@ -5,44 +5,47 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapp.model.network.data.NetworkMovie
-import com.example.movieapp.model.network.NetworkSource
+import com.example.movieapp.model.network.SmallNetworkSource
+import com.example.movieapp.model.network.data.SmallMovieList
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class OverviewViewModel @Inject constructor(private val networkSource: NetworkSource) : ViewModel() {
+class OverviewViewModel @Inject constructor(private val networkSource: SmallNetworkSource) : ViewModel() {
+
 
     //LiveData object of movie
-    private val _navigateToSelectProperty = MutableLiveData<NetworkMovie>()
-    val navigateToSelectProperty: LiveData<NetworkMovie>
+    private val _navigateToSelectProperty = MutableLiveData<SmallMovieList>()
+    val navigateToSelectProperty: LiveData<SmallMovieList>
         get() = _navigateToSelectProperty
 
     //LiveData for show Progress Bar
-    private var _eventNetworkError = MutableLiveData<Boolean>(false)
+    private var _eventNetworkError = MutableLiveData(false)
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
     //LiveData for show internet error
-    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+    private var _isNetworkErrorShown = MutableLiveData(false)
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    private var _playList = MutableLiveData<List<NetworkMovie>>()
-    val playList: LiveData<List<NetworkMovie>>
+
+    private var _playList = MutableLiveData<List<SmallMovieList>>()
+    val playList: LiveData<List<SmallMovieList>>
         get() = _playList
 
     val errorClickListener = View.OnClickListener { getMovieList() }
 
-    init {
-        getMovieList()
-    }
-
-    private fun getMovieList() {
+    fun getMovieList() {
         viewModelScope.launch {
             try {
-                _playList.value = networkSource.retrieveData()
+                _playList.value = networkSource.retrievePoster(
+                    "top_rated",
+                    "26f381d6ab8dd659b22d983cab9aa255",
+                    "ru"
+                )
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
+
             } catch (e: Exception) {
                 if (playList.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true
@@ -51,7 +54,7 @@ class OverviewViewModel @Inject constructor(private val networkSource: NetworkSo
         }
     }
 
-    fun displayPropertyDetails(movie: NetworkMovie) {
+    fun displayPropertyDetails(movie: SmallMovieList) {
         _navigateToSelectProperty.value = movie
     }
 
