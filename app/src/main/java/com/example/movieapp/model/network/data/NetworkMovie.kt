@@ -29,7 +29,4 @@ data class NetworkMovie(
     val vote_average: Double,
     val overview: String,
     val release_date: String
-){
-    val plus18
-    get() = if (adult) View.VISIBLE  else View.GONE
-}
+)

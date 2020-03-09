@@ -7,7 +7,7 @@
 
         <variable
             name="movie"
-            type="com.example.movieapp.model.network.data.Small" />
+            type="com.example.movieapp.model.network.data.SmallMovieList" />
 
         <import type="android.view.View" />
 
@@ -29,7 +29,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:scaleType="centerCrop"
-            app:imageUrl="@{movie.poster_path}"
+            app:imageUrl="@{movie.posterPath}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

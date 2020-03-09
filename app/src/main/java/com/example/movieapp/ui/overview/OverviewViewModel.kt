@@ -5,20 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapp.model.network.data.NetworkMovie
-import com.example.movieapp.model.network.NetworkSource
 import com.example.movieapp.model.network.SmallNetworkSource
-import com.example.movieapp.model.network.data.Small
+import com.example.movieapp.model.network.data.SmallMovieList
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OverviewViewModel @Inject constructor(private val networkSource: SmallNetworkSource) : ViewModel() {
 
-    var language: String = "ru"
 
     //LiveData object of movie
-    private val _navigateToSelectProperty = MutableLiveData<Small>()
-    val navigateToSelectProperty: LiveData<Small>
+    private val _navigateToSelectProperty = MutableLiveData<SmallMovieList>()
+    val navigateToSelectProperty: LiveData<SmallMovieList>
         get() = _navigateToSelectProperty
 
     //LiveData for show Progress Bar
@@ -32,17 +29,17 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
         get() = _isNetworkErrorShown
 
 
-    private var _playList = MutableLiveData<List<Small>>()
-    val playList: LiveData<List<Small>>
+    private var _playList = MutableLiveData<List<SmallMovieList>>()
+    val playList: LiveData<List<SmallMovieList>>
         get() = _playList
 
-    val errorClickListener = View.OnClickListener { getMovieList(1, language) }
+    val errorClickListener = View.OnClickListener { getMovieList() }
 
 
-     fun getMovieList(i :Int, language: String) {
+     fun getMovieList() {
         viewModelScope.launch {
             try {
-               _playList.value = networkSource.smallRetrieveData("top_rated" ,"26f381d6ab8dd659b22d983cab9aa255", language, i)
+               _playList.value = networkSource.smallRetrieveData("top_rated" ,"26f381d6ab8dd659b22d983cab9aa255", "ru")
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
 
@@ -55,8 +52,7 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
     }
 
 
-
-    fun displayPropertyDetails(movie: Small) {
+    fun displayPropertyDetails(movie: SmallMovieList) {
         _navigateToSelectProperty.value = movie
     }
 

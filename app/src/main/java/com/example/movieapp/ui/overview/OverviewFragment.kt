@@ -26,10 +26,8 @@ class OverviewFragment : Fragment() {
     lateinit var viewModel: OverviewViewModel
     lateinit var binding: OverviewFragmentBinding
     lateinit var adapter: MovieAdapter
-    private lateinit var popularMoviesLayoutMgr: LinearLayoutManager
 
     private var errorSnackbar: Snackbar? = null
-    private var popularMoviesPage = 1
 
 
     override fun onCreateView(
@@ -38,7 +36,7 @@ class OverviewFragment : Fragment() {
         App.appComponent.inject(this)
         binding = OverviewFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
-        sendNewMovieList()
+        viewModel.getMovieList()
 
         //Listener of recycler view click
         binding.recyclerTopRated.adapter =
@@ -50,9 +48,7 @@ class OverviewFragment : Fragment() {
                 },
                 mutableListOf()
             )
-        popularMoviesLayoutMgr = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        binding.recyclerTopRated.layoutManager = popularMoviesLayoutMgr
         adapter = binding.recyclerTopRated.adapter as MovieAdapter
 
         viewModel.playList.observe(viewLifecycleOwner, Observer {
@@ -90,27 +86,4 @@ class OverviewFragment : Fragment() {
             errorSnackbar?.show()
         }
     }
-
-    fun sendNewMovieList() {
-        viewModel.getMovieList(popularMoviesPage, "ru")
-        attachPopularMoviesOnScrollListener()
-    }
-
-
-    fun attachPopularMoviesOnScrollListener() {
-        binding.recyclerTopRated.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val totalItemCount = popularMoviesLayoutMgr.itemCount
-                val visibleItemCount = popularMoviesLayoutMgr.childCount
-                val firstVisibleItem = popularMoviesLayoutMgr.findFirstVisibleItemPosition()
-
-                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
-                    binding.recyclerTopRated.removeOnScrollListener(this)
-                    popularMoviesPage++
-                    sendNewMovieList()
-                }
-            }
-        })
-    }
-
 }
