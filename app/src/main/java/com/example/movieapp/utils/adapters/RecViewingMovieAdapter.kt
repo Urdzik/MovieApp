@@ -43,7 +43,7 @@ class RecViewingMovieAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: SmallMovieList) {
             Glide.with(binding.root.context)
-                .load("https://image.tmdb.org/t/p/w500${movie.backdrop_path}")
+                .load("https://image.tmdb.org/t/p/w500${movie.backdropPath}")
                 .apply(
                     RequestOptions()
                         .placeholder(R.drawable.loading_animation)

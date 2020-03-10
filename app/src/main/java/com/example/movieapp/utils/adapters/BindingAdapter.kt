@@ -42,7 +42,7 @@ fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {
 fun TextView.shopGenres(data: List<Genres>?) {
     data?.let {
         var genres = " "
-        var show = " "
+        var show: String
         for (genre in data) {
             if (data.size == 1) {
                 genre.name

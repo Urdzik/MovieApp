@@ -10,6 +10,6 @@ data class PosterMovie(
 data class SmallMovieList(
     @SerializedName("id") val id: Int,
     @SerializedName("poster_path") val posterPath: String,
-    val vote_average: Float,
-    val backdrop_path: String
+    @SerializedName("vote_average")val voteAverage: Float,
+    @SerializedName("backdrop_path") val backdropPath: String
 )
