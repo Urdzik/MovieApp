@@ -3,13 +3,17 @@ package com.example.movieapp.utils.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieapp.databinding.ItemBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.movieapp.R
+
+import com.example.movieapp.databinding.ItemRecViewingBinding
 import com.example.movieapp.model.network.data.SmallMovieList
 
-class TopRatedMovieAdapter(
+class RecViewingMovieAdapter(
     private val onClickListener: ClickListener,
     private var movies: MutableList<SmallMovieList>
-) : RecyclerView.Adapter<TopRatedMovieAdapter.MovieViewHolder>() {
+) : RecyclerView.Adapter<RecViewingMovieAdapter.MovieViewHolder>() {
 
     fun appendMovies(movies: List<SmallMovieList>) {
         this.movies.addAll(movies)
@@ -20,14 +24,12 @@ class TopRatedMovieAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(
-            ItemBinding.inflate(
-                LayoutInflater.from(parent.context)
-            )
+        return MovieViewHolder(ItemRecViewingBinding.inflate(LayoutInflater.from(parent.context)
+        )
         )
     }
 
-    override fun getItemCount(): Int = movies.size 
+    override fun getItemCount(): Int = movies.size - 16
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = movies[position]
@@ -37,9 +39,17 @@ class TopRatedMovieAdapter(
         holder.bind(item)
     }
 
-    class MovieViewHolder(private val binding: ItemBinding) :
+    class MovieViewHolder(private val binding: ItemRecViewingBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: SmallMovieList) {
+            Glide.with(binding.root.context)
+                .load("https://image.tmdb.org/t/p/w500${movie.backdrop_path}")
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_broken_image)
+                )
+                .into(binding.imageView2)
             binding.movie = movie
         }
     }

@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.model.network.data.SmallMovieList
 
-class TopRatedMovieAdapter(
+class NowPlayingMovieAdapter(
     private val onClickListener: ClickListener,
     private var movies: MutableList<SmallMovieList>
-) : RecyclerView.Adapter<TopRatedMovieAdapter.MovieViewHolder>() {
+) : RecyclerView.Adapter<NowPlayingMovieAdapter.MovieViewHolder>() {
 
     fun appendMovies(movies: List<SmallMovieList>) {
         this.movies.addAll(movies)
@@ -27,7 +27,7 @@ class TopRatedMovieAdapter(
         )
     }
 
-    override fun getItemCount(): Int = movies.size 
+    override fun getItemCount(): Int = movies.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = movies[position]

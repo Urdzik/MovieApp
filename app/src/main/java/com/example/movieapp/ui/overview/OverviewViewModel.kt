@@ -41,14 +41,20 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
     val nowPlayingPlayList: LiveData<List<SmallMovieList>>
         get() = _nowPlayingPlayList
 
+    private var _recViewingPlayList = MutableLiveData<List<SmallMovieList>>()
+    val recViewingPlayList: LiveData<List<SmallMovieList>>
+        get() = _recViewingPlayList
+
     val errorClickListener = View.OnClickListener { getMovieList() }
 
     fun getMovieList() {
         viewModelScope.launch {
             try {
+                _recViewingPlayList.value = networkSource.retrievePoster("upcoming", "26f381d6ab8dd659b22d983cab9aa255", "ru")
                 _topRatedPlayList.value = networkSource.retrievePoster("top_rated", "26f381d6ab8dd659b22d983cab9aa255", "ru")
                 _popularPlayList.value = networkSource.retrievePoster("popular", "26f381d6ab8dd659b22d983cab9aa255", "ru")
                 _nowPlayingPlayList.value = networkSource.retrievePoster("now_playing", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+
 
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false

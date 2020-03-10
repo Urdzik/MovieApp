@@ -2,21 +2,27 @@ package com.example.movieapp.ui.overview
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.SnapHelper
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
 import com.example.movieapp.ui.detail.DetailActivity
+import com.example.movieapp.utils.adapters.NowPlayingMovieAdapter
 import com.example.movieapp.utils.adapters.PopularMovieAdapter
+import com.example.movieapp.utils.adapters.RecViewingMovieAdapter
 import com.example.movieapp.utils.adapters.TopRatedMovieAdapter
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
+
 
 class OverviewFragment : Fragment() {
 
@@ -24,8 +30,10 @@ class OverviewFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: OverviewViewModel
     lateinit var binding: OverviewFragmentBinding
-    lateinit var topRatedAdapter: TopRatedMovieAdapter
+    lateinit var recViewingMovieAdapter: RecViewingMovieAdapter
+    lateinit var topRatedMovieAdapter: TopRatedMovieAdapter
     lateinit var popularMovieAdapter: PopularMovieAdapter
+    lateinit var nowPlayingMovieAdapter: NowPlayingMovieAdapter
 
     private var errorSnackbar: Snackbar? = null
 
@@ -39,6 +47,10 @@ class OverviewFragment : Fragment() {
         viewModel.getMovieList()
 
         //Listener of recycler view click
+        binding.recyclerRecViewing.adapter = RecViewingMovieAdapter(RecViewingMovieAdapter.ClickListener {
+            viewModel.displayPropertyDetails(it)
+        }, mutableListOf())
+
         binding.recyclerTopRated.adapter = TopRatedMovieAdapter(TopRatedMovieAdapter.ClickListener {
             viewModel.displayPropertyDetails(it)
         }, mutableListOf())
@@ -47,24 +59,36 @@ class OverviewFragment : Fragment() {
             viewModel.displayPropertyDetails(it)
         }, mutableListOf())
 
-        binding.recyclerTopRated.adapter = TopRatedMovieAdapter(TopRatedMovieAdapter.ClickListener {
+        binding.recyclerNowPlaying.adapter = NowPlayingMovieAdapter(NowPlayingMovieAdapter.ClickListener {
             viewModel.displayPropertyDetails(it)
         }, mutableListOf())
 
 
 
-
-        topRatedAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
+        recViewingMovieAdapter = binding.recyclerRecViewing.adapter as RecViewingMovieAdapter
+        topRatedMovieAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
         popularMovieAdapter = binding.recyclerPopular.adapter as PopularMovieAdapter
+        nowPlayingMovieAdapter = binding.recyclerNowPlaying.adapter as NowPlayingMovieAdapter
+
+
+        viewModel.recViewingPlayList.observe(viewLifecycleOwner, Observer {
+            recViewingMovieAdapter.appendMovies(it)
+        })
 
         viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
-            topRatedAdapter.appendMovies(it)
-
+            topRatedMovieAdapter.appendMovies(it)
         })
 
         viewModel.popularPlayList.observe(viewLifecycleOwner, Observer {
             popularMovieAdapter.appendMovies(it)
         })
+
+        viewModel.nowPlayingPlayList.observe(viewLifecycleOwner, Observer {
+            nowPlayingMovieAdapter.appendMovies(it)
+        })
+
+        val snapHelperStart = GravitySnapHelper(Gravity.START)
+        snapHelperStart.attachToRecyclerView(binding.recyclerRecViewing)
 
         //Navigate to Detail Activity
         viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {
@@ -81,7 +105,7 @@ class OverviewFragment : Fragment() {
                 if (it) onNetworkError()
             })
 
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         return binding.root

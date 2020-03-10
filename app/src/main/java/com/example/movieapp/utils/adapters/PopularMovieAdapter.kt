@@ -27,7 +27,7 @@ class PopularMovieAdapter(
         )
     }
 
-    override fun getItemCount(): Int = movies.size - 4
+    override fun getItemCount(): Int = movies.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = movies[position]

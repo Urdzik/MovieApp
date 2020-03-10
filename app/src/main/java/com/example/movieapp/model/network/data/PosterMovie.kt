@@ -9,5 +9,6 @@ data class PosterMovie(
 
 data class SmallMovieList(
     @SerializedName("id") val id: Int,
-    @SerializedName("poster_path") val posterPath: String
+    @SerializedName("poster_path") val posterPath: String,
+    val backdrop_path: String
 )

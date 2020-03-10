@@ -30,8 +30,8 @@ class NetworkModule (private val application: Application) {
         interceptor.level = HttpLoggingInterceptor.Level.BASIC
 
         val cacheDir = File(application.cacheDir, UUID.randomUUID().toString())
-        // 10 MiB cache
-        val cache = Cache(cacheDir, 10 * 1024 * 1024)
+        // 15 MiB cache
+        val cache = Cache(cacheDir, 15 * 1024 * 1024)
         return OkHttpClient.Builder()
             .cache(
                 cache)
