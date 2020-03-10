@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.R
 import com.example.movieapp.model.network.data.Genres
-import com.example.movieapp.model.network.data.NetworkMovie
+import com.example.movieapp.model.network.data.SmallMovieList
 
 //Binding adapter used to display images from URL using Glide
 @BindingAdapter("imageUrl")
@@ -36,6 +36,8 @@ fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {
     }
 }
 
+
+
 @BindingAdapter("genre")
 fun TextView.shopGenres(data: List<Genres>?) {
     data?.let {
@@ -54,6 +56,6 @@ fun TextView.shopGenres(data: List<Genres>?) {
                 }
                 text = show
             }
+            }
         }
     }
-}

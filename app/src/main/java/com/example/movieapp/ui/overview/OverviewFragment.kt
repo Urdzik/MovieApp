@@ -41,43 +41,14 @@ class OverviewFragment : Fragment() {
         App.appComponent.inject(this)
         binding = OverviewFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
-        viewModel.getMovieList()
 
         //Listener of recycler view click
-        binding.recyclerRecViewing.adapter = RecViewingMovieAdapter(RecViewingMovieAdapter.ClickListener {
-            viewModel.displayPropertyDetails(it)
-        }, mutableListOf())
 
+        recViewingRvViewing()
         topRatedRvViewing()
+        popularRvViewing()
+        nowPlayingRvViewing()
 
-        binding.recyclerPopular.adapter = PopularMovieAdapter(PopularMovieAdapter.ClickListener {
-            viewModel.displayPropertyDetails(it)
-        }, mutableListOf())
-
-        binding.recyclerNowPlaying.adapter = NowPlayingMovieAdapter(NowPlayingMovieAdapter.ClickListener {
-            viewModel.displayPropertyDetails(it)
-        }, mutableListOf())
-
-
-
-        recViewingMovieAdapter = binding.recyclerRecViewing.adapter as RecViewingMovieAdapter
-        popularMovieAdapter = binding.recyclerPopular.adapter as PopularMovieAdapter
-        nowPlayingMovieAdapter = binding.recyclerNowPlaying.adapter as NowPlayingMovieAdapter
-
-
-        viewModel.recViewingPlayList.observe(viewLifecycleOwner, Observer {
-            recViewingMovieAdapter.appendMovies(it)
-        })
-
-
-
-        viewModel.popularPlayList.observe(viewLifecycleOwner, Observer {
-            popularMovieAdapter.appendMovies(it)
-        })
-
-        viewModel.nowPlayingPlayList.observe(viewLifecycleOwner, Observer {
-            nowPlayingMovieAdapter.appendMovies(it)
-        })
 
         val snapHelperStart = GravitySnapHelper(Gravity.START)
         snapHelperStart.attachToRecyclerView(binding.recyclerRecViewing)
@@ -92,9 +63,6 @@ class OverviewFragment : Fragment() {
             }
         })
 
-        viewModel.topRatedLiveData.observe(viewLifecycleOwner, Observer {
-
-        })
 
         //Looking for the internet connection
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
@@ -117,18 +85,57 @@ class OverviewFragment : Fragment() {
         }
     }
 
-    private fun topRatedRvViewing(){
-        binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener{
-            viewModel.displayPropertyDetails(it)
-        })
-        topRatedMovieAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
+    private fun recViewingRvViewing() {
+        binding.recyclerRecViewing.adapter =
+            RecViewingMovieAdapter(RecViewingMovieAdapter.ClickListener {
+                viewModel.displayPropertyDetails(it)
+            }, mutableListOf())
 
-        viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
-            topRatedMovieAdapter.addHeaderAndSubmitList(it)
+        recViewingMovieAdapter = binding.recyclerRecViewing.adapter as RecViewingMovieAdapter
+
+        viewModel.recViewingPlayList.observe(viewLifecycleOwner, Observer {
+            recViewingMovieAdapter.appendMovies(it)
         })
 
     }
 
 
+    private fun topRatedRvViewing(){
+        binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener{
+            viewModel.displayPropertyDetails(it)
+        })
+
+        topRatedMovieAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
+
+        viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
+            topRatedMovieAdapter.addHeaderAndSubmitList(it)
+        })
+    }
+
+
+    private fun popularRvViewing() {
+        binding.recyclerPopular.adapter = PopularMovieAdapter(PopularMovieAdapter.ClickListener {
+            viewModel.displayPropertyDetails(it)
+        }, mutableListOf())
+
+        popularMovieAdapter = binding.recyclerPopular.adapter as PopularMovieAdapter
+
+        viewModel.popularPlayList.observe(viewLifecycleOwner, Observer {
+            popularMovieAdapter.appendMovies(it)
+        })
+
+    }
+
+    private fun nowPlayingRvViewing() {
+        binding.recyclerNowPlaying.adapter =
+            NowPlayingMovieAdapter(NowPlayingMovieAdapter.ClickListener {
+                viewModel.displayPropertyDetails(it)
+            }, mutableListOf())
+        nowPlayingMovieAdapter = binding.recyclerNowPlaying.adapter as NowPlayingMovieAdapter
+
+        viewModel.nowPlayingPlayList.observe(viewLifecycleOwner, Observer {
+            nowPlayingMovieAdapter.appendMovies(it)
+        })
+    }
 
 }

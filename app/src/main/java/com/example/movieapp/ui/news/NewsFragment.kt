@@ -20,6 +20,7 @@ class NewsFragment : Fragment() {
     ): View? {
         val binding = NewsFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
+        binding.lifecycleOwner = this
     return binding.root
 
     }
