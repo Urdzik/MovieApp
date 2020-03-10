@@ -30,6 +30,7 @@ class OverviewFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: OverviewViewModel
     lateinit var binding: OverviewFragmentBinding
+
     lateinit var recViewingMovieAdapter: RecViewingMovieAdapter
     lateinit var topRatedMovieAdapter: TopRatedMovieAdapter
     lateinit var popularMovieAdapter: PopularMovieAdapter

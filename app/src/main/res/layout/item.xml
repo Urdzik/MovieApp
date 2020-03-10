@@ -21,13 +21,14 @@
         android:paddingBottom="16dp">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="125dp"
             android:layout_height="170dp"
             android:layout_margin="5dp"
-            app:cardElevation="2dp"
-            app:cardCornerRadius="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +43,20 @@
                 app:imageUrl="@{movie.posterPath}"
                 app:srcCompat="@drawable/ic_launcher_background" />
         </androidx.cardview.widget.CardView>
+
+        <RatingBar
+            android:id="@+id/rating"
+            style="@android:style/Widget.Material.RatingBar.Small"
+            android:layout_width="80dp"
+            android:layout_height="15dp"
+            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:numStars="10"
+            android:rating="@{movie.vote_average}"
+            android:stepSize="0.5"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
