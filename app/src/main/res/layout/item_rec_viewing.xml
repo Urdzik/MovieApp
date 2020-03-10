@@ -28,7 +28,7 @@
             app:cardCornerRadius="8dp">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/poster_image"
                 android:layout_width="380dp"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"

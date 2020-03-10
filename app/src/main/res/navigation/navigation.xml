@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_overviewFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -51,4 +54,9 @@
             android:id="@+id/action_searchFragment_to_overviewFragment"
             app:destination="@id/overviewFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.movieapp.ui.list.ListFragment"
+        android:label="list_fragment"
+        tools:layout="@layout/list_fragment" />
 </navigation>

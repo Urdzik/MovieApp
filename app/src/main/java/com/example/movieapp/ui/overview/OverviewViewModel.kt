@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.overview
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -28,7 +29,6 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-
     private var _topRatedPlayList = MutableLiveData<List<SmallMovieList>>()
     val topRatedPlayList: LiveData<List<SmallMovieList>>
         get() = _topRatedPlayList
@@ -44,6 +44,11 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
     private var _recViewingPlayList = MutableLiveData<List<SmallMovieList>>()
     val recViewingPlayList: LiveData<List<SmallMovieList>>
         get() = _recViewingPlayList
+
+
+    private var _topRatedLiveData = MutableLiveData(false)
+    val topRatedLiveData: LiveData<Boolean>
+        get() = _topRatedLiveData
 
     val errorClickListener = View.OnClickListener { getMovieList() }
 
@@ -77,5 +82,12 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
 
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
+    }
+
+    fun topRatedButtonListener(){
+        _topRatedLiveData.value = true
+    }
+    fun topRatedButtonListenerCompleted(){
+        _topRatedLiveData.value = true
     }
 }

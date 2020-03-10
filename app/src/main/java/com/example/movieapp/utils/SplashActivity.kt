@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movieapp.MainActivity
 import com.example.movieapp.R

@@ -49,7 +49,7 @@ class RecViewingMovieAdapter(
                         .placeholder(R.drawable.loading_animation)
                         .error(R.drawable.ic_broken_image)
                 )
-                .into(binding.imageView2)
+                .into(binding.posterImage)
             binding.movie = movie
         }
     }

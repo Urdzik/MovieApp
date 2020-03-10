@@ -2,14 +2,14 @@ package com.example.movieapp.ui.detail
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
-import com.example.movieapp.databinding.DetailActivityBinding
+import com.example.movieapp.databinding.ActivityDetailBinding
+
 import javax.inject.Inject
 
 
@@ -23,8 +23,8 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: DetailActivityBinding =
-            DataBindingUtil.setContentView(this, R.layout.detail_activity)
+        val binding: ActivityDetailBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_detail)
 
         App.appComponent.inject(this)
 

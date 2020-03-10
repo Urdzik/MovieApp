@@ -9,16 +9,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.SnapHelper
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
 import com.example.movieapp.ui.detail.DetailActivity
-import com.example.movieapp.utils.adapters.NowPlayingMovieAdapter
-import com.example.movieapp.utils.adapters.PopularMovieAdapter
-import com.example.movieapp.utils.adapters.RecViewingMovieAdapter
-import com.example.movieapp.utils.adapters.TopRatedMovieAdapter
+import com.example.movieapp.utils.adapters.*
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
@@ -52,9 +48,7 @@ class OverviewFragment : Fragment() {
             viewModel.displayPropertyDetails(it)
         }, mutableListOf())
 
-        binding.recyclerTopRated.adapter = TopRatedMovieAdapter(TopRatedMovieAdapter.ClickListener {
-            viewModel.displayPropertyDetails(it)
-        }, mutableListOf())
+        topRatedRvViewing()
 
         binding.recyclerPopular.adapter = PopularMovieAdapter(PopularMovieAdapter.ClickListener {
             viewModel.displayPropertyDetails(it)
@@ -67,7 +61,6 @@ class OverviewFragment : Fragment() {
 
 
         recViewingMovieAdapter = binding.recyclerRecViewing.adapter as RecViewingMovieAdapter
-        topRatedMovieAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
         popularMovieAdapter = binding.recyclerPopular.adapter as PopularMovieAdapter
         nowPlayingMovieAdapter = binding.recyclerNowPlaying.adapter as NowPlayingMovieAdapter
 
@@ -76,9 +69,7 @@ class OverviewFragment : Fragment() {
             recViewingMovieAdapter.appendMovies(it)
         })
 
-        viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
-            topRatedMovieAdapter.appendMovies(it)
-        })
+
 
         viewModel.popularPlayList.observe(viewLifecycleOwner, Observer {
             popularMovieAdapter.appendMovies(it)
@@ -101,6 +92,10 @@ class OverviewFragment : Fragment() {
             }
         })
 
+        viewModel.topRatedLiveData.observe(viewLifecycleOwner, Observer {
+
+        })
+
         //Looking for the internet connection
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
                 if (it) onNetworkError()
@@ -121,4 +116,19 @@ class OverviewFragment : Fragment() {
             errorSnackbar?.show()
         }
     }
+
+    private fun topRatedRvViewing(){
+        binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener{
+            viewModel.displayPropertyDetails(it)
+        })
+        topRatedMovieAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
+
+        viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
+            topRatedMovieAdapter.addHeaderAndSubmitList(it)
+        })
+
+    }
+
+
+
 }

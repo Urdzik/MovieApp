@@ -92,9 +92,8 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
     //Database
-    def room_version = "2.2.4"
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-runtime:2.2.4"
+    kapt "androidx.room:room-compiler:2.2.4"
 
     //Dagger 2
     def dagger_version = '2.26'

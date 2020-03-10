@@ -14,7 +14,7 @@ import com.example.movieapp.model.network.data.NetworkMovie
 //Binding adapter used to display images from URL using Glide
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imgUrl: String?) {
-    val i = imgUrl
+
     Glide.with(imageView.context)
         .load("https://image.tmdb.org/t/p/w500$imgUrl")
         .apply(
