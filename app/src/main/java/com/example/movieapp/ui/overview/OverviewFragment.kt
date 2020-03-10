@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
 import com.example.movieapp.ui.detail.DetailActivity
-import com.example.movieapp.utils.adapters.MovieAdapter
+import com.example.movieapp.utils.adapters.PopularMovieAdapter
+import com.example.movieapp.utils.adapters.TopRatedMovieAdapter
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -25,7 +24,8 @@ class OverviewFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: OverviewViewModel
     lateinit var binding: OverviewFragmentBinding
-    lateinit var adapter: MovieAdapter
+    lateinit var topRatedAdapter: TopRatedMovieAdapter
+    lateinit var popularMovieAdapter: PopularMovieAdapter
 
     private var errorSnackbar: Snackbar? = null
 
@@ -39,22 +39,32 @@ class OverviewFragment : Fragment() {
         viewModel.getMovieList()
 
         //Listener of recycler view click
-        binding.recyclerTopRated.adapter =
-            MovieAdapter(
-                MovieAdapter.ClickListener {
-                    viewModel.displayPropertyDetails(
-                        it
-                    )
-                },
-                mutableListOf()
-            )
+        binding.recyclerTopRated.adapter = TopRatedMovieAdapter(TopRatedMovieAdapter.ClickListener {
+            viewModel.displayPropertyDetails(it)
+        }, mutableListOf())
 
-        adapter = binding.recyclerTopRated.adapter as MovieAdapter
+        binding.recyclerPopular.adapter = PopularMovieAdapter(PopularMovieAdapter.ClickListener {
+            viewModel.displayPropertyDetails(it)
+        }, mutableListOf())
 
-        viewModel.playList.observe(viewLifecycleOwner, Observer {
-            adapter.appendMovies(it)
+        binding.recyclerTopRated.adapter = TopRatedMovieAdapter(TopRatedMovieAdapter.ClickListener {
+            viewModel.displayPropertyDetails(it)
+        }, mutableListOf())
+
+
+
+
+        topRatedAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
+        popularMovieAdapter = binding.recyclerPopular.adapter as PopularMovieAdapter
+
+        viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
+            topRatedAdapter.appendMovies(it)
+
         })
 
+        viewModel.popularPlayList.observe(viewLifecycleOwner, Observer {
+            popularMovieAdapter.appendMovies(it)
+        })
 
         //Navigate to Detail Activity
         viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {

@@ -29,25 +29,32 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
         get() = _isNetworkErrorShown
 
 
-    private var _playList = MutableLiveData<List<SmallMovieList>>()
-    val playList: LiveData<List<SmallMovieList>>
-        get() = _playList
+    private var _topRatedPlayList = MutableLiveData<List<SmallMovieList>>()
+    val topRatedPlayList: LiveData<List<SmallMovieList>>
+        get() = _topRatedPlayList
+
+    private var _popularPlayList = MutableLiveData<List<SmallMovieList>>()
+    val popularPlayList: LiveData<List<SmallMovieList>>
+        get() = _popularPlayList
+
+    private var _nowPlayingPlayList = MutableLiveData<List<SmallMovieList>>()
+    val nowPlayingPlayList: LiveData<List<SmallMovieList>>
+        get() = _nowPlayingPlayList
 
     val errorClickListener = View.OnClickListener { getMovieList() }
 
     fun getMovieList() {
         viewModelScope.launch {
             try {
-                _playList.value = networkSource.retrievePoster(
-                    "top_rated",
-                    "26f381d6ab8dd659b22d983cab9aa255",
-                    "ru"
-                )
+                _topRatedPlayList.value = networkSource.retrievePoster("top_rated", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+                _popularPlayList.value = networkSource.retrievePoster("popular", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+                _nowPlayingPlayList.value = networkSource.retrievePoster("now_playing", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
 
             } catch (e: Exception) {
-                if (playList.value.isNullOrEmpty()) {
+                if (topRatedPlayList.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true
                 }
             }
