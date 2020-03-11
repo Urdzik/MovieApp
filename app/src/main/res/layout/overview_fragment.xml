@@ -46,7 +46,9 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/comfortaa_bold"
+                    app:playlists="@{viewModel.topRatedPlayList}"
                     android:text="@string/top_rated"
+                    app:vis="@{safeUnbox(viewModel.eventNetworkError)}"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
@@ -67,10 +69,12 @@
                     tools:listitem="@layout/item" />
 
                 <TextView
+                    app:vis="@{safeUnbox(viewModel.eventNetworkError)}"
                     android:id="@+id/popular_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    app:playlists="@{viewModel.topRatedPlayList}"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/comfortaa_bold"
@@ -95,7 +99,9 @@
                     tools:listitem="@layout/item" />
 
                 <TextView
+                    app:vis="@{safeUnbox(viewModel.eventNetworkError)}"
                     android:id="@+id/now_playing_text"
+                    app:playlists="@{viewModel.topRatedPlayList}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"

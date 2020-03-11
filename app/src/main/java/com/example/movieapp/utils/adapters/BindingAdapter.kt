@@ -36,6 +36,14 @@ fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {
     }
 }
 
+@BindingAdapter("vis", "playlists")
+fun vis(view: View, isNetWorkError: Boolean, playlist: Any?) {
+    view.visibility = if (playlist != null) View.VISIBLE else View.GONE
+    if (isNetWorkError) {
+        view.visibility = View.VISIBLE
+    }
+}
+
 
 
 @BindingAdapter("genre")

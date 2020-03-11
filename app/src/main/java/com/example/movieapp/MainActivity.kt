@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         })
 
-
+        /** Not delete*/
 //        val myNavHostFragment: NavHostFragment = nav_host_fragment as NavHostFragment
 //        val inflater = myNavHostFragment.navController.navInflater
 //        val graph = inflater.inflate(R.navigation.navigation)
