@@ -1,12 +1,12 @@
 package com.example.movieapp.utils.adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieapp.R
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.databinding.ItemCustomBinding
 import com.example.movieapp.model.network.data.SmallMovieList
@@ -16,9 +16,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 private const val ITEM_VIEW_TYPE_HEADER = 0
-private val ITEM_VIEW_TYPE_ITEM = 1
+private const val ITEM_VIEW_TYPE_ITEM = 1
 
-class TopRatedMovieAdapter(private val clickListener: MovieListener) :
+class TopRatedMovieAdapter(private val clickListener: MovieListener, private val customListener: CustomListener) :
     ListAdapter<DataItem, RecyclerView.ViewHolder>(MovieNightDiffCallback()) {
 
 
@@ -40,9 +40,8 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) :
 
         when (holder) {
 
-            is MoviewViewHolder -> {
+            is MovieViewHolder -> {
                 val movieItem = getItem(position) as DataItem.MovieItem
-
                 holder.itemView.setOnClickListener {
                     clickListener.onClick(movieItem.movie)
 
@@ -50,14 +49,22 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) :
 
                 holder.bind(movieItem.movie)
             }
+            is TextViewHolder -> {
+                Log.i("TAG", position.toString())
 
+
+                holder.itemView.setOnClickListener {
+                    customListener.onClick()
+                    Log.i("TAG", "TAG")
+                }
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
-            ITEM_VIEW_TYPE_ITEM -> MoviewViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM -> MovieViewHolder.from(parent)
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }
@@ -79,7 +86,7 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) :
         }
     }
 
-    class MoviewViewHolder private constructor(val binding: ItemBinding) :
+    class MovieViewHolder private constructor(val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: SmallMovieList) {
@@ -88,10 +95,10 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) :
         }
 
         companion object {
-            fun from(parent: ViewGroup): MoviewViewHolder {
+            fun from(parent: ViewGroup): MovieViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemBinding.inflate(layoutInflater, parent, false)
-                return MoviewViewHolder(binding)
+                return MovieViewHolder(binding)
             }
         }
     }
@@ -123,4 +130,8 @@ sealed class DataItem {
 
 class MovieListener(val clickListener: (movie: SmallMovieList) -> Unit) {
     fun onClick(movie: SmallMovieList) = clickListener(movie)
+}
+
+class CustomListener(val clickListener: () -> Unit) {
+    fun onClick() = clickListener()
 }

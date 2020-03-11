@@ -137,6 +137,8 @@ class OverviewFragment : Fragment() {
 
         binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener{
             viewModel.displayPropertyDetails(it)
+        }, CustomListener {
+            print("r")
         })
 
         topRatedMovieAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
