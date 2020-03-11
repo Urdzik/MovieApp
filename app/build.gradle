@@ -109,4 +109,6 @@ dependencies {
 
     implementation 'com.yarolegovich:discrete-scrollview:1.4.9'
 
+
+
 }

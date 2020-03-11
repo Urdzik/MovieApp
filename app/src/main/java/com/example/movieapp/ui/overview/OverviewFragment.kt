@@ -1,25 +1,23 @@
 package com.example.movieapp.ui.overview
 
 import android.content.Intent
-import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
 import com.example.movieapp.ui.detail.DetailActivity
 import com.example.movieapp.utils.adapters.*
-import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.android.material.snackbar.Snackbar
 import com.yarolegovich.discretescrollview.DSVOrientation
+import com.yarolegovich.discretescrollview.transform.Pivot
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import javax.inject.Inject
 
 
@@ -115,14 +113,20 @@ class OverviewFragment : Fragment() {
             }, mutableListOf())
 
 
-
+        binding.piker.setItemTransformer(
+            ScaleTransformer.Builder()
+                .setMaxScale(1.05f)
+                .setMinScale(0.8f)
+                .setPivotX(Pivot.X.CENTER) // CENTER is a default one
+                .setPivotY(Pivot.Y.BOTTOM) // CENTER is a default one
+                .build()
+        )
 
 
         recViewingMovieAdapter = binding.piker.adapter as RecViewingMovieAdapter
 
         binding.piker.setOrientation(DSVOrientation.HORIZONTAL)
 
-        binding.piker.setOffscreenItems(1)
         viewModel.recViewingPlayList.observe(viewLifecycleOwner, Observer {
             recViewingMovieAdapter.appendMovies(it)
         })
@@ -131,6 +135,9 @@ class OverviewFragment : Fragment() {
 
 
     private fun topRatedRvViewing(){
+
+
+
         binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener{
             viewModel.displayPropertyDetails(it)
         })
@@ -140,6 +147,9 @@ class OverviewFragment : Fragment() {
         viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
             topRatedMovieAdapter.addHeaderAndSubmitList(it)
         })
+
+
+
     }
 
 
