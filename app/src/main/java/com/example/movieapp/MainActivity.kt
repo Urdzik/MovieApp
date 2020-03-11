@@ -6,10 +6,11 @@ import android.view.MenuItem
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager.widget.ViewPager
-import com.example.movieapp.utils.MainScreen
-import com.example.movieapp.utils.adapters.MainPagerAdapter
-import com.example.movieapp.utils.getMainScreenForMenuItem
+import com.example.movieapp.utils.viewPager.MainScreen
+import com.example.movieapp.utils.viewPager.MainPagerAdapter
+import com.example.movieapp.utils.viewPager.getMainScreenForMenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -27,7 +28,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 //Function for Light-Dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
 
-        mainPagerAdapter = MainPagerAdapter(supportFragmentManager)
+        mainPagerAdapter = MainPagerAdapter(
+            supportFragmentManager
+        )
 
         mainPagerAdapter.setItems(
             arrayListOf(
@@ -58,7 +61,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         })
 
         /** Not delete*/
-//        val myNavHostFragment: NavHostFragment = nav_host_fragment as NavHostFragment
+//        val myNavHostFragment: NavHostFragment = view_pager as NavHostFragment
 //        val inflater = myNavHostFragment.navController.navInflater
 //        val graph = inflater.inflate(R.navigation.navigation)
 //        myNavHostFragment.navController.graph = graph
@@ -84,7 +87,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
      * Listener implementation for registering bottom navigation clicks.
      */
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        getMainScreenForMenuItem(menuItem.itemId)?.let {
+        getMainScreenForMenuItem(menuItem.itemId)
+            ?.let {
             scrollToScreen(it)
             return true
         }

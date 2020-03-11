@@ -7,21 +7,6 @@
 
 
     <fragment
-        android:id="@+id/newsFragment"
-        android:name="com.example.movieapp.ui.news.NewsFragment"
-        android:label="NewsFragment"
-        tools:layout="@layout/news_fragment"/>
-    <fragment
-        android:id="@+id/saveMovieFragment"
-        android:name="com.example.movieapp.ui.save.SaveMovieFragment"
-        android:label="SaveMovieFragment"
-        tools:layout="@layout/save_movie_fragment"/>
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.movieapp.ui.profile.ProfileFragment"
-        android:label="ProfileFragment"
-        tools:layout="@layout/profile_fragment"/>
-    <fragment
         android:id="@+id/overviewFragment"
         android:name="com.example.movieapp.ui.overview.OverviewFragment"
         android:label="OverviewFragment"
@@ -30,11 +15,6 @@
             android:id="@+id/action_overviewFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.example.movieapp.ui.search.SearchFragment"
-        android:label="search_fragment"
-        tools:layout="@layout/search_fragment" />
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.movieapp.ui.list.ListFragment"

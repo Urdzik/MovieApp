@@ -1,10 +1,8 @@
-package com.example.movieapp.utils.adapters
+package com.example.movieapp.utils.viewPager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.movieapp.utils.MainScreen
 
 
 class MainPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {

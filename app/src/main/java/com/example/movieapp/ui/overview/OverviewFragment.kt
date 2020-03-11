@@ -2,6 +2,7 @@ package com.example.movieapp.ui.overview
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -125,8 +126,6 @@ class OverviewFragment : Fragment() {
 
         recViewingMovieAdapter = binding.piker.adapter as RecViewingMovieAdapter
 
-        binding.piker.setOrientation(DSVOrientation.HORIZONTAL)
-
         viewModel.recViewingPlayList.observe(viewLifecycleOwner, Observer {
             recViewingMovieAdapter.appendMovies(it)
         })
@@ -135,8 +134,6 @@ class OverviewFragment : Fragment() {
 
 
     private fun topRatedRvViewing(){
-
-
 
         binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener{
             viewModel.displayPropertyDetails(it)
@@ -147,8 +144,6 @@ class OverviewFragment : Fragment() {
         viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
             topRatedMovieAdapter.addHeaderAndSubmitList(it)
         })
-
-
 
     }
 

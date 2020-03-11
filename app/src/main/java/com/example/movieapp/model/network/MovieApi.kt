@@ -11,7 +11,7 @@ import retrofit2.http.Query
 
 //A retrofit service to fetch movie playlist.
 interface MovieApi {
-    @GET("{category}")
+    @GET("movie/{category}")
     suspend fun getPropertyAsync(
         @Path("category") category: String,
         @Query("api_key") key: String = "26f381d6ab8dd659b22d983cab9aa255",
@@ -20,7 +20,7 @@ interface MovieApi {
     ): Results
 
 
-    @GET("{category}")
+    @GET("movie/{category}")
     suspend fun getListOfPosters(
         @Path("category") category: String,
         @Query("api_key") key: String = "26f381d6ab8dd659b22d983cab9aa255",
@@ -28,6 +28,6 @@ interface MovieApi {
     ): PosterMovie
 
 
-    @GET("{id}?api_key=26f381d6ab8dd659b22d983cab9aa255&language=ru")
+    @GET("movie/{id}?api_key=26f381d6ab8dd659b22d983cab9aa255&language=ru")
     suspend fun getMovieByID(@Path("id") id: Int): MovieInfo
 }

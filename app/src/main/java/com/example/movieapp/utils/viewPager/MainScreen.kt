@@ -1,4 +1,4 @@
-package com.example.movieapp.utils
+package com.example.movieapp.utils.viewPager
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes

@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.overview
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -82,6 +83,8 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
+
+
 
 
 }

@@ -2,20 +2,20 @@ package com.example.movieapp.utils.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ItemBinding
+import com.example.movieapp.databinding.ItemCustomBinding
 import com.example.movieapp.model.network.data.SmallMovieList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-private val ITEM_VIEW_TYPE_HEADER = 0
+private const val ITEM_VIEW_TYPE_HEADER = 0
 private val ITEM_VIEW_TYPE_ITEM = 1
 
 class TopRatedMovieAdapter(private val clickListener: MovieListener) :
@@ -39,21 +39,25 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         when (holder) {
-            is ViewHolder -> {
+
+            is MoviewViewHolder -> {
                 val movieItem = getItem(position) as DataItem.MovieItem
 
                 holder.itemView.setOnClickListener {
                     clickListener.onClick(movieItem.movie)
+
                 }
+
                 holder.bind(movieItem.movie)
             }
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
-            ITEM_VIEW_TYPE_ITEM -> ViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM -> MoviewViewHolder.from(parent)
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }
@@ -65,17 +69,17 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) :
         }
     }
 
-    class TextViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class TextViewHolder private constructor(val binding: ItemCustomBinding) : RecyclerView.ViewHolder(binding.root) {
         companion object {
             fun from(parent: ViewGroup): TextViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val view = layoutInflater.inflate(R.layout.item_custom, parent, false)
-                return TextViewHolder(view)
+                val binding = ItemCustomBinding.inflate(layoutInflater)
+                return TextViewHolder(binding)
             }
         }
     }
 
-    class ViewHolder private constructor(val binding: ItemBinding) :
+    class MoviewViewHolder private constructor(val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: SmallMovieList) {
@@ -84,10 +88,10 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) :
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup): MoviewViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return MoviewViewHolder(binding)
             }
         }
     }
@@ -111,7 +115,7 @@ sealed class DataItem {
     }
 
     object Header : DataItem() {
-        override val id = Long.MIN_VALUE
+        override val id = Long.MAX_VALUE
     }
 
     abstract val id: Long

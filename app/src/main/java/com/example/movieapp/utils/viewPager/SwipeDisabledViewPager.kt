@@ -1,4 +1,4 @@
-package com.example.movieapp.utils.adapters
+package com.example.movieapp.utils.viewPager
 
 import android.content.Context
 import android.util.AttributeSet
@@ -9,7 +9,7 @@ import androidx.viewpager.widget.ViewPager
 
 class SwipeDisabledViewPager : ViewPager {
     constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
         // returning false will not propagate the swipe event
