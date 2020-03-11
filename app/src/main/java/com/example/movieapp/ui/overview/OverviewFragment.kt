@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
@@ -18,7 +17,6 @@ import com.example.movieapp.ui.detail.DetailActivity
 import com.example.movieapp.utils.adapters.*
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.overview_fragment.*
 import javax.inject.Inject
 
 
@@ -79,6 +77,24 @@ class OverviewFragment : Fragment() {
         return binding.root
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putIntArray(
+            "ARTICLE_SCROLL_POSITION",
+            intArrayOf(binding.scrollView.scrollX, binding.scrollView.scrollY)
+        )
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        val position = savedInstanceState?.getIntArray("ARTICLE_SCROLL_POSITION")
+        if (position != null) binding.scrollView.post {
+            binding.scrollView.scrollTo(
+                position[0],
+                position[1]
+            )
+        }
+    }
 
     //Function will show a toast when there is no internet
     private fun onNetworkError() {
