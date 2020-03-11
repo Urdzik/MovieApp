@@ -20,8 +20,10 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="-16dp"
-            tools:layout_editor_absoluteY="-32dp">
+            android:fillViewport="true"
+            android:scrollbars = "vertical"
+            android:scrollbarStyle="insideInset"
+            >
 
 
             <LinearLayout

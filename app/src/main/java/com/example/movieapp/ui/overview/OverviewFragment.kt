@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
@@ -17,6 +18,7 @@ import com.example.movieapp.ui.detail.DetailActivity
 import com.example.movieapp.utils.adapters.*
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.overview_fragment.*
 import javax.inject.Inject
 
 
@@ -50,6 +52,8 @@ class OverviewFragment : Fragment() {
         nowPlayingRvViewing()
 
 
+
+
         val snapHelperStart = GravitySnapHelper(Gravity.START)
         snapHelperStart.attachToRecyclerView(binding.recyclerRecViewing)
 
@@ -69,7 +73,7 @@ class OverviewFragment : Fragment() {
                 if (it) onNetworkError()
             })
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         return binding.root

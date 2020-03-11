@@ -19,6 +19,7 @@ class SaveMovieFragment : Fragment() {
     ): View? {
         val binding = SaveMovieFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this).get(SaveMovieViewModel::class.java)
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

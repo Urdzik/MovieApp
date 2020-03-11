@@ -23,6 +23,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         val binding = ProfileFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

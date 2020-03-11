@@ -1,6 +1,5 @@
 package com.example.movieapp.ui.overview
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -65,7 +64,7 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
                 _isNetworkErrorShown.value = false
 
             } catch (e: Exception) {
-                if (topRatedPlayList.value.isNullOrEmpty()) {
+                if (topRatedPlayList.value.isNullOrEmpty() || recViewingPlayList.value.isNullOrEmpty() || popularPlayList.value.isNullOrEmpty() || nowPlayingPlayList.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true
                 }
             }
