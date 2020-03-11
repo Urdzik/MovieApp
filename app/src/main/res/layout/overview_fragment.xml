@@ -20,32 +20,26 @@
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:scrollbars = "vertical"
-            android:scrollbarStyle="insideInset"
-            >
+            android:layout_height="match_parent">
 
 
             <LinearLayout
                 android:id="@+id/overviewFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:context="com.example.movieapp.MainActivity">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_rec_viewing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <com.yarolegovich.discretescrollview.DiscreteScrollView
+                    android:id="@+id/piker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_gravity="center"
+                    app:dsv_orientation="horizontal"
                     tools:listitem="@layout/item_rec_viewing" />
+
+
+
 
                 <TextView
                     android:id="@+id/top_rated_text"

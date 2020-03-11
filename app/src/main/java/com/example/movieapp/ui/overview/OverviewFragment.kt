@@ -1,6 +1,7 @@
 package com.example.movieapp.ui.overview
 
 import android.content.Intent
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
@@ -17,6 +19,7 @@ import com.example.movieapp.ui.detail.DetailActivity
 import com.example.movieapp.utils.adapters.*
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.android.material.snackbar.Snackbar
+import com.yarolegovich.discretescrollview.DSVOrientation
 import javax.inject.Inject
 
 
@@ -52,8 +55,8 @@ class OverviewFragment : Fragment() {
 
 
 
-        val snapHelperStart = GravitySnapHelper(Gravity.START)
-        snapHelperStart.attachToRecyclerView(binding.recyclerRecViewing)
+//        val snapHelperStart = GravitySnapHelper(Gravity.START)
+//        snapHelperStart.attachToRecyclerView(binding.recyclerRecViewing)
 
         //Navigate to Detail Activity
         viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {
@@ -106,13 +109,20 @@ class OverviewFragment : Fragment() {
     }
 
     private fun recViewingRvViewing() {
-        binding.recyclerRecViewing.adapter =
+        binding.piker.adapter =
             RecViewingMovieAdapter(RecViewingMovieAdapter.ClickListener {
                 viewModel.displayPropertyDetails(it)
             }, mutableListOf())
 
-        recViewingMovieAdapter = binding.recyclerRecViewing.adapter as RecViewingMovieAdapter
 
+
+
+
+        recViewingMovieAdapter = binding.piker.adapter as RecViewingMovieAdapter
+
+        binding.piker.setOrientation(DSVOrientation.HORIZONTAL)
+
+        binding.piker.setOffscreenItems(1)
         viewModel.recViewingPlayList.observe(viewLifecycleOwner, Observer {
             recViewingMovieAdapter.appendMovies(it)
         })
