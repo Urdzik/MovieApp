@@ -103,13 +103,10 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
-    
 
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     implementation 'com.yarolegovich:discrete-scrollview:1.4.9'
-
-
 
 
 }

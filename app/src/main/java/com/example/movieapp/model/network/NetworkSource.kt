@@ -1,7 +1,7 @@
 package com.example.movieapp.model.network
 
 import com.example.movieapp.model.network.data.MovieInfo
-import com.example.movieapp.model.network.data.NetworkMovie
+import com.example.movieapp.model.network.data.ListMovie
 import com.example.movieapp.model.network.data.SmallMovieList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class NetworkSource @Inject constructor(private val api: MovieApi) {
     suspend fun retrieveData(category: String, key: String, language: String,page: Int
-    ): List<NetworkMovie> = withContext(Dispatchers.IO) {
+    ): List<ListMovie> = withContext(Dispatchers.IO) {
         val playList = api.getPropertyAsync(category, key, language, page)
        playList.networkMovie
     }

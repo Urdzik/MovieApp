@@ -1,13 +1,11 @@
 package com.example.movieapp.ui.detail
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.model.network.MovieInfoSource
 import com.example.movieapp.model.network.data.MovieInfo
-import com.example.movieapp.model.network.data.NetworkMovie
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

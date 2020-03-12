@@ -1,7 +1,7 @@
 package com.example.movieapp.utils.adapters
 
 import android.annotation.SuppressLint
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.databinding.ItemCustomBinding
 import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.ui.list.ListActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,8 +19,7 @@ import kotlinx.coroutines.withContext
 private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
 
-class TopRatedMovieAdapter(private val clickListener: MovieListener, private val customListener: CustomListener) :
-    ListAdapter<DataItem, RecyclerView.ViewHolder>(MovieNightDiffCallback()) {
+class TopRatedMovieAdapter(private val clickListener: MovieListener) : ListAdapter<DataItem, RecyclerView.ViewHolder>(MovieTopRatedDiffCallback()) {
 
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -50,13 +50,7 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener, private val
                 holder.bind(movieItem.movie)
             }
             is TextViewHolder -> {
-                Log.i("TAG", position.toString())
 
-
-                holder.itemView.setOnClickListener {
-                    customListener.onClick()
-                    Log.i("TAG", "TAG")
-                }
             }
         }
     }
@@ -81,6 +75,11 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener, private val
             fun from(parent: ViewGroup): TextViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemCustomBinding.inflate(layoutInflater)
+                binding.button.setOnClickListener {
+                    val intent = Intent(binding.root.context, ListActivity::class.java)
+                    intent.putExtra("category", "top_rated")
+                    binding.root.context.startActivity(intent)
+                }
                 return TextViewHolder(binding)
             }
         }
@@ -104,7 +103,7 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener, private val
     }
 }
 
-class MovieNightDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+class MovieTopRatedDiffCallback : DiffUtil.ItemCallback<DataItem>() {
     override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
         return oldItem.id == newItem.id
     }
@@ -132,6 +131,3 @@ class MovieListener(val clickListener: (movie: SmallMovieList) -> Unit) {
     fun onClick(movie: SmallMovieList) = clickListener(movie)
 }
 
-class CustomListener(val clickListener: () -> Unit) {
-    fun onClick() = clickListener()
-}

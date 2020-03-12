@@ -137,8 +137,6 @@ class OverviewFragment : Fragment() {
 
         binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener{
             viewModel.displayPropertyDetails(it)
-        }, CustomListener {
-            print("r")
         })
 
         topRatedMovieAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
@@ -151,14 +149,14 @@ class OverviewFragment : Fragment() {
 
 
     private fun popularRvViewing() {
-        binding.recyclerPopular.adapter = PopularMovieAdapter(PopularMovieAdapter.ClickListener {
+        binding.recyclerPopular.adapter = PopularMovieAdapter(PopularMovieAdapter.MovieListener {
             viewModel.displayPropertyDetails(it)
-        }, mutableListOf())
+        })
 
         popularMovieAdapter = binding.recyclerPopular.adapter as PopularMovieAdapter
 
         viewModel.popularPlayList.observe(viewLifecycleOwner, Observer {
-            popularMovieAdapter.appendMovies(it)
+            popularMovieAdapter.addHeaderAndSubmitList(it)
         })
 
     }

@@ -1,54 +1,135 @@
 package com.example.movieapp.utils.adapters
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
+import com.example.movieapp.databinding.ItemCustomBinding
 import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.ui.list.ListActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class PopularMovieAdapter(
-    private val onClickListener: ClickListener,
-    private var movies: MutableList<SmallMovieList>
-) : RecyclerView.Adapter<PopularMovieAdapter.MovieViewHolder>() {
+private const val ITEM_VIEW_TYPE_HEADER = 0
+private const val ITEM_VIEW_TYPE_ITEM = 1
 
-    fun appendMovies(movies: List<SmallMovieList>) {
-        this.movies.addAll(movies)
-        notifyItemRangeInserted(
-            this.movies.size,
-            movies.size - 1)
-        notifyDataSetChanged()
-    }
+class PopularMovieAdapter(private val clickListener: MovieListener) :
+    ListAdapter<DataItemPopular, RecyclerView.ViewHolder>(MoviePopularDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(
-            ItemBinding.inflate(
-                LayoutInflater.from(parent.context)
-            )
-        )
-    }
 
-    override fun getItemCount(): Int = movies.size
+    private val adapterScope = CoroutineScope(Dispatchers.Default)
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val item = movies[position]
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(item)
+    fun addHeaderAndSubmitList(list: List<SmallMovieList>?) {
+        adapterScope.launch {
+            val items = when (list) {
+                null -> listOf(DataItemPopular.Header)
+                else -> list.map { DataItemPopular.MovieItem(it) } + listOf(DataItemPopular.Header)
+            }
+            withContext(Dispatchers.Main) {
+                submitList(items)
+            }
         }
-        holder.bind(item)
     }
 
-    class MovieViewHolder(private val binding: ItemBinding) :
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+        when (holder) {
+
+            is MovieViewHolder -> {
+                val movieItem = getItem(position) as DataItemPopular.MovieItem
+                holder.itemView.setOnClickListener {
+                    clickListener.onClick(movieItem.movie)
+
+                }
+
+                holder.bind(movieItem.movie)
+            }
+            is TextViewHolder -> {
+
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM -> MovieViewHolder.from(parent)
+            else -> throw ClassCastException("Unknown viewType $viewType")
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is DataItemPopular.Header -> ITEM_VIEW_TYPE_HEADER
+            is DataItemPopular.MovieItem -> ITEM_VIEW_TYPE_ITEM
+        }
+    }
+
+    class TextViewHolder private constructor(val binding: ItemCustomBinding) : RecyclerView.ViewHolder(binding.root) {
+        companion object {
+            fun from(parent: ViewGroup): TextViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemCustomBinding.inflate(layoutInflater)
+                binding.button.setOnClickListener {
+                    val intent = Intent(binding.root.context, ListActivity::class.java)
+                    intent.putExtra("category", "popular")
+                    binding.root.context.startActivity(intent)
+                }
+                return TextViewHolder(binding)
+            }
+        }
+    }
+
+    class MovieViewHolder private constructor(val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: SmallMovieList) {
-            binding.movie = movie
+
+        fun bind(item: SmallMovieList) {
+            binding.movie = item
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): MovieViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemBinding.inflate(layoutInflater, parent, false)
+                return MovieViewHolder(binding)
+            }
         }
     }
-
-
-    //Class for click by element
-    class ClickListener(val clickListener: (movie: SmallMovieList) -> Unit) {
+    class MovieListener(val clickListener: (movie: SmallMovieList) -> Unit) {
         fun onClick(movie: SmallMovieList) = clickListener(movie)
     }
-
-
 }
+
+class MoviePopularDiffCallback : DiffUtil.ItemCallback<DataItemPopular>() {
+    override fun areItemsTheSame(oldItem: DataItemPopular, newItem: DataItemPopular): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: DataItemPopular, newItem: DataItemPopular): Boolean {
+        return oldItem == newItem
+    }
+}
+
+
+sealed class DataItemPopular {
+    data class MovieItem(val movie: SmallMovieList) : DataItemPopular() {
+        override val id = movie.id.toLong()
+    }
+
+    object Header : DataItemPopular() {
+        override val id = Long.MAX_VALUE
+    }
+
+    abstract val id: Long
+}
+
+
+
