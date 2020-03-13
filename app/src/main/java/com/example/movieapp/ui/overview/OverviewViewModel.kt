@@ -53,7 +53,9 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
         fetchMoviesLists()
     }
 
+
     private fun fetchMoviesLists() {
+
         viewModelScope.launch {
             try {
                 _recViewingPlayList.value = networkSource.fetchSmallMovieList("upcoming", "26f381d6ab8dd659b22d983cab9aa255", "ru")
