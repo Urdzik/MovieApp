@@ -4,14 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
+import com.example.movieapp.databinding.ItemListBinding
+import com.example.movieapp.model.network.data.ListMovie
 import com.example.movieapp.model.network.data.SmallMovieList
 
-class MovieAdapter(
+class ListMovieAdapter(
     private val onClickListener: ClickListener,
-    private var movies: MutableList<SmallMovieList>
-) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+    private var movies: MutableList<ListMovie>
+) : RecyclerView.Adapter<ListMovieAdapter.MovieViewHolder>() {
 
-    fun appendMovies(movies: List<SmallMovieList>) {
+    fun appendMovies(movies: List<ListMovie>) {
         this.movies.addAll(movies)
         notifyItemRangeInserted(
             this.movies.size,
@@ -21,13 +23,13 @@ class MovieAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
-            ItemBinding.inflate(
+            ItemListBinding.inflate(
                 LayoutInflater.from(parent.context)
             )
         )
     }
 
-    override fun getItemCount(): Int = movies.size - 4
+    override fun getItemCount(): Int = movies.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = movies[position]
@@ -37,17 +39,17 @@ class MovieAdapter(
         holder.bind(item)
     }
 
-    class MovieViewHolder(private val binding: ItemBinding) :
+    class MovieViewHolder(private val binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: SmallMovieList) {
+        fun bind(movie: ListMovie) {
             binding.movie = movie
         }
     }
 
 
     //Class for click by element
-    class ClickListener(val clickListener: (movie: SmallMovieList) -> Unit) {
-        fun onClick(movie: SmallMovieList) = clickListener(movie)
+    class ClickListener(val clickListener: (movie: ListMovie) -> Unit) {
+        fun onClick(movie: ListMovie) = clickListener(movie)
     }
 
 

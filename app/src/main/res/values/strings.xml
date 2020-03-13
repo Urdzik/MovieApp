@@ -11,4 +11,7 @@
     <string name="news">News</string>
     <string name="in_developing">In developing</string>
     <string name="search">Search</string>
+    <string name="popular">Популярные</string>
+    <string name="top_rated">Топ рейтинг</string>
+    <string name="now_playing">Сейчас в кино</string>
 </resources>

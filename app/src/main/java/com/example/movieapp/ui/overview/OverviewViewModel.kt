@@ -5,13 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapp.model.network.SmallNetworkSource
+import com.example.movieapp.model.network.SmallMovieListSource
 import com.example.movieapp.model.network.data.SmallMovieList
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class OverviewViewModel @Inject constructor(private val networkSource: SmallNetworkSource) : ViewModel() {
-
+class OverviewViewModel @Inject constructor(private val networkSource: SmallMovieListSource) : ViewModel() {
 
     //LiveData object of movie
     private val _navigateToSelectProperty = MutableLiveData<SmallMovieList>()
@@ -28,26 +27,45 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallNetw
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+    //LiveData of Top Rated movies
+    private var _topRatedPlayList = MutableLiveData<List<SmallMovieList>>()
+    val topRatedPlayList: LiveData<List<SmallMovieList>>
+        get() = _topRatedPlayList
 
-    private var _playList = MutableLiveData<List<SmallMovieList>>()
-    val playList: LiveData<List<SmallMovieList>>
-        get() = _playList
+    //LiveData of Popular movies
+    private var _popularPlayList = MutableLiveData<List<SmallMovieList>>()
+    val popularPlayList: LiveData<List<SmallMovieList>>
+        get() = _popularPlayList
 
-    val errorClickListener = View.OnClickListener { getMovieList() }
+    //LiveData of now playing movies
+    private var _nowPlayingPlayList = MutableLiveData<List<SmallMovieList>>()
+    val nowPlayingPlayList: LiveData<List<SmallMovieList>>
+        get() = _nowPlayingPlayList
 
-    fun getMovieList() {
+    //LiveData of recommended movies
+    private var _recViewingPlayList = MutableLiveData<List<SmallMovieList>>()
+    val recViewingPlayList: LiveData<List<SmallMovieList>>
+        get() = _recViewingPlayList
+
+    val errorClickListener = View.OnClickListener { fetchMoviesLists() }
+
+    init {
+        fetchMoviesLists()
+    }
+
+    private fun fetchMoviesLists() {
         viewModelScope.launch {
             try {
-                _playList.value = networkSource.retrievePoster(
-                    "top_rated",
-                    "26f381d6ab8dd659b22d983cab9aa255",
-                    "ru"
-                )
+                _recViewingPlayList.value = networkSource.fetchSmallMovieList("upcoming", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+                _topRatedPlayList.value = networkSource.fetchSmallMovieList("top_rated", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+                _popularPlayList.value = networkSource.fetchSmallMovieList("popular", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+                _nowPlayingPlayList.value = networkSource.fetchSmallMovieList("now_playing", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
 
             } catch (e: Exception) {
-                if (playList.value.isNullOrEmpty()) {
+                if (topRatedPlayList.value.isNullOrEmpty() || recViewingPlayList.value.isNullOrEmpty() || popularPlayList.value.isNullOrEmpty() || nowPlayingPlayList.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true
                 }
             }

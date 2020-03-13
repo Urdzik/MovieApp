@@ -9,11 +9,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.R
 import com.example.movieapp.model.network.data.Genres
-import com.example.movieapp.model.network.data.NetworkMovie
+import com.example.movieapp.model.network.data.SmallMovieList
 
 //Binding adapter used to display images from URL using Glide
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imgUrl: String?) {
+
     Glide.with(imageView.context)
         .load("https://image.tmdb.org/t/p/w500$imgUrl")
         .apply(
@@ -25,7 +26,6 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 }
 
 
-
 //Binding adapter used to hide the spinner once data is available.
 @BindingAdapter("isNetworkError", "playlist")
 fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {
@@ -35,11 +35,21 @@ fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {
     }
 }
 
+@BindingAdapter("vis", "playlists")
+fun vis(view: View, isNetWorkError: Boolean, playlist: Any?) {
+    view.visibility = if (playlist != null) View.VISIBLE else View.GONE
+    if (isNetWorkError) {
+        view.visibility = View.VISIBLE
+    }
+}
+
+
+
 @BindingAdapter("genre")
 fun TextView.shopGenres(data: List<Genres>?) {
     data?.let {
         var genres = " "
-        var show = " "
+        var show: String
         for (genre in data) {
             if (data.size == 1) {
                 genre.name
@@ -53,6 +63,6 @@ fun TextView.shopGenres(data: List<Genres>?) {
                 }
                 text = show
             }
+            }
         }
     }
-}
