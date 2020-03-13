@@ -15,6 +15,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        //Image by mode in system
         when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_NO -> iv.setImageResource(R.drawable.day)
             Configuration.UI_MODE_NIGHT_YES -> iv.setImageResource(R.drawable.night)

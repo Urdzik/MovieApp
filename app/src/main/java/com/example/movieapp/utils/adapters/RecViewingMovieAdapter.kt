@@ -1,8 +1,10 @@
 package com.example.movieapp.utils.adapters
 
-import android.nfc.tech.MifareUltralight.PAGE_SIZE
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -11,35 +13,24 @@ import com.example.movieapp.databinding.ItemRecViewingBinding
 import com.example.movieapp.model.network.data.SmallMovieList
 
 
-class RecViewingMovieAdapter(
-    private val onClickListener: ClickListener,
-    private var movies: MutableList<SmallMovieList>
-) : RecyclerView.Adapter<RecViewingMovieAdapter.MovieViewHolder>() {
+class RecViewingMovieAdapter(private val onClickListener: ClickListener): ListAdapter<SmallMovieList, RecViewingMovieAdapter.MovieViewHolder>(MovieRecDiffCallback()) {
 
-    fun appendMovies(movies: List<SmallMovieList>) {
-        this.movies.addAll(movies)
-        notifyItemRangeInserted(
-            this.movies.size,
-            movies.size - 1)
-        notifyDataSetChanged()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(ItemRecViewingBinding.inflate(LayoutInflater.from(parent.context)
-        )
-        )
+        return MovieViewHolder(ItemRecViewingBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun getItemCount(): Int = movies.size
+
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val item = movies[position]
+        val item = getItem(position)
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)
         }
 
         holder.bind(item )
     }
+
   inner class MovieViewHolder(private val binding: ItemRecViewingBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: SmallMovieList) {
@@ -66,3 +57,13 @@ class RecViewingMovieAdapter(
 
 }
 
+class MovieRecDiffCallback : DiffUtil.ItemCallback<SmallMovieList>() {
+    override fun areItemsTheSame(oldItem: SmallMovieList, newItem: SmallMovieList): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: SmallMovieList, newItem: SmallMovieList): Boolean {
+        return oldItem == newItem
+    }
+}

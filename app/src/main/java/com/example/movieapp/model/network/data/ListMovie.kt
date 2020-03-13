@@ -2,8 +2,8 @@ package com.example.movieapp.model.network.data
 
 import com.google.gson.annotations.SerializedName
 
-//Network object of movie for REST
 
+/** Data class for Retrofit request from ListActivity */
 data class Results(
     @SerializedName("results") val networkMovie: List<ListMovie>,
     val page: Int,

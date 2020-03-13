@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.databinding.SaveMovieFragmentBinding
 
-
 class SaveMovieFragment : Fragment() {
 
     private lateinit var viewModel: SaveMovieViewModel
@@ -18,10 +17,11 @@ class SaveMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = SaveMovieFragmentBinding.inflate(inflater)
+
         viewModel = ViewModelProvider(this).get(SaveMovieViewModel::class.java)
+
         binding.lifecycleOwner = viewLifecycleOwner
+
         return binding.root
     }
-
-
 }

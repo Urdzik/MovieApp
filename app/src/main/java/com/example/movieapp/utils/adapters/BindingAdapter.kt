@@ -26,7 +26,6 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 }
 
 
-
 //Binding adapter used to hide the spinner once data is available.
 @BindingAdapter("isNetworkError", "playlist")
 fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {

@@ -31,7 +31,7 @@
                 android:id="@+id/big_poster"
                 android:layout_width="200dp"
                 android:layout_height="290dp"
-                android:scaleType="centerCrop"
+                android:scaleType="center"
                 app:imageUrl="@{movie.poster_path}"
                 app:srcCompat="@drawable/ic_launcher_background" />
         </androidx.cardview.widget.CardView>

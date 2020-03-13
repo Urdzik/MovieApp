@@ -5,14 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapp.model.network.NetworkSource
+import com.example.movieapp.model.network.MovieListSource
 import com.example.movieapp.model.network.data.ListMovie
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ListViewModel @Inject constructor(private  val networkSource: NetworkSource): ViewModel(){
-    //LiveData object of movie
+class ListViewModel @Inject constructor(private  val networkSource: MovieListSource): ViewModel(){
 
+    //LiveData object of movie
     private val _navigateToSelectProperty = MutableLiveData<ListMovie>()
     val navigateToSelectProperty: LiveData<ListMovie>
         get() = _navigateToSelectProperty
@@ -27,15 +27,20 @@ class ListViewModel @Inject constructor(private  val networkSource: NetworkSourc
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+    //LiveData of list Movies
     private var _playList = MutableLiveData<List<ListMovie>>()
     val playList: LiveData<List<ListMovie>>
         get() = _playList
 
 
+    fun errorClickListener(category: String){
+      getMovieList(category, 1)
+    }
+
      fun getMovieList(category: String, page: Int) {
         viewModelScope.launch {
             try {
-                _playList.value = networkSource.retrieveData(category, "26f381d6ab8dd659b22d983cab9aa255", "ru", page)
+                _playList.value = networkSource.fetchMovieList(category, "26f381d6ab8dd659b22d983cab9aa255", "ru", page)
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
 

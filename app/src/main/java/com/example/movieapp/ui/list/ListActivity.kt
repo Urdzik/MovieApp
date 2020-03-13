@@ -14,6 +14,7 @@ import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.ActivityListBinding
 import com.example.movieapp.ui.detail.DetailActivity
 import com.example.movieapp.utils.adapters.ListMovieAdapter
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 
@@ -21,13 +22,15 @@ class ListActivity : AppCompatActivity() {
 
     @Inject
     lateinit var listViewModelFactory: ViewModelFactory
+    private lateinit var viewModel: ListViewModel
+    private lateinit var binding: ActivityListBinding
 
-    lateinit var viewModel: ListViewModel
-    lateinit var binding: ActivityListBinding
     private lateinit var layoutManager: GridLayoutManager
+    private lateinit var movieCategory: String
+    private lateinit var adapter: ListMovieAdapter
+
     private var popularMoviesPage = 1
-    lateinit var movieCategory: String
-    lateinit var adapter: ListMovieAdapter
+    private var errorSnackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +40,11 @@ class ListActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, listViewModelFactory).get(ListViewModel::class.java)
 
-        movieCategory = intent.getStringExtra("category")
+        movieCategory = intent.getStringExtra("category")!!
         sendNewMovieList(movieCategory)
 
+        // Create Toolbar and button of back in toolbar
         val myToolbar = binding.toolbar
-
         myToolbar.apply {
             setSupportActionBar(myToolbar)
             supportActionBar?.apply {
@@ -55,28 +58,24 @@ class ListActivity : AppCompatActivity() {
             }
         }
 
-        binding.recyclerList.adapter = ListMovieAdapter(ListMovieAdapter.ClickListener {
-            viewModel.displayPropertyDetails(it)
-        }, mutableListOf())
+        setMovieListToRV()
 
-        adapter = binding.recyclerList.adapter as ListMovieAdapter
-
-        layoutManager = GridLayoutManager(this,2, GridLayoutManager.VERTICAL, false)
-        binding.recyclerList.layoutManager = layoutManager
-        viewModel.playList.observe(this, Observer {
-            adapter.appendMovies(it)
+        //Looking for the internet connection
+        viewModel.eventNetworkError.observe(this, Observer {
+            if (it) onNetworkError()
         })
 
-        viewModel.navigateToSelectProperty.observe(this, Observer {
-            it?.let {
-                val intent = Intent(this, DetailActivity::class.java)
-                intent.putExtra("movie", it.id)
-                startActivity(intent)
-                viewModel.displayPropertyDetailsCompleted()
-            }
-        })
 
         binding.lifecycleOwner = this
+    }
+
+    //Function will show a toast when there is no internet
+    private fun onNetworkError() {
+        if (!viewModel.isNetworkErrorShown.value!!) {
+            errorSnackbar = Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_INDEFINITE)
+            errorSnackbar?.setAction(R.string.retry) { viewModel.errorClickListener(movieCategory) }
+            errorSnackbar?.show()
+        }
     }
 
     fun sendNewMovieList(category: String) {
@@ -84,7 +83,7 @@ class ListActivity : AppCompatActivity() {
         attachPopularMoviesOnScrollListener()
     }
 
-
+    //Getting movies from next page
     private fun attachPopularMoviesOnScrollListener() {
         binding.recyclerList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -101,4 +100,29 @@ class ListActivity : AppCompatActivity() {
         })
     }
 
+    //Work with RV
+    private fun setMovieListToRV() {
+        binding.recyclerList.adapter = ListMovieAdapter(ListMovieAdapter.ClickListener {
+            viewModel.displayPropertyDetails(it)
+        }, mutableListOf())
+
+        adapter = binding.recyclerList.adapter as ListMovieAdapter
+
+        layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
+
+        binding.recyclerList.layoutManager = layoutManager
+
+        viewModel.playList.observe(this, Observer {
+            adapter.appendMovies(it)
+        })
+
+        viewModel.navigateToSelectProperty.observe(this, Observer {
+            it?.let {
+                val intent = Intent(this, DetailActivity::class.java)
+                intent.putExtra("movie", it.id)
+                startActivity(intent)
+                viewModel.displayPropertyDetailsCompleted()
+            }
+        })
+    }
 }

@@ -12,9 +12,7 @@ import com.example.movieapp.databinding.ActivityDetailBinding
 
 import javax.inject.Inject
 
-
 class DetailActivity : AppCompatActivity() {
-
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -22,18 +20,14 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        App.appComponent.inject(this)
 
         val binding: ActivityDetailBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_detail)
 
-        App.appComponent.inject(this)
-
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
 
-        val movieId = intent.getIntExtra("movie", 0)
-
-        viewModel.getSelectMovie(movieId)
-
+        viewModel.getSelectedMovieById(intent.getIntExtra("movie", 0))
 
         // Create Toolbar and button of back in toolbar
         val myToolbar = binding.toolbar
@@ -51,11 +45,8 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
-
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
     }
 }
 

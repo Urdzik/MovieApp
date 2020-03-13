@@ -2,10 +2,8 @@ package com.example.movieapp.dagger.module
 
 import android.app.Application
 import com.example.movieapp.model.network.MovieApi
-import com.example.movieapp.model.network.NetworkSource
+import com.example.movieapp.model.network.MovieListSource
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -14,8 +12,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -23,6 +19,7 @@ import java.util.concurrent.TimeUnit
 @Module
 class NetworkModule (private val application: Application) {
 
+    //Create cache of request
     @Provides
     @Reusable
     internal fun provideOkHttpClient(): OkHttpClient {
@@ -42,10 +39,9 @@ class NetworkModule (private val application: Application) {
             .build()
     }
 
-
     @Provides
     @Reusable
-    internal fun provideRetrofitInterface( okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    internal fun provideRetrofitInterface(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .baseUrl("https://api.themoviedb.org/3/")
@@ -58,6 +54,6 @@ class NetworkModule (private val application: Application) {
 
     @Provides
     @Reusable
-    internal fun provideRemoteSource(api: MovieApi): NetworkSource = NetworkSource(api)
+    internal fun provideRemoteSource(api: MovieApi): MovieListSource = MovieListSource(api)
 
 }

@@ -2,7 +2,9 @@ package com.example.movieapp.model.network.data
 
 import com.google.gson.annotations.SerializedName
 
-data class PosterMovie(
+/** Data class for Retrofit request from OverviewFragment and getting small data of movie  */
+
+data class SmallMovie(
     @SerializedName("results") val smallMovieList: List<SmallMovieList>,
     @SerializedName("page") val page: Int
 )

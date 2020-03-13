@@ -44,18 +44,10 @@ class OverviewFragment : Fragment() {
         binding = OverviewFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
 
-        //Listener of recycler view click
-
         recViewingRvViewing()
         topRatedRvViewing()
         popularRvViewing()
         nowPlayingRvViewing()
-
-
-
-
-//        val snapHelperStart = GravitySnapHelper(Gravity.START)
-//        snapHelperStart.attachToRecyclerView(binding.recyclerRecViewing)
 
         //Navigate to Detail Activity
         viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {
@@ -79,6 +71,7 @@ class OverviewFragment : Fragment() {
         return binding.root
     }
 
+    //Saving scroll position
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putIntArray(
@@ -87,6 +80,7 @@ class OverviewFragment : Fragment() {
         )
     }
 
+    //Set scroll position
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         val position = savedInstanceState?.getIntArray("ARTICLE_SCROLL_POSITION")
@@ -106,71 +100,57 @@ class OverviewFragment : Fragment() {
             errorSnackbar?.show()
         }
     }
-
+    //Work with recommended RV
     private fun recViewingRvViewing() {
         binding.piker.adapter =
             RecViewingMovieAdapter(RecViewingMovieAdapter.ClickListener {
-                viewModel.displayPropertyDetails(it)
-            }, mutableListOf())
+                viewModel.displayPropertyDetails(it) })
 
-
+        //Add animation for RV
         binding.piker.setItemTransformer(
             ScaleTransformer.Builder()
                 .setMaxScale(1.05f)
                 .setMinScale(0.8f)
                 .setPivotX(Pivot.X.CENTER) // CENTER is a default one
                 .setPivotY(Pivot.Y.BOTTOM) // CENTER is a default one
-                .build()
-        )
-
+                .build())
 
         recViewingMovieAdapter = binding.piker.adapter as RecViewingMovieAdapter
 
         viewModel.recViewingPlayList.observe(viewLifecycleOwner, Observer {
-            recViewingMovieAdapter.appendMovies(it)
-        })
-
+            recViewingMovieAdapter.submitList(it) })
     }
 
-
+    //Work with top rated RV
     private fun topRatedRvViewing(){
-
         binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener{
-            viewModel.displayPropertyDetails(it)
-        })
+            viewModel.displayPropertyDetails(it) })
 
         topRatedMovieAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
 
         viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
-            topRatedMovieAdapter.addHeaderAndSubmitList(it)
-        })
-
+            topRatedMovieAdapter.addHeaderAndSubmitList(it) })
     }
 
-
+    //Work with popular RV
     private fun popularRvViewing() {
         binding.recyclerPopular.adapter = PopularMovieAdapter(PopularMovieAdapter.MovieListener {
-            viewModel.displayPropertyDetails(it)
-        })
+            viewModel.displayPropertyDetails(it) })
 
         popularMovieAdapter = binding.recyclerPopular.adapter as PopularMovieAdapter
 
         viewModel.popularPlayList.observe(viewLifecycleOwner, Observer {
-            popularMovieAdapter.addHeaderAndSubmitList(it)
-        })
-
+            popularMovieAdapter.addHeaderAndSubmitList(it) })
     }
-
+    //Work with now playing RV
     private fun nowPlayingRvViewing() {
         binding.recyclerNowPlaying.adapter =
-            NowPlayingMovieAdapter(NowPlayingMovieAdapter.ClickListener {
-                viewModel.displayPropertyDetails(it)
-            }, mutableListOf())
+            NowPlayingMovieAdapter(NowPlayingMovieAdapter.MovieListener {
+                viewModel.displayPropertyDetails(it) })
+
         nowPlayingMovieAdapter = binding.recyclerNowPlaying.adapter as NowPlayingMovieAdapter
 
         viewModel.nowPlayingPlayList.observe(viewLifecycleOwner, Observer {
-            nowPlayingMovieAdapter.appendMovies(it)
-        })
+            nowPlayingMovieAdapter.addHeaderAndSubmitList(it) })
     }
-
 }
