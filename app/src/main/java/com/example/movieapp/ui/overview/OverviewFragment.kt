@@ -20,6 +20,7 @@ import com.example.movieapp.utils.MovieAdapter
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
+
 class OverviewFragment : Fragment() {
 
     @Inject
