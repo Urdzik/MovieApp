@@ -36,7 +36,6 @@ class OverviewViewModel @Inject constructor(private val networkSource: NetworkSo
     init {
         getMovieList()
     }
-
     private fun getMovieList() {
         viewModelScope.launch {
             try {
