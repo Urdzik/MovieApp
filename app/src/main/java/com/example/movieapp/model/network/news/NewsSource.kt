@@ -1,7 +1,5 @@
 package com.example.movieapp.model.network.news
 
-import android.util.Log
-import com.example.movieapp.model.network.data.NetworkMovie
 import com.example.movieapp.model.network.news.data.Result
 import com.example.movieapp.utils.ALL_NEWS
 import com.example.movieapp.utils.DAILY_NEWS

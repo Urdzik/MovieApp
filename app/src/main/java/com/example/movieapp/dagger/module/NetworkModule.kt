@@ -2,7 +2,6 @@ package com.example.movieapp.dagger.module
 
 import android.app.Application
 import com.example.movieapp.model.network.MovieApi
-import com.example.movieapp.model.network.NetworkSource
 import com.example.movieapp.model.network.news.NewsApi
 import com.example.movieapp.model.network.news.NewsSource
 import com.example.movieapp.model.network.MovieListSource
