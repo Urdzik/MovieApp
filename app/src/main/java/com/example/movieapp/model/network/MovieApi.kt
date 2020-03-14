@@ -4,30 +4,31 @@ package com.example.movieapp.model.network
 import com.example.movieapp.model.network.data.MovieInfo
 import com.example.movieapp.model.network.data.PosterMovie
 import com.example.movieapp.model.network.data.Results
+import com.example.movieapp.utils.API_KEY
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-
 //A retrofit service to fetch movie playlist.
 interface MovieApi {
-    @GET("{category}")
+
+    @GET("movie/{category}")
     suspend fun getPropertyAsync(
         @Path("category") category: String,
-        @Query("api_key") key: String = "26f381d6ab8dd659b22d983cab9aa255",
+        @Query("api_key") key: String = API_KEY,
         @Query("language") language: String,
         @Query("page") page: Int
     ): Results
 
 
-    @GET("{category}")
+    @GET("movie/{category}")
     suspend fun getListOfPosters(
         @Path("category") category: String,
-        @Query("api_key") key: String = "26f381d6ab8dd659b22d983cab9aa255",
+        @Query("api_key") key: String = API_KEY,
         @Query("language") language: String
     ): PosterMovie
 
 
-    @GET("{id}?api_key=26f381d6ab8dd659b22d983cab9aa255&language=ru")
+    @GET("movie/{id}?api_key=$API_KEY&language=ru")
     suspend fun getMovieByID(@Path("id") id: Int): MovieInfo
 }

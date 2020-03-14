@@ -3,6 +3,8 @@ package com.example.movieapp.dagger.module
 import android.app.Application
 import com.example.movieapp.model.network.MovieApi
 import com.example.movieapp.model.network.NetworkSource
+import com.example.movieapp.model.network.news.NewsApi
+import com.example.movieapp.model.network.news.NewsSource
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -42,13 +44,12 @@ class NetworkModule (private val application: Application) {
             .build()
     }
 
-
     @Provides
     @Reusable
     internal fun provideRetrofitInterface( okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .baseUrl("https://api.themoviedb.org/3/movie/")
+        .baseUrl("https://api.themoviedb.org/3/")
         .client(okHttpClient)
         .build()
 
@@ -60,4 +61,11 @@ class NetworkModule (private val application: Application) {
     @Reusable
     internal fun provideRemoteSource(api: MovieApi): NetworkSource = NetworkSource(api)
 
+    @Provides
+    @Reusable
+    internal fun provideNewsApi(retrofit: Retrofit): NewsApi = retrofit.create(NewsApi::class.java)
+
+    @Provides
+    @Reusable
+    internal fun provideNewsSource(api: NewsApi): NewsSource = NewsSource(api)
 }
