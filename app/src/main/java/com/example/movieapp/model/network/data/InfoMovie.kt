@@ -1,6 +1,6 @@
 package com.example.movieapp.model.network.data
 
-
+/** Data class for Retrofit request from DetailActivity */
 data class MovieInfo (
     val adult: Boolean,
     val backdrop_path: String,

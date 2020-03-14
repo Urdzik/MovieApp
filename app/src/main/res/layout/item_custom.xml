@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
 
-        <variable
-            name="movie"
-            type="com.example.movieapp.model.network.data.SmallMovieList" />
-
-        <import type="android.view.View" />
-
-    </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/itemConstraintLayout"
         android:layout_width="wrap_content"
+        android:theme="@style/Theme.AppCompat.DayNight"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="16dp">
@@ -29,34 +21,36 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
+            app:cardElevation="2dp"
+            android:background="#00FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-            <ImageView
-                android:id="@+id/poster_image"
+            <ImageButton
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="40dp"
+                android:background="#00FFFFFF"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{movie.posterPath}"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_brightness_1_black_24dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00FFFFFF"
+                android:padding="42dp"
+                android:src="@drawable/ic_arrow_forward_black_24dp"
+                android:tint="?attr/actionMenuTextColor" />
+
+
         </androidx.cardview.widget.CardView>
 
-        <RatingBar
-            android:id="@+id/rating"
-            style="@android:style/Widget.Material.RatingBar.Small"
-            android:layout_width="80dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:numStars="10"
-            android:rating="@{movie.voteAverage}"
-            android:stepSize="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

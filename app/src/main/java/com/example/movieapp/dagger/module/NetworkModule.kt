@@ -5,6 +5,7 @@ import com.example.movieapp.model.network.MovieApi
 import com.example.movieapp.model.network.NetworkSource
 import com.example.movieapp.model.network.news.NewsApi
 import com.example.movieapp.model.network.news.NewsSource
+import com.example.movieapp.model.network.MovieListSource
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -32,8 +33,8 @@ class NetworkModule (private val application: Application) {
         interceptor.level = HttpLoggingInterceptor.Level.BASIC
 
         val cacheDir = File(application.cacheDir, UUID.randomUUID().toString())
-        // 10 MiB cache
-        val cache = Cache(cacheDir, 10 * 1024 * 1024)
+        // 15 MiB cache
+        val cache = Cache(cacheDir, 15 * 1024 * 1024)
         return OkHttpClient.Builder()
             .cache(
                 cache)
@@ -46,7 +47,7 @@ class NetworkModule (private val application: Application) {
 
     @Provides
     @Reusable
-    internal fun provideRetrofitInterface( okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    internal fun provideRetrofitInterface(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .baseUrl("https://api.themoviedb.org/3/")
@@ -59,7 +60,7 @@ class NetworkModule (private val application: Application) {
 
     @Provides
     @Reusable
-    internal fun provideRemoteSource(api: MovieApi): NetworkSource = NetworkSource(api)
+    internal fun provideRemoteSource(api: MovieApi): MovieListSource = MovieListSource(api)
 
     @Provides
     @Reusable

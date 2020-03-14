@@ -12,89 +12,142 @@
             type="com.example.movieapp.ui.overview.OverviewViewModel" />
     </data>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/overviewFragment"
-        tools:context="com.example.movieapp.MainActivity"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/top_rated_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="Топ рейтинг"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_top_rated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item" />
+            <LinearLayout
+                android:id="@+id/overviewFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/popular_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="Популярные"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+                <com.yarolegovich.discretescrollview.DiscreteScrollView
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/piker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/item_rec_viewing"
+                    android:layoutAnimation="@anim/layout_animation_fall_down"
+                    app:dsv_orientation="horizontal"/>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_popular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item" />
+                <TextView
+                    android:id="@+id/top_rated_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/comfortaa_bold"
+                    app:playlists="@{viewModel.topRatedPlayList}"
+                    android:text="@string/top_rated"
+                    app:vis="@{safeUnbox(viewModel.eventNetworkError)}"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                     />
 
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_top_rated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:clipToPadding="false"
 
-    </LinearLayout>
-<!--        <ProgressBar-->
-<!--        style="@style/progressBarStyle"-->
-<!--        android:foregroundGravity="center"-->
-<!--        android:layout_width="64dp"-->
-<!--        android:layout_height="64dp"-->
-<!--        android:indeterminateTint="@color/appColor"-->
-<!--        android:indeterminateTintMode="src_in"-->
-<!--        app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:playlist="@{viewModel.playList}" />-->
-    </ScrollView>
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layoutAnimation="@anim/layout_animation_fall_down"
+                    tools:listitem="@layout/item" />
 
+                <TextView
+                    app:vis="@{safeUnbox(viewModel.eventNetworkError)}"
+                    android:id="@+id/popular_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:playlists="@{viewModel.topRatedPlayList}"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/comfortaa_bold"
+                    android:text="@string/popular"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_popular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layoutAnimation="@anim/layout_animation_fall_down"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item" />
+
+                <TextView
+                    app:vis="@{safeUnbox(viewModel.eventNetworkError)}"
+                    android:id="@+id/now_playing_text"
+                    app:playlists="@{viewModel.topRatedPlayList}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/comfortaa_bold"
+                    android:text="@string/now_playing"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_now_playing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layoutAnimation="@anim/layout_animation_fall_down"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ProgressBar
+        style="@style/progressBarStyle"
+        android:foregroundGravity="center"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:indeterminateTint="@color/appColor"
+        android:indeterminateTintMode="src_in"
+        app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:playlist="@{viewModel.topRatedPlayList}" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
