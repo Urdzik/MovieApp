@@ -1,6 +1,7 @@
 package com.example.movieapp.model.network.news
 
 import com.example.movieapp.model.network.data.Results
+import com.example.movieapp.model.network.data.SmallMovie
 import com.example.movieapp.model.network.news.data.NewsResponse
 import com.example.movieapp.utils.ALL_NEWS
 import com.example.movieapp.utils.API_KEY
@@ -13,5 +14,5 @@ interface NewsApi {
     suspend fun getNews(
         @Path("type") type: String = ALL_NEWS,
         @Path("time") time: String = WEEKLY_NEWS
-    ): NewsResponse
+    ): SmallMovie
 }

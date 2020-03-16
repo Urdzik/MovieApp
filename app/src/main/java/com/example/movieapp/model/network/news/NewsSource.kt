@@ -1,5 +1,6 @@
 package com.example.movieapp.model.network.news
 
+import com.example.movieapp.model.network.data.SmallMovieList
 import com.example.movieapp.model.network.news.data.Result
 import com.example.movieapp.utils.ALL_NEWS
 import com.example.movieapp.utils.DAILY_NEWS
@@ -9,23 +10,23 @@ import javax.inject.Inject
 
 class NewsSource @Inject constructor(private val api: NewsApi) {
 
-    suspend fun getDailyNews(type: String = ALL_NEWS): List<Result> {
+    suspend fun getDailyNews(type: String = ALL_NEWS): List<SmallMovieList> {
         val newsResponse = api.getNews(type, DAILY_NEWS)
 
-        return if (newsResponse.results.isNullOrEmpty()) {
+        return if (newsResponse.smallMovieList.isNullOrEmpty()) {
             emptyList()
         } else {
-            newsResponse.results
+            newsResponse.smallMovieList
         }
     }
 
-    suspend fun getWeeklyNews(type: String = ALL_NEWS): List<Result> = ioReturnTask {
+    suspend fun getWeeklyNews(type: String = ALL_NEWS): List<SmallMovieList> {
         val newsResponse = api.getNews(type, WEEKLY_NEWS)
 
-        if (newsResponse.results.isNullOrEmpty()) {
+        return if (newsResponse.smallMovieList.isNullOrEmpty()) {
             emptyList()
         } else {
-            newsResponse.results
+            newsResponse.smallMovieList
         }
     }
 }

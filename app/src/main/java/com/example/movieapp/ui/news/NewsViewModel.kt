@@ -25,9 +25,9 @@ class NewsViewModel @Inject constructor(private val newsSource: NewsSource) : Vi
     private fun load() {
         viewModelScope.launch {
             newsTypes.forEach {
-                loadingMap[it] = ioTaskAsync {
-                    newsSource.getWeeklyNews(it)
-                }
+//                loadingMap[it] = ioTaskAsync {
+//                    newsSource.getWeeklyNews(it)
+//                }
             }
         }
     }
