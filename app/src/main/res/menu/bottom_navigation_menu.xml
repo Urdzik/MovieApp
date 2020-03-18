@@ -3,6 +3,7 @@
 
     <item
         android:id="@+id/overviewFragment"
+        android:contentDescription="@string/overview"
         android:icon="@drawable/ic_public_black_24dp"
         android:title="@string/home" />
     <item
@@ -14,10 +15,7 @@
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search_black_24dp"
         android:title="@string/search" />
-    <item
-        android:id="@+id/saveMovieFragment"
-        android:icon="@drawable/ic_save_black_24dp"
-        android:title="@string/save" />
+
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_person_black_24dp"
