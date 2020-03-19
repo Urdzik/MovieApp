@@ -5,28 +5,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.list.ListActivity">
+    tools:context=".ui.list.ListFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#00000000"
-        android:theme="@style/Theme.AppCompat.DayNight"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="?attr/actionMenuTextColor" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        app:layoutManager=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_list" />
 
 

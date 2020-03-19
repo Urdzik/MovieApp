@@ -4,13 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.databinding.ItemCustomBinding
 import com.example.movieapp.model.network.data.SmallMovieList
-import com.example.movieapp.ui.list.ListActivity
+import com.example.movieapp.ui.list.ListFragment
+import com.example.movieapp.ui.overview.OverviewFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -77,9 +79,7 @@ class PopularMovieAdapter(private val clickListener: MovieListener) :
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemCustomBinding.inflate(layoutInflater)
                 binding.button.setOnClickListener {
-                    val intent = Intent(binding.root.context, ListActivity::class.java)
-                    intent.putExtra("category", "popular")
-                    binding.root.context.startActivity(intent)
+                    binding.root.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToListFragment("popular"))
                 }
                 return TextViewHolder(binding)
             }
