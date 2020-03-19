@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(main_toolbar)
         //Function for Light-Dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
+
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
@@ -69,10 +70,3 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//
-//val myNavHostFragment: NavHostFragment = nav_host_fragment as NavHostFragment
-////        val inflater = myNavHostFragment.navController.navInflater
-////        val graph = inflater.inflate(R.navigation.navigation)
-////        myNavHostFragment.navController.graph = graph
-////
-////        NavigationUI.setupWithNavController(bottom_navigation, myNavHostFragment.navController)

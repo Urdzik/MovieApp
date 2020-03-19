@@ -12,7 +12,7 @@ import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.ActivityListBinding
-import com.example.movieapp.ui.detail.DetailActivity
+import com.example.movieapp.ui.detail.DetailFragment
 import com.example.movieapp.utils.adapters.ListMovieAdapter
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
@@ -118,7 +118,7 @@ class ListActivity : AppCompatActivity() {
 
         viewModel.navigateToSelectProperty.observe(this, Observer {
             it?.let {
-                val intent = Intent(this, DetailActivity::class.java)
+                val intent = Intent(this, DetailFragment::class.java)
                 intent.putExtra("movie", it.id)
                 startActivity(intent)
                 viewModel.displayPropertyDetailsCompleted()

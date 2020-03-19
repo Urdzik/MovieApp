@@ -14,9 +14,9 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.list.ListActivity"
-            android:screenOrientation="portrait"/>
+            />
         <activity android:name=".utils.SplashActivity"
-            android:screenOrientation="portrait">
+           >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,9 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.detail.DetailActivity"
-            android:screenOrientation="portrait"/>
+           />
+
 
         <meta-data
             android:name="preloaded_fonts"
