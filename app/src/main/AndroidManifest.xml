@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.list.ListActivity"
+        <activity android:name=".ui.list.ListFragment"
             />
         <activity android:name=".utils.SplashActivity"
            >
