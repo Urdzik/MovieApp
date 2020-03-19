@@ -14,9 +14,10 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#00000000"
         android:theme="@style/Theme.AppCompat.DayNight"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
 
+        app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="?attr/actionMenuTextColor" />
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_container"
