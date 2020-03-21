@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemRecViewingBinding
 import com.example.movieapp.model.network.data.SmallMovieList
-import com.example.movieapp.ui.detail.DetailActivity
 
 class WeeklyGeneralNewsAdapter : ListAdapter<SmallMovieList, WeeklyGeneralViewHolder>(MovieRecDiffCallback()) {
 
@@ -30,9 +29,9 @@ class WeeklyGeneralViewHolder(private val binding: ItemRecViewingBinding) : Recy
         binding.movie = movie
 
         binding.posterImage.setOnClickListener {
-            val intent = Intent(binding.root.context, DetailActivity::class.java)
-            intent.putExtra("movie", it.id)
-            startActivity(binding.root.context, intent, Bundle())
+//            val intent = Intent(binding.root.context, DetailActivity::class.java)
+//            intent.putExtra("movie", it.id)
+//            startActivity(binding.root.context, intent, Bundle())
         }
     }
 }

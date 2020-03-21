@@ -25,6 +25,7 @@ class OverviewFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
     lateinit var viewModel: OverviewViewModel
     lateinit var binding: OverviewFragmentBinding
 
@@ -38,11 +39,17 @@ class OverviewFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?
+    ): View? {
         App.appComponent.inject(this)
         binding = OverviewFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
 
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         recViewingRvViewing()
         topRatedRvViewing()
         popularRvViewing()
@@ -51,7 +58,11 @@ class OverviewFragment : Fragment() {
         //Navigate to Detail Activity
         viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {
             it?.let {
-            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it.id))
+                findNavController().navigate(
+                    OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(
+                        it.id
+                    )
+                )
                 viewModel.displayPropertyDetailsCompleted()
             }
         })
@@ -59,22 +70,23 @@ class OverviewFragment : Fragment() {
 
         //Looking for the internet connection
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
-                if (it) onNetworkError()
-            })
+            if (it) onNetworkError()
+        })
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        return binding.root
     }
 
     //Saving scroll position
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putIntArray(
-            "ARTICLE_SCROLL_POSITION",
-            intArrayOf(binding.scrollView.scrollX, binding.scrollView.scrollY)
-        )
+        if (::binding.isLateinit) return
+
+            outState.putIntArray(
+                "ARTICLE_SCROLL_POSITION",
+                intArrayOf(binding.scrollView.scrollX, binding.scrollView.scrollY)
+            )
     }
 
     //Set scroll position
@@ -97,11 +109,13 @@ class OverviewFragment : Fragment() {
             errorSnackbar?.show()
         }
     }
+
     //Work with recommended RV
     private fun recViewingRvViewing() {
         binding.piker.adapter =
             RecViewingMovieAdapter(RecViewingMovieAdapter.ClickListener {
-                viewModel.displayPropertyDetails(it) })
+                viewModel.displayPropertyDetails(it)
+            })
 
         //Add animation for RV
         binding.piker.setItemTransformer(
@@ -110,44 +124,53 @@ class OverviewFragment : Fragment() {
                 .setMinScale(0.8f)
                 .setPivotX(Pivot.X.CENTER) // CENTER is a default one
                 .setPivotY(Pivot.Y.BOTTOM) // CENTER is a default one
-                .build())
+                .build()
+        )
 
         recViewingMovieAdapter = binding.piker.adapter as RecViewingMovieAdapter
 
         viewModel.recViewingPlayList.observe(viewLifecycleOwner, Observer {
-            recViewingMovieAdapter.submitList(it) })
+            recViewingMovieAdapter.submitList(it)
+        })
     }
 
     //Work with top rated RV
-    private fun topRatedRvViewing(){
-        binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener{
-            viewModel.displayPropertyDetails(it) })
+    private fun topRatedRvViewing() {
+        binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener {
+            viewModel.displayPropertyDetails(it)
+        })
 
         topRatedMovieAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
 
         viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
-            topRatedMovieAdapter.addHeaderAndSubmitList(it) })
+            topRatedMovieAdapter.addHeaderAndSubmitList(it)
+        })
     }
 
     //Work with popular RV
     private fun popularRvViewing() {
         binding.recyclerPopular.adapter = PopularMovieAdapter(PopularMovieAdapter.MovieListener {
-            viewModel.displayPropertyDetails(it) })
+            viewModel.displayPropertyDetails(it)
+        })
 
         popularMovieAdapter = binding.recyclerPopular.adapter as PopularMovieAdapter
 
         viewModel.popularPlayList.observe(viewLifecycleOwner, Observer {
-            popularMovieAdapter.addHeaderAndSubmitList(it) })
+            popularMovieAdapter.addHeaderAndSubmitList(it)
+        })
     }
+
     //Work with now playing RV
     private fun nowPlayingRvViewing() {
         binding.recyclerNowPlaying.adapter =
             NowPlayingMovieAdapter(NowPlayingMovieAdapter.MovieListener {
-                viewModel.displayPropertyDetails(it) })
+                viewModel.displayPropertyDetails(it)
+            })
 
         nowPlayingMovieAdapter = binding.recyclerNowPlaying.adapter as NowPlayingMovieAdapter
 
         viewModel.nowPlayingPlayList.observe(viewLifecycleOwner, Observer {
-            nowPlayingMovieAdapter.addHeaderAndSubmitList(it) })
+            nowPlayingMovieAdapter.addHeaderAndSubmitList(it)
+        })
     }
 }

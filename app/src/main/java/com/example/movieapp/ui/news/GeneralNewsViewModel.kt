@@ -25,6 +25,10 @@ class GeneralNewsViewModel @Inject constructor(private val newsSource: NewsSourc
         get() = _isLoading
     private val _isLoading = MutableLiveData<Boolean>()
 
+    val redirectToAllNewsLiveData: LiveData<Any>
+        get() = _redirectToAllNewsLiveData
+    private val _redirectToAllNewsLiveData = MutableLiveData<Any>()
+
     init {
         loadNews()
     }
@@ -46,5 +50,13 @@ class GeneralNewsViewModel @Inject constructor(private val newsSource: NewsSourc
             _isLoading.postValue(false)
             _tvNewsLiveData.postValue(news)
         }
+    }
+
+    fun redirectToAllNews() {
+        _redirectToAllNewsLiveData.postValue(Any())
+    }
+
+    fun redirectComplete() {
+        _redirectToAllNewsLiveData.value = null
     }
 }

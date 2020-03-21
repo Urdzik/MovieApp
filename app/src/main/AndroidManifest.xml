@@ -13,8 +13,6 @@
         android:supportsRtl="true"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.news.AllNewsActivity"></activity>
-        <activity android:name=".ui.list.ListActivity" />
         <activity android:name=".utils.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-           />
+        <activity android:name=".MainActivity" />
 
 
         <meta-data

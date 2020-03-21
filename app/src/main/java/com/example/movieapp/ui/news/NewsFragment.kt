@@ -12,10 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.NewsFragmentBinding
-import com.example.movieapp.utils.ALL_NEWS
-import com.example.movieapp.utils.MOVIE_NEWS
-import com.example.movieapp.utils.TV_NEWS
-import com.example.movieapp.utils.hide
+import com.example.movieapp.utils.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.general_news_fragment.*
 import javax.inject.Inject
 
@@ -37,7 +35,7 @@ class NewsFragment : Fragment() {
         App.appComponent.inject(this)
 
         val binding = NewsFragmentBinding.inflate(inflater)
-        progressBar?.visibility = View.VISIBLE
+        progressBar?.show()
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(NewsViewModel::class.java)
 

@@ -6,6 +6,7 @@
         android:contentDescription="@string/overview"
         android:icon="@drawable/ic_public_black_24dp"
         android:title="@string/home" />
+
     <item
         android:contentDescription="@string/news"
         android:id="@+id/news"

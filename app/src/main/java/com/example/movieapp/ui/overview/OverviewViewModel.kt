@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.overview
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -50,12 +51,13 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     val errorClickListener = View.OnClickListener { fetchMoviesLists() }
 
     init {
+        Log.d("ViewModel", "init view model")
         fetchMoviesLists()
     }
 
 
     private fun fetchMoviesLists() {
-
+        Log.d("ViewModel", "load data")
         viewModelScope.launch {
             try {
                 _recViewingPlayList.value = networkSource.fetchSmallMovieList("upcoming", "26f381d6ab8dd659b22d983cab9aa255", "ru")

@@ -1,7 +1,6 @@
 package com.example.movieapp.utils.adapters
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,16 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemCustomBinding
 import com.example.movieapp.databinding.ItemTvNewsBinding
 import com.example.movieapp.model.network.news.data.TvNew
-import com.example.movieapp.ui.news.AllNewsActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
 
-class TvNewsAdapter : ListAdapter<TvNewsItem, RecyclerView.ViewHolder>(TvNewsDiffCallback()) {
+class TvNewsAdapter(private val seeAllListener: SeeAllListener) : ListAdapter<TvNewsItem, RecyclerView.ViewHolder>(TvNewsDiffCallback()) {
 
 //    private val adapterScope = CoroutineScope(Dispatchers.Default)
 
@@ -56,7 +50,7 @@ class TvNewsAdapter : ListAdapter<TvNewsItem, RecyclerView.ViewHolder>(TvNewsDif
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
+            ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent, seeAllListener)
             ITEM_VIEW_TYPE_ITEM -> MovieViewHolder.from(parent)
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
@@ -71,12 +65,13 @@ class TvNewsAdapter : ListAdapter<TvNewsItem, RecyclerView.ViewHolder>(TvNewsDif
 
     class TextViewHolder private constructor(val binding: ItemCustomBinding) : RecyclerView.ViewHolder(binding.root) {
         companion object {
-            fun from(parent: ViewGroup): TextViewHolder {
+            fun from(parent: ViewGroup, seeAllListener: SeeAllListener): TextViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemCustomBinding.inflate(layoutInflater)
                 binding.button.setOnClickListener {
-                    val intent = Intent(binding.root.context, AllNewsActivity::class.java)
-                    binding.root.context.startActivity(intent)
+//                    val intent = Intent(binding.root.context, AllNewsActivity::class.java)
+//                    binding.root.context.startActivity(intent)
+                    seeAllListener.onClick()
                 }
 
                 return TextViewHolder(binding)
@@ -128,7 +123,7 @@ sealed class TvNewsItem {
     abstract val id: Long
 }
 //
-////class MovieListener(val clickListener: (movie: SmallMovieList) -> Unit) {
-////    fun onClick(movie: SmallMovieList) = clickListener(movie)
-////}
+class SeeAllListener(val clickListener: () -> Unit) {
+    fun onClick() = clickListener()
+}
 //

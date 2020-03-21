@@ -17,6 +17,7 @@
 package com.example.movieapp.utils
 
 import android.content.Intent
+import android.util.Log
 import android.util.SparseArray
 import androidx.core.util.forEach
 import androidx.core.util.set
@@ -228,8 +229,12 @@ private fun obtainNavHostFragment(
 ): NavHostFragment {
     // If the Nav Host fragment exists, return it
     val existingFragment = fragmentManager.findFragmentByTag(fragmentTag) as NavHostFragment?
-    existingFragment?.let { return it }
+    existingFragment?.let {
+        Log.d("savingState", "$fragmentTag exist")
+        return it
+    }
 
+    Log.d("savingState", "$fragmentTag don't exist, creating new one")
     // Otherwise, create it and return it.
     val navHostFragment = NavHostFragment.create(navGraphId)
     fragmentManager.beginTransaction()

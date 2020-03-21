@@ -8,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
+import com.example.movieapp.databinding.GeneralNewsFragmentBinding
+import com.example.movieapp.utils.adapters.SeeAllListener
 import com.example.movieapp.utils.adapters.TvNewsAdapter
 import com.example.movieapp.utils.adapters.WeeklyGeneralNewsAdapter
 import com.example.movieapp.utils.hide
@@ -29,6 +32,7 @@ class GeneralNewsFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: GeneralNewsViewModel
+    private lateinit var binding: GeneralNewsFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,13 +40,19 @@ class GeneralNewsFragment : Fragment() {
     ): View? {
         App.appComponent.inject(this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(GeneralNewsViewModel::class.java)
-        return inflater.inflate(R.layout.general_news_fragment, container, false)
+        binding = GeneralNewsFragmentBinding.inflate(inflater)
+
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         recycler_weekly.adapter = WeeklyGeneralNewsAdapter()
-        recycler_tv.adapter = TvNewsAdapter()
+        recycler_tv.adapter = TvNewsAdapter(SeeAllListener {
+            viewModel.redirectToAllNews()
+        })
         progressBar.show()
 
         viewModel.weeklyNewsLiveData.observe(viewLifecycleOwner, Observer {
@@ -53,14 +63,19 @@ class GeneralNewsFragment : Fragment() {
             (recycler_tv.adapter as TvNewsAdapter).addHeaderAndSubmitList(it)
         })
 
-
         viewModel.isLoading.observe(viewLifecycleOwner, Observer {
             if (it == false) progressBar?.hide()
         })
 
+        viewModel.redirectToAllNewsLiveData.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                findNavController().navigate(GeneralNewsFragmentDirections.actionGeneralNewsFragmentToNewsFragment())
+                viewModel.redirectComplete()
+            }
+        })
+
         detailed.setOnClickListener {
-            val intent = Intent(context, AllNewsActivity::class.java)
-            startActivity(intent)
+            viewModel.redirectToAllNews()
         }
     }
 }
