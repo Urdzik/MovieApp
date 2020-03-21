@@ -1,29 +1,30 @@
 package com.example.movieapp.ui.list
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
-import com.example.movieapp.databinding.ActivityListBinding
-import com.example.movieapp.ui.detail.DetailActivity
+import com.example.movieapp.databinding.ListFragmentBinding
 import com.example.movieapp.utils.adapters.ListMovieAdapter
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 
-class ListActivity : AppCompatActivity() {
+class ListFragment : Fragment() {
 
     @Inject
     lateinit var listViewModelFactory: ViewModelFactory
     private lateinit var viewModel: ListViewModel
-    private lateinit var binding: ActivityListBinding
+    private lateinit var binding: ListFragmentBinding
 
     private lateinit var layoutManager: GridLayoutManager
     private lateinit var movieCategory: String
@@ -32,31 +33,20 @@ class ListActivity : AppCompatActivity() {
     private var popularMoviesPage = 1
     private var errorSnackbar: Snackbar? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         App.appComponent.inject(this)
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_list)
-
+        binding = ListFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this, listViewModelFactory).get(ListViewModel::class.java)
 
-        movieCategory = intent.getStringExtra("category")!!
+        movieCategory = ListFragmentArgs.fromBundle(requireArguments()).category
         sendNewMovieList(movieCategory)
 
         // Create Toolbar and button of back in toolbar
-        val myToolbar = binding.toolbar
-        myToolbar.apply {
-            setSupportActionBar(myToolbar)
-            supportActionBar?.apply {
-                setDisplayHomeAsUpEnabled(true)
-                setHomeButtonEnabled(true)
-                setDisplayShowTitleEnabled(false)
-            }
-            //Button of back
-            setNavigationOnClickListener {
-                super.onBackPressed()
-            }
-        }
+
 
         setMovieListToRV()
 
@@ -67,7 +57,10 @@ class ListActivity : AppCompatActivity() {
 
 
         binding.lifecycleOwner = this
+
+        return binding.root
     }
+
 
     //Function will show a toast when there is no internet
     private fun onNetworkError() {
@@ -108,19 +101,20 @@ class ListActivity : AppCompatActivity() {
 
         adapter = binding.recyclerList.adapter as ListMovieAdapter
 
-        layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
+        layoutManager =
+            GridLayoutManager(binding.root.context, 2, GridLayoutManager.VERTICAL, false)
 
         binding.recyclerList.layoutManager = layoutManager
 
-        viewModel.playList.observe(this, Observer {
+        viewModel.playList.observe(viewLifecycleOwner, Observer {
             adapter.appendMovies(it)
         })
 
-        viewModel.navigateToSelectProperty.observe(this, Observer {
+        viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {
             it?.let {
-                val intent = Intent(this, DetailActivity::class.java)
-                intent.putExtra("movie", it.id)
-                startActivity(intent)
+                findNavController().navigate(
+                    ListFragmentDirections.actionListFragmentToDetailFragment(it.id)
+                )
                 viewModel.displayPropertyDetailsCompleted()
             }
         })
