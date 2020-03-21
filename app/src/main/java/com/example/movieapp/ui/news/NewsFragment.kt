@@ -15,6 +15,8 @@ import com.example.movieapp.databinding.NewsFragmentBinding
 import com.example.movieapp.utils.ALL_NEWS
 import com.example.movieapp.utils.MOVIE_NEWS
 import com.example.movieapp.utils.TV_NEWS
+import com.example.movieapp.utils.hide
+import kotlinx.android.synthetic.main.general_news_fragment.*
 import javax.inject.Inject
 
 class NewsFragment : Fragment() {
@@ -24,6 +26,10 @@ class NewsFragment : Fragment() {
 
     private lateinit var viewModel: NewsViewModel
 
+    companion object {
+        fun newInstance() = NewsFragment()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +37,8 @@ class NewsFragment : Fragment() {
         App.appComponent.inject(this)
 
         val binding = NewsFragmentBinding.inflate(inflater)
+        progressBar?.visibility = View.VISIBLE
+
         viewModel = ViewModelProvider(this, viewModelFactory).get(NewsViewModel::class.java)
 
         viewModel.loadData()
@@ -41,6 +49,10 @@ class NewsFragment : Fragment() {
 
         viewModel.getWeeklyNews(MOVIE_NEWS).observe(viewLifecycleOwner, Observer {
             println("movie news: ${it[0].title}")
+        })
+
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            if (it == false) progressBar?.hide()
         })
 //        viewModel.getDailyByType(MOVIE_NEWS)?.observe(viewLifecycleOwner, Observer { list ->
 //            list.forEach {

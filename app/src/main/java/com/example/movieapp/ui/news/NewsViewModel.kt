@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movieapp.model.network.data.SmallMovieList
 import com.example.movieapp.model.network.news.NewsSource
 import com.example.movieapp.model.network.news.data.Result
 import com.example.movieapp.utils.*
@@ -13,21 +14,26 @@ import javax.inject.Inject
 
 class NewsViewModel @Inject constructor(private val newsSource: NewsSource) : ViewModel() {
 
-    private val loadingMap = HashMap<String, Deferred<List<Result>>>()
-    private val resultMap = HashMap<String, MutableLiveData<List<Result>>>()
+    private val loadingMap = HashMap<String, Deferred<List<SmallMovieList>>>()
+    private val resultMap = HashMap<String, MutableLiveData<List<SmallMovieList>>>()
 
     private val newsTypes = listOf(ALL_NEWS, MOVIE_NEWS, TV_NEWS, PERSON_NEWS)
+
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+    private val _isLoading = MutableLiveData<Boolean>()
 
     init {
         load()
     }
 
     private fun load() {
+        _isLoading.postValue(true)
         viewModelScope.launch {
             newsTypes.forEach {
-//                loadingMap[it] = ioTaskAsync {
-//                    newsSource.getWeeklyNews(it)
-//                }
+                loadingMap[it] = ioTaskAsync {
+                    newsSource.getWeeklyNews(it)
+                }
             }
         }
     }
@@ -45,12 +51,13 @@ class NewsViewModel @Inject constructor(private val newsSource: NewsSource) : Vi
 
         viewModelScope.launch {
             loadingMap[type]!!.await().also {
+                _isLoading.postValue(false)
                 resultMap[type]!!.postValue(it)
             }
         }
     }
 
-    fun getWeeklyNews(type: String): LiveData<List<Result>> {
+    fun getWeeklyNews(type: String): LiveData<List<SmallMovieList>> {
         return resultMap[type] ?: MutableLiveData()
     }
 

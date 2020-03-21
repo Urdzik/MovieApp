@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.news.AllNewsActivity"></activity>
         <activity android:name=".ui.list.ListActivity" />
         <activity android:name=".utils.SplashActivity">
             <intent-filter>

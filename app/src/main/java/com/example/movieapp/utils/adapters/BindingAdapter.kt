@@ -10,13 +10,14 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.R
 import com.example.movieapp.model.network.data.Genres
 import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.utils.IMAGE_BASE_PATH
 
 //Binding adapter used to display images from URL using Glide
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imgUrl: String?) {
 
     Glide.with(imageView.context)
-        .load("https://image.tmdb.org/t/p/w500$imgUrl")
+        .load("$IMAGE_BASE_PATH$imgUrl")
         .apply(
             RequestOptions()
                 .placeholder(R.drawable.loading_animation)
