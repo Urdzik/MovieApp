@@ -2,19 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/overviewFragment"
+        android:id="@+id/overview"
+        android:contentDescription="@string/overview"
         android:icon="@drawable/ic_public_black_24dp"
         android:title="@string/home" />
+
     <item
-        android:id="@+id/newsFragment"
+        android:contentDescription="@string/news"
+        android:id="@+id/news"
         android:icon="@drawable/ic_location_city_black_24dp"
         android:title="@string/news" />
+
     <item
-        android:id="@+id/saveMovieFragment"
-        android:icon="@drawable/ic_save_black_24dp"
-        android:title="@string/save" />
+        android:contentDescription="@string/search"
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/search" />
+
     <item
-        android:id="@+id/profileFragment"
+        android:contentDescription="@string/profile"
+        android:id="@+id/profile"
         android:icon="@drawable/ic_person_black_24dp"
         android:title="@string/profile" />
 </menu>

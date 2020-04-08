@@ -1,19 +1,17 @@
 package com.example.movieapp.model.network.data
 
-import android.view.View
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
-//Network object of movie for REST
-@JsonClass(generateAdapter = true)
+
+/** Data class for Retrofit request from ListActivity */
 data class Results(
-    @Json(name = "results") val networkMovie: List<NetworkMovie>,
+    @SerializedName("results") val networkMovie: List<ListMovie>,
     val page: Int,
     val total_results: Int,
     val total_pages: Int
 )
 
-data class NetworkMovie(
+data class ListMovie(
     val id: Int,
     val adult: Boolean,
     val popularity: Double,
@@ -28,7 +26,4 @@ data class NetworkMovie(
     val vote_average: Double,
     val overview: String,
     val release_date: String
-){
-    val plus18
-    get() = if (adult) View.VISIBLE  else View.GONE
-}
+)

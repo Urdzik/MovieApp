@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/news"
+    app:startDestination="@id/generalNewsFragment">
+
+    <fragment
+        android:id="@+id/generalNewsFragment"
+        android:name="com.example.movieapp.ui.news.GeneralNewsFragment"
+        android:label="GeneralNewsFragment">
+        <action
+            android:id="@+id/action_generalNewsFragment_to_newsFragment"
+            app:destination="@id/newsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.movieapp.ui.news.NewsFragment"
+        android:label="NewsFragment" />
+</navigation>

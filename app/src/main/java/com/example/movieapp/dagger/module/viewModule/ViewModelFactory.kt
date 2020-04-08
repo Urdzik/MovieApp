@@ -6,10 +6,21 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 @Suppress("UNCHECKED_CAST")
-class ViewModelFactory @Inject constructor(private val viewModel: MutableMap<Class<out ViewModel>, Provider<ViewModel>>) : ViewModelProvider.Factory {
+class ViewModelFactory @Inject constructor(private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>) :
+    ViewModelProvider.Factory {
+    private val usedViewModelMap = HashMap<Class<out ViewModel>, ViewModel>()
+
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        val viewModelProvider = viewModel[modelClass]
+        if (usedViewModelMap.contains(modelClass)) {
+            return usedViewModelMap[modelClass] as T
+        }
+
+        val viewModelProvider = viewModels[modelClass]
             ?: throw IllegalArgumentException(" model class $modelClass not found")
-        return viewModelProvider.get() as T
+
+        val viewModel = viewModelProvider.get()
+        usedViewModelMap[viewModel::class.java] = viewModel
+
+        return viewModel as T
     }
 }

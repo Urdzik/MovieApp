@@ -2,8 +2,12 @@ package com.example.movieapp.dagger.module
 
 import android.app.Application
 import com.example.movieapp.model.network.MovieApi
-import com.example.movieapp.model.network.NetworkSource
+import com.example.movieapp.model.network.news.NewsApi
+import com.example.movieapp.model.network.news.NewsSource
+import com.example.movieapp.model.network.MovieListSource
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -11,7 +15,9 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -26,8 +32,8 @@ class NetworkModule (private val application: Application) {
         interceptor.level = HttpLoggingInterceptor.Level.BASIC
 
         val cacheDir = File(application.cacheDir, UUID.randomUUID().toString())
-        // 10 MiB cache
-        val cache = Cache(cacheDir, 10 * 1024 * 1024)
+        // 15 MiB cache
+        val cache = Cache(cacheDir, 15 * 1024 * 1024)
         return OkHttpClient.Builder()
             .cache(
                 cache)
@@ -40,10 +46,10 @@ class NetworkModule (private val application: Application) {
 
     @Provides
     @Reusable
-    internal fun provideRetrofitInterface( okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create())
+    internal fun provideRetrofitInterface(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .baseUrl("https://api.themoviedb.org/3/movie/")
+        .baseUrl("https://api.themoviedb.org/3/")
         .client(okHttpClient)
         .build()
 
@@ -53,6 +59,13 @@ class NetworkModule (private val application: Application) {
 
     @Provides
     @Reusable
-    internal fun provideRemoteSource(api: MovieApi): NetworkSource = NetworkSource(api)
+    internal fun provideRemoteSource(api: MovieApi): MovieListSource = MovieListSource(api)
 
+    @Provides
+    @Reusable
+    internal fun provideNewsApi(retrofit: Retrofit): NewsApi = retrofit.create(NewsApi::class.java)
+
+    @Provides
+    @Reusable
+    internal fun provideNewsSource(api: NewsApi): NewsSource = NewsSource(api)
 }
