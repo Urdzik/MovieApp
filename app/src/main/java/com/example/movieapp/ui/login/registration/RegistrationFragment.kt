@@ -1,33 +1,29 @@
 package com.example.movieapp.ui.login.registration
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.example.movieapp.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.movieapp.databinding.RegistrationFragmentBinding
 
 class RegistrationFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RegistrationFragment()
-    }
-
     private lateinit var viewModel: RegistrationViewModel
+    private lateinit var binding: RegistrationFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.registration_fragment, container, false)
+        binding = RegistrationFragmentBinding.inflate(inflater)
+
+        viewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
+
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(RegistrationViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

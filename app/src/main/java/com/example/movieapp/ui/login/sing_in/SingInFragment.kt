@@ -6,28 +6,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 
 import com.example.movieapp.R
+import com.example.movieapp.databinding.SingInFragmentBinding
 
 class SingInFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SingInFragment()
-    }
-
     private lateinit var viewModel: SingInViewModel
+    private lateinit var binding: SingInFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.sing_in_fragment, container, false)
+        binding = SingInFragmentBinding.inflate(inflater)
+        viewModel = ViewModelProvider(this).get(SingInViewModel::class.java)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SingInViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }
