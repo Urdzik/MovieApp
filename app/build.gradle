@@ -85,6 +85,7 @@ dependencies {
 
     //Firebase
     implementation 'com.google.firebase:firebase-auth:19.3.0'
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
 
     // arch components
     // ViewModel and LiveData
