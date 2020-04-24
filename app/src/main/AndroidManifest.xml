@@ -13,13 +13,15 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.login.activity.RegAndSingActivity"></activity>
-        <activity android:name=".utils.SplashActivity">
+        <activity android:name=".ui.login.activity.RegAndSingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".utils.SplashActivity">
+
         </activity>
         <activity android:name=".MainActivity" />
 
