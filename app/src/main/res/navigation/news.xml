@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/generalNewsFragment"
         android:name="com.example.movieapp.ui.news.GeneralNewsFragment"
-        android:label="GeneralNewsFragment">
+        android:label="@string/news">
         <action
             android:id="@+id/action_generalNewsFragment_to_newsFragment"
             app:destination="@id/newsFragment"

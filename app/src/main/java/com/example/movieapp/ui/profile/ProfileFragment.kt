@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ProfileFragmentBinding
+import com.example.movieapp.utils.LOGIN_TAG
+import com.example.movieapp.utils.RC_SIGN_IN
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -40,20 +42,18 @@ class ProfileFragment : Fragment() {
 
         binding.googleLoginBtn.setOnClickListener{ signIn() }
 
-        // [START config_signin]
+        binding.logOutBtn.setOnClickListener { revokeAccess()}
+
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        // [END config_signin]
 
         googleSignInClient = GoogleSignIn.getClient(binding.root.context, gso)
 
-        // [START initialize_auth]
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
-        // [END initialize_auth]
 
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -67,9 +67,7 @@ class ProfileFragment : Fragment() {
         updateUI(currentUser)
         Log.e("TAG", "3")
     }
-    // [END on_start_check_user]
 
-    // [START onactivityresult]
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -82,51 +80,40 @@ class ProfileFragment : Fragment() {
                 firebaseAuthWithGoogle(account!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e)
-                // [START_EXCLUDE]
+                Log.w(LOGIN_TAG, "Google sign in failed", e)
                 updateUI(null)
-                // [END_EXCLUDE]
             }
         }
     }
-    // [END onactivityresult]
 
-    // [START auth_with_google]
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
-        // [START_EXCLUDE silent]
+        Log.d(LOGIN_TAG, "firebaseAuthWithGoogle:" + acct.id!!)
 
-        // [END_EXCLUDE]
 
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener() { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
+                    Log.d(LOGIN_TAG, "signInWithCredential:success")
                     val user = auth.currentUser
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    Log.w(LOGIN_TAG, "signInWithCredential:failure", task.exception)
                     Snackbar.make(binding.root, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
                     updateUI(null)
                 }
 
-                // [START_EXCLUDE]
 
-                // [END_EXCLUDE]
             }
     }
-    // [END auth_with_google]
 
-    // [START signin]
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
-        Log.e("TAG", "1")
     }
-    // [END signin]
+
 
     private fun signOut() {
         // Firebase sign out
@@ -149,25 +136,31 @@ class ProfileFragment : Fragment() {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        Log.e(TAG, "3")
         if (user != null) {
+
            binding.registration.text = user.displayName
-            Glide.with(binding.avatar).load(user.photoUrl).circleCrop().into(binding.avatar)
+
+            Glide.with(binding.avatar)
+                .load(user.photoUrl)
+                .circleCrop()
+                .into(binding.avatar)
 
 
             binding.googleLoginBtn.visibility = View.GONE
             binding.twitterLoginBtn.visibility = View.GONE
             binding.avatar.visibility = View.VISIBLE
+            binding.logOutBtn.visibility = View.VISIBLE
 
         } else {
-
+            binding.registration.text = "Registration"
+            binding.googleLoginBtn.visibility = View.VISIBLE
+            binding.twitterLoginBtn.visibility = View.VISIBLE
+            binding.avatar.visibility = View.GONE
+            binding.logOutBtn.visibility = View.GONE
         }
     }
 
 
 
-    companion object {
-        private const val TAG = "GoogleActivity"
-        private const val RC_SIGN_IN = 9001
-    }
+
 }
