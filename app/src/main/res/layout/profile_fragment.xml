@@ -33,14 +33,32 @@
             app:layout_constraintTop_toTopOf="@+id/registration" />
 
         <com.google.android.gms.common.SignInButton
-            android:layout_width="wrap_content"
+            android:id="@+id/google_login_btn"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/reg_btn"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/twitter_login_btn"
+            app:layout_constraintStart_toStartOf="@+id/twitter_login_btn"
             app:layout_constraintTop_toBottomOf="@+id/registration"
-            app:layout_constraintVertical_bias="0.768" />
+            app:layout_constraintVertical_bias="0.65" />
+
+<!--        <com.facebook.login.widget.LoginButton-->
+<!--            android:id="@+id/loginButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/reg_btn"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/reg_btn"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/reg_btn" />-->
+
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
+            android:id="@+id/twitter_login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/google_login_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

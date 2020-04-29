@@ -84,7 +84,7 @@ dependencies {
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.9.2'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-auth:19.3.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.1'
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
 
     // arch components
@@ -107,6 +107,10 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    implementation 'com.facebook.android:facebook-android-sdk:4.0.0'
+
+    implementation 'com.twitter.sdk.android:twitter-core:3.0.0'
 
 
 }

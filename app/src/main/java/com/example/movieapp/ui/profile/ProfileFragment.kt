@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        binding.regBtn.setOnClickListener{ signIn() }
+        binding.googleLoginBtn.setOnClickListener{ signIn() }
 
         // [START config_signin]
         // Configure Google Sign In
@@ -153,9 +153,10 @@ class ProfileFragment : Fragment() {
         if (user != null) {
            binding.registration.text = user.displayName
             Glide.with(binding.avatar).load(user.photoUrl).circleCrop().into(binding.avatar)
-            user.photoUrl
 
-            binding.regBtn.visibility = View.GONE
+
+            binding.googleLoginBtn.visibility = View.GONE
+            binding.twitterLoginBtn.visibility = View.GONE
             binding.avatar.visibility = View.VISIBLE
 
         } else {
