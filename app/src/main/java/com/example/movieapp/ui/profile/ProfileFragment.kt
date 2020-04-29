@@ -3,13 +3,12 @@ package com.example.movieapp.ui.profile
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.movieapp.MainActivity
-
+import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ProfileFragmentBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -34,7 +33,8 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-         binding = ProfileFragmentBinding.inflate(inflater)
+
+        binding = ProfileFragmentBinding.inflate(inflater)
 
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
@@ -59,7 +59,8 @@ class ProfileFragment : Fragment() {
 
         return binding.root
     }
-    public override fun onStart() {
+
+    override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
@@ -69,7 +70,7 @@ class ProfileFragment : Fragment() {
     // [END on_start_check_user]
 
     // [START onactivityresult]
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
@@ -151,7 +152,11 @@ class ProfileFragment : Fragment() {
         Log.e(TAG, "3")
         if (user != null) {
            binding.registration.text = user.displayName
+            Glide.with(binding.avatar).load(user.photoUrl).circleCrop().into(binding.avatar)
+            user.photoUrl
+
             binding.regBtn.visibility = View.GONE
+            binding.avatar.visibility = View.VISIBLE
 
         } else {
 
