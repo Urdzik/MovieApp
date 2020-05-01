@@ -108,8 +108,10 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
+    //Facebook
     implementation 'com.facebook.android:facebook-android-sdk:4.0.0'
 
+    //Twitter
     implementation 'com.twitter.sdk.android:twitter-core:3.0.0'
 
 

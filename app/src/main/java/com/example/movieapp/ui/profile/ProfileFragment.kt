@@ -150,6 +150,8 @@ class ProfileFragment : Fragment() {
             binding.twitterLoginBtn.visibility = View.GONE
             binding.avatar.visibility = View.VISIBLE
             binding.logOutBtn.visibility = View.VISIBLE
+            binding.loginWithEmail.visibility = View.GONE
+            binding.loginWithPhone.visibility = View.GONE
 
         } else {
             binding.registration.text = "Registration"
@@ -157,6 +159,8 @@ class ProfileFragment : Fragment() {
             binding.twitterLoginBtn.visibility = View.VISIBLE
             binding.avatar.visibility = View.GONE
             binding.logOutBtn.visibility = View.GONE
+            binding.loginWithEmail.visibility = View.VISIBLE
+            binding.loginWithPhone.visibility = View.VISIBLE
         }
     }
 

@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="@+id/twitter_login_btn"
             app:layout_constraintStart_toStartOf="@+id/twitter_login_btn"
             app:layout_constraintTop_toBottomOf="@+id/registration"
-            app:layout_constraintVertical_bias="0.65" />
+            app:layout_constraintVertical_bias="0.49" />
 
 <!--        <com.facebook.login.widget.LoginButton-->
 <!--            android:id="@+id/loginButton"-->
@@ -59,6 +59,87 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/google_login_btn" />
+
+
+        <androidx.cardview.widget.CardView
+
+            android:id="@+id/login_with_email"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:background="#F44336"
+            android:backgroundTint="#F44336"
+            app:cardBackgroundColor="#F44336"
+            app:layout_constraintEnd_toEndOf="@+id/twitter_login_btn"
+            app:layout_constraintStart_toStartOf="@+id/twitter_login_btn"
+            app:layout_constraintTop_toBottomOf="@+id/twitter_login_btn">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_email_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:text="Login with email"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/login_with_phone"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:background="#10E381"
+            android:backgroundTint="#10E381"
+            app:cardBackgroundColor="#10E381"
+            app:layout_constraintEnd_toEndOf="@+id/twitter_login_btn"
+            app:layout_constraintStart_toStartOf="@+id/twitter_login_btn"
+            app:layout_constraintTop_toBottomOf="@+id/login_with_email">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_local_phone_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:text="Login with phone"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
 
         <Button
             android:id="@+id/log_out_btn"
