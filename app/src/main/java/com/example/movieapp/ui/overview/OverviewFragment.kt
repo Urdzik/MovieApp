@@ -1,6 +1,5 @@
 package com.example.movieapp.ui.overview
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
-import com.example.movieapp.ui.detail.DetailFragment
 import com.example.movieapp.utils.adapters.*
 import com.google.android.material.snackbar.Snackbar
 import com.yarolegovich.discretescrollview.transform.Pivot
@@ -30,7 +28,7 @@ class OverviewFragment : Fragment() {
     lateinit var binding: OverviewFragmentBinding
 
     lateinit var recViewingMovieAdapter: RecViewingMovieAdapter
-    lateinit var topRatedMovieAdapter: TopRatedMovieAdapter
+    lateinit var topRatedMovieAdapter: MovieAdapter
     lateinit var popularMovieAdapter: PopularMovieAdapter
     lateinit var nowPlayingMovieAdapter: NowPlayingMovieAdapter
 
@@ -136,11 +134,11 @@ class OverviewFragment : Fragment() {
 
     //Work with top rated RV
     private fun topRatedRvViewing() {
-        binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener {
+        binding.recyclerTopRated.adapter = MovieAdapter(MovieListener {
             viewModel.displayPropertyDetails(it)
         })
 
-        topRatedMovieAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
+        topRatedMovieAdapter = binding.recyclerTopRated.adapter as MovieAdapter
 
         viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
             topRatedMovieAdapter.addHeaderAndSubmitList(it)

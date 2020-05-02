@@ -43,7 +43,6 @@ class RecViewingMovieAdapter(private val onClickListener: ClickListener) :
                 )
                 .into(binding.posterImage)
             binding.movie = movie
-
         }
     }
 

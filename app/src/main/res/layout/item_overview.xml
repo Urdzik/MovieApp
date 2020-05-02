@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.example.movieapp.ui.overview.OverviewViewModel" />
-    </data>
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/top_rated_text"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -25,20 +19,24 @@
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:playlists="@{viewModel.topRatedPlayList}"
-            app:vis="@{safeUnbox(viewModel.eventNetworkError)}" />
+            app:layout_constraintTop_toTopOf="parent"/>
+<!--            app:playlists="@{viewModel.topRatedPlayList}"-->
+<!--            app:vis="@{safeUnbox(viewModel.eventNetworkError)}" />-->
+
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_top_rated"
+            android:id="@+id/recycler"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="@+id/top_rated_text"
-            app:layout_constraintTop_toBottomOf="@+id/top_rated_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
             tools:listitem="@layout/item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
