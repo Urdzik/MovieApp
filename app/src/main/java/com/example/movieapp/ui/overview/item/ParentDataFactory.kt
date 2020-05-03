@@ -1,9 +1,12 @@
 package com.example.movieapp.ui.overview.item
 
+import com.example.movieapp.model.network.data.ParentModel
+import com.example.movieapp.model.network.data.SmallMovieList
+
 object ParentDataFactory {
 
     private val titleList = arrayListOf("Топ рейтинг", "Популярное", "Сейчас в кино")
-    val categoryList = arrayListOf("top_rated", "popular", "now_playing")
+    private val categoryList = arrayListOf("top_rated", "popular", "now_playing")
 
     fun title(): String {
         return titleList[0]
@@ -14,8 +17,17 @@ object ParentDataFactory {
         return categoryList[0]
     }
 
-    fun getParent(){
+    private fun children(): List<SmallMovieList> {
+        return MovieDataFactory.getChildren(category())
+    }
 
+    fun getParent(): List<ParentModel> {
+        val parents = mutableListOf<ParentModel>()
+        repeat(titleList.size) {
+            val parent = ParentModel(title(), children())
+            parents.add(parent)
+        }
+        return parents
     }
 
 
