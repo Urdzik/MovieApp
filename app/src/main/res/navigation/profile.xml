@@ -9,5 +9,55 @@
         android:id="@+id/profileFragment"
         android:name="com.example.movieapp.ui.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginWithEmailFragment"
+            app:destination="@id/loginWithEmailFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loginWithPhoneFragment"
+            app:destination="@id/loginWithPhoneFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_userFragment"
+            app:destination="@id/userFragment"
+            app:popUpToInclusive="?android:attr/windowOverscan" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginWithEmailFragment"
+        android:name="com.example.movieapp.ui.profile.login.login_with_email.LoginWithEmailFragment"
+        android:label="login_with_email_fragment"
+        tools:layout="@layout/login_with_email_fragment" >
+        <action
+            android:id="@+id/action_loginWithEmailFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginWithPhoneFragment"
+        android:name="com.example.movieapp.ui.profile.login.login_with_phone.LoginWithPhoneFragment"
+        android:label="login_with_phone_fragment"
+        tools:layout="@layout/login_with_phone_fragment" >
+        <action
+            android:id="@+id/action_loginWithPhoneFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.movieapp.ui.profile.user.UserFragment"
+        android:label="user_fragment"
+        tools:layout="@layout/user_fragment" >
+        <action
+            android:id="@+id/action_userFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <argument
+            android:name="thisUser"
+            app:argType="com.google.firebase.auth.FirebaseUser" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.movieapp.ui.profile.user.settings.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

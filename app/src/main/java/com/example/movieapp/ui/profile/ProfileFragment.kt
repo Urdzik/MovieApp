@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ProfileFragmentBinding
+import com.example.movieapp.ui.profile.user.UserFragmentDirections
 import com.example.movieapp.utils.LOGIN_TAG
 import com.example.movieapp.utils.RC_SIGN_IN
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -65,7 +67,6 @@ class ProfileFragment : Fragment() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         updateUI(currentUser)
-        Log.e("TAG", "3")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -137,30 +138,9 @@ class ProfileFragment : Fragment() {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-
-           binding.registration.text = user.displayName
-
-            Glide.with(binding.avatar)
-                .load(user.photoUrl)
-                .circleCrop()
-                .into(binding.avatar)
-
-
-            binding.googleLoginBtn.visibility = View.GONE
-            binding.twitterLoginBtn.visibility = View.GONE
-            binding.avatar.visibility = View.VISIBLE
-            binding.logOutBtn.visibility = View.VISIBLE
-            binding.loginWithEmail.visibility = View.GONE
-            binding.loginWithPhone.visibility = View.GONE
-
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToUserFragment(user))
         } else {
-            binding.registration.text = "Registration"
-            binding.googleLoginBtn.visibility = View.VISIBLE
-            binding.twitterLoginBtn.visibility = View.VISIBLE
-            binding.avatar.visibility = View.GONE
-            binding.logOutBtn.visibility = View.GONE
-            binding.loginWithEmail.visibility = View.VISIBLE
-            binding.loginWithPhone.visibility = View.VISIBLE
+
         }
     }
 
