@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.movieapp.ui.profile.ProfileFragment"
-        android:label="Profile"
+        android:label="Login"
         tools:layout="@layout/profile_fragment" >
         <action
             android:id="@+id/action_profileFragment_to_loginWithEmailFragment"
@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/userFragment"
         android:name="com.example.movieapp.ui.profile.user.UserFragment"
-        android:label="user_fragment"
+        android:label="User"
         tools:layout="@layout/user_fragment" >
         <action
             android:id="@+id/action_userFragment_to_settingsFragment"
@@ -54,7 +54,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.movieapp.ui.profile.user.settings.SettingsFragment"
-        android:label="settings_fragment"
+        android:label="Setting"
         tools:layout="@layout/settings_fragment" >
         <action
             android:id="@+id/action_settingsFragment_to_profileFragment"
