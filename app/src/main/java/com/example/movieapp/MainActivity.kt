@@ -11,6 +11,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.movieapp.ui.profile.user.UserFragment
 import com.example.movieapp.utils.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(main_toolbar)
 
         //Function for Light-Dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
@@ -58,8 +58,12 @@ class MainActivity : AppCompatActivity() {
         )
 
         // Whenever the selected controller changes, setup the action bar.
+
         controller.observe(this, Observer { navController ->
-            setupActionBarWithNavController(navController)
+
+//                setupActionBarWithNavController(navController)
+
+
         })
         currentNavController = controller
     }

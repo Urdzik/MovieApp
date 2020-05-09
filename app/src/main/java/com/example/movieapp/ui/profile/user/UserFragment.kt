@@ -4,8 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import com.example.movieapp.MainActivity
+import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.UserFragmentBinding
@@ -30,6 +36,9 @@ class UserFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
 
         val args = UserFragmentArgs.fromBundle(requireArguments()).thisUser
+
+
+
 
         viewModel.getUser(args)
 

@@ -2,9 +2,11 @@ package com.example.movieapp.ui.overview
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +16,7 @@ import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
 import com.example.movieapp.ui.detail.DetailFragment
+import com.example.movieapp.utils.LOGIN_TAG
 import com.example.movieapp.utils.adapters.*
 import com.google.android.material.snackbar.Snackbar
 import com.yarolegovich.discretescrollview.transform.Pivot
@@ -44,6 +47,9 @@ class OverviewFragment : Fragment() {
         App.appComponent.inject(this)
         binding = OverviewFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
+
+
+
 
         return binding.root
     }

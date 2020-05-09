@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ProfileFragmentBinding
@@ -53,6 +54,8 @@ class ProfileFragment : Fragment() {
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(binding.root.context, gso)
+
+
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()

@@ -19,7 +19,9 @@
         <action
             android:id="@+id/action_profileFragment_to_userFragment"
             app:destination="@id/userFragment"
-            app:popUpToInclusive="?android:attr/windowOverscan" />
+            app:launchSingleTop="true"
+            app:popUpTo="@id/userFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loginWithEmailFragment"
