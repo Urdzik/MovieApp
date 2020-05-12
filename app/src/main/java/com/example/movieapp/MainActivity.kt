@@ -2,8 +2,10 @@ package com.example.movieapp
 
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(main_toolbar)
 
         //Function for Light-Dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
@@ -61,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         controller.observe(this, Observer { navController ->
 
-//                setupActionBarWithNavController(navController)
+                setupActionBarWithNavController(navController)
 
 
         })
@@ -71,6 +74,8 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
     }
+
+
 }
 
 

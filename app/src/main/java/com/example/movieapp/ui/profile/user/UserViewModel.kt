@@ -14,8 +14,19 @@ class UserViewModel @Inject constructor() : ViewModel(){
     val currentUser: LiveData<FirebaseUser>
         get() = _currentUser
 
+    private var _buttonOfSettings = MutableLiveData(false)
+    val buttonOfSettings: LiveData<Boolean>
+        get() = _buttonOfSettings
+
     fun getUser(user: FirebaseUser){
         _currentUser.value = user
+    }
+
+    fun clickToSettingsButton(){
+        _buttonOfSettings.value = true
+    }
+    fun finishedToClickOfSettingsButton(){
+        _buttonOfSettings.value = false
     }
 
 }

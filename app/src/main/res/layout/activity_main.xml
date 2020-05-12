@@ -7,7 +7,16 @@
     android:orientation="vertical"
     tools:context="com.example.movieapp.MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#00000000"
+        android:theme="@style/Theme.AppCompat.DayNight"
+        app:layout_constraintStart_toStartOf="parent"
 
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="?attr/actionMenuTextColor" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_container"

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.movieapp.R
+import com.example.movieapp.databinding.SettingsFragmentBinding
 
 class SettingsFragment : Fragment() {
 
@@ -18,7 +19,13 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {viewModel = ViewModelProviders.of(this).get(SettingsViewModel::class.java)
-        return inflater.inflate(R.layout.settings_fragment, container, false)
+        val binding = SettingsFragmentBinding.inflate(inflater)
+
+        val args = SettingsFragmentArgs.fromBundle(requireArguments()).thisUser
+        binding.
+
+        binding.viewModel = viewModel
+        return binding.root
     }
 
 

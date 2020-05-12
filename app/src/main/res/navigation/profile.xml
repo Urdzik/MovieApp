@@ -61,5 +61,8 @@
         <action
             android:id="@+id/action_settingsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <argument
+            android:name="thisUser"
+            app:argType="com.google.firebase.auth.FirebaseUser" />
     </fragment>
 </navigation>

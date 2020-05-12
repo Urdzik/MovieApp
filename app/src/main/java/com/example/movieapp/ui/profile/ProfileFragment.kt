@@ -9,11 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
-import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ProfileFragmentBinding
-import com.example.movieapp.ui.profile.user.UserFragmentDirections
 import com.example.movieapp.utils.LOGIN_TAG
 import com.example.movieapp.utils.RC_SIGN_IN
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -45,7 +42,6 @@ class ProfileFragment : Fragment() {
 
         binding.googleLoginBtn.setOnClickListener{ signIn() }
 
-        binding.logOutBtn.setOnClickListener { revokeAccess()}
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -143,7 +139,7 @@ class ProfileFragment : Fragment() {
         if (user != null) {
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToUserFragment(user))
         } else {
-
+        // TODO Add function
         }
     }
 
