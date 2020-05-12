@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.news
+package com.example.movieapp.ui.news.main_news
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.model.network.data.SmallMovieList
 import com.example.movieapp.model.network.news.NewsSource
-import com.example.movieapp.model.network.news.data.Result
 import com.example.movieapp.utils.*
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.launch

@@ -1,6 +1,5 @@
-package com.example.movieapp.ui.news
+package com.example.movieapp.ui.news.general_news
 
-import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,10 +9,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 
-import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.GeneralNewsFragmentBinding
+import com.example.movieapp.ui.news.GeneralNewsFragmentDirections
 import com.example.movieapp.utils.adapters.SeeAllListener
 import com.example.movieapp.utils.adapters.TvNewsAdapter
 import com.example.movieapp.utils.adapters.WeeklyGeneralNewsAdapter
@@ -25,7 +24,8 @@ import javax.inject.Inject
 class GeneralNewsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = GeneralNewsFragment()
+        fun newInstance() =
+            GeneralNewsFragment()
     }
 
     @Inject

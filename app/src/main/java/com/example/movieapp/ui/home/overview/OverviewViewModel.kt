@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.overview
+package com.example.movieapp.ui.home.overview
 
 import android.util.Log
 import android.view.View

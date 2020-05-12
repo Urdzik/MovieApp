@@ -1,6 +1,5 @@
-package com.example.movieapp.ui.overview
+package com.example.movieapp.ui.home.overview
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,7 @@ import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
-import com.example.movieapp.ui.detail.DetailFragment
+import com.example.movieapp.ui.home.OverviewFragmentDirections
 import com.example.movieapp.utils.adapters.*
 import com.google.android.material.snackbar.Snackbar
 import com.yarolegovich.discretescrollview.transform.Pivot

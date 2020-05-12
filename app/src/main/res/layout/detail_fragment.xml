@@ -13,7 +13,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailFragment">
+    tools:context=".ui.home.detail.DetailFragment">
 
     <ImageView
         android:id="@+id/imageView"

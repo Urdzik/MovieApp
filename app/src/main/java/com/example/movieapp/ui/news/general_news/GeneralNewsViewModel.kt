@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.news
+package com.example.movieapp.ui.news.general_news
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
