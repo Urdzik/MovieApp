@@ -12,7 +12,6 @@ import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
-import com.example.movieapp.ui.home.OverviewFragmentDirections
 import com.example.movieapp.utils.adapters.*
 import com.google.android.material.snackbar.Snackbar
 import com.yarolegovich.discretescrollview.transform.Pivot

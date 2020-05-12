@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.GeneralNewsFragmentBinding
-import com.example.movieapp.ui.news.GeneralNewsFragmentDirections
+
 import com.example.movieapp.utils.adapters.SeeAllListener
 import com.example.movieapp.utils.adapters.TvNewsAdapter
 import com.example.movieapp.utils.adapters.WeeklyGeneralNewsAdapter
