@@ -15,7 +15,7 @@
         tools:context=".ui.profile.user.UserFragment">
 
         <Button
-            android:id=""
+            android:id="@+id/btn_sing_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="sing out"

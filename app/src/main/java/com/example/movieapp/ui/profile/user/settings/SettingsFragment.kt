@@ -1,13 +1,11 @@
 package com.example.movieapp.ui.profile.user.settings
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.example.movieapp.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.example.movieapp.databinding.SettingsFragmentBinding
 
 class SettingsFragment : Fragment() {
@@ -21,8 +19,8 @@ class SettingsFragment : Fragment() {
     ): View? {viewModel = ViewModelProviders.of(this).get(SettingsViewModel::class.java)
         val binding = SettingsFragmentBinding.inflate(inflater)
 
-        val args = SettingsFragmentArgs.fromBundle(requireArguments()).thisUser
-        binding.
+        val args = SettingsFragmentArgs.fromBundle(requireArguments())
+
 
         binding.viewModel = viewModel
         return binding.root

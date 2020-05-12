@@ -1,6 +1,7 @@
 package com.example.movieapp.ui.profile.user
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
@@ -38,14 +39,13 @@ class UserFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
 
-        val args = UserFragmentArgs.fromBundle(requireArguments()).thisUser
+        val args = UserFragmentArgs.fromBundle(requireArguments())
 
         viewModel.buttonOfSettings.observe(viewLifecycleOwner, Observer {
             if (it){
-                findNavController().navigate(UserFragmentDirections.actionUserFragmentToSettingsFragment(args))
+                findNavController().navigate(UserFragmentDirections.actionUserFragmentToSettingsFragment(args.thisUser))
                 viewModel.finishedToClickOfSettingsButton()
             }
-
 
         })
 
@@ -53,7 +53,8 @@ class UserFragment : Fragment() {
 
 
 
-        viewModel.getUser(args)
+        viewModel.getUser(args.thisUser)
+        Log.i("TAG", args.thisUser.photoUrl.toString())
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

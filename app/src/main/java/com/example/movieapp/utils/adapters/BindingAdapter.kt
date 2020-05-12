@@ -1,5 +1,6 @@
 package com.example.movieapp.utils.adapters
 
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,6 +19,20 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 
     Glide.with(imageView.context)
         .load("$IMAGE_BASE_PATH$imgUrl")
+        .apply(
+            RequestOptions()
+                .placeholder(R.drawable.loading_animation)
+                .error(R.drawable.ic_broken_image)
+        )
+        .into(imageView)
+}
+
+@BindingAdapter("avatarURL")
+fun bindAvatar(imageView: ImageView, imgUrl: Uri?) {
+
+    Glide.with(imageView.context)
+        .load(imgUrl)
+        .circleCrop()
         .apply(
             RequestOptions()
                 .placeholder(R.drawable.loading_animation)

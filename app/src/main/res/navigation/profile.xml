@@ -52,6 +52,8 @@
         <argument
             android:name="thisUser"
             app:argType="com.google.firebase.auth.FirebaseUser" />
+
+
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -63,6 +65,7 @@
             app:destination="@id/profileFragment" />
         <argument
             android:name="thisUser"
-            app:argType="com.google.firebase.auth.FirebaseUser" />
+            app:argType="com.google.firebase.auth.FirebaseUser"/>
+
     </fragment>
 </navigation>
