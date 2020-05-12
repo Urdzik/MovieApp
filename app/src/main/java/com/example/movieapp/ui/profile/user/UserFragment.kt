@@ -54,7 +54,6 @@ class UserFragment : Fragment() {
 
 
         viewModel.getUser(args.thisUser)
-        Log.i("TAG", args.thisUser.photoUrl.toString())
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
