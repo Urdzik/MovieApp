@@ -8,5 +8,5 @@
         android:id="@+id/searchFragment"
         android:name="com.example.movieapp.ui.search.search.SearchFragment"
         android:label="SearchFragment"
-        tools:layout="@layout/search_fragment"/>
+        tools:layout="@layout/main_search_fragment"/>
 </navigation>
