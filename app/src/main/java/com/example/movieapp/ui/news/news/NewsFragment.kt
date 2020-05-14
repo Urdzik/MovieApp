@@ -70,7 +70,7 @@ class NewsFragment : Fragment() {
 
         viewModel.redirectToAllNewsLiveData.observe(viewLifecycleOwner, Observer {
             it?.let {
-                findNavController().navigate(GeneralNewsFragmentDirections.actionGeneralNewsFragmentToNewsFragment())
+                findNavController().navigate(NewsFragmentDirections.actionGeneralNewsFragmentToNewsFragment())
                 viewModel.redirectComplete()
             }
         })

@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.ui.home.detail.DetailViewModel
 import com.example.movieapp.ui.home.list.ListViewModel
 import com.example.movieapp.ui.home.overview.OverviewViewModel
+import com.example.movieapp.ui.news.detail_news.DetailNewsViewModel
+import com.example.movieapp.ui.news.news.NewsViewModel
 import com.example.movieapp.utils.ViewModelKey
 import dagger.Binds
 import dagger.Module
@@ -35,8 +37,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(NewsViewModel::class)
-    internal abstract fun bindGeneralNewsViewModel(viewModel: com.example.movieapp.ui.news.news.NewsViewModel): ViewModel
+    @ViewModelKey(DetailNewsViewModel::class)
+    internal abstract fun bindDetailNewsViewModel(viewModel: DetailNewsViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
