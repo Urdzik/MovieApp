@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.news.general_news
+package com.example.movieapp.ui.news.news
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import com.example.movieapp.utils.ioReturnTask
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class GeneralNewsViewModel @Inject constructor(private val newsSource: NewsSource) : ViewModel() {
+class NewsViewModel @Inject constructor(private val newsSource: NewsSource) : ViewModel() {
 
     val weeklyNewsLiveData: LiveData<List<SmallMovieList>>
         get() = _weeklyNewsLiveData

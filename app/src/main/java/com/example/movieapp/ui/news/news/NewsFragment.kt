@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.news.general_news
+package com.example.movieapp.ui.news.news
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -11,36 +11,37 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
-import com.example.movieapp.databinding.GeneralNewsFragmentBinding
+
+import com.example.movieapp.databinding.NewsFragmentBinding
 
 import com.example.movieapp.utils.adapters.SeeAllListener
 import com.example.movieapp.utils.adapters.TvNewsAdapter
 import com.example.movieapp.utils.adapters.WeeklyGeneralNewsAdapter
 import com.example.movieapp.utils.hide
 import com.example.movieapp.utils.show
-import kotlinx.android.synthetic.main.general_news_fragment.*
+import kotlinx.android.synthetic.main.news_fragment.*
 import javax.inject.Inject
 
-class GeneralNewsFragment : Fragment() {
+class NewsFragment : Fragment() {
 
     companion object {
         fun newInstance() =
-            GeneralNewsFragment()
+            NewsFragment()
     }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private lateinit var viewModel: GeneralNewsViewModel
-    private lateinit var binding: GeneralNewsFragmentBinding
+    private lateinit var viewModel: NewsViewModel
+    private lateinit var binding: NewsFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         App.appComponent.inject(this)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(GeneralNewsViewModel::class.java)
-        binding = GeneralNewsFragmentBinding.inflate(inflater)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewsViewModel::class.java)
+        binding = NewsFragmentBinding.inflate(inflater)
 
         binding.lifecycleOwner = viewLifecycleOwner
 

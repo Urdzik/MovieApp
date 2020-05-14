@@ -10,7 +10,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.news.general_news.GeneralNewsFragment">
+            tools:context=".ui.news.news.NewsFragment">
 
             <com.yarolegovich.discretescrollview.DiscreteScrollView
                 android:id="@+id/recycler_weekly"
