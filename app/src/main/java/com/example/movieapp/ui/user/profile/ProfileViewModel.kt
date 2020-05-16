@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.profile
+package com.example.movieapp.ui.user.profile
 
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.lifecycle.ViewModel

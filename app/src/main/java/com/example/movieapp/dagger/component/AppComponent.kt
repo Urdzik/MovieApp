@@ -7,7 +7,6 @@ import com.example.movieapp.ui.news.GeneralNewsFragment
 import com.example.movieapp.ui.detail.DetailFragment
 import com.example.movieapp.ui.list.ListFragment
 import com.example.movieapp.ui.overview.OverviewFragment
-import com.example.movieapp.ui.profile.user.UserFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,7 +16,7 @@ interface AppComponent{
     fun inject(overviewFragment: OverviewFragment)
     fun inject(detailFragment: DetailFragment)
     fun inject(listFragment: ListFragment)
-    fun inject(generalNewsFragment: GeneralNewsFragment)
     fun inject(newsFragment: NewsFragment)
     fun inject(userFragment: UserFragment)
+    fun inject(detailNewsFragment: DetailNewsFragment)
 }

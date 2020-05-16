@@ -7,6 +7,6 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.movieapp.ui.search.SearchFragment"
-        android:label="@string/search"
+        android:label="search_fragment"
         tools:layout="@layout/search_fragment" />
 </navigation>
