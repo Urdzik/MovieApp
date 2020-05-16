@@ -2,11 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/profile"
+    android:id="@+id/user"
     app:startDestination="@id/profileFragment">
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.movieapp.ui.profile.ProfileFragment"
+        android:name="com.example.movieapp.ui.user.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/profile_fragment"/>
 </navigation>

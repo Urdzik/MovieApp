@@ -1,6 +1,5 @@
 package com.example.movieapp.ui.search
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
