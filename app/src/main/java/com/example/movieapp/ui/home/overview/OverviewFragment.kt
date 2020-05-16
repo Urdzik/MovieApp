@@ -28,7 +28,7 @@ class OverviewFragment : Fragment() {
     lateinit var binding: OverviewFragmentBinding
 
     lateinit var recViewingMovieAdapter: RecViewingMovieAdapter
-    lateinit var topRatedMovieAdapter: MovieAdapter
+    lateinit var topRatedMovieAdapter: TopRatedMovieAdapter
     lateinit var popularMovieAdapter: PopularMovieAdapter
     lateinit var nowPlayingMovieAdapter: NowPlayingMovieAdapter
 
@@ -134,11 +134,11 @@ class OverviewFragment : Fragment() {
 
     //Work with top rated RV
     private fun topRatedRvViewing() {
-        binding.recyclerTopRated.adapter = MovieAdapter(MovieListener {
+        binding.recyclerTopRated.adapter = TopRatedMovieAdapter(MovieListener {
             viewModel.displayPropertyDetails(it)
         })
 
-        topRatedMovieAdapter = binding.recyclerTopRated.adapter as MovieAdapter
+        topRatedMovieAdapter = binding.recyclerTopRated.adapter as TopRatedMovieAdapter
 
         viewModel.topRatedPlayList.observe(viewLifecycleOwner, Observer {
             topRatedMovieAdapter.addHeaderAndSubmitList(it)
