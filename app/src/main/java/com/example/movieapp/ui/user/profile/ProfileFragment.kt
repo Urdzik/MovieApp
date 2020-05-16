@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.profile
+package com.example.movieapp.ui.user.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 
-import com.example.movieapp.R
 import com.example.movieapp.databinding.ProfileFragmentBinding
 
 class ProfileFragment : Fragment() {

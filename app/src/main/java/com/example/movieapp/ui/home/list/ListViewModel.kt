@@ -1,6 +1,5 @@
-package com.example.movieapp.ui.list
+package com.example.movieapp.ui.home.list
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

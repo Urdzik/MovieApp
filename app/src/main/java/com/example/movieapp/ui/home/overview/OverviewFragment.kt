@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.overview
+package com.example.movieapp.ui.home.overview
 
 import android.os.Bundle
 import android.view.LayoutInflater
