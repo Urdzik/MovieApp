@@ -1,10 +1,8 @@
-package com.example.movieapp.ui.profile.user
+package com.example.movieapp.ui.user.user
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.model.network.SmallMovieListSource
-import com.example.movieapp.model.network.data.SmallMovieList
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 

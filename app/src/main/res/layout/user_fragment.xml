@@ -5,14 +5,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.movieapp.ui.profile.user.UserViewModel" />
+            type="com.example.movieapp.ui.user.user.UserViewModel" />
     </data>
 
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.user.UserFragment">
+    tools:context=".ui.user.user.UserFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

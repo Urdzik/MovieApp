@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.profile.user.settings
+package com.example.movieapp.ui.user.user.settings
 
 import androidx.lifecycle.ViewModel
 

@@ -5,14 +5,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.movieapp.ui.profile.user.settings.SettingsViewModel" />
+            type="com.example.movieapp.ui.user.user.settings.SettingsViewModel" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.profile.user.UserFragment">
+        tools:context=".ui.user.user.UserFragment">
 
         <Button
             android:id="@+id/btn_sing_out"

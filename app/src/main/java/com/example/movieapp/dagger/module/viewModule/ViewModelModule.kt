@@ -2,11 +2,13 @@ package com.example.movieapp.dagger.module.viewModule
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.movieapp.ui.detail.DetailViewModel
-import com.example.movieapp.ui.news.NewsViewModel
-import com.example.movieapp.ui.list.ListViewModel
-import com.example.movieapp.ui.news.GeneralNewsViewModel
-import com.example.movieapp.ui.overview.OverviewViewModel
+import com.example.movieapp.ui.home.detail.DetailViewModel
+import com.example.movieapp.ui.home.list.ListViewModel
+import com.example.movieapp.ui.home.overview.OverviewViewModel
+import com.example.movieapp.ui.news.detail_news.DetailNewsViewModel
+import com.example.movieapp.ui.news.news.NewsViewModel
+import com.example.movieapp.ui.user.user.UserViewModel
+
 import com.example.movieapp.utils.ViewModelKey
 import dagger.Binds
 import dagger.Module

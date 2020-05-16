@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ProfileFragmentBinding
+import com.example.movieapp.ui.user.profile.ProfileViewModel
 import com.example.movieapp.utils.LOGIN_TAG
 import com.example.movieapp.utils.RC_SIGN_IN
 import com.google.android.gms.auth.api.signin.GoogleSignIn

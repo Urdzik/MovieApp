@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginWithEmailFragment"
-        android:name="com.example.movieapp.ui.profile.login.login_with_email.LoginWithEmailFragment"
+        android:name="com.example.movieapp.ui.user.login.login_with_email.LoginWithEmailFragment"
         android:label="login_with_email_fragment"
         tools:layout="@layout/login_with_email_fragment" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginWithPhoneFragment"
-        android:name="com.example.movieapp.ui.profile.login.login_with_phone.LoginWithPhoneFragment"
+        android:name="com.example.movieapp.ui.user.login.login_with_phone.LoginWithPhoneFragment"
         android:label="login_with_phone_fragment"
         tools:layout="@layout/login_with_phone_fragment" >
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.example.movieapp.ui.profile.user.UserFragment"
+        android:name="com.example.movieapp.ui.user.user.UserFragment"
         android:label="User"
         tools:layout="@layout/user_fragment" >
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.movieapp.ui.profile.user.settings.SettingsFragment"
+        android:name="com.example.movieapp.ui.user.user.settings.SettingsFragment"
         android:label="Setting"
         tools:layout="@layout/settings_fragment" >
         <action
