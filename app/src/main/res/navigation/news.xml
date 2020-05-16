@@ -22,5 +22,5 @@
         android:id="@+id/newsFragment"
         android:name="com.example.movieapp.ui.news.detail_news.DetailNewsFragment"
         android:label="NewsFragment"
-        tools:layout="nee"/>
+        tools:layout="@layout/detail_news_fragment"/>
 </navigation>

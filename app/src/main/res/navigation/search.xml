@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/search"
     app:startDestination="@id/searchFragment">
-    <keep_state_fragment
+    <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.movieapp.ui.search.search.SearchFragment"
+        android:name="com.example.movieapp.ui.search.SearchFragment"
         android:label="search_fragment"
         tools:layout="@layout/search_fragment" />
 </navigation>

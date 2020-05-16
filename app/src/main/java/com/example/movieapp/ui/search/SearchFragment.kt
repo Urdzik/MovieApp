@@ -1,18 +1,21 @@
 package com.example.movieapp.ui.search
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+
 import com.example.movieapp.R
 
-class MainSearchFragment : Fragment(){
+class SearchFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.main_search_fragment, container, false)
+        return inflater.inflate(R.layout.search_fragment, container, false)
     }
+
+
 }
