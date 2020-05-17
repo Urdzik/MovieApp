@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.movieapp.R
+import com.example.movieapp.dagger.App
+import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.ProfileFragmentBinding
 import com.example.movieapp.ui.user.profile.ProfileViewModel
 import com.example.movieapp.utils.LOGIN_TAG
@@ -23,9 +26,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import javax.inject.Inject
 
 class ProfileFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: ProfileViewModel
     private lateinit var binding: ProfileFragmentBinding
 
@@ -36,13 +42,12 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        App.appComponent.inject(this)
         binding = ProfileFragmentBinding.inflate(inflater)
 
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
 
         binding.googleLoginBtn.setOnClickListener{ signIn() }
-
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -52,7 +57,12 @@ class ProfileFragment : Fragment() {
 
         googleSignInClient = GoogleSignIn.getClient(binding.root.context, gso)
 
+        viewModel.auth.observe(viewLifecycleOwner, Observer { auth ->
 
+            googleSignInClient.revokeAccess().addOnCompleteListener() {
+                updateUI(null)
+            }
+        })
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
@@ -139,8 +149,9 @@ class ProfileFragment : Fragment() {
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToUserFragment(user))
+            viewModel.getUserAuth(auth)
         } else {
-        // TODO Add function
+
         }
     }
 

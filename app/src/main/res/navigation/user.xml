@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.movieapp.ui.user.user.settings.SettingsFragment"
+        android:name="com.example.movieapp.ui.user.profile.settings.SettingsFragment"
         android:label="Setting"
         tools:layout="@layout/settings_fragment" >
         <action
