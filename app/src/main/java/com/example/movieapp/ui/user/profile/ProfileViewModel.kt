@@ -1,26 +1,25 @@
 package com.example.movieapp.ui.user.profile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.movieapp.utils.LOGIN_TAG
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 
-class ProfileViewModel @Inject constructor() : ViewModel() {
+class ProfileViewModel: ViewModel() {
 
-    private var _auth = MutableLiveData<FirebaseAuth>()
-    val auth: LiveData<FirebaseAuth>
-        get() = _auth
+    private var _currentUser = MutableLiveData<FirebaseUser>()
+    val currentUser: LiveData<FirebaseUser>
+        get() = _currentUser
 
-    fun getUserAuth(thisUserAuth: FirebaseAuth) {
-        _auth.value = thisUserAuth
+
+    fun getUser(user: FirebaseUser?) {
+        _currentUser.value = user
+
     }
 
-    fun revokeAccess() {
-        // Firebase sign out
-        auth.value?.signOut()
-
-        _auth.value = null
-    }
 
 }
