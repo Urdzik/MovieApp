@@ -44,10 +44,10 @@ abstract class ViewModelModule {
     internal abstract fun bindDetailNewsViewModel(viewModel: DetailNewsViewModel): ViewModel
 
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(ProfileViewModel::class)
-//    internal abstract fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    internal abstract fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

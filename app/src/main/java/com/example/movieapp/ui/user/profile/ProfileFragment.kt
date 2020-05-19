@@ -7,8 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.movieapp.R
+import com.example.movieapp.dagger.App
+import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.ProfileFragmentBinding
 import com.example.movieapp.utils.LOGIN_TAG
 import com.example.movieapp.utils.RC_SIGN_IN
@@ -21,9 +25,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import javax.inject.Inject
 
 class ProfileFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: ProfileViewModel
     private lateinit var binding: ProfileFragmentBinding
 
@@ -34,13 +41,13 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        App.appComponent.inject(this)
 
         binding = ProfileFragmentBinding.inflate(inflater)
 
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
 
         binding.googleLoginBtn.setOnClickListener{ signIn() }
-        binding.logOut.setOnClickListener { signOut() }
 
 
         // Configure Google Sign In
@@ -50,11 +57,19 @@ class ProfileFragment : Fragment() {
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(binding.root.context, gso)
-
+        viewModel.getGoogleSignInClient(googleSignInClient)
 
 
         // Initialize Firebase Auth
+
         auth = FirebaseAuth.getInstance()
+
+        binding.settingsButton.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
+        }
+
+
+
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -65,10 +80,17 @@ class ProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
+        viewModel.test.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                updateUI(null)
+
+            } else {
+                val currentUser = auth.currentUser
+                updateUI(currentUser)
+            }
+        })
 
 
-        updateUI(currentUser)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -115,6 +137,7 @@ class ProfileFragment : Fragment() {
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+        viewModel.testFalse()
     }
 
 
@@ -128,20 +151,22 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun revokeAccess() {
-        // Firebase sign out
-        auth.signOut()
+//    private fun revokeAccess() {
+//        // Firebase sign out
+//        auth.signOut()
+//
+//        // Google revoke access
+//        googleSignInClient.revokeAccess().addOnCompleteListener() {
+//            updateUI(null)
+//        }
+//    }
 
-        // Google revoke access
-        googleSignInClient.revokeAccess().addOnCompleteListener() {
-            updateUI(null)
-        }
-    }
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
 
             viewModel.getUser(user)
+            viewModel.getAuthUser(auth)
 
             binding.userFragment.visibility = View.VISIBLE
             binding.logOut.visibility = View.VISIBLE
