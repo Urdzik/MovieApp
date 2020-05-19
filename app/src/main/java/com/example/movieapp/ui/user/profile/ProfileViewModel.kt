@@ -9,6 +9,9 @@ import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor() : ViewModel() {
+    init {
+        println("Create viewMode")
+    }
 
     private var _currentUser = MutableLiveData<FirebaseUser>()
     val currentUser: LiveData<FirebaseUser>

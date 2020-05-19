@@ -6,8 +6,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 @Suppress("UNCHECKED_CAST")
-class ViewModelFactory @Inject constructor(private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>) :
-    ViewModelProvider.Factory {
+class ViewModelFactory @Inject constructor(private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>) : ViewModelProvider.Factory {
     private val usedViewModelMap = HashMap<Class<out ViewModel>, ViewModel>()
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

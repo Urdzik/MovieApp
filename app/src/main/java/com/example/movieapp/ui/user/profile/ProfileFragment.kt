@@ -83,7 +83,6 @@ class ProfileFragment : Fragment() {
         viewModel.test.observe(viewLifecycleOwner, Observer {
             if (it) {
                 updateUI(null)
-
             } else {
                 val currentUser = auth.currentUser
                 updateUI(currentUser)
@@ -169,11 +168,9 @@ class ProfileFragment : Fragment() {
             viewModel.getAuthUser(auth)
 
             binding.userFragment.visibility = View.VISIBLE
-            binding.logOut.visibility = View.VISIBLE
             binding.googleLoginBtn.visibility = View.GONE
         } else {
             binding.googleLoginBtn.visibility = View.VISIBLE
-            binding.logOut.visibility = View.GONE
             binding.userFragment.visibility = View.GONE
             Log.e("TAG", "tag")
         }
