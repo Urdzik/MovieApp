@@ -7,6 +7,14 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.movieapp.ui.user.profile.ProfileFragment"
-        android:label="ProfileFragment"
-        tools:layout="@layout/profile_fragment"/>
+        android:label="Login"
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.movieapp.ui.user.profile.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

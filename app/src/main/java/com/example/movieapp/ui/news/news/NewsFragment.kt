@@ -1,12 +1,12 @@
 package com.example.movieapp.ui.news.news
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
 import com.example.movieapp.dagger.App
@@ -40,7 +40,7 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         App.appComponent.inject(this)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewsViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(NewsViewModel::class.java)
         binding = NewsFragmentBinding.inflate(inflater)
 
         binding.lifecycleOwner = viewLifecycleOwner

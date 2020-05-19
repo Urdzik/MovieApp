@@ -7,6 +7,9 @@ import com.example.movieapp.ui.home.list.ListViewModel
 import com.example.movieapp.ui.home.overview.OverviewViewModel
 import com.example.movieapp.ui.news.detail_news.DetailNewsViewModel
 import com.example.movieapp.ui.news.news.NewsViewModel
+import com.example.movieapp.ui.user.profile.ProfileViewModel
+
+
 import com.example.movieapp.utils.ViewModelKey
 import dagger.Binds
 import dagger.Module
@@ -39,6 +42,12 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(DetailNewsViewModel::class)
     internal abstract fun bindDetailNewsViewModel(viewModel: DetailNewsViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    internal abstract fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
