@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
@@ -31,7 +31,8 @@ class ProfileFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var viewModel: ProfileViewModel
+
+   private val viewModel: ProfileViewModel by navGraphViewModels(R.id.user) { viewModelFactory }
     private lateinit var binding: ProfileFragmentBinding
 
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -42,12 +43,8 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         App.appComponent.inject(this)
-
         binding = ProfileFragmentBinding.inflate(inflater)
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
-
-        binding.googleLoginBtn.setOnClickListener{ signIn() }
 
 
         // Configure Google Sign In
@@ -57,18 +54,13 @@ class ProfileFragment : Fragment() {
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(binding.root.context, gso)
-        viewModel.getGoogleSignInClient(googleSignInClient)
-
-
         // Initialize Firebase Auth
 
         auth = FirebaseAuth.getInstance()
 
-        binding.settingsButton.setOnClickListener {
-            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
-        }
+        binding.settingsButton.setOnClickListener { findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment()) }
 
-
+        binding.googleLoginBtn.setOnClickListener{ signIn() }
 
 
         binding.viewModel = viewModel

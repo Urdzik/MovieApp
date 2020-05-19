@@ -50,5 +50,10 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
         test.value = false
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        println("Finish")
+    }
+
 
 }
