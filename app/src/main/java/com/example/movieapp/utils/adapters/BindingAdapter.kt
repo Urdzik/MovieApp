@@ -1,5 +1,6 @@
 package com.example.movieapp.utils.adapters
 
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,6 +12,7 @@ import com.example.movieapp.R
 import com.example.movieapp.model.network.data.Genres
 import com.example.movieapp.model.network.data.SmallMovieList
 import com.example.movieapp.utils.IMAGE_BASE_PATH
+import com.google.firebase.auth.FirebaseUser
 
 //Binding adapter used to display images from URL using Glide
 @BindingAdapter("imageUrl")
@@ -18,6 +20,20 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 
     Glide.with(imageView.context)
         .load("$IMAGE_BASE_PATH$imgUrl")
+        .apply(
+            RequestOptions()
+                .placeholder(R.drawable.loading_animation)
+                .error(R.drawable.ic_broken_image)
+        )
+        .into(imageView)
+}
+
+@BindingAdapter("avaURL")
+fun bindAva(imageView: ImageView, imgUrl: Uri?) {
+
+    Glide.with(imageView.context)
+        .load(imgUrl)
+        .circleCrop()
         .apply(
             RequestOptions()
                 .placeholder(R.drawable.loading_animation)
@@ -43,6 +59,7 @@ fun vis(view: View, isNetWorkError: Boolean, playlist: Any?) {
         view.visibility = View.VISIBLE
     }
 }
+
 
 
 

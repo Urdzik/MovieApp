@@ -7,6 +7,7 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movieapp.MainActivity
 import com.example.movieapp.R
+
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
@@ -25,6 +26,6 @@ class SplashActivity : AppCompatActivity() {
         Handler().postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, 1500L)
+        }, 1000L)
     }
 }

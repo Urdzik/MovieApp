@@ -7,8 +7,9 @@
 
     <fragment
         android:id="@+id/generalNewsFragment"
-        android:name="com.example.movieapp.ui.news.GeneralNewsFragment"
-        android:label="GeneralNewsFragment">
+        android:name="com.example.movieapp.ui.news.news.NewsFragment"
+        android:label="GeneralNewsFragment"
+        tools:layout="@layout/news_fragment">
         <action
             android:id="@+id/action_generalNewsFragment_to_newsFragment"
             app:destination="@id/newsFragment"
@@ -19,6 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.example.movieapp.ui.news.NewsFragment"
-        android:label="NewsFragment" />
+        android:name="com.example.movieapp.ui.news.detail_news.DetailNewsFragment"
+        android:label="NewsFragment"
+        tools:layout="@layout/detail_news_fragment"/>
 </navigation>

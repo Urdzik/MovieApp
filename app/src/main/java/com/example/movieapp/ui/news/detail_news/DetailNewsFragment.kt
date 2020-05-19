@@ -1,8 +1,7 @@
-package com.example.movieapp.ui.news
+package com.example.movieapp.ui.news.detail_news
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,19 +12,18 @@ import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.NewsFragmentBinding
 import com.example.movieapp.utils.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.general_news_fragment.*
+import kotlinx.android.synthetic.main.news_fragment.*
 import javax.inject.Inject
 
-class NewsFragment : Fragment() {
+class DetailNewsFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private lateinit var viewModel: NewsViewModel
+    private lateinit var viewModel: DetailNewsViewModel
 
     companion object {
-        fun newInstance() = NewsFragment()
+        fun newInstance() = DetailNewsFragment()
     }
 
     override fun onCreateView(
@@ -37,7 +35,7 @@ class NewsFragment : Fragment() {
         val binding = NewsFragmentBinding.inflate(inflater)
         progressBar?.show()
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(NewsViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(DetailNewsViewModel::class.java)
 
         viewModel.loadData()
 
