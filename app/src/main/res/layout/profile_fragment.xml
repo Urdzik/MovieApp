@@ -1,22 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.movieapp.ui.user.profile.ProfileViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.user.profile.ProfileFragment">
 
-        <TextView
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:id="@+id/user_fragment"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/google_login_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            >
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@{viewModel.currentUser.displayName}"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageAvatar"
+                app:layout_constraintTop_toTopOf="@+id/imageAvatar"
+                tools:text="Slavik Urdzik" />
+
+            <TextView
+                android:id="@+id/email_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@{viewModel.currentUser.email}"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/imageAvatar"
+                app:layout_constraintTop_toBottomOf="@+id/user_name"
+                tools:text="email@gmail.com" />
+
+            <ImageButton
+                android:id="@+id/settings_button"
+                style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:tint="?android:attr/textColorSecondaryNoDisable"
+                app:layout_constraintBottom_toBottomOf="@+id/user_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/user_name"
+                app:srcCompat="@drawable/ic_settings_black_24dp" />
+
+            <ImageView
+                android:id="@+id/imageAvatar"
+                avaURL="@{viewModel.currentUser.photoUrl}"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_broken_image" />
+
+
+            <!--        <com.twitter.sdk.android.core.identity.TwitterLoginButton-->
+            <!--            android:id="@+id/twitter_login_btn"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginTop="8dp"-->
+            <!--            app:layout_constraintEnd_toEndOf="parent"-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintTop_toBottomOf="@+id/google_login_btn" />-->
+
+
+            <!--        <androidx.cardview.widget.CardView-->
+
+            <!--            android:id="@+id/login_with_email"-->
+            <!--            android:layout_width="0dp"-->
+            <!--            android:layout_height="45dp"-->
+            <!--            android:layout_marginTop="8dp"-->
+            <!--            android:background="#F44336"-->
+            <!--            android:backgroundTint="#F44336"-->
+            <!--            app:cardBackgroundColor="#F44336"-->
+            <!--            app:layout_constraintEnd_toEndOf="@+id/twitter_login_btn"-->
+            <!--            app:layout_constraintStart_toStartOf="@+id/twitter_login_btn"-->
+            <!--            app:layout_constraintTop_toBottomOf="@+id/twitter_login_btn">-->
+
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:orientation="horizontal">-->
+
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    android:layout_marginStart="16dp"-->
+            <!--                    android:src="@drawable/ic_email_black_24dp" />-->
+
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:text="Login with email"-->
+            <!--                    android:textColor="#fff"-->
+            <!--                    android:textSize="18sp"-->
+            <!--                    android:textStyle="bold" />-->
+
+            <!--            </LinearLayout>-->
+
+
+            <!--        </androidx.cardview.widget.CardView>-->
+
+            <!--        <androidx.cardview.widget.CardView-->
+            <!--            android:id="@+id/login_with_phone"-->
+            <!--            android:layout_width="0dp"-->
+            <!--            android:layout_height="45dp"-->
+            <!--            android:layout_marginTop="8dp"-->
+            <!--            android:background="#10E381"-->
+            <!--            android:backgroundTint="#10E381"-->
+            <!--            app:cardBackgroundColor="#10E381"-->
+            <!--            app:layout_constraintEnd_toEndOf="@+id/twitter_login_btn"-->
+            <!--            app:layout_constraintStart_toStartOf="@+id/twitter_login_btn"-->
+            <!--            app:layout_constraintTop_toBottomOf="@+id/login_with_email">-->
+
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:orientation="horizontal">-->
+
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    android:layout_marginStart="16dp"-->
+            <!--                    android:src="@drawable/ic_local_phone_black_24dp" />-->
+
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:text="Login with phone"-->
+            <!--                    android:textColor="#fff"-->
+            <!--                    android:textSize="18sp"-->
+            <!--                    android:textStyle="bold" />-->
+
+            <!--            </LinearLayout>-->
+
+
+            <!--        </androidx.cardview.widget.CardView>-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/google_login_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/comfortaa_bold"
-            android:text="@string/in_developing"
-            android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -8,3 +8,5 @@ const val ALL_NEWS = "all"
 const val MOVIE_NEWS = "movie"
 const val TV_NEWS = "tv"
 const val PERSON_NEWS = "person"
+const val RC_SIGN_IN = 9001
+const val LOGIN_TAG = "Login activity"
