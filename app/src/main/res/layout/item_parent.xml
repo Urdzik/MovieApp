@@ -25,9 +25,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:playlists="@{viewModel.topRatedPlayList}"
-            app:vis="@{safeUnbox(viewModel.eventNetworkError)}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/child_recycler"

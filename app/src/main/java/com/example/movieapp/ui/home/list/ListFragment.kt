@@ -51,7 +51,7 @@ class ListFragment : Fragment() {
         setMovieListToRV()
 
         //Looking for the internet connection
-        viewModel.eventNetworkError.observe(this, Observer {
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
             if (it) onNetworkError()
         })
 

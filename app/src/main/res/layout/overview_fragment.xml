@@ -26,19 +26,19 @@
             tools:listitem="@layout/item_parent"
             android:orientation="vertical"/>
 
-        <ProgressBar
-        style="@style/progressBarStyle"
-        android:foregroundGravity="center"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:indeterminateTint="@color/appColor"
-        android:indeterminateTintMode="src_in"
-        app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:playlist="@{viewModel.topRatedPlayList}" />
+<!--        <ProgressBar-->
+<!--        style="@style/progressBarStyle"-->
+<!--        android:foregroundGravity="center"-->
+<!--        android:layout_width="64dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:indeterminateTint="@color/appColor"-->
+<!--        android:indeterminateTintMode="src_in"-->
+<!--        app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:playlist="@{viewModel.parentListMovie}" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
