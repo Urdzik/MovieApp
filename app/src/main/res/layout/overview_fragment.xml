@@ -14,118 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <ScrollView
-            android:id="@+id/scrollView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <LinearLayout
-                android:id="@+id/overviewFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.yarolegovich.discretescrollview.DiscreteScrollView
-                    android:layout_marginTop="16dp"
-                    android:id="@+id/piker"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:listitem="@layout/item_rec_viewing"
-                    app:dsv_orientation="horizontal"/>
-
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/comfortaa_bold"
-                    app:playlists="@{viewModel.topRatedPlayList}"
-                    android:text="@string/top_rated"
-                    app:vis="@{safeUnbox(viewModel.eventNetworkError)}"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_top_rated"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/item" />
-
-                <TextView
-                    app:vis="@{safeUnbox(viewModel.eventNetworkError)}"
-                    android:id="@+id/popular_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    app:playlists="@{viewModel.topRatedPlayList}"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/comfortaa_bold"
-                    android:text="@string/popular"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_popular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/item" />
-
-                <TextView
-                    app:vis="@{safeUnbox(viewModel.eventNetworkError)}"
-                    android:id="@+id/now_playing_text"
-                    app:playlists="@{viewModel.topRatedPlayList}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/comfortaa_bold"
-                    android:text="@string/now_playing"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_now_playing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/item" />
-
-
-            </LinearLayout>
-
-        </ScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_rv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_parent"
+            android:orientation="vertical"/>
 
         <ProgressBar
         style="@style/progressBarStyle"
@@ -140,5 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:playlist="@{viewModel.topRatedPlayList}" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
