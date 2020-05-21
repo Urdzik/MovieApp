@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
@@ -62,16 +61,24 @@ class OverviewFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        viewModel.fetchMoviesLists()
 
         binding.mainRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.mainRv.adapter = GroupAdapter<ViewHolder>().also { adapter ->
-            val item = viewModel.parentListMovie.value?.map { ParentItem(it) }
-            if (item != null) {
+
+
+        viewModel.parentListMovie.observe(viewLifecycleOwner, Observer { movie ->
+            val item = movie.map { ParentItem(it) }
+            println("parentListMovie")
+            binding.mainRv.adapter = GroupAdapter<ViewHolder>().also { adapter ->
+
+
                 adapter.update(item)
+
+                println("GroupAdapter")
             }
-        }
-        binding.mainRv.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        )
+
+        })
+
 
         return binding.root
     }

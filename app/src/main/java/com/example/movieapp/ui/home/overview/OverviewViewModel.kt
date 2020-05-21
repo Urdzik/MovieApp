@@ -42,35 +42,23 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     }
 
 
-    private fun fetchMoviesLists() {
+     fun fetchMoviesLists() {
 
         viewModelScope.launch {
             try {
 
+                val topRated = networkSource.fetchSmallMovieList("top_rated", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+                val popular = networkSource.fetchSmallMovieList("popular", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+                val nowPlaying = networkSource.fetchSmallMovieList("now_playing", "26f381d6ab8dd659b22d983cab9aa255", "ru")
                 _parentListMovie.value = listOf(
-                    ParentListMovie(
-                        "Топ рейтинг","top_rated",
-                        networkSource.fetchSmallMovieList(
-                            "top_rated",
-                            "26f381d6ab8dd659b22d983cab9aa255",
-                            "ru"
-                        )
-                    ),
+                    ParentListMovie("Топ рейтинг","top_rated", topRated),
                     ParentListMovie(
                         "Популярное","popular",
-                        networkSource.fetchSmallMovieList(
-                            "popular",
-                            "26f381d6ab8dd659b22d983cab9aa255",
-                            "ru"
-                        )
+                        popular
                     ),
                     ParentListMovie(
                         "Сейчас в кино","now_playing",
-                        networkSource.fetchSmallMovieList(
-                            "now_playing",
-                            "26f381d6ab8dd659b22d983cab9aa255",
-                            "ru"
-                        )
+                        nowPlaying
                     )
                 )
 
