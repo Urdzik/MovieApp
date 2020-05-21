@@ -63,19 +63,14 @@ class OverviewFragment : Fragment() {
         binding.viewModel = viewModel
 
 
-        binding.mainRv.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.mainRv.adapter = GroupAdapter<ViewHolder>().also {
+        binding.mainRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.mainRv.adapter = GroupAdapter<ViewHolder>().also { adapter ->
             val item = viewModel.parentListMovie.value?.map { ParentItem(it) }
             if (item != null) {
-                it.update(item)
+                adapter.update(item)
             }
         }
-        binding.mainRv.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.VERTICAL
-            )
+        binding.mainRv.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         )
 
         return binding.root

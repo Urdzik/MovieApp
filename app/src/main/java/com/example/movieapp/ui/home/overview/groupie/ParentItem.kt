@@ -1,17 +1,18 @@
 package com.example.movieapp.ui.home.overview.groupie
 
-import androidx.navigation.findNavController
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ItemParentBinding
 import com.example.movieapp.model.network.data.ParentListMovie
 import com.xwray.groupie.databinding.BindableItem
-import com.example.movieapp.model.network.data.SmallMovieList
-import com.example.movieapp.ui.home.overview.OverviewFragmentDirections
 import com.example.movieapp.utils.adapters.ChildAdapter
 import com.example.movieapp.utils.adapters.ChildAdapter.*
-import com.example.movieapp.utils.adapters.TopRatedMovieAdapter
+import javax.inject.Singleton
 
+@Singleton
 class ParentItem (private val movieList: ParentListMovie): BindableItem<ItemParentBinding>(){
+    init {
+        println("Create Parent Item")
+    }
 
     private lateinit var childAdapter: ChildAdapter
 

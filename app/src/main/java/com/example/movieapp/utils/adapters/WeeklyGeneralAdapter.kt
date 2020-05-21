@@ -35,3 +35,6 @@ class WeeklyGeneralViewHolder(private val binding: ItemRecViewingBinding) : Recy
         }
     }
 }
+
+
+

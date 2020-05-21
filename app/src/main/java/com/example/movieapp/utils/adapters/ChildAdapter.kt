@@ -20,7 +20,7 @@ private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
 
 class ChildAdapter(private val clickListener: MovieListener) :
-    ListAdapter<DataItemNowPlaying, RecyclerView.ViewHolder>(MovieNowPlayingDiffCallback()) {
+    ListAdapter<DataItemChild, RecyclerView.ViewHolder>(ChildDiffCallback()) {
 
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -28,8 +28,8 @@ class ChildAdapter(private val clickListener: MovieListener) :
     fun addHeaderAndSubmitList(list: List<SmallMovieList>?) {
         adapterScope.launch {
             val items = when (list) {
-                null -> listOf(DataItemNowPlaying.Header)
-                else -> list.map { DataItemNowPlaying.MovieItem(it) } + listOf(DataItemNowPlaying.Header)
+                null -> listOf(DataItemChild.Header)
+                else -> list.map { DataItemChild.MovieItem(it) } + listOf(DataItemChild.Header)
             }
             withContext(Dispatchers.Main) {
                 submitList(items)
@@ -42,7 +42,7 @@ class ChildAdapter(private val clickListener: MovieListener) :
         when (holder) {
 
             is MovieViewHolder -> {
-                val movieItem = getItem(position) as DataItemNowPlaying.MovieItem
+                val movieItem = getItem(position) as DataItemChild.MovieItem
                 holder.itemView.setOnClickListener {
                     clickListener.onClick(movieItem.movie)
                 }
@@ -65,8 +65,8 @@ class ChildAdapter(private val clickListener: MovieListener) :
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is DataItemNowPlaying.Header -> ITEM_VIEW_TYPE_HEADER
-            is DataItemNowPlaying.MovieItem -> ITEM_VIEW_TYPE_ITEM
+            is DataItemChild.Header -> ITEM_VIEW_TYPE_HEADER
+            is DataItemChild.MovieItem -> ITEM_VIEW_TYPE_ITEM
         }
     }
 
@@ -104,13 +104,13 @@ class ChildAdapter(private val clickListener: MovieListener) :
     }
 }
 
-class ChildDiffCallback : DiffUtil.ItemCallback<DataItemNowPlaying>() {
-    override fun areItemsTheSame(oldItem: DataItemNowPlaying, newItem: DataItemNowPlaying): Boolean {
+class ChildDiffCallback : DiffUtil.ItemCallback<DataItemChild>() {
+    override fun areItemsTheSame(oldItem: DataItemChild, newItem: DataItemChild): Boolean {
         return oldItem.id == newItem.id
     }
 
     @SuppressLint("DiffUtilEquals")
-    override fun areContentsTheSame(oldItem: DataItemNowPlaying, newItem: DataItemNowPlaying): Boolean {
+    override fun areContentsTheSame(oldItem: DataItemChild, newItem: DataItemChild): Boolean {
         return oldItem == newItem
     }
 }
