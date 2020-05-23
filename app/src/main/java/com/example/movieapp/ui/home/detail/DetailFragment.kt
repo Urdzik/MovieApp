@@ -1,6 +1,8 @@
 package com.example.movieapp.ui.home.detail
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.DetailFragmentBinding
+import com.example.movieapp.utils.SHARED_KEY
 import javax.inject.Inject
 
 class DetailFragment : Fragment() {
@@ -19,6 +22,7 @@ class DetailFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: DetailViewModel
     lateinit var binding: DetailFragmentBinding
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +35,10 @@ class DetailFragment : Fragment() {
         binding = DetailFragmentBinding.inflate(inflater)
 
         val args = DetailFragmentArgs.fromBundle(requireArguments()).id
+
+        sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!
+        val id =  sharedPreferences.getString(SHARED_KEY, "null")
+        println(id)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
 

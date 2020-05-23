@@ -10,3 +10,4 @@ const val TV_NEWS = "tv"
 const val PERSON_NEWS = "person"
 const val RC_SIGN_IN = 9001
 const val LOGIN_TAG = "Login activity"
+const val SHARED_KEY = "this User data"

@@ -1,6 +1,8 @@
 package com.example.movieapp.ui.user.profile
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +18,7 @@ import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.ProfileFragmentBinding
 import com.example.movieapp.utils.LOGIN_TAG
 import com.example.movieapp.utils.RC_SIGN_IN
+import com.example.movieapp.utils.SHARED_KEY
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -32,11 +35,14 @@ class ProfileFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-   private val viewModel: ProfileViewModel by navGraphViewModels(R.id.user) { viewModelFactory }
+    private val viewModel: ProfileViewModel by navGraphViewModels(R.id.user) { viewModelFactory }
     private lateinit var binding: ProfileFragmentBinding
 
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
+
+    private lateinit var sharedPreferences: SharedPreferences
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +50,9 @@ class ProfileFragment : Fragment() {
     ): View? {
         App.appComponent.inject(this)
         binding = ProfileFragmentBinding.inflate(inflater)
+
+        sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!
+
 
 
 
@@ -78,6 +87,7 @@ class ProfileFragment : Fragment() {
             } else {
                 val currentUser = auth.currentUser
                 updateUI(currentUser)
+
             }
         })
 
@@ -132,15 +142,15 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun signOut() {
-        // Firebase sign out
-        auth.signOut()
-
-        // Google sign out
-        googleSignInClient.signOut().addOnCompleteListener() {
-            updateUI(null)
-        }
-    }
+//    private fun signOut() {
+//        // Firebase sign out
+//        auth.signOut()
+//
+//        // Google sign out
+//        googleSignInClient.signOut().addOnCompleteListener() {
+//            updateUI(null)
+//        }
+//    }
 
 //    private fun revokeAccess() {
 //        // Firebase sign out
@@ -158,6 +168,9 @@ class ProfileFragment : Fragment() {
 
             viewModel.getUser(user)
             viewModel.getAuthUser(auth)
+            val editor = sharedPreferences?.edit()
+            editor?.putString(SHARED_KEY, user?.uid)
+            editor.apply()
 
             binding.userFragment.visibility = View.VISIBLE
             binding.googleLoginBtn.visibility = View.GONE
