@@ -42,6 +42,7 @@ class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
 
     override fun onCreateView(
@@ -52,7 +53,7 @@ class ProfileFragment : Fragment() {
         binding = ProfileFragmentBinding.inflate(inflater)
 
         sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!
-
+        editor = sharedPreferences?.edit()
 
 
 
@@ -84,10 +85,12 @@ class ProfileFragment : Fragment() {
         viewModel.test.observe(viewLifecycleOwner, Observer {
             if (it) {
                 updateUI(null)
+
             } else {
                 val currentUser = auth.currentUser
                 updateUI(currentUser)
-
+//                editor?.putString(SHARED_KEY, currentUser?.uid)
+//                editor.apply()
             }
         })
 
@@ -168,13 +171,14 @@ class ProfileFragment : Fragment() {
 
             viewModel.getUser(user)
             viewModel.getAuthUser(auth)
-            val editor = sharedPreferences?.edit()
-            editor?.putString(SHARED_KEY, user?.uid)
-            editor.apply()
+
+            editor.putString(SHARED_KEY, user.uid)
+            editor.commit();
 
             binding.userFragment.visibility = View.VISIBLE
             binding.googleLoginBtn.visibility = View.GONE
         } else {
+
             binding.googleLoginBtn.visibility = View.VISIBLE
             binding.userFragment.visibility = View.GONE
             Log.e("TAG", "tag")

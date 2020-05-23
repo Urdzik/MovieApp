@@ -37,15 +37,19 @@ class DetailFragment : Fragment() {
         val args = DetailFragmentArgs.fromBundle(requireArguments()).id
 
         sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!
-        val id =  sharedPreferences.getString(SHARED_KEY, "null")
-        println(id)
+        val id =  sharedPreferences.getString(SHARED_KEY, null)
+
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
 
         viewModel.getSelectedMovieById(args)
 
         binding.imageButton.setOnClickListener {
-            Toast.makeText(context, "Save Movie", Toast.LENGTH_SHORT).show()
+            if (id == null  || id == "null"){
+                Toast.makeText(context, "Please Sing in your account", Toast.LENGTH_SHORT).show()
+            } else{
+                println(id)
+            }
         }
 
 
