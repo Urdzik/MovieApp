@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapp.R
 import com.example.movieapp.dagger.App
@@ -66,18 +65,19 @@ class OverviewFragment : Fragment() {
         binding.mainRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
 
-        viewModel.parentListMovie.observe(viewLifecycleOwner, Observer { movie ->
-            val item = movie.map { ParentItem(it) }
+            val item = viewModel.parentListMovie.value?.map { ParentItem(it) }
             println("parentListMovie")
             binding.mainRv.adapter = GroupAdapter<ViewHolder>().also { adapter ->
 
 
-                adapter.update(item)
+                item?.let { adapter.update(it) }
 
                 println("GroupAdapter")
             }
 
-        })
+
+
+
 
 
         return binding.root

@@ -6,9 +6,8 @@ import com.example.movieapp.model.network.data.ParentListMovie
 import com.xwray.groupie.databinding.BindableItem
 import com.example.movieapp.utils.adapters.ChildAdapter
 import com.example.movieapp.utils.adapters.ChildAdapter.*
-import javax.inject.Singleton
 
-@Singleton
+
 class ParentItem (private val movieList: ParentListMovie): BindableItem<ItemParentBinding>(){
     init {
         println("Create Parent Item")

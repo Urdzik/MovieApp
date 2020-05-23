@@ -1,5 +1,11 @@
 package com.example.movieapp.ui.home.overview.groupie
 
+import com.example.movieapp.R
+import com.example.movieapp.databinding.ItemParentBinding
+import com.example.movieapp.model.network.data.ParentListMovie
+import com.example.movieapp.model.network.data.SmallMovieList
+import com.xwray.groupie.databinding.BindableItem
+
 //Work with recommended RV
 //    private fun recViewingRvViewing() {
 //        binding.piker.adapter =
@@ -26,3 +32,11 @@ package com.example.movieapp.ui.home.overview.groupie
 //
 
 //                networkSource.fetchSmallMovieList("upcoming", "26f381d6ab8dd659b22d983cab9aa255", "ru"),
+
+class HeaderItem (private val movieList: List<SmallMovieList>): BindableItem<ItemParentBinding>() {
+    override fun getLayout(): Int = R.layout.item_rec
+
+    override fun bind(viewBinding: ItemParentBinding, position: Int) {
+        TODO("Not yet implemented")
+    }
+}

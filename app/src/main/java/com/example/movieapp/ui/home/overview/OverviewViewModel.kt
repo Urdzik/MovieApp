@@ -28,6 +28,8 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+
+
     //LiveData of Top Rated movies
     private var _parentListMovie = MutableLiveData<List<ParentListMovie>>()
     val parentListMovie: LiveData<List<ParentListMovie>>
@@ -50,20 +52,16 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
                 val topRated = networkSource.fetchSmallMovieList("top_rated", "26f381d6ab8dd659b22d983cab9aa255", "ru")
                 val popular = networkSource.fetchSmallMovieList("popular", "26f381d6ab8dd659b22d983cab9aa255", "ru")
                 val nowPlaying = networkSource.fetchSmallMovieList("now_playing", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+
                 _parentListMovie.value = listOf(
                     ParentListMovie("Топ рейтинг","top_rated", topRated),
-                    ParentListMovie(
-                        "Популярное","popular",
-                        popular
-                    ),
-                    ParentListMovie(
-                        "Сейчас в кино","now_playing",
-                        nowPlaying
-                    )
+                    ParentListMovie("Популярное","popular", popular),
+                    ParentListMovie("Сейчас в кино","now_playing", nowPlaying)
                 )
 
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
+
 
             } catch (e: Exception) {
                 if (parentListMovie.value.isNullOrEmpty()) {
