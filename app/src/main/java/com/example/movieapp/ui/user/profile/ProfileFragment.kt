@@ -53,7 +53,7 @@ class ProfileFragment : Fragment() {
         binding = ProfileFragmentBinding.inflate(inflater)
 
         sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!
-        editor = sharedPreferences?.edit()
+
 
 
 
@@ -172,8 +172,9 @@ class ProfileFragment : Fragment() {
             viewModel.getUser(user)
             viewModel.getAuthUser(auth)
 
+            editor = sharedPreferences.edit()
             editor.putString(SHARED_KEY, user.uid)
-            editor.commit();
+            editor.commit()
 
             binding.userFragment.visibility = View.VISIBLE
             binding.googleLoginBtn.visibility = View.GONE
