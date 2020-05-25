@@ -1,11 +1,18 @@
 package com.example.movieapp.ui.user.profile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.movieapp.model.network.data.SmallMovieList
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor() : ViewModel() {
@@ -27,11 +34,13 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
 
     var test = MutableLiveData(false)
 
+    init {
 
+    }
 
 
     fun getUser(user: FirebaseUser?) {
-        _currentUser.value = user
+        _currentUser.value = user!!
     }
 
     fun getAuthUser(auth: FirebaseAuth){
@@ -48,6 +57,26 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
 
     fun testFalse(){
         test.value = false
+    }
+
+    fun fetchMovieOfSave() {
+        val db = Firebase.firestore
+        viewModelScope.launch {
+            db.collection("users").document(currentUser.value!!.uid).collection("movie")
+                .get()
+                .addOnSuccessListener { result ->
+                    Log.i("TAG", "1")
+                   for(document in result){
+                      val obj =  result.toObjects(SmallMovieList::class.java)
+                       Log.i("TAG", "2")
+                       obj.forEach {
+                           Log.i("TAG", "${it.title}")
+                       }
+                   }
+                }.addOnFailureListener { exception ->
+                    Log.w("TAG", "Error getting documents.", exception)
+                }
+        }
     }
 
     override fun onCleared() {

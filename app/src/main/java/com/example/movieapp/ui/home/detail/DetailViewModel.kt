@@ -39,11 +39,10 @@ class DetailViewModel @Inject constructor(private val movieDetailSource: MovieDe
                 backdropPath = it.backdrop_path)
 
             viewModelScope.launch {
-                database.document("users/$id")
-                    .collection("movies")
+                database.collection("users").document(id).collection("movie")
                     .add(listOfMovie)
                     .addOnSuccessListener { documentReference ->
-                        Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
+                        Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference}")
                     }.addOnFailureListener { e ->
                         Log.w("TAG", "Error adding document", e)
                     }

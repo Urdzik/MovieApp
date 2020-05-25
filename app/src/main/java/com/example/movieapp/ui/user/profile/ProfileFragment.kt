@@ -178,6 +178,8 @@ class ProfileFragment : Fragment() {
 
             binding.userFragment.visibility = View.VISIBLE
             binding.googleLoginBtn.visibility = View.GONE
+
+            viewModel.fetchMovieOfSave()
         } else {
 
             binding.googleLoginBtn.visibility = View.VISIBLE
