@@ -37,7 +37,7 @@
 
 
                 <TextView
-                    android:id="@+id/top_rated_text"
+                    android:id="@+id/save_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -51,7 +51,7 @@
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_top_rated"
+                    android:id="@+id/recyclerTopRated"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"

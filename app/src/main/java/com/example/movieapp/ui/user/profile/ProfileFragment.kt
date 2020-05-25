@@ -178,12 +178,16 @@ class ProfileFragment : Fragment() {
 
             binding.userFragment.visibility = View.VISIBLE
             binding.googleLoginBtn.visibility = View.GONE
+            binding.saveText.visibility = View.VISIBLE
+            binding.recyclerSave.visibility = View.VISIBLE
 
             viewModel.fetchMovieOfSave()
         } else {
 
             binding.googleLoginBtn.visibility = View.VISIBLE
             binding.userFragment.visibility = View.GONE
+            binding.saveText.visibility = View.GONE
+            binding.recyclerSave.visibility = View.GONE
             Log.e("TAG", "tag")
         }
     }
