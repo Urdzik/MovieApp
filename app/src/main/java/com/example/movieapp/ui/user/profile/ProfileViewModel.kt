@@ -10,15 +10,20 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor() : ViewModel() {
-    init {
-        println("Create viewMode")
-    }
+
+
+    private var _navigateToSelectSaveProperty = MutableLiveData<SmallMovieList>()
+    val navigateToSelectSaveProperty: LiveData<SmallMovieList>
+        get() = _navigateToSelectSaveProperty
+
+    private var _movieOfSave = MutableLiveData<List<SmallMovieList>>()
+    val movieOfSave: LiveData<List<SmallMovieList>>
+        get() = _movieOfSave
 
     private var _currentUser = MutableLiveData<FirebaseUser>()
     val currentUser: LiveData<FirebaseUser>
@@ -33,10 +38,6 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
         get() = _googleSignInClient
 
     var test = MutableLiveData(false)
-
-    init {
-
-    }
 
 
     fun getUser(user: FirebaseUser?) {
@@ -62,21 +63,26 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
     fun fetchMovieOfSave() {
         val db = Firebase.firestore
         viewModelScope.launch {
-            db.collection("users").document(currentUser.value!!.uid).collection("movie")
+            db.collection("users")
+                .document(currentUser.value!!.uid)
+                .collection("movie")
                 .get()
                 .addOnSuccessListener { result ->
-                    Log.i("TAG", "1")
-                   for(document in result){
-                      val obj =  result.toObjects(SmallMovieList::class.java)
-                       Log.i("TAG", "2")
-                       obj.forEach {
-                           Log.i("TAG", "${it.title}")
-                       }
-                   }
+                    for (document in result) {
+                        _movieOfSave.value = result.toObjects(SmallMovieList::class.java)
+
+                    }
                 }.addOnFailureListener { exception ->
                     Log.w("TAG", "Error getting documents.", exception)
                 }
         }
+    }
+    fun displayPropertyDetails(movie: SmallMovieList) {
+        _navigateToSelectSaveProperty.value = movie
+    }
+
+    fun displayPropertyDetailsCompleted() {
+        _navigateToSelectSaveProperty.value = null
     }
 
     override fun onCleared() {

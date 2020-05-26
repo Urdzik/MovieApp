@@ -16,9 +16,12 @@ import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.ProfileFragmentBinding
+import com.example.movieapp.ui.home.overview.OverviewFragmentDirections
 import com.example.movieapp.utils.LOGIN_TAG
 import com.example.movieapp.utils.RC_SIGN_IN
 import com.example.movieapp.utils.SHARED_KEY
+import com.example.movieapp.utils.adapters.PopularMovieAdapter
+import com.example.movieapp.utils.adapters.SaveInUserAdapter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -43,6 +46,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
+    private lateinit var saveInUserAdapter: SaveInUserAdapter
 
 
     override fun onCreateView(
@@ -71,6 +75,28 @@ class ProfileFragment : Fragment() {
         binding.settingsButton.setOnClickListener { findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment()) }
 
         binding.googleLoginBtn.setOnClickListener{ signIn() }
+        //Navigate to Detail Activity
+        viewModel.navigateToSelectSaveProperty.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                findNavController().navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToDetailFragment2(
+                        it.id
+                    )
+                )
+                viewModel.displayPropertyDetailsCompleted()
+            }
+        })
+
+        binding.recyclerSave.adapter = SaveInUserAdapter(SaveInUserAdapter.ClickListener {
+            viewModel.displayPropertyDetails(it)
+        })
+
+        saveInUserAdapter = binding.recyclerSave.adapter as SaveInUserAdapter
+
+        viewModel.movieOfSave.observe(viewLifecycleOwner, Observer {
+            saveInUserAdapter.submitList(it)
+
+        })
 
 
         binding.viewModel = viewModel

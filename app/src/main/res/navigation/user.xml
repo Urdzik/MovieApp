@@ -12,9 +12,21 @@
         <action
             android:id="@+id/action_profileFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_detailFragment2"
+            app:destination="@id/detailFragmentInUser" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.movieapp.ui.user.profile.settings.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/detailFragmentInUser"
+        android:name="com.example.movieapp.ui.home.detail.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/detail_fragment">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>
