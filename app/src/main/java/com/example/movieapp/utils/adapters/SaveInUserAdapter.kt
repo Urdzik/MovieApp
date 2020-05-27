@@ -30,6 +30,7 @@ class SaveInUserAdapter(private val onClickListener: ClickListener) : ListAdapte
 
     override fun onBindViewHolder(holder: SaveInUserHolder, position: Int) {
         val item = getItem(position)
+
         holder.itemView.setOnClickListener {
             onClickListener.onClick(item)
         }
@@ -37,19 +38,8 @@ class SaveInUserAdapter(private val onClickListener: ClickListener) : ListAdapte
         holder.bind(item)
     }
 
-    inner class SaveInUserHolder(private val binding: ItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class SaveInUserHolder(private val binding: ItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: SmallMovieList) {
-
-//            Glide.with(binding.root.context)
-//                .load("$IMAGE_BASE_PATH${movie.backdropPath}")
-//                .apply(
-//                    RequestOptions()
-//                        .placeholder(R.drawable.loading_animation)
-//                        .error(R.drawable.ic_broken_image)
-//                )
-//                .into(binding.posterImage)
-
 
             binding.movie = movie
 

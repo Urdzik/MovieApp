@@ -45,14 +45,18 @@ class DetailFragment : Fragment() {
 
 
         binding = DetailFragmentBinding.inflate(inflater)
-
+        viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
         val args = DetailFragmentArgs.fromBundle(requireArguments()).id
 
         sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!
         val id =  sharedPreferences.getString(SHARED_KEY, null)
+        if (id != null) {
+            viewModel.getUserId(id)
+            viewModel.checkForSavedMovie(id)
+        }
 
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
+
 
         viewModel.getSelectedMovieById(args)
 
@@ -61,9 +65,19 @@ class DetailFragment : Fragment() {
             if (id == null  || id == "null"){
                 Toast.makeText(context, "Please Sing in your account", Toast.LENGTH_SHORT).show()
             } else{
-                viewModel.putMovieInDatabase(id)
+                Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
+                viewModel.putMovieInDatabase()
             }
         }
+
+        viewModel.test.observe(viewLifecycleOwner, Observer {
+            if(it){
+                binding.imageButton.visibility = View.GONE
+            } else {
+                binding.imageButton.visibility = View.VISIBLE
+            }
+
+        })
 
 
         binding.viewModel = viewModel

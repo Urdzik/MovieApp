@@ -48,6 +48,8 @@ class ProfileFragment : Fragment() {
     private lateinit var editor: SharedPreferences.Editor
     private lateinit var saveInUserAdapter: SaveInUserAdapter
 
+    private var errorSnackbar: Snackbar? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,8 +59,6 @@ class ProfileFragment : Fragment() {
         binding = ProfileFragmentBinding.inflate(inflater)
 
         sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!
-
-
 
 
         // Configure Google Sign In
@@ -78,11 +78,7 @@ class ProfileFragment : Fragment() {
         //Navigate to Detail Activity
         viewModel.navigateToSelectSaveProperty.observe(viewLifecycleOwner, Observer {
             it?.let {
-                findNavController().navigate(
-                    ProfileFragmentDirections.actionProfileFragmentToDetailFragment2(
-                        it.id
-                    )
-                )
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToDetailFragment2(it.id))
                 viewModel.displayPropertyDetailsCompleted()
             }
         })
@@ -96,6 +92,11 @@ class ProfileFragment : Fragment() {
         viewModel.movieOfSave.observe(viewLifecycleOwner, Observer {
             saveInUserAdapter.submitList(it)
 
+        })
+
+        //Looking for the internet connection
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
+            if (it) onNetworkError()
         })
 
 
@@ -115,8 +116,7 @@ class ProfileFragment : Fragment() {
             } else {
                 val currentUser = auth.currentUser
                 updateUI(currentUser)
-//                editor?.putString(SHARED_KEY, currentUser?.uid)
-//                editor.apply()
+
             }
         })
 
@@ -162,6 +162,15 @@ class ProfileFragment : Fragment() {
 
 
             }
+    }
+
+    //Function will show a toast when there is no internet
+    private fun onNetworkError() {
+        if (!viewModel.isNetworkErrorShown.value!!) {
+            errorSnackbar = Snackbar.make(binding.root, "Ошибка сети", Snackbar.LENGTH_INDEFINITE)
+            errorSnackbar?.setAction(R.string.retry, viewModel.errorClickListener)
+            errorSnackbar?.show()
+        }
     }
 
     private fun signIn() {
@@ -210,11 +219,13 @@ class ProfileFragment : Fragment() {
             viewModel.fetchMovieOfSave()
         } else {
 
-            binding.googleLoginBtn.visibility = View.VISIBLE
-            binding.userFragment.visibility = View.GONE
-            binding.saveText.visibility = View.GONE
-            binding.recyclerSave.visibility = View.GONE
-            Log.e("TAG", "tag")
+            binding.apply {
+                googleLoginBtn.visibility = View.VISIBLE
+                userFragment.visibility = View.GONE
+                saveText.visibility = View.GONE
+                recyclerSave.visibility = View.GONE
+            }
+
         }
     }
 

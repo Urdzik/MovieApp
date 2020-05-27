@@ -22,13 +22,24 @@ class DetailViewModel @Inject constructor(private val movieDetailSource: MovieDe
     val selectProperty: LiveData<MovieInfo>
         get() = _selectProperty
 
+    private var _test = MutableLiveData(false)
+    val test: LiveData<Boolean>
+        get() = _test
+
+    private var _userId = MutableLiveData<String>()
+    val userId: LiveData<String>
+        get() = _userId
+
+
     fun getSelectedMovieById(id: Int) {
         viewModelScope.launch {
             _selectProperty.value = movieDetailSource.fetchDetailInformationOfMovie(id)
         }
     }
 
-    fun putMovieInDatabase(id: String){
+
+    fun putMovieInDatabase(){
+
         val database = Firebase.firestore
         _selectProperty.value?.also {
             val listOfMovie = SmallMovieList(
@@ -39,15 +50,46 @@ class DetailViewModel @Inject constructor(private val movieDetailSource: MovieDe
                 backdropPath = it.backdrop_path)
 
             viewModelScope.launch {
-                database.collection("users").document(id).collection("movie")
+                database.collection("users").document(userId.value!!).collection("movie")
                     .add(listOfMovie)
                     .addOnSuccessListener { documentReference ->
-                        Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference}")
+                        Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
+                        _test.value = true
                     }.addOnFailureListener { e ->
                         Log.w("TAG", "Error adding document", e)
                     }
             }
         }
-
     }
-}
+
+    fun getUserId(id: String){
+        _userId.value = id
+    }
+
+
+     fun checkForSavedMovie(id: String){
+        val database = Firebase.firestore
+        viewModelScope.launch {
+                database.collection("users")
+                    .document(id)
+                    .collection("movie")
+                    .get()
+                    .addOnSuccessListener { result ->
+                        var i = 0
+                        for (document in result) {
+                            if (selectProperty.value?.title == document.get("title")){
+                                i++
+                                _test.value = true
+                            }else{
+                                if (i == 0){
+                                    _test.value = false
+                                }
+                            }
+                        }
+                    }.addOnFailureListener { exception ->
+                        Log.w("TAG", "Error getting documents.", exception)
+                    }
+            }
+        }
+    }
+

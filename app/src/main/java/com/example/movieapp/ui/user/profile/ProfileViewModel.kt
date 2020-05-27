@@ -1,6 +1,7 @@
 package com.example.movieapp.ui.user.profile
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,7 +38,19 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
     val googleSignInClient: LiveData<GoogleSignInClient>
         get() = _googleSignInClient
 
+    //LiveData for show Progress Bar
+    private var _eventNetworkError = MutableLiveData(false)
+    val eventNetworkError: LiveData<Boolean>
+        get() = _eventNetworkError
+
+    //LiveData for show internet error
+    private var _isNetworkErrorShown = MutableLiveData(false)
+    val isNetworkErrorShown: LiveData<Boolean>
+        get() = _isNetworkErrorShown
+
     var test = MutableLiveData(false)
+
+    val errorClickListener = View.OnClickListener { fetchMovieOfSave() }
 
 
     fun getUser(user: FirebaseUser?) {

@@ -196,9 +196,26 @@
             android:clipToPadding="false"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/save_text"
             app:layout_constraintTop_toBottomOf="@+id/save_text"
+            app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/item" />
+
+        <ProgressBar
+            style="@style/progressBarStyle"
+            android:foregroundGravity="center"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:indeterminateTint="@color/appColor"
+            android:indeterminateTintMode="src_in"
+            app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:playlist="@{viewModel.movieOfSave}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
