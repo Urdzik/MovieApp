@@ -8,6 +8,7 @@
             name="viewModel"
             type="com.example.movieapp.ui.user.profile.ProfileViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,14 +16,13 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
             android:id="@+id/user_fragment"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/google_login_btn"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            >
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
                 android:id="@+id/user_name"
@@ -174,6 +174,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/save_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="Сохранёные"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_fragment" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/save_text"
+            app:layout_constraintTop_toBottomOf="@+id/save_text"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/item" />
+
+        <ProgressBar
+            android:id="@+id/prograssBar"
+            style="@style/progressBarStyle"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:foregroundGravity="center"
+            android:indeterminateTint="@color/appColor"
+            android:indeterminateTintMode="src_in"
+            app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:playlist="@{viewModel.movieOfSave}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

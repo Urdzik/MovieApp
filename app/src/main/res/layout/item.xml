@@ -45,18 +45,17 @@
 
             <TextView
                 android:id="@+id/name"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/cardView"
-                app:layout_constraintBottom_toTopOf="@id/rating"
                 android:layout_marginVertical="10dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:ellipsize="end"
                 android:lines="2"
                 android:maxLines="2"
-                android:ellipsize="end"
-                android:text="@{movie.title}" />
+                android:text="@{movie.title}"
+                app:layout_constraintBottom_toTopOf="@id/rating"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintStart_toStartOf="@+id/cardView"
+                app:layout_constraintTop_toBottomOf="@id/cardView" />
 
             <RatingBar
                 android:id="@+id/rating"
@@ -65,8 +64,11 @@
                 android:layout_height="15dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:hapticFeedbackEnabled="false"
                 android:numStars="10"
+                android:progressTint="@color/appColor"
                 android:rating="@{movie.voteAverage}"
+                android:secondaryProgressTint="@color/appColor"
                 android:stepSize="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
