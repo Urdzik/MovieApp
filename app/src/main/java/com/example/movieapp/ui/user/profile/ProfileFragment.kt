@@ -215,6 +215,7 @@ class ProfileFragment : Fragment() {
             binding.googleLoginBtn.visibility = View.GONE
             binding.saveText.visibility = View.VISIBLE
             binding.recyclerSave.visibility = View.VISIBLE
+            binding.prograssBar.visibility = View.VISIBLE
 
             viewModel.fetchMovieOfSave()
         } else {
@@ -224,6 +225,7 @@ class ProfileFragment : Fragment() {
                 userFragment.visibility = View.GONE
                 saveText.visibility = View.GONE
                 recyclerSave.visibility = View.GONE
+                prograssBar.visibility = View.GONE
             }
 
         }

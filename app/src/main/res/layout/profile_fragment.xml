@@ -204,10 +204,11 @@
             tools:listitem="@layout/item" />
 
         <ProgressBar
+            android:id="@+id/prograssBar"
             style="@style/progressBarStyle"
-            android:foregroundGravity="center"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:foregroundGravity="center"
             android:indeterminateTint="@color/appColor"
             android:indeterminateTintMode="src_in"
             app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"
