@@ -92,4 +92,3 @@ class DetailViewModel @Inject constructor(private val movieDetailSource: MovieDe
             }
         }
     }
-

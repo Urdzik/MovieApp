@@ -42,50 +42,42 @@ class DetailFragment : Fragment() {
     ): View? {
         App.appComponent.inject(this)
 
-
-
         binding = DetailFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
+
         val args = DetailFragmentArgs.fromBundle(requireArguments()).id
 
         sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!
-        val id =  sharedPreferences.getString(SHARED_KEY, null)
+        val id = sharedPreferences.getString(SHARED_KEY, null)
+
         if (id != null) {
             viewModel.getUserId(id)
             viewModel.checkForSavedMovie(id)
         }
 
-
-
-
         viewModel.getSelectedMovieById(args)
 
-
         binding.imageButton.setOnClickListener {
-            if (id == null  || id == "null"){
+            if (id == null || id == "null") {
                 Toast.makeText(context, "Please Sing in your account", Toast.LENGTH_SHORT).show()
-            } else{
+            } else {
                 Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
                 viewModel.putMovieInDatabase()
             }
         }
 
         viewModel.test.observe(viewLifecycleOwner, Observer {
-            if(it){
+            if (it) {
                 binding.imageButton.visibility = View.GONE
             } else {
                 binding.imageButton.visibility = View.VISIBLE
             }
-
         })
-
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         return binding.root
     }
-
-
 }
 
 
