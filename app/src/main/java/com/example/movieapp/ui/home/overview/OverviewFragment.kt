@@ -34,7 +34,6 @@ class OverviewFragment : Fragment() {
 
     private var errorSnackbar: Snackbar? = null
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,7 +63,6 @@ class OverviewFragment : Fragment() {
                 viewModel.displayPropertyDetailsCompleted()
             }
         })
-
 
         //Looking for the internet connection
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {

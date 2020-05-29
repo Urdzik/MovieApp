@@ -62,8 +62,4 @@ class ListViewModel @Inject constructor(private  val networkSource: MovieListSou
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
-
-
-
-
 }

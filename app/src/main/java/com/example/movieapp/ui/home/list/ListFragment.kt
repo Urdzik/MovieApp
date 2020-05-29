@@ -45,16 +45,12 @@ class ListFragment : Fragment() {
         movieCategory = ListFragmentArgs.fromBundle(requireArguments()).category
         sendNewMovieList(movieCategory)
 
-        // Create Toolbar and button of back in toolbar
-
-
         setMovieListToRV()
 
         //Looking for the internet connection
-        viewModel.eventNetworkError.observe(this, Observer {
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
             if (it) onNetworkError()
         })
-
 
         binding.lifecycleOwner = this
 
