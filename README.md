@@ -41,7 +41,7 @@
 	     __okHTTP__ <br/>
 	        – caching data from the server to display the movie offline
 		
-	     __Moshi__ <br/>
+	     __Gson__ <br/>
 		– converting  json to object
        
    * __Coroutines__ <br/>
@@ -63,12 +63,14 @@
 ## All libraries: <br/>
 
 * Android X
+* Firabase
 * Material Librarie 
 * Android Jetpack
 * Dagger 2
 * Kotlin Coroutines
 * Retrofit 2
 * OkHTTP 3
-* Moshi
+* Gson
 * Glide
+
 
