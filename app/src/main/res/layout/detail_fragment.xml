@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/frameLayout"
                 android:layout_width="match_parent"
@@ -42,7 +43,7 @@
                 app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
 
-                <TextView
+            <TextView
                     android:id="@+id/title_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -59,36 +60,34 @@
                     tools:text="They Shall Not Grow Old" />
 
             <TextView
-                android:id="@+id/year_ditale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/title_detail"
-                app:layout_constraintTop_toBottomOf="@+id/title_detail"
-                tools:text="2019"
-                android:text="@{viewModel.selectProperty.release_date}"
-                />
+                    android:id="@+id/year_ditale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/title_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/title_detail"
+                    tools:text="2019"
+                    android:text="@{viewModel.selectProperty.release_date}" />
 
 
-            <TextView
-                android:id="@+id/year_ditale2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:genre="@{viewModel.selectProperty.genres}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/title_detail"
-                app:layout_constraintTop_toBottomOf="@+id/year_ditale"
-                tools:text="2019" />
+                <TextView
+                    android:id="@+id/year_ditale2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:genre="@{viewModel.selectProperty.genres}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/title_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/year_ditale"
+                    tools:text="2019" />
 
                 <TextView
                     android:id="@+id/langue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-
                     android:layout_marginEnd="16dp"
                     android:text="@{viewModel.selectProperty.original_language}"
                     app:layout_constraintBottom_toBottomOf="@+id/title_detail"
@@ -96,18 +95,18 @@
                     app:layout_constraintTop_toTopOf="@+id/title_detail"
                     tools:text="English" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/plot"
-                android:textColor="?attr/editTextColor"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/year_ditale2" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/plot"
+                    android:textColor="?attr/editTextColor"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/year_ditale2" />
 
                 <TextView
                     android:id="@+id/textView11"
@@ -123,6 +122,7 @@
                     app:layout_constraintStart_toStartOf="@+id/textView4"
                     app:layout_constraintTop_toBottomOf="@+id/textView4"
                     tools:text="A documentary about World War I with never-before-seen footage to commemorate the centennial of the end of the war." />
+
                 <ImageButton
                     android:id="@+id/imageButton"
                     android:layout_width="wrap_content"
@@ -136,7 +136,9 @@
                     app:srcCompat="@drawable/ic_save_black_24dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
 

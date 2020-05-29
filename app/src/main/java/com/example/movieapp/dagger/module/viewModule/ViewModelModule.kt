@@ -43,7 +43,6 @@ abstract class ViewModelModule {
     @ViewModelKey(DetailNewsViewModel::class)
     internal abstract fun bindDetailNewsViewModel(viewModel: DetailNewsViewModel): ViewModel
 
-
     @Binds
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)

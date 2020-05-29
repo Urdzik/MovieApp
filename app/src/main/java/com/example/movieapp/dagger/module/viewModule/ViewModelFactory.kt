@@ -13,9 +13,7 @@ class ViewModelFactory @Inject constructor(private val viewModels: MutableMap<Cl
         if (usedViewModelMap.contains(modelClass)) {
             return usedViewModelMap[modelClass] as T
         }
-
-        val viewModelProvider = viewModels[modelClass]
-            ?: throw IllegalArgumentException(" model class $modelClass not found")
+        val viewModelProvider = viewModels[modelClass] ?: throw IllegalArgumentException(" model class $modelClass not found")
 
         val viewModel = viewModelProvider.get()
         usedViewModelMap[viewModel::class.java] = viewModel
