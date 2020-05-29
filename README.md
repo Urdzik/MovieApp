@@ -16,9 +16,9 @@
     <br/><br/>
 
     <div align = "center">
-     <img src = "https://github.com/Urdzik/MovieApp/blob/update-readme/readme/One.png?raw=true" width="220">
-     <img src = "https://github.com/Urdzik/MovieApp/blob/update-readme/readme/Two.png?raw=true" width="220">
-	<img src = "https://github.com/Urdzik/MovieApp/blob/update-readme/readme/Three.png?raw=true" width="220">
+     <img src = "https://github.com/Urdzik/MovieApp/blob/update-readme/readme/One.png?raw=true" width="280">
+     <img src = "https://github.com/Urdzik/MovieApp/blob/update-readme/readme/Two.png?raw=true" width="280">
+	<img src = "https://github.com/Urdzik/MovieApp/blob/update-readme/readme/Three.png?raw=true" width="280">
     </div>
 
 *  ### __ViewModel__
