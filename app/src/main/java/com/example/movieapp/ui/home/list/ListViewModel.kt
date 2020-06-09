@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.home.list
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.example.movieapp.model.network.MovieListSource
 import com.example.movieapp.model.network.data.ListMovie
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 class ListViewModel @Inject constructor(private  val networkSource: MovieListSource): ViewModel(){
 
@@ -37,18 +39,16 @@ class ListViewModel @Inject constructor(private  val networkSource: MovieListSou
     }
 
      fun getMovieList(category: String, page: Int) {
-        viewModelScope.launch {
-            try {
-                _playList.value = networkSource.fetchMovieList(category, "26f381d6ab8dd659b22d983cab9aa255", "ru", page)
-                _eventNetworkError.value = false
-                _isNetworkErrorShown.value = false
-
-            } catch (e: Exception) {
-                if (playList.value.isNullOrEmpty()) {
+                networkSource.fetchMovieList(category, "26f381d6ab8dd659b22d983cab9aa255", "ru", page)
+                    .subscribe({
+                    _playList.value = it
+                     _eventNetworkError.value = false
+                    _isNetworkErrorShown.value = false
+                },{
+                    Log.e("tag", it.toString())
+                    if (playList.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true
-                }
-            }
-        }
+                }})
     }
 
     fun displayPropertyDetails(movie: ListMovie) {
