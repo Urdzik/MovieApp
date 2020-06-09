@@ -72,6 +72,15 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
+
+
+    //Rx
+    implementation "io.reactivex.rxjava3:rxjava:3.0.3"
+    implementation"io.reactivex.rxjava3:rxkotlin:3.0.0"
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+    implementation 'com.github.pwittchen:reactivenetwork-rx2:3.0.0'
 
     //Parsing the JSON format
     implementation 'com.google.code.gson:gson:2.8.6'
