@@ -6,12 +6,12 @@ import kotlinx.android.parcel.Parcelize
 
 /** Data class for Retrofit request from OverviewFragment and getting small data of movie  */
 
-data class SmallMovie(
-    @SerializedName("results") val smallMovieList: List<SmallMovieList>,
+data class SmallMovieList(
+    @SerializedName("results") val smallMovieList: List<SmallMovie>,
     @SerializedName("page") val page: Int
 )
 @Parcelize
-data class SmallMovieList(
+data class SmallMovie(
     @SerializedName("id") val id: Int,
     @SerializedName("poster_path") val posterPath: String,
     @SerializedName("title") val title: String,

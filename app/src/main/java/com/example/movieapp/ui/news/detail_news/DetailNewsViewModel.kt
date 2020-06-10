@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.model.network.data.SmallMovie
 import com.example.movieapp.model.network.news.NewsSource
 import com.example.movieapp.utils.*
 import kotlinx.coroutines.Deferred
@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 class DetailNewsViewModel @Inject constructor(private val newsSource: NewsSource) : ViewModel() {
 
-    private val loadingMap = HashMap<String, Deferred<List<SmallMovieList>>>()
-    private val resultMap = HashMap<String, MutableLiveData<List<SmallMovieList>>>()
+    private val loadingMap = HashMap<String, Deferred<List<SmallMovie>>>()
+    private val resultMap = HashMap<String, MutableLiveData<List<SmallMovie>>>()
 
     private val newsTypes = listOf(ALL_NEWS, MOVIE_NEWS, TV_NEWS, PERSON_NEWS)
 
@@ -56,7 +56,7 @@ class DetailNewsViewModel @Inject constructor(private val newsSource: NewsSource
         }
     }
 
-    fun getWeeklyNews(type: String): LiveData<List<SmallMovieList>> {
+    fun getWeeklyNews(type: String): LiveData<List<SmallMovie>> {
         return resultMap[type] ?: MutableLiveData()
     }
 

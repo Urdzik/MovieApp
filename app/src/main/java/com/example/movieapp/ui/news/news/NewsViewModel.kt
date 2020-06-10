@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope as scope
-import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.model.network.data.SmallMovie
 import com.example.movieapp.model.network.news.NewsSource
 import com.example.movieapp.model.network.news.data.TvNew
 import com.example.movieapp.utils.ioReturnTask
@@ -13,9 +13,9 @@ import javax.inject.Inject
 
 class NewsViewModel @Inject constructor(private val newsSource: NewsSource) : ViewModel() {
 
-    val weeklyNewsLiveData: LiveData<List<SmallMovieList>>
+    val weeklyNewsLiveData: LiveData<List<SmallMovie>>
         get() = _weeklyNewsLiveData
-    private val _weeklyNewsLiveData = MutableLiveData<List<SmallMovieList>>()
+    private val _weeklyNewsLiveData = MutableLiveData<List<SmallMovie>>()
 
     val tvNewsLiveData: LiveData<List<TvNew>>
         get() = _tvNewsLiveData

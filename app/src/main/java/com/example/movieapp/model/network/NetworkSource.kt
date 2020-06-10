@@ -2,7 +2,7 @@ package com.example.movieapp.model.network
 
 import com.example.movieapp.model.network.data.ListMovie
 import com.example.movieapp.model.network.data.MovieInfo
-import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.model.network.data.SmallMovie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -18,9 +18,9 @@ class MovieListSource @Inject constructor(private val api: MovieApi) {
 
 class SmallMovieListSource @Inject constructor(private val api: MovieApi) {
     suspend fun fetchSmallMovieList(
-        category: String, key: String, language: String
-    ): List<SmallMovieList> = withContext(Dispatchers.IO) {
-        val playList = api.getListOfPosters(category, key, language)
+        key: String, language: String
+    ): List<SmallMovie> = withContext(Dispatchers.IO) {
+        val playList = api.getListOfPosters(key, language = language)
         playList.smallMovieList
     }
 }

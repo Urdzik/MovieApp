@@ -7,5 +7,5 @@ import kotlinx.android.parcel.Parcelize
 data class ParentListMovie (
     var title: String,
     var category: String,
-    var movieList: List<SmallMovieList>
+    var movieList: List<SmallMovie>
 ): Parcelable

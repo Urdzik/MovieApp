@@ -13,7 +13,7 @@ import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
-import com.example.movieapp.utils.adapters.OverviewAdapter
+import com.example.movieapp.utils.adapters.overview.OverviewAdapter
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -42,7 +42,9 @@ class OverviewFragment : Fragment() {
 
         binding.mainRv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        adapter = OverviewAdapter(viewModel)
+        adapter = OverviewAdapter(
+            viewModel
+        )
         binding.mainRv.adapter = adapter
 
         viewModel.fetchMoviesLists()
