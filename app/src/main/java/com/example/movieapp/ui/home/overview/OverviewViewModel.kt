@@ -60,70 +60,38 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
 
     private fun fetchMoviesLists() {
         Log.d("ViewModel", "load data")
-            try {
+        var i = 1
+        networkSource.fetchSmallMovieList(categoryList, "26f381d6ab8dd659b22d983cab9aa255", "ru")
+            .forEach { single ->
+                disposableBack.add(
+                    single.subscribe({
+                        when (i) {
+                            1 -> {
+                                _recViewingPlayList.value = it
+                                i++
+                            }
+                            2 -> {
+                                _topRatedPlayList.value = it
+                                i++
+                            }
+                            3 -> {
+                                _popularPlayList.value = it
+                                i++
+                            }
+                            4 -> {
+                                _nowPlayingPlayList.value = it
+                            }
+                        }
+                        _eventNetworkError.value = false
+                        _isNetworkErrorShown.value = false
 
-
-                val firstDisposable = networkSource.fetchSmallMovieList(
-                    "upcoming",
-                    "26f381d6ab8dd659b22d983cab9aa255",
-                    "ru"
-                ).subscribe({
-                    _recViewingPlayList.value = it
-                }, {
-                    Log.e("TAG", it.toString())
-                })
-
-
-                val secondDisposable = networkSource.fetchSmallMovieList(
-                    "top_rated",
-                    "26f381d6ab8dd659b22d983cab9aa255",
-                    "ru"
-                ).subscribe({
-                    _topRatedPlayList.value = it
-                }, {
-                    Log.e("TAG", it.toString())
-                })
-
-
-                val thirdDisposable = networkSource.fetchSmallMovieList(
-                    "popular",
-                    "26f381d6ab8dd659b22d983cab9aa255",
-                    "ru"
-                ).subscribe({
-                    _popularPlayList.value = it
-                }, {
-                    Log.e("TAG", it.toString())
-                })
-
-
-                val fourthDisposable = networkSource.fetchSmallMovieList(
-                    "now_playing",
-                    "26f381d6ab8dd659b22d983cab9aa255",
-                    "ru"
-                ).subscribe({
-                    _nowPlayingPlayList.value = it
-
-                }, {
-                    Log.e("TAG", it.toString())
-                })
-
-
-                disposableBack.addAll(
-                    firstDisposable,
-                    secondDisposable,
-                    thirdDisposable,
-                    fourthDisposable
+                    }, {
+                        if (topRatedPlayList.value.isNullOrEmpty() || recViewingPlayList.value.isNullOrEmpty() || popularPlayList.value.isNullOrEmpty() || nowPlayingPlayList.value.isNullOrEmpty()) {
+                            _eventNetworkError.value = true
+                        }
+                    })
                 )
-
-                _eventNetworkError.value = false
-                _isNetworkErrorShown.value = false
-
-            } catch (e: Exception) {
-                Log.e("TAG", e.toString())
-                if (topRatedPlayList.value.isNullOrEmpty() || recViewingPlayList.value.isNullOrEmpty() || popularPlayList.value.isNullOrEmpty() || nowPlayingPlayList.value.isNullOrEmpty()) {
-                    _eventNetworkError.value = true
-                }
-        }
+            }
     }
 
     fun displayPropertyDetails(movie: SmallMovieList) {
