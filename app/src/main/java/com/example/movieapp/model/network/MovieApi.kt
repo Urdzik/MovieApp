@@ -22,11 +22,11 @@ interface MovieApi {
 
 
     @GET("movie/{category}")
-     suspend  fun getListOfPosters(
+    fun getListOfPosters(
         @Path("category") category: String,
         @Query("api_key") key: String = API_KEY,
         @Query("language") language: String
-    ): SmallMovie
+    ): Single<SmallMovie>
 
 
     @GET("movie/{id}?api_key=$API_KEY&language=ru")

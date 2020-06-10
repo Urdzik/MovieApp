@@ -18,16 +18,15 @@ class MovieListSource @Inject constructor(private val api: MovieApi) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
-
 }
 
 class SmallMovieListSource @Inject constructor(private val api: MovieApi) {
-    suspend fun fetchSmallMovieList(
-        category: String, key: String, language: String
-    ): List<SmallMovieList> = withContext(Dispatchers.IO) {
-        val playList = api.getListOfPosters(category, key, language)
-        playList.smallMovieList
-    }
+     fun fetchSmallMovieList(category: String, key: String, language: String): Single<List<SmallMovieList>> {
+         return api.getListOfPosters(category, key, language)
+             .map { it.smallMovieList }
+             .subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+     }
 }
 
 class MovieDetailSource @Inject constructor(private val api: MovieApi) {

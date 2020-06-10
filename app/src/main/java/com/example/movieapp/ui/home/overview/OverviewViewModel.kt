@@ -5,13 +5,15 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.movieapp.model.network.SmallMovieListSource
 import com.example.movieapp.model.network.data.SmallMovieList
-import kotlinx.coroutines.launch
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class OverviewViewModel @Inject constructor(private val networkSource: SmallMovieListSource) : ViewModel() {
+
+    private var disposableBack = CompositeDisposable()
+    private val categoryList = listOf("upcoming", "top_rated", "popular", "now_playing")
 
     //LiveData object of movie
     private val _navigateToSelectProperty = MutableLiveData<SmallMovieList>()
@@ -58,21 +60,69 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
 
     private fun fetchMoviesLists() {
         Log.d("ViewModel", "load data")
-        viewModelScope.launch {
             try {
-                _recViewingPlayList.value = networkSource.fetchSmallMovieList("upcoming", "26f381d6ab8dd659b22d983cab9aa255", "ru")
-                _topRatedPlayList.value = networkSource.fetchSmallMovieList("top_rated", "26f381d6ab8dd659b22d983cab9aa255", "ru")
-                _popularPlayList.value = networkSource.fetchSmallMovieList("popular", "26f381d6ab8dd659b22d983cab9aa255", "ru")
-                _nowPlayingPlayList.value = networkSource.fetchSmallMovieList("now_playing", "26f381d6ab8dd659b22d983cab9aa255", "ru")
+
+
+                val firstDisposable = networkSource.fetchSmallMovieList(
+                    "upcoming",
+                    "26f381d6ab8dd659b22d983cab9aa255",
+                    "ru"
+                ).subscribe({
+                    _recViewingPlayList.value = it
+                }, {
+                    Log.e("TAG", it.toString())
+                })
+
+
+                val secondDisposable = networkSource.fetchSmallMovieList(
+                    "top_rated",
+                    "26f381d6ab8dd659b22d983cab9aa255",
+                    "ru"
+                ).subscribe({
+                    _topRatedPlayList.value = it
+                }, {
+                    Log.e("TAG", it.toString())
+                })
+
+
+                val thirdDisposable = networkSource.fetchSmallMovieList(
+                    "popular",
+                    "26f381d6ab8dd659b22d983cab9aa255",
+                    "ru"
+                ).subscribe({
+                    _popularPlayList.value = it
+                }, {
+                    Log.e("TAG", it.toString())
+                })
+
+
+                val fourthDisposable = networkSource.fetchSmallMovieList(
+                    "now_playing",
+                    "26f381d6ab8dd659b22d983cab9aa255",
+                    "ru"
+                ).subscribe({
+                    _nowPlayingPlayList.value = it
+
+                }, {
+                    Log.e("TAG", it.toString())
+                })
+
+
+                disposableBack.addAll(
+                    firstDisposable,
+                    secondDisposable,
+                    thirdDisposable,
+                    fourthDisposable
+                )
 
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
 
             } catch (e: Exception) {
+                Log.e("TAG", e.toString())
                 if (topRatedPlayList.value.isNullOrEmpty() || recViewingPlayList.value.isNullOrEmpty() || popularPlayList.value.isNullOrEmpty() || nowPlayingPlayList.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true
                 }
-            }
         }
     }
 
@@ -86,5 +136,10 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
 
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposableBack.dispose()
     }
 }

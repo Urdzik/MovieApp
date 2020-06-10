@@ -7,11 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.model.network.MovieListSource
 import com.example.movieapp.model.network.data.ListMovie
+import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 class ListViewModel @Inject constructor(private  val networkSource: MovieListSource): ViewModel(){
+
+    private lateinit var disposable: Disposable
 
     //LiveData object of movie
     private val _navigateToSelectProperty = MutableLiveData<ListMovie>()
@@ -34,12 +37,13 @@ class ListViewModel @Inject constructor(private  val networkSource: MovieListSou
         get() = _playList
 
 
+
     fun errorClickListener(category: String){
       getMovieList(category, 1)
     }
 
      fun getMovieList(category: String, page: Int) {
-                networkSource.fetchMovieList(category, "26f381d6ab8dd659b22d983cab9aa255", "ru", page)
+              disposable = networkSource.fetchMovieList(category, "26f381d6ab8dd659b22d983cab9aa255", "ru", page)
                     .subscribe({
                     _playList.value = it
                      _eventNetworkError.value = false
@@ -61,5 +65,10 @@ class ListViewModel @Inject constructor(private  val networkSource: MovieListSou
 
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable.dispose()
     }
 }
