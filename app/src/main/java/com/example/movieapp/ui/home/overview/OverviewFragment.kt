@@ -13,10 +13,8 @@ import com.example.movieapp.R
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
-import com.example.movieapp.ui.home.overview.groupie.ParentItem
+import com.example.movieapp.utils.adapters.OverviewAdapter
 import com.google.android.material.snackbar.Snackbar
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
 import javax.inject.Inject
 
 
@@ -27,9 +25,9 @@ class OverviewFragment : Fragment() {
 
     lateinit var viewModel: OverviewViewModel
     lateinit var binding: OverviewFragmentBinding
+    lateinit var adapter: OverviewAdapter
 
     private var errorSnackbar: Snackbar? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +36,26 @@ class OverviewFragment : Fragment() {
         App.appComponent.inject(this)
         binding = OverviewFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
+
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+
+        binding.mainRv.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        adapter = OverviewAdapter(viewModel)
+        binding.mainRv.adapter = adapter
+
+        viewModel.fetchMoviesLists()
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.parentListMovie.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+        })
 
         //Navigate to Detail Activity
         viewModel.navigateToSelectProperty.observe(viewLifecycleOwner, Observer {
@@ -51,39 +69,11 @@ class OverviewFragment : Fragment() {
             }
         })
 
-
         //Looking for the internet connection
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
             if (it) onNetworkError()
         })
-
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-
-        viewModel.fetchMoviesLists()
-
-        binding.mainRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
-
-            val item = viewModel.parentListMovie.value?.map { ParentItem(it) }
-            println("parentListMovie")
-            binding.mainRv.adapter = GroupAdapter<ViewHolder>().also { adapter ->
-
-
-                item?.let { adapter.update(it) }
-
-                println("GroupAdapter")
-            }
-
-
-
-
-
-
-        return binding.root
     }
-
-
 
     //Function will show a toast when there is no internet
     private fun onNetworkError() {
