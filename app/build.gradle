@@ -80,6 +80,8 @@ dependencies {
     implementation"io.reactivex.rxjava3:rxkotlin:3.0.0"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+    implementation 'com.jakewharton.rxbinding:rxbinding-support-v4:0.4.0'
+    implementation 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
     implementation 'com.github.pwittchen:reactivenetwork-rx2:3.0.0'
 
     //Parsing the JSON format

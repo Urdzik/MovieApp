@@ -7,6 +7,7 @@ import com.example.movieapp.ui.home.list.ListFragment
 import com.example.movieapp.ui.home.overview.OverviewFragment
 import com.example.movieapp.ui.news.detail_news.DetailNewsFragment
 import com.example.movieapp.ui.news.news.NewsFragment
+import com.example.movieapp.ui.search.SearchFragment
 import com.example.movieapp.ui.user.profile.ProfileFragment
 import com.example.movieapp.ui.user.profile.settings.SettingsFragment
 
@@ -24,4 +25,5 @@ interface AppComponent{
     fun inject(detailNewsFragment: DetailNewsFragment)
     fun inject(settingsFragment: SettingsFragment)
     fun inject(profileFragment: ProfileFragment)
+    fun inject(searchFragment: SearchFragment)
 }
