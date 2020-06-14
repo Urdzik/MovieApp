@@ -7,7 +7,7 @@
 
 # Files for the ART/Dalvik VM
 *.dex
-app/google-services.json
+
 # Java class files
 *.class
 
@@ -86,3 +86,8 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
+app/src/main/res/layout-v26/
+app/src/main/res/layoutd/
+app/src/main/res/layouts/
+app/src/release/
+app/google-services.json

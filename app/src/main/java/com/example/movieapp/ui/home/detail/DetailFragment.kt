@@ -52,6 +52,7 @@ class DetailFragment : Fragment() {
 
         if (id != null) {
             viewModel.getUserId(id)
+            println(" viewModel.checkForSavedMovie(id)")
             viewModel.checkForSavedMovie(id)
         }
 

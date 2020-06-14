@@ -75,27 +75,27 @@ class OverviewFragment : Fragment() {
     }
 
     //Saving scroll position
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        if (::binding.isLateinit) return
-
-            outState.putIntArray(
-                "ARTICLE_SCROLL_POSITION",
-                intArrayOf(binding.scrollView.scrollX, binding.scrollView.scrollY)
-            )
-    }
-
-    //Set scroll position
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        val position = savedInstanceState?.getIntArray("ARTICLE_SCROLL_POSITION")
-        if (position != null) binding.scrollView.post {
-            binding.scrollView.scrollTo(
-                position[0],
-                position[1]
-            )
-        }
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        if (::binding.isLateinit) return
+//
+//            outState.putIntArray(
+//                "ARTICLE_SCROLL_POSITION",
+//                intArrayOf(binding.scrollView.scrollX, binding.scrollView.scrollY)
+//            )
+//    }
+//
+//    //Set scroll position
+//    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+//        super.onViewStateRestored(savedInstanceState)
+//        val position = savedInstanceState?.getIntArray("ARTICLE_SCROLL_POSITION")
+//        if (position != null) binding.scrollView.post {
+//            binding.scrollView.scrollTo(
+//                position[0],
+//                position[1]
+//            )
+//        }
+//    }
 
     //Function will show a toast when there is no internet
     private fun onNetworkError() {
