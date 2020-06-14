@@ -1,8 +1,8 @@
 package com.example.movieapp.model.network.news
 
 import com.example.movieapp.model.network.data.SmallMovieList
-import com.example.movieapp.model.network.news.data.Result
-import com.example.movieapp.model.network.news.data.TvNew
+import com.example.movieapp.model.network.data.news.data.Result
+import com.example.movieapp.model.network.data.news.data.TvNew
 import com.example.movieapp.utils.ALL_NEWS
 import com.example.movieapp.utils.DAILY_NEWS
 import com.example.movieapp.utils.WEEKLY_NEWS

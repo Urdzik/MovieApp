@@ -1,6 +1,7 @@
 package com.example.movieapp.model.network
 
-import com.example.movieapp.model.network.data.SmallMovie
+import com.example.movieapp.model.network.data.search.GenreResponse
+import com.example.movieapp.model.network.data.search.SearchResponse
 import com.example.movieapp.utils.API_KEY
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
@@ -12,5 +13,11 @@ interface SearchApi {
         @Query("query") query: String,
         @Query("api_key") key: String = API_KEY,
         @Query("language") language: String = "en-US"
-    ): Single<SmallMovie>
+    ): Single<SearchResponse>
+
+    @GET("genre/movie/list")
+    fun getGenres(
+        @Query("api_key") key: String = API_KEY,
+        @Query("language") language: String = "en-US"
+    ): Single<GenreResponse>
 }

@@ -5,6 +5,7 @@ import com.example.movieapp.model.network.MovieApi
 import com.example.movieapp.model.network.news.NewsApi
 import com.example.movieapp.model.network.news.NewsSource
 import com.example.movieapp.model.network.MovieListSource
+import com.example.movieapp.model.network.SearchApi
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -61,6 +62,10 @@ class NetworkModule (private val application: Application) {
     @Provides
     @Reusable
     internal fun provideNewsApi(retrofit: Retrofit): NewsApi = retrofit.create(NewsApi::class.java)
+
+    @Provides
+    @Reusable
+    internal fun provideSearchApi(retrofit: Retrofit): SearchApi = retrofit.create(SearchApi::class.java)
 
     @Provides
     @Reusable

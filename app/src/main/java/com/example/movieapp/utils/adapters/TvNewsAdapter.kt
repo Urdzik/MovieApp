@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemCustomBinding
 import com.example.movieapp.databinding.ItemTvNewsBinding
-import com.example.movieapp.model.network.news.data.TvNew
+import com.example.movieapp.model.network.data.news.data.TvNew
 
 private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1

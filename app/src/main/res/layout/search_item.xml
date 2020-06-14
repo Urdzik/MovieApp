@@ -4,11 +4,11 @@
     <data>
 
         <variable
-            name="tvNew"
-            type="TvNew" />
+            name="movie"
+            type="com.example.movieapp.model.network.data.search.SearchItem" />
 
         <import type="android.view.View" />
-        <import type="com.example.movieapp.model.network.data.news.data.TvNew"/>
+
     </data>
 
 
@@ -39,34 +39,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{tvNew.backdropPath}"
+                app:imageUrl="@{movie.backdropPath}"
                 app:srcCompat="@drawable/ic_launcher_background" />
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/cardView"
-            app:layout_constraintBottom_toTopOf="@id/rating"
             android:layout_marginVertical="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="@{tvNew.name}" />
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{movie.name}"
+            app:layout_constraintBottom_toTopOf="@id/rating"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@id/cardView" />
 
+        <TextView
+            app:layout_constraintTop_toBottomOf="@id/name"
+            android:id="@+id/genres"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <RatingBar
             android:id="@+id/rating"
             style="@android:style/Widget.Material.RatingBar.Small"
             android:layout_width="80dp"
             android:layout_height="15dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="8dp"
+            android:hapticFeedbackEnabled="false"
             android:numStars="10"
-            android:rating="@{tvNew.vote_average}"
+            android:progressTint="@color/appColor"
+            android:rating="@{movie.voteAverage}"
+            android:secondaryProgressTint="@color/appColor"
             android:stepSize="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            app:layout_constraintTop_toBottomOf="@+id/genres" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

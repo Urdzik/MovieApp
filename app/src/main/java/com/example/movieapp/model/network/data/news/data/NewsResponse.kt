@@ -1,4 +1,4 @@
-package com.example.movieapp.model.network.news.data
+package com.example.movieapp.model.network.data.news.data
 
 data class NewsResponse(
     val page: Int,
