@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.home.overview
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
@@ -58,41 +59,41 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     }
 
 
+    @SuppressLint("NewApi")
     private fun fetchMoviesLists() {
         Log.d("ViewModel", "load data")
         var i = 1
         networkSource.fetchSmallMovieList(categoryList, "26f381d6ab8dd659b22d983cab9aa255", "ru")
-            .forEach { single ->
-                disposableBack.add(
-                    single.subscribe({
-                        when (i) {
-                            1 -> {
-                                _recViewingPlayList.value = it
-                                i++
-                            }
-                            2 -> {
-                                _topRatedPlayList.value = it
-                                i++
-                            }
-                            3 -> {
-                                _popularPlayList.value = it
-                                i++
-                            }
-                            4 -> {
-                                _nowPlayingPlayList.value = it
-                            }
+            .subscribe({
+                it.forEach {
+                    when (i) {
+                        1 -> {
+                            _recViewingPlayList.value = it
+                            i++
                         }
-                        _eventNetworkError.value = false
-                        _isNetworkErrorShown.value = false
+                        2 -> {
+                            _topRatedPlayList.value = it
+                            i++
+                        }
+                        3 -> {
+                            _popularPlayList.value = it
+                            i++
+                        }
+                        4 -> {
+                            _nowPlayingPlayList.value = it
+                        }
+                    } }
+                _eventNetworkError.value = false
+                _isNetworkErrorShown.value = false
 
-                    }, {
-                        if (topRatedPlayList.value.isNullOrEmpty() || recViewingPlayList.value.isNullOrEmpty() || popularPlayList.value.isNullOrEmpty() || nowPlayingPlayList.value.isNullOrEmpty()) {
-                            _eventNetworkError.value = true
-                        }
-                    })
-                )
-            }
+            }, {
+                if (topRatedPlayList.value.isNullOrEmpty() || recViewingPlayList.value.isNullOrEmpty() || popularPlayList.value.isNullOrEmpty() || nowPlayingPlayList.value.isNullOrEmpty()) {
+                    _eventNetworkError.value = true
+                }
+            })
+
     }
+
 
     fun displayPropertyDetails(movie: SmallMovieList) {
         _navigateToSelectProperty.value = movie

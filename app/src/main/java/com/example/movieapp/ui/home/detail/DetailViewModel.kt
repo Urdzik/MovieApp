@@ -32,9 +32,11 @@ class DetailViewModel @Inject constructor(private val movieDetailSource: MovieDe
 
 
     fun getSelectedMovieById(id: Int) {
-        viewModelScope.launch {
-            _selectProperty.value = movieDetailSource.fetchDetailInformationOfMovie(id)
-        }
+
+            movieDetailSource.fetchDetailInformationOfMovie(id).subscribe({
+                _selectProperty.value = it
+            },{})
+
     }
 
 
