@@ -46,6 +46,9 @@ class SearchFragment : Fragment() {
                 it.length > 2
             }
             .debounce(300, TimeUnit.MILLISECONDS)
+            .doOnNext {
+                //TODO("show progress")
+            }
             .observeOn(Schedulers.io())
             .switchMap {
                 apiRequest(it).toObservable()
