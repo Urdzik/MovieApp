@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.databinding.ItemListBinding
 import com.example.movieapp.model.network.data.ListMovie
-import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.model.network.data.SmallMovie
 
 class ListMovieAdapter(
     private val onClickListener: ClickListener,

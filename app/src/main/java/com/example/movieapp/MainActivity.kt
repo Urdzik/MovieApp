@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         //Function for Light-Dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
 
+
+
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
@@ -45,7 +47,6 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
         val navGraphIds = listOf(R.navigation.home, R.navigation.news, R.navigation.search, R.navigation.user)
 
         // Setup the bottom navigation view with a list of navigation graphs

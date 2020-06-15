@@ -7,6 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapp.model.network.SmallMovieListSource
+import com.example.movieapp.model.network.data.ParentListMovie
+import com.example.movieapp.model.network.data.SmallMovie
+import kotlinx.coroutines.launch
 import com.example.movieapp.model.network.data.SmallMovieList
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -17,8 +20,8 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     private val categoryList = listOf("upcoming", "top_rated", "popular", "now_playing")
 
     //LiveData object of movie
-    private val _navigateToSelectProperty = MutableLiveData<SmallMovieList>()
-    val navigateToSelectProperty: LiveData<SmallMovieList>
+    private val _navigateToSelectProperty = MutableLiveData<SmallMovie>()
+    val navigateToSelectProperty: LiveData<SmallMovie>
         get() = _navigateToSelectProperty
 
     //LiveData for show Progress Bar
@@ -31,30 +34,18 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+
+
     //LiveData of Top Rated movies
-    private var _topRatedPlayList = MutableLiveData<List<SmallMovieList>>()
-    val topRatedPlayList: LiveData<List<SmallMovieList>>
-        get() = _topRatedPlayList
+    private var _parentListMovie = MutableLiveData<List<ParentListMovie>>()
+    val parentListMovie: LiveData<List<ParentListMovie>>
+        get() = _parentListMovie
 
-    //LiveData of Popular movies
-    private var _popularPlayList = MutableLiveData<List<SmallMovieList>>()
-    val popularPlayList: LiveData<List<SmallMovieList>>
-        get() = _popularPlayList
-
-    //LiveData of now playing movies
-    private var _nowPlayingPlayList = MutableLiveData<List<SmallMovieList>>()
-    val nowPlayingPlayList: LiveData<List<SmallMovieList>>
-        get() = _nowPlayingPlayList
-
-    //LiveData of recommended movies
-    private var _recViewingPlayList = MutableLiveData<List<SmallMovieList>>()
-    val recViewingPlayList: LiveData<List<SmallMovieList>>
-        get() = _recViewingPlayList
 
     val errorClickListener = View.OnClickListener { fetchMoviesLists() }
 
     init {
-        Log.d("ViewModel", "init view model")
+        println("initialization viewModel")
         fetchMoviesLists()
     }
 
@@ -83,19 +74,43 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
                             _nowPlayingPlayList.value = it
                         }
                     } }
+     fun fetchMoviesLists() {
+
+        viewModelScope.launch {
+            try {
+
+                val topRated = networkSource.fetchSmallMovieList("top_rated", "ru")
+                val popular = networkSource.fetchSmallMovieList("popular",  "ru")
+                val nowPlaying = networkSource.fetchSmallMovieList("now_playing",  "ru")
+                val upcoming = networkSource.fetchSmallMovieList("upcoming", "ru")
+
+                _parentListMovie.value = listOf(
+                    ParentListMovie("Upcoming","upcoming", upcoming),
+                    ParentListMovie("Топ рейтинг","top_rated", topRated),
+                    ParentListMovie("Популярное","popular", popular),
+                    ParentListMovie("Сейчас в кино","now_playing", nowPlaying)
+                )
+
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
 
+
+            } catch (e: Exception) {
+                if (parentListMovie.value.isNullOrEmpty()) {
             }, {
                 if (topRatedPlayList.value.isNullOrEmpty() || recViewingPlayList.value.isNullOrEmpty() || popularPlayList.value.isNullOrEmpty() || nowPlayingPlayList.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true
                 }
+            }
+        }
+
             })
 
     }
 
 
-    fun displayPropertyDetails(movie: SmallMovieList) {
+
+    fun displayPropertyDetails(movie: SmallMovie) {
         _navigateToSelectProperty.value = movie
     }
 

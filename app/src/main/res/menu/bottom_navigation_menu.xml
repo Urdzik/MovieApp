@@ -4,13 +4,13 @@
     <item
         android:id="@+id/home"
         android:contentDescription="@string/home"
-        android:icon="@drawable/ic_public_black_24dp"
+        android:icon="@drawable/ic_location_city_black_24dp"
         android:title="@string/home" />
 
     <item
         android:contentDescription="@string/news"
         android:id="@+id/news"
-        android:icon="@drawable/ic_location_city_black_24dp"
+        android:icon="@drawable/ic_public_black_24dp"
         android:title="@string/news" />
 
     <item
