@@ -58,11 +58,5 @@ class NetworkModule (private val application: Application) {
     @Reusable
     internal fun provideRemoteSource(api: MovieApi): MovieListSource = MovieListSource(api)
 
-    @Provides
-    @Reusable
-    internal fun provideNewsApi(retrofit: Retrofit): NewsApi = retrofit.create(NewsApi::class.java)
 
-    @Provides
-    @Reusable
-    internal fun provideNewsSource(api: NewsApi): NewsSource = NewsSource(api)
 }
