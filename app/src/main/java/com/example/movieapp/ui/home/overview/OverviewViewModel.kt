@@ -86,11 +86,7 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
                     _eventNetworkError.value = true}
             }
     )
-
-
     }
-
-
 
     fun displayPropertyDetails(movie: SmallMovieList) {
         _navigateToSelectProperty.value = movie
