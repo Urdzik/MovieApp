@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope as scope
 import com.example.movieapp.model.network.data.SmallMovieList
-import com.example.movieapp.model.network.news.NewsSource
-import com.example.movieapp.model.network.news.data.TvNew
+
 import com.example.movieapp.utils.ioReturnTask
 import kotlinx.coroutines.launch
 import javax.inject.Inject

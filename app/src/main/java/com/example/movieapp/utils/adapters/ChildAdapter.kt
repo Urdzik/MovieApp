@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.databinding.ItemCustomBinding
 import com.example.movieapp.model.network.data.SmallMovie
+import com.example.movieapp.model.network.data.SmallMovieList
 import com.example.movieapp.ui.home.overview.OverviewFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +26,7 @@ class ChildAdapter(private val clickListener: MovieListener) :
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
-    fun addHeaderAndSubmitList(list: List<SmallMovie>?) {
+    fun addHeaderAndSubmitList(list: List<SmallMovieList>?) {
         adapterScope.launch {
             val items = when (list) {
                 null -> listOf(DataItemChild.Header)
@@ -86,7 +87,7 @@ class ChildAdapter(private val clickListener: MovieListener) :
     class MovieViewHolder private constructor(val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: SmallMovie) {
+        fun bind(item: SmallMovieList) {
             binding.movie = item
             binding.executePendingBindings()
         }
@@ -99,8 +100,8 @@ class ChildAdapter(private val clickListener: MovieListener) :
             }
         }
     }
-    class MovieListener(val clickListener: (movie: SmallMovie) -> Unit) {
-        fun onClick(movie: SmallMovie) = clickListener(movie)
+    class MovieListener(val clickListener: (movie: SmallMovieList) -> Unit) {
+        fun onClick(movie: SmallMovieList) = clickListener(movie)
     }
 }
 
@@ -117,7 +118,7 @@ class ChildDiffCallback : DiffUtil.ItemCallback<DataItemChild>() {
 
 
 sealed class DataItemChild {
-    data class MovieItem(val movie: SmallMovie) : DataItemChild() {
+    data class MovieItem(val movie: SmallMovieList) : DataItemChild() {
         override val id = movie.id.toLong()
     }
 

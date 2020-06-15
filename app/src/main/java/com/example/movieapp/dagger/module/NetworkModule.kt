@@ -2,8 +2,7 @@ package com.example.movieapp.dagger.module
 
 import android.app.Application
 import com.example.movieapp.model.network.MovieApi
-import com.example.movieapp.model.network.news.NewsApi
-import com.example.movieapp.model.network.news.NewsSource
+
 import com.example.movieapp.model.network.MovieListSource
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module

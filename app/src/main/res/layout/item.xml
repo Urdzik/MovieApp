@@ -5,7 +5,7 @@
 
             <variable
                 name="movie"
-                type="com.example.movieapp.model.network.data.SmallMovie" />
+                type="com.example.movieapp.model.network.data.SmallMovieList" />
 
             <import type="android.view.View" />
 

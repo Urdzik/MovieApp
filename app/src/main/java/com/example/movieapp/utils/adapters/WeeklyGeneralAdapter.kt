@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemRecViewingBinding
 import com.example.movieapp.model.network.data.SmallMovie
+import com.example.movieapp.model.network.data.SmallMovieList
 
-class WeeklyGeneralNewsAdapter : ListAdapter<SmallMovie, WeeklyGeneralViewHolder>(MovieRecDiffCallback()) {
+class WeeklyGeneralNewsAdapter : ListAdapter<SmallMovieList, WeeklyGeneralViewHolder>(MovieRecDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeeklyGeneralViewHolder =
         WeeklyGeneralViewHolder(ItemRecViewingBinding.inflate(LayoutInflater.from(parent.context)))
@@ -20,7 +21,7 @@ class WeeklyGeneralNewsAdapter : ListAdapter<SmallMovie, WeeklyGeneralViewHolder
 }
 
 class WeeklyGeneralViewHolder(private val binding: ItemRecViewingBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(movie: SmallMovie) {
+    fun bind(movie: SmallMovieList) {
         Log.d("bind", "bind movie: ${movie.title}")
 
         binding.movie = movie

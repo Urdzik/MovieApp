@@ -20,8 +20,8 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     private val categoryList = listOf("upcoming", "top_rated", "popular", "now_playing")
 
     //LiveData object of movie
-    private val _navigateToSelectProperty = MutableLiveData<SmallMovie>()
-    val navigateToSelectProperty: LiveData<SmallMovie>
+    private val _navigateToSelectProperty = MutableLiveData<SmallMovieList>()
+    val navigateToSelectProperty: LiveData<SmallMovieList>
         get() = _navigateToSelectProperty
 
     //LiveData for show Progress Bar
@@ -50,67 +50,49 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     }
 
 
-    @SuppressLint("NewApi")
-    private fun fetchMoviesLists() {
+
+     fun fetchMoviesLists() {
         Log.d("ViewModel", "load data")
+         val mListMovie = ArrayList<ParentListMovie>()
         var i = 1
         networkSource.fetchSmallMovieList(categoryList, "26f381d6ab8dd659b22d983cab9aa255", "ru")
             .subscribe({
                 it.forEach {
                     when (i) {
                         1 -> {
-                            _recViewingPlayList.value = it
+                           mListMovie.add( ParentListMovie("Upcoming","upcoming", it))
+
                             i++
                         }
-                        2 -> {
-                            _topRatedPlayList.value = it
+                        2 -> {  mListMovie.add(ParentListMovie("Топ рейтинг","top_rated", it))
+
+
                             i++
                         }
-                        3 -> {
-                            _popularPlayList.value = it
+                        3 -> { mListMovie.add(ParentListMovie("Популярное","popular", it))
+
+
                             i++
                         }
-                        4 -> {
-                            _nowPlayingPlayList.value = it
+                        4 -> { mListMovie.add(ParentListMovie("Сейчас в кино","now_playing", it))
+
                         }
                     } }
-     fun fetchMoviesLists() {
-
-        viewModelScope.launch {
-            try {
-
-                val topRated = networkSource.fetchSmallMovieList("top_rated", "ru")
-                val popular = networkSource.fetchSmallMovieList("popular",  "ru")
-                val nowPlaying = networkSource.fetchSmallMovieList("now_playing",  "ru")
-                val upcoming = networkSource.fetchSmallMovieList("upcoming", "ru")
-
-                _parentListMovie.value = listOf(
-                    ParentListMovie("Upcoming","upcoming", upcoming),
-                    ParentListMovie("Топ рейтинг","top_rated", topRated),
-                    ParentListMovie("Популярное","popular", popular),
-                    ParentListMovie("Сейчас в кино","now_playing", nowPlaying)
-                )
-
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
-
-
-            } catch (e: Exception) {
+            _parentListMovie.value = mListMovie
+            },{
                 if (parentListMovie.value.isNullOrEmpty()) {
-            }, {
-                if (topRatedPlayList.value.isNullOrEmpty() || recViewingPlayList.value.isNullOrEmpty() || popularPlayList.value.isNullOrEmpty() || nowPlayingPlayList.value.isNullOrEmpty()) {
-                    _eventNetworkError.value = true
-                }
+                    _eventNetworkError.value = true}
             }
-        }
+    )
 
-            })
 
     }
 
 
 
-    fun displayPropertyDetails(movie: SmallMovie) {
+    fun displayPropertyDetails(movie: SmallMovieList) {
         _navigateToSelectProperty.value = movie
     }
 
