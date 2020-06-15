@@ -6,6 +6,8 @@ import com.example.movieapp.model.network.data.SmallMovieList
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.functions.Function
+import io.reactivex.rxjava3.kotlin.toFlowable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -25,12 +27,14 @@ class SmallMovieListSource @Inject constructor(private val api: MovieApi) {
         language: String
     ): Single<List<List<SmallMovieList>>> {
         return Flowable.fromIterable(categories)
-            .flatMap { category ->
+            .concatMap { category ->
                 api.getListOfPosters(category, key, language)
                     .toFlowable()
                     .subscribeOn(Schedulers.io())
             }
-            .map { it.smallMovieList }
+            .map {
+                it.smallMovieList
+            }
             .toList()
             .observeOn(AndroidSchedulers.mainThread())
     }
