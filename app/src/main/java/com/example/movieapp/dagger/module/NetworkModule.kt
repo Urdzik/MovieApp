@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.movieapp.model.network.MovieApi
 
 import com.example.movieapp.model.network.MovieListSource
+import com.example.movieapp.model.network.SearchApi
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -58,4 +59,11 @@ class NetworkModule (private val application: Application) {
     internal fun provideRemoteSource(api: MovieApi): MovieListSource = MovieListSource(api)
 
 
+    @Provides
+    @Reusable
+    internal fun provideSearchApi(retrofit: Retrofit): SearchApi = retrofit.create(SearchApi::class.java)
+
+    @Provides
+    @Reusable
+    internal fun provideNewsSource(api: NewsApi): NewsSource = NewsSource(api)
 }
