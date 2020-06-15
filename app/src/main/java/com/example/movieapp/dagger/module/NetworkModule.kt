@@ -2,8 +2,7 @@ package com.example.movieapp.dagger.module
 
 import android.app.Application
 import com.example.movieapp.model.network.MovieApi
-import com.example.movieapp.model.network.news.NewsApi
-import com.example.movieapp.model.network.news.NewsSource
+
 import com.example.movieapp.model.network.MovieListSource
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
@@ -58,11 +57,5 @@ class NetworkModule (private val application: Application) {
     @Reusable
     internal fun provideRemoteSource(api: MovieApi): MovieListSource = MovieListSource(api)
 
-    @Provides
-    @Reusable
-    internal fun provideNewsApi(retrofit: Retrofit): NewsApi = retrofit.create(NewsApi::class.java)
 
-    @Provides
-    @Reusable
-    internal fun provideNewsSource(api: NewsApi): NewsSource = NewsSource(api)
 }

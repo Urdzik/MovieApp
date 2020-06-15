@@ -2,14 +2,13 @@ package com.example.movieapp.model.network
 
 import com.example.movieapp.model.network.data.ListMovie
 import com.example.movieapp.model.network.data.MovieInfo
-import com.example.movieapp.model.network.data.Results
 import com.example.movieapp.model.network.data.SmallMovieList
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.functions.Function
+import io.reactivex.rxjava3.kotlin.toFlowable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MovieListSource @Inject constructor(private val api: MovieApi) {
@@ -22,22 +21,33 @@ class MovieListSource @Inject constructor(private val api: MovieApi) {
 }
 
 class SmallMovieListSource @Inject constructor(private val api: MovieApi) {
-     fun fetchSmallMovieList(category: List<String>, key: String, language: String): List<Single<List<SmallMovieList>>> {
-         val mutableCollection = ArrayList<Single<List<SmallMovieList>>>()
-         category.forEach {category ->
-             mutableCollection.add(api.getListOfPosters(category, key, language)
-                 .map { it.smallMovieList }
-                 .subscribeOn(Schedulers.io())
-                 .observeOn(AndroidSchedulers.mainThread()))
-         }
+    fun fetchSmallMovieList(
+        categories: List<String>,
+        key: String,
+        language: String
+    ): Single<List<List<SmallMovieList>>> {
+        return Flowable.fromIterable(categories)
+            .concatMap { category ->
+                api.getListOfPosters(category, key, language)
+                    .toFlowable()
+                    .subscribeOn(Schedulers.io())
+            }
+            .map {
+                it.smallMovieList
+            }
+            .toList()
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 
-         return  mutableCollection
-     }
 }
 
 class MovieDetailSource @Inject constructor(private val api: MovieApi) {
-    suspend fun fetchDetailInformationOfMovie(id: Int): MovieInfo = withContext(Dispatchers.IO) {
-        val infoOfMovie = api.getMovieByID(id)
-        infoOfMovie
+    fun fetchDetailInformationOfMovie(id: Int): Single<MovieInfo> {
+        return api.getMovieByID(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 }
+
+
+

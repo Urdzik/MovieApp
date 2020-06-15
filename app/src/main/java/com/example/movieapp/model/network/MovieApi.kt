@@ -30,5 +30,5 @@ interface MovieApi {
 
 
     @GET("movie/{id}?api_key=$API_KEY&language=ru")
-    suspend fun getMovieByID(@Path("id") id: Int): MovieInfo
+     fun getMovieByID(@Path("id") id: Int): Single<MovieInfo>
 }

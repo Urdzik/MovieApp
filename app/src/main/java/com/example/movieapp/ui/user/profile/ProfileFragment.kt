@@ -20,7 +20,6 @@ import com.example.movieapp.ui.home.overview.OverviewFragmentDirections
 import com.example.movieapp.utils.LOGIN_TAG
 import com.example.movieapp.utils.RC_SIGN_IN
 import com.example.movieapp.utils.SHARED_KEY
-import com.example.movieapp.utils.adapters.PopularMovieAdapter
 import com.example.movieapp.utils.adapters.SaveInUserAdapter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount

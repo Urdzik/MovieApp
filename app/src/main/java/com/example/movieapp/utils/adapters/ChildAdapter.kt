@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.databinding.ItemCustomBinding
+import com.example.movieapp.model.network.data.SmallMovie
 import com.example.movieapp.model.network.data.SmallMovieList
 import com.example.movieapp.ui.home.overview.OverviewFragmentDirections
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +20,8 @@ import kotlinx.coroutines.withContext
 private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
 
-class TopRatedMovieAdapter(private val clickListener: MovieListener) : ListAdapter<DataItem, RecyclerView.ViewHolder>(MovieTopRatedDiffCallback()) {
+class ChildAdapter(private val clickListener: MovieListener) :
+    ListAdapter<DataItemChild, RecyclerView.ViewHolder>(ChildDiffCallback()) {
 
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -27,8 +29,8 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) : ListAdapt
     fun addHeaderAndSubmitList(list: List<SmallMovieList>?) {
         adapterScope.launch {
             val items = when (list) {
-                null -> listOf(DataItem.Header)
-                else -> list.map { DataItem.MovieItem(it) } + listOf(DataItem.Header)
+                null -> listOf(DataItemChild.Header)
+                else -> list.map { DataItemChild.MovieItem(it) } + listOf(DataItemChild.Header)
             }
             withContext(Dispatchers.Main) {
                 submitList(items)
@@ -41,10 +43,9 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) : ListAdapt
         when (holder) {
 
             is MovieViewHolder -> {
-                val movieItem = getItem(position) as DataItem.MovieItem
+                val movieItem = getItem(position) as DataItemChild.MovieItem
                 holder.itemView.setOnClickListener {
                     clickListener.onClick(movieItem.movie)
-
                 }
 
                 holder.bind(movieItem.movie)
@@ -65,8 +66,8 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) : ListAdapt
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is DataItem.Header -> ITEM_VIEW_TYPE_HEADER
-            is DataItem.MovieItem -> ITEM_VIEW_TYPE_ITEM
+            is DataItemChild.Header -> ITEM_VIEW_TYPE_HEADER
+            is DataItemChild.MovieItem -> ITEM_VIEW_TYPE_ITEM
         }
     }
 
@@ -76,7 +77,7 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) : ListAdapt
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemCustomBinding.inflate(layoutInflater)
                 binding.button.setOnClickListener {
-                    binding.root.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToListFragment("top_rated"))
+                    binding.root.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToListFragment("now_playing"))
                 }
                 return TextViewHolder(binding)
             }
@@ -99,33 +100,33 @@ class TopRatedMovieAdapter(private val clickListener: MovieListener) : ListAdapt
             }
         }
     }
+    class MovieListener(val clickListener: (movie: SmallMovieList) -> Unit) {
+        fun onClick(movie: SmallMovieList) = clickListener(movie)
+    }
 }
 
-class MovieTopRatedDiffCallback : DiffUtil.ItemCallback<DataItem>() {
-    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+class ChildDiffCallback : DiffUtil.ItemCallback<DataItemChild>() {
+    override fun areItemsTheSame(oldItem: DataItemChild, newItem: DataItemChild): Boolean {
         return oldItem.id == newItem.id
     }
 
     @SuppressLint("DiffUtilEquals")
-    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+    override fun areContentsTheSame(oldItem: DataItemChild, newItem: DataItemChild): Boolean {
         return oldItem == newItem
     }
 }
 
 
-sealed class DataItem {
-    data class MovieItem(val movie: SmallMovieList) : DataItem() {
+sealed class DataItemChild {
+    data class MovieItem(val movie: SmallMovieList) : DataItemChild() {
         override val id = movie.id.toLong()
     }
 
-    object Header : DataItem() {
+    object Header : DataItemChild() {
         override val id = Long.MAX_VALUE
     }
 
     abstract val id: Long
 }
 
-class MovieListener(val clickListener: (movie: SmallMovieList) -> Unit) {
-    fun onClick(movie: SmallMovieList) = clickListener(movie)
-}
 

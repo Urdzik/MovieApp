@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ItemRecViewingBinding
+import com.example.movieapp.model.network.data.SmallMovie
 import com.example.movieapp.model.network.data.SmallMovieList
 import com.example.movieapp.utils.IMAGE_BASE_PATH
 
@@ -43,7 +44,6 @@ class RecViewingMovieAdapter(private val onClickListener: ClickListener) :
                 )
                 .into(binding.posterImage)
             binding.movie = movie
-
         }
     }
 

@@ -1,14 +1,12 @@
 package com.example.movieapp.utils.adapters
 
-import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemRecViewingBinding
+import com.example.movieapp.model.network.data.SmallMovie
 import com.example.movieapp.model.network.data.SmallMovieList
 
 class WeeklyGeneralNewsAdapter : ListAdapter<SmallMovieList, WeeklyGeneralViewHolder>(MovieRecDiffCallback()) {
@@ -35,3 +33,6 @@ class WeeklyGeneralViewHolder(private val binding: ItemRecViewingBinding) : Recy
         }
     }
 }
+
+
+

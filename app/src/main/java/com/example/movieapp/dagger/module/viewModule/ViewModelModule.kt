@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.ui.home.detail.DetailViewModel
 import com.example.movieapp.ui.home.list.ListViewModel
 import com.example.movieapp.ui.home.overview.OverviewViewModel
-import com.example.movieapp.ui.news.detail_news.DetailNewsViewModel
 import com.example.movieapp.ui.news.news.NewsViewModel
 import com.example.movieapp.ui.search.SearchViewModel
 import com.example.movieapp.ui.user.profile.ProfileViewModel
@@ -29,20 +28,15 @@ abstract class ViewModelModule {
     @ViewModelKey(DetailViewModel::class)
     internal abstract fun bindDetailViewModel(viewModel: DetailViewModel): ViewModel
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(NewsViewModel::class)
-    internal abstract fun bindNewsViewModel(viewModel: NewsViewModel): ViewModel
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(NewsViewModel::class)
+//    internal abstract fun bindNewsViewModel(viewModel: NewsViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(ListViewModel::class)
     internal abstract fun bindListViewModel(viewModel: ListViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(DetailNewsViewModel::class)
-    internal abstract fun bindDetailNewsViewModel(viewModel: DetailNewsViewModel): ViewModel
 
     @Binds
     @IntoMap

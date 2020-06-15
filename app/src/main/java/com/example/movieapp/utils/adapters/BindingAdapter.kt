@@ -5,12 +5,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.R
 import com.example.movieapp.model.network.data.Genres
-import com.example.movieapp.model.network.data.SmallMovieList
 import com.example.movieapp.utils.IMAGE_BASE_PATH
 import com.google.firebase.auth.FirebaseUser
 

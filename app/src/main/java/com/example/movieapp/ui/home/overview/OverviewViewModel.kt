@@ -1,11 +1,15 @@
 package com.example.movieapp.ui.home.overview
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapp.model.network.SmallMovieListSource
+import com.example.movieapp.model.network.data.ParentListMovie
+import com.example.movieapp.model.network.data.SmallMovie
+import kotlinx.coroutines.launch
 import com.example.movieapp.model.network.data.SmallMovieList
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -30,68 +34,58 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+
+
     //LiveData of Top Rated movies
-    private var _topRatedPlayList = MutableLiveData<List<SmallMovieList>>()
-    val topRatedPlayList: LiveData<List<SmallMovieList>>
-        get() = _topRatedPlayList
+    private var _parentListMovie = MutableLiveData<List<ParentListMovie>>()
+    val parentListMovie: LiveData<List<ParentListMovie>>
+        get() = _parentListMovie
 
-    //LiveData of Popular movies
-    private var _popularPlayList = MutableLiveData<List<SmallMovieList>>()
-    val popularPlayList: LiveData<List<SmallMovieList>>
-        get() = _popularPlayList
-
-    //LiveData of now playing movies
-    private var _nowPlayingPlayList = MutableLiveData<List<SmallMovieList>>()
-    val nowPlayingPlayList: LiveData<List<SmallMovieList>>
-        get() = _nowPlayingPlayList
-
-    //LiveData of recommended movies
-    private var _recViewingPlayList = MutableLiveData<List<SmallMovieList>>()
-    val recViewingPlayList: LiveData<List<SmallMovieList>>
-        get() = _recViewingPlayList
 
     val errorClickListener = View.OnClickListener { fetchMoviesLists() }
 
     init {
-        Log.d("ViewModel", "init view model")
+        println("initialization viewModel")
         fetchMoviesLists()
     }
 
 
-    private fun fetchMoviesLists() {
+
+     fun fetchMoviesLists() {
         Log.d("ViewModel", "load data")
+         val mListMovie = ArrayList<ParentListMovie>()
         var i = 1
         networkSource.fetchSmallMovieList(categoryList, "26f381d6ab8dd659b22d983cab9aa255", "ru")
-            .forEach { single ->
-                disposableBack.add(
-                    single.subscribe({
-                        when (i) {
-                            1 -> {
-                                _recViewingPlayList.value = it
-                                i++
-                            }
-                            2 -> {
-                                _topRatedPlayList.value = it
-                                i++
-                            }
-                            3 -> {
-                                _popularPlayList.value = it
-                                i++
-                            }
-                            4 -> {
-                                _nowPlayingPlayList.value = it
-                            }
-                        }
-                        _eventNetworkError.value = false
-                        _isNetworkErrorShown.value = false
+            .subscribe({
+                it.forEach {
+                    when (i) {
+                        1 -> {
+                           mListMovie.add( ParentListMovie("Upcoming","upcoming", it))
 
-                    }, {
-                        if (topRatedPlayList.value.isNullOrEmpty() || recViewingPlayList.value.isNullOrEmpty() || popularPlayList.value.isNullOrEmpty() || nowPlayingPlayList.value.isNullOrEmpty()) {
-                            _eventNetworkError.value = true
+                            i++
                         }
-                    })
-                )
+                        2 -> {  mListMovie.add(ParentListMovie("Топ рейтинг","top_rated", it))
+
+
+                            i++
+                        }
+                        3 -> { mListMovie.add(ParentListMovie("Популярное","popular", it))
+
+
+                            i++
+                        }
+                        4 -> { mListMovie.add(ParentListMovie("Сейчас в кино","now_playing", it))
+
+                        }
+                    } }
+                _eventNetworkError.value = false
+                _isNetworkErrorShown.value = false
+            _parentListMovie.value = mListMovie
+            },{
+                if (parentListMovie.value.isNullOrEmpty()) {
+                    _eventNetworkError.value = true}
             }
+    )
     }
 
     fun displayPropertyDetails(movie: SmallMovieList) {
