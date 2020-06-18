@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.SearchItemBinding
 import com.example.movieapp.model.network.data.search.SearchItem
 
-class SearchAdapter: ListAdapter<SearchItem, SearchViewHolder>(SearchDiffUtil()) {
+class SearchAdapter(private val onClickListener: ClickListener) :
+    ListAdapter<SearchItem, SearchViewHolder>(SearchDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         return SearchViewHolder(SearchItemBinding.inflate(LayoutInflater.from(parent.context)))
@@ -16,6 +17,13 @@ class SearchAdapter: ListAdapter<SearchItem, SearchViewHolder>(SearchDiffUtil())
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(getItem(position))
+        }
+    }
+
+    class ClickListener(val clickListener: (movie: SearchItem) -> Unit) {
+        fun onClick(movie: SearchItem) = clickListener(movie)
     }
 }
 

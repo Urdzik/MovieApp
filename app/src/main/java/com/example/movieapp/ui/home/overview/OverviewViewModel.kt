@@ -51,10 +51,10 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
         Log.d("ViewModel", "load data")
 
         val titleCategoryMap = hashMapOf(
-            1 to ("Upcoming" to "upcoming"),
+            1 to ("Сейчас в кино" to "now_playing"),
             2 to ("Топ рейтинг" to "top_rated"),
             3 to ("Популярное" to "popular"),
-            4 to ("Сейчас в кино" to "now_playing")
+            4 to ("Рекомендации" to "upcoming")
         )
 
         networkSource.fetchSmallMovieList(categoryList, "26f381d6ab8dd659b22d983cab9aa255", "ru")
