@@ -7,12 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemParentBinding
 import com.example.movieapp.databinding.ItemRecBinding
-import com.example.movieapp.databinding.ItemRecViewingBinding
-import com.example.movieapp.model.network.data.ParentListMovie
-import com.example.movieapp.model.network.data.SmallMovie
+import com.example.movieapp.model.network.data.movie.ParentListMovie
 import com.example.movieapp.ui.home.overview.OverviewViewModel
 import com.example.movieapp.utils.adapters.ChildAdapter
-import com.example.movieapp.utils.adapters.MovieRecDiffCallback
 
 const val UPCOMING_HOLDER = 0
 const val DEFAULT_HOLDER = 1
@@ -69,7 +66,6 @@ class CollectionHolder(
 
         adapter.addHeaderAndSubmitList(parentListMovie.movieList)
     }
-
 }
 
 class UpcomingHolder(

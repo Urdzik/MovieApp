@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.databinding.ItemListBinding
-import com.example.movieapp.model.network.data.ListMovie
-import com.example.movieapp.model.network.data.SmallMovie
+import com.example.movieapp.model.network.data.movie.ListMovie
 
 class ListMovieAdapter(
     private val onClickListener: ClickListener,
@@ -46,11 +45,8 @@ class ListMovieAdapter(
         }
     }
 
-
     //Class for click by element
     class ClickListener(val clickListener: (movie: ListMovie) -> Unit) {
         fun onClick(movie: ListMovie) = clickListener(movie)
     }
-
-
 }

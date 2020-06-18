@@ -20,7 +20,6 @@ interface AppComponent{
     fun inject(overviewFragment: OverviewFragment)
     fun inject(detailFragment: DetailFragment)
     fun inject(listFragment: ListFragment)
-//    fun inject(newsFragment: NewsFragment)
     fun inject(settingsFragment: SettingsFragment)
     fun inject(profileFragment: ProfileFragment)
     fun inject(searchFragment: SearchFragment)

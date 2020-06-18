@@ -41,11 +41,7 @@ class SettingsFragment : Fragment() {
 
             editor.putString(SHARED_KEY, "null")
             editor.commit();
-
         }
-
-
-
         return binding.root
     }
 }

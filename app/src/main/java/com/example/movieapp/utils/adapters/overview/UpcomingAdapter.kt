@@ -1,13 +1,13 @@
 package com.example.movieapp.utils.adapters.overview
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemRecViewingBinding
-import com.example.movieapp.model.network.data.SmallMovie
-import com.example.movieapp.model.network.data.SmallMovieList
-import com.example.movieapp.utils.adapters.MovieRecDiffCallback
+import com.example.movieapp.model.network.data.movie.SmallMovieList
 
 class UpcomingAdapter : ListAdapter<SmallMovieList, UpcomingAdapter.UpcomingInnerHolder>(MovieRecDiffCallback()) {
 
@@ -28,5 +28,15 @@ class UpcomingAdapter : ListAdapter<SmallMovieList, UpcomingAdapter.UpcomingInne
         fun bind(smallMovie: SmallMovieList) {
             binding.movie = smallMovie
         }
+    }
+}
+class MovieRecDiffCallback : DiffUtil.ItemCallback<SmallMovieList>() {
+    override fun areItemsTheSame(oldItem: SmallMovieList, newItem: SmallMovieList): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: SmallMovieList, newItem: SmallMovieList): Boolean {
+        return oldItem == newItem
     }
 }

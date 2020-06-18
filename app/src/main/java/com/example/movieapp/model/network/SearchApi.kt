@@ -12,12 +12,12 @@ interface SearchApi {
     fun getListOfPosters(
         @Query("query") query: String,
         @Query("api_key") key: String = API_KEY,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String = "ru"
     ): Single<SearchResponse>
 
     @GET("genre/movie/list")
     fun getGenres(
         @Query("api_key") key: String = API_KEY,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String = "ru"
     ): Single<GenreResponse>
 }

@@ -28,11 +28,6 @@ abstract class ViewModelModule {
     @ViewModelKey(DetailViewModel::class)
     internal abstract fun bindDetailViewModel(viewModel: DetailViewModel): ViewModel
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(NewsViewModel::class)
-//    internal abstract fun bindNewsViewModel(viewModel: NewsViewModel): ViewModel
-
     @Binds
     @IntoMap
     @ViewModelKey(ListViewModel::class)
@@ -47,7 +42,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SearchViewModel::class)
     internal abstract fun bindSearchViewModel(viewModel: SearchViewModel): ViewModel
-
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

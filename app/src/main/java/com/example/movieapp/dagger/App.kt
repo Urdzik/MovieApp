@@ -5,9 +5,11 @@ import com.example.movieapp.dagger.component.AppComponent
 import com.example.movieapp.dagger.component.DaggerAppComponent
 import com.example.movieapp.dagger.module.NetworkModule
 
-class App : Application(){
+class App : Application() {
 
-    companion object{ lateinit var appComponent: AppComponent }
+    companion object {
+        lateinit var appComponent: AppComponent
+    }
 
     override fun onCreate() {
         super.onCreate()

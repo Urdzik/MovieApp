@@ -8,7 +8,3 @@ data class SearchResponse(
     val total_pages: Int,
     val total_results: Int
 )
-
-fun streams() {
-    val s1 = Observable.just(true)
-}

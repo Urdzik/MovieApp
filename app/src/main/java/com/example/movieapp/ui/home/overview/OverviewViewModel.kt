@@ -1,16 +1,13 @@
 package com.example.movieapp.ui.home.overview
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapp.model.network.SmallMovieListSource
-import com.example.movieapp.model.network.data.ParentListMovie
-import com.example.movieapp.model.network.data.SmallMovie
-import kotlinx.coroutines.launch
-import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.model.network.data.movie.ParentListMovie
+import com.example.movieapp.model.network.data.movie.SmallMovieList
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -60,21 +57,45 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
                 it.forEach {
                     when (i) {
                         1 -> {
-                           mListMovie.add( ParentListMovie("Upcoming","upcoming", it))
+                           mListMovie.add(
+                               ParentListMovie(
+                                   "Upcoming",
+                                   "upcoming",
+                                   it
+                               )
+                           )
 
                             i++
                         }
-                        2 -> {  mListMovie.add(ParentListMovie("Топ рейтинг","top_rated", it))
+                        2 -> {  mListMovie.add(
+                            ParentListMovie(
+                                "Топ рейтинг",
+                                "top_rated",
+                                it
+                            )
+                        )
 
 
                             i++
                         }
-                        3 -> { mListMovie.add(ParentListMovie("Популярное","popular", it))
+                        3 -> { mListMovie.add(
+                            ParentListMovie(
+                                "Популярное",
+                                "popular",
+                                it
+                            )
+                        )
 
 
                             i++
                         }
-                        4 -> { mListMovie.add(ParentListMovie("Сейчас в кино","now_playing", it))
+                        4 -> { mListMovie.add(
+                            ParentListMovie(
+                                "Сейчас в кино",
+                                "now_playing",
+                                it
+                            )
+                        )
 
                         }
                     } }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
@@ -41,7 +42,7 @@ class SearchFragment : Fragment() {
         adapter = SearchAdapter()
         binding.lifecycleOwner = viewLifecycleOwner
         with(binding.searchRv) {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = LinearLayoutManager(context)
             adapter = this@SearchFragment.adapter
         }
         return binding.root
@@ -75,16 +76,16 @@ class SearchFragment : Fragment() {
             })
     }
 
-    fun apiRequest(chars: CharSequence): Single<List<SearchItem>> {
+    private fun apiRequest(chars: CharSequence): Single<List<SearchItem>> {
         return viewModel.getSearchResult(chars.toString())
     }
 
-    fun showProgress() {
+    private fun showProgress() {
         searchProgressBar.visibility = View.VISIBLE
         search_rv.visibility = View.INVISIBLE
     }
 
-    fun hideProgress() {
+    private fun hideProgress() {
         searchProgressBar.visibility = View.INVISIBLE
         search_rv.visibility = View.VISIBLE
     }

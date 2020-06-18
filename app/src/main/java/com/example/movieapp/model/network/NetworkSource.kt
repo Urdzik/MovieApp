@@ -1,13 +1,11 @@
 package com.example.movieapp.model.network
 
-import com.example.movieapp.model.network.data.ListMovie
-import com.example.movieapp.model.network.data.MovieInfo
-import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.model.network.data.movie.ListMovie
+import com.example.movieapp.model.network.data.movie.MovieInfo
+import com.example.movieapp.model.network.data.movie.SmallMovieList
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.functions.Function
-import io.reactivex.rxjava3.kotlin.toFlowable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 

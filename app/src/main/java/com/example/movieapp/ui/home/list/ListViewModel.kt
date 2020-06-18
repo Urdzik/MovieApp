@@ -4,11 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.movieapp.model.network.MovieListSource
-import com.example.movieapp.model.network.data.ListMovie
+import com.example.movieapp.model.network.data.movie.ListMovie
 import io.reactivex.rxjava3.disposables.Disposable
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 

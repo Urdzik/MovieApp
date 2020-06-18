@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.databinding.ItemCustomBinding
-import com.example.movieapp.model.network.data.SmallMovie
-import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.model.network.data.movie.SmallMovieList
 import com.example.movieapp.ui.home.overview.OverviewFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

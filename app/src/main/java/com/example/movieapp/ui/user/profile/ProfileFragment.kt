@@ -49,7 +49,6 @@ class ProfileFragment : Fragment() {
 
     private var errorSnackbar: Snackbar? = null
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,7 +57,6 @@ class ProfileFragment : Fragment() {
         binding = ProfileFragmentBinding.inflate(inflater)
 
         sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!
-
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -90,14 +88,12 @@ class ProfileFragment : Fragment() {
 
         viewModel.movieOfSave.observe(viewLifecycleOwner, Observer {
             saveInUserAdapter.submitList(it)
-
         })
 
         //Looking for the internet connection
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
             if (it) onNetworkError()
         })
-
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -111,15 +107,11 @@ class ProfileFragment : Fragment() {
         viewModel.test.observe(viewLifecycleOwner, Observer {
             if (it) {
                 updateUI(null)
-
             } else {
                 val currentUser = auth.currentUser
                 updateUI(currentUser)
-
             }
         })
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -142,8 +134,6 @@ class ProfileFragment : Fragment() {
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         Log.d(LOGIN_TAG, "firebaseAuthWithGoogle:" + acct.id!!)
-
-
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener() { task ->
@@ -158,8 +148,6 @@ class ProfileFragment : Fragment() {
                     Snackbar.make(binding.root, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
                     updateUI(null)
                 }
-
-
             }
     }
 
@@ -179,30 +167,8 @@ class ProfileFragment : Fragment() {
     }
 
 
-//    private fun signOut() {
-//        // Firebase sign out
-//        auth.signOut()
-//
-//        // Google sign out
-//        googleSignInClient.signOut().addOnCompleteListener() {
-//            updateUI(null)
-//        }
-//    }
-
-//    private fun revokeAccess() {
-//        // Firebase sign out
-//        auth.signOut()
-//
-//        // Google revoke access
-//        googleSignInClient.revokeAccess().addOnCompleteListener() {
-//            updateUI(null)
-//        }
-//    }
-
-
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-
             viewModel.getUser(user)
             viewModel.getAuthUser(auth)
 
@@ -226,11 +192,6 @@ class ProfileFragment : Fragment() {
                 recyclerSave.visibility = View.GONE
                 prograssBar.visibility = View.GONE
             }
-
         }
     }
-
-
-
-
 }

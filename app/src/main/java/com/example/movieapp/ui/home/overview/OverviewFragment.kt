@@ -40,11 +40,8 @@ class OverviewFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        binding.mainRv.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        adapter = OverviewAdapter(
-            viewModel
-        )
+        binding.mainRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        adapter = OverviewAdapter(viewModel)
         binding.mainRv.adapter = adapter
 
         viewModel.fetchMoviesLists()
