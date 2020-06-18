@@ -97,8 +97,7 @@ class ListFragment : Fragment() {
 
         adapter = binding.recyclerList.adapter as ListMovieAdapter
 
-        layoutManager =
-            GridLayoutManager(binding.root.context, 2, GridLayoutManager.VERTICAL, false)
+        layoutManager = GridLayoutManager(binding.root.context, 2, GridLayoutManager.VERTICAL, false)
 
         binding.recyclerList.layoutManager = layoutManager
 

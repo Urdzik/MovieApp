@@ -1,4 +1,4 @@
-package com.example.movieapp.model.network.data
+package com.example.movieapp.model.network.data.movie
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -12,12 +12,13 @@ data class SmallMovie(
 )
 
 
+@Parcelize
 data class  SmallMovieList constructor(
     @SerializedName("id") val id: Int,
     @SerializedName("poster_path") val posterPath: String,
     @SerializedName("title") val title: String,
     @SerializedName("vote_average")val voteAverage: Float,
     @SerializedName("backdrop_path") val backdropPath: String
-){
+):Parcelable{
     constructor(): this(0,"","", 0.0F, "")
 }

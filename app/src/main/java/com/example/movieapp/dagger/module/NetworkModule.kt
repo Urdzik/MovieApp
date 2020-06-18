@@ -2,9 +2,9 @@ package com.example.movieapp.dagger.module
 
 import android.app.Application
 import com.example.movieapp.model.network.MovieApi
-import com.example.movieapp.model.network.news.NewsApi
-import com.example.movieapp.model.network.news.NewsSource
+
 import com.example.movieapp.model.network.MovieListSource
+import com.example.movieapp.model.network.SearchApi
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -13,6 +13,7 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.*
@@ -43,7 +44,7 @@ class NetworkModule (private val application: Application) {
     @Reusable
     internal fun provideRetrofitInterface(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .baseUrl("https://api.themoviedb.org/3/")
         .client(okHttpClient)
         .build()
@@ -56,11 +57,9 @@ class NetworkModule (private val application: Application) {
     @Reusable
     internal fun provideRemoteSource(api: MovieApi): MovieListSource = MovieListSource(api)
 
-    @Provides
-    @Reusable
-    internal fun provideNewsApi(retrofit: Retrofit): NewsApi = retrofit.create(NewsApi::class.java)
 
     @Provides
     @Reusable
-    internal fun provideNewsSource(api: NewsApi): NewsSource = NewsSource(api)
+    internal fun provideSearchApi(retrofit: Retrofit): SearchApi = retrofit.create(SearchApi::class.java)
+
 }

@@ -5,14 +5,16 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.model.network.data.movie.SmallMovieList
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.launch
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor() : ViewModel() {
@@ -75,20 +77,27 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
 
     fun fetchMovieOfSave() {
         val db = Firebase.firestore
-        viewModelScope.launch {
+        Single.create<QuerySnapshot> { sub ->
             db.collection("users")
                 .document(currentUser.value!!.uid)
                 .collection("movie")
                 .get()
                 .addOnSuccessListener { result ->
-                    for (document in result) {
-                        _movieOfSave.value = result.toObjects(SmallMovieList::class.java)
+                    sub.onSuccess(result)
 
-                    }
                 }.addOnFailureListener { exception ->
-                    Log.w("TAG", "Error getting documents.", exception)
+                   sub.onError(exception)
                 }
-        }
+
+        }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                    _movieOfSave.value = it.toObjects(SmallMovieList::class.java)
+
+            },{
+                Log.w("TAG", "Error getting documents.", it)
+            })
+
     }
     fun displayPropertyDetails(movie: SmallMovieList) {
         _navigateToSelectSaveProperty.value = movie

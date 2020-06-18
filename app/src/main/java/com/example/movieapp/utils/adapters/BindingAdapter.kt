@@ -5,14 +5,11 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.R
-import com.example.movieapp.model.network.data.Genres
-import com.example.movieapp.model.network.data.SmallMovieList
+import com.example.movieapp.model.network.data.movie.Genres
 import com.example.movieapp.utils.IMAGE_BASE_PATH
-import com.google.firebase.auth.FirebaseUser
 
 //Binding adapter used to display images from URL using Glide
 @BindingAdapter("imageUrl")
@@ -51,15 +48,6 @@ fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {
         view.visibility = View.GONE
     }
 }
-
-@BindingAdapter("vis", "playlists")
-fun vis(view: View, isNetWorkError: Boolean, playlist: Any?) {
-    view.visibility = if (playlist != null) View.VISIBLE else View.GONE
-    if (isNetWorkError) {
-        view.visibility = View.VISIBLE
-    }
-}
-
 
 
 
