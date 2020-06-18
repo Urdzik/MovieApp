@@ -2,12 +2,14 @@ package com.example.movieapp.utils.adapters.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemParentBinding
 import com.example.movieapp.databinding.ItemRecBinding
 import com.example.movieapp.model.network.data.movie.ParentListMovie
+import com.example.movieapp.ui.home.overview.OverviewFragmentDirections
 import com.example.movieapp.ui.home.overview.OverviewViewModel
 import com.example.movieapp.utils.adapters.ChildAdapter
 
@@ -73,8 +75,9 @@ class UpcomingHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(parentListMovie: ParentListMovie) {
-        val adapter =
-            UpcomingAdapter()
+        val adapter = UpcomingAdapter(UpcomingAdapter.ClickListener{
+                binding.root.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it.id))
+            })
         binding.piker.adapter = adapter
         adapter.submitList(parentListMovie.movieList)
     }

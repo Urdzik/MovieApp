@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemRecViewingBinding
+import com.example.movieapp.model.network.data.movie.ListMovie
 import com.example.movieapp.model.network.data.movie.SmallMovieList
+import com.example.movieapp.utils.adapters.ListMovieAdapter
 
-class UpcomingAdapter : ListAdapter<SmallMovieList, UpcomingAdapter.UpcomingInnerHolder>(MovieRecDiffCallback()) {
+class UpcomingAdapter(private val onClickListener: ClickListener) : ListAdapter<SmallMovieList, UpcomingAdapter.UpcomingInnerHolder>(MovieRecDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpcomingInnerHolder {
         return UpcomingInnerHolder(
@@ -18,7 +20,12 @@ class UpcomingAdapter : ListAdapter<SmallMovieList, UpcomingAdapter.UpcomingInne
     }
 
     override fun onBindViewHolder(holder: UpcomingInnerHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(item)
+        }
+        holder.bind(item)
     }
 
     class UpcomingInnerHolder(
@@ -28,6 +35,9 @@ class UpcomingAdapter : ListAdapter<SmallMovieList, UpcomingAdapter.UpcomingInne
         fun bind(smallMovie: SmallMovieList) {
             binding.movie = smallMovie
         }
+    }
+    class ClickListener(val clickListener: (movie: SmallMovieList) -> Unit) {
+        fun onClick(movie: SmallMovieList) = clickListener(movie)
     }
 }
 class MovieRecDiffCallback : DiffUtil.ItemCallback<SmallMovieList>() {
@@ -40,3 +50,4 @@ class MovieRecDiffCallback : DiffUtil.ItemCallback<SmallMovieList>() {
         return oldItem == newItem
     }
 }
+
