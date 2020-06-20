@@ -30,9 +30,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -53,7 +54,7 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        App.appComponent.inject(this)
+
         binding = ProfileFragmentBinding.inflate(inflater)
 
         sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!

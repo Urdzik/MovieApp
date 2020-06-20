@@ -4,6 +4,7 @@ package com.example.movieapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -13,11 +14,19 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.movieapp.utils.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity(), HasAndroidInjector {
     private var currentNavController: LiveData<NavController>? = null
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector as AndroidInjector<Any>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -15,10 +15,12 @@ import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.DetailFragmentBinding
 import com.example.movieapp.utils.SHARED_KEY
+import com.example.movieapp.utils.injectViewModel
+import dagger.android.support.DaggerFragment
 
 import javax.inject.Inject
 
-class DetailFragment : Fragment() {
+class DetailFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -31,10 +33,10 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        App.appComponent.inject(this)
+
 
         binding = DetailFragmentBinding.inflate(inflater)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
+        viewModel = injectViewModel(viewModelFactory)
 
         val args = DetailFragmentArgs.fromBundle(requireArguments()).id
 

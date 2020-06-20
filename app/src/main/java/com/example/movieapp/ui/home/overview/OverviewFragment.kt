@@ -14,11 +14,13 @@ import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
 import com.example.movieapp.utils.adapters.overview.OverviewAdapter
+import com.example.movieapp.utils.injectViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 
-class OverviewFragment : Fragment() {
+class OverviewFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -33,9 +35,9 @@ class OverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        App.appComponent.inject(this)
+
         binding = OverviewFragmentBinding.inflate(inflater)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
+        viewModel = injectViewModel(viewModelFactory)
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel

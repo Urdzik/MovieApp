@@ -1,6 +1,7 @@
 package com.example.movieapp.dagger.module
 
 import android.app.Application
+import android.content.Context
 import com.example.movieapp.model.network.MovieApi
 
 import com.example.movieapp.model.network.MovieListSource
@@ -20,16 +21,22 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 @Module
-class NetworkModule (private val application: Application) {
+class NetworkModule {
 
     @Provides
     @Reusable
-    internal fun provideOkHttpClient(): OkHttpClient {
+    internal fun provideContext(application: Application): Context {
+        return application.applicationContext
+    }
+
+    @Provides
+    @Reusable
+    internal fun provideOkHttpClient(context: Context): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BASIC
 
-        val cacheDir = File(application.cacheDir, UUID.randomUUID().toString())
-        // 15 MiB cache
+        val cacheDir = File(context.cacheDir, UUID.randomUUID().toString())
+
         val cache = Cache(cacheDir, 15 * 1024 * 1024)
         return OkHttpClient.Builder()
             .cache(

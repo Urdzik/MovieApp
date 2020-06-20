@@ -15,11 +15,13 @@ import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.ListFragmentBinding
 import com.example.movieapp.utils.adapters.ListMovieAdapter
+import com.example.movieapp.utils.injectViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 
-class ListFragment : Fragment() {
+class ListFragment : DaggerFragment() {
 
     @Inject
     lateinit var listViewModelFactory: ViewModelFactory
@@ -38,9 +40,9 @@ class ListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        App.appComponent.inject(this)
+
         binding = ListFragmentBinding.inflate(inflater)
-        viewModel = ViewModelProvider(this, listViewModelFactory).get(ListViewModel::class.java)
+        viewModel = injectViewModel(listViewModelFactory)
 
         movieCategory = ListFragmentArgs.fromBundle(requireArguments()).category
         sendNewMovieList(movieCategory)

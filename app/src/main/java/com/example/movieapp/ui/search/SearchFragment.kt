@@ -14,7 +14,9 @@ import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.SearchFragmentBinding
 import com.example.movieapp.model.network.data.search.SearchItem
 import com.example.movieapp.utils.adapters.SearchAdapter
+import com.example.movieapp.utils.injectViewModel
 import com.jakewharton.rxbinding.widget.RxTextView
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.search_fragment.*
 import rx.Single
 import rx.android.schedulers.AndroidSchedulers
@@ -22,7 +24,7 @@ import rx.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class SearchFragment : Fragment() {
+class SearchFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -34,9 +36,9 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        App.appComponent.inject(this)
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
+
+        viewModel = injectViewModel(viewModelFactory)
         binding = SearchFragmentBinding.inflate(inflater)
         adapter = SearchAdapter(SearchAdapter.ClickListener {
             findNavController().navigate(

@@ -14,9 +14,10 @@ import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.SettingsFragmentBinding
 import com.example.movieapp.ui.user.profile.ProfileViewModel
 import com.example.movieapp.utils.SHARED_KEY
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -30,7 +31,7 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        App.appComponent.inject(this)
+
 
         binding = SettingsFragmentBinding.inflate(inflater)
         sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!
