@@ -44,7 +44,8 @@ class NetworkModule {
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(interceptor)
-            .build() }
+            .build()
+    }
 
     @Provides
     @Reusable

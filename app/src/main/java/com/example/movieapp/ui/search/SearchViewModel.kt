@@ -2,11 +2,9 @@ package com.example.movieapp.ui.search
 
 import androidx.lifecycle.ViewModel
 import com.example.movieapp.model.network.SearchApi
-import com.example.movieapp.model.network.data.search.Genre
 import com.example.movieapp.model.network.data.search.SearchItem
 import com.example.movieapp.model.network.data.search.SearchResponse
-import io.reactivex.rxjava3.schedulers.Schedulers
-import rx.Single
+import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(private val api: SearchApi) : ViewModel() {
@@ -15,11 +13,13 @@ class SearchViewModel @Inject constructor(private val api: SearchApi) : ViewMode
 //        get() = api.getGenres().map { it.genres }.cache().subscribeOn(Schedulers.io())
 
     fun getSearchResult(query: String): Single<List<SearchItem>> {
-        return Single.create<List<SearchItem>> { s ->
+        return api.getListOfPosters(query).map(SearchResponse::results)
+    }
 
-            api.getListOfPosters(query)
-                .map(SearchResponse::results)
 
+
+    // .map(SearchResponse::results)
+/*
 //                .flattenAsFlowable { it.results }
 //                .flatMap { r ->
 //                    Flowable.just(r.genreIds)
@@ -33,11 +33,11 @@ class SearchViewModel @Inject constructor(private val api: SearchApi) : ViewMode
 //                        }
 //                }
 //                .toList()
-                .subscribe({
-                    s.onSuccess(it)
-                }, {
-                    s.onError(it)
-                })
-        }
-    }
+ */
+
+//                .subscribe({
+//                    s.onSuccess(it)
+//                }, {
+//                    s.onError(it)
+//                })
 }

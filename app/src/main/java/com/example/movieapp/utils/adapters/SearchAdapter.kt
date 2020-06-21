@@ -22,6 +22,7 @@ class SearchAdapter(private val onClickListener: ClickListener) :
         }
     }
 
+
     class ClickListener(val clickListener: (movie: SearchItem) -> Unit) {
         fun onClick(movie: SearchItem) = clickListener(movie)
     }
