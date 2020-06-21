@@ -46,8 +46,6 @@ class OverviewFragment : DaggerFragment() {
         adapter = OverviewAdapter(viewModel)
         binding.mainRv.adapter = adapter
 
-        viewModel.fetchMoviesLists()
-
         return binding.root
     }
 

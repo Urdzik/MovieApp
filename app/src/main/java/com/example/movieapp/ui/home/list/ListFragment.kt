@@ -54,7 +54,7 @@ class ListFragment : DaggerFragment() {
             if (it) onNetworkError()
         })
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
     }

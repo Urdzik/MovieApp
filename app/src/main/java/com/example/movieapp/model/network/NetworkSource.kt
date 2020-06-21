@@ -30,9 +30,7 @@ class SmallMovieListSource @Inject constructor(private val api: MovieApi) {
                     .toFlowable()
                     .subscribeOn(Schedulers.io())
             }
-            .map {
-                it.smallMovieList
-            }
+            .map { it.smallMovieList }
             .toList()
             .observeOn(AndroidSchedulers.mainThread())
     }

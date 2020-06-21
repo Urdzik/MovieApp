@@ -24,6 +24,7 @@ import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity(), HasAndroidInjector {
     private var currentNavController: LiveData<NavController>? = null
+
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector as AndroidInjector<Any>

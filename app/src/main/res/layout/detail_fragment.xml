@@ -8,9 +8,6 @@
             type="com.example.movieapp.ui.home.detail.DetailViewModel" />
     </data>
 
-
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,18 +26,18 @@
                 android:layout_height="match_parent"
                 tools:context=".ui.home.detail.DetailFragment">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="260dp"
-                android:background="#FFFFFF"
-                android:contentDescription="@string/plot"
-                android:scaleType="center"
-                android:src="@android:color/background_dark"
-                app:imageUrl="@{viewModel.selectProperty.backdrop_path}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/toolbar" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp"
+                    android:background="#FFFFFF"
+                    android:contentDescription="@string/plot"
+                    android:scaleType="center"
+                    android:src="@android:color/background_dark"
+                    app:imageUrl="@{viewModel.selectProperty.backdrop_path}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView

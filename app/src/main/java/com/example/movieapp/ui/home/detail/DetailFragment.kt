@@ -41,11 +41,11 @@ class DetailFragment : DaggerFragment() {
         val args = DetailFragmentArgs.fromBundle(requireArguments()).id
 
         sharedPreferences = activity?.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE)!!
+
         val id = sharedPreferences.getString(SHARED_KEY, null)
 
         if (id != null) {
             viewModel.getUserId(id)
-            println(" viewModel.checkForSavedMovie(id)")
             viewModel.checkForSavedMovie(id)
         }
 
@@ -69,7 +69,7 @@ class DetailFragment : DaggerFragment() {
         })
 
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 }

@@ -47,7 +47,7 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     }
 
 
-    fun fetchMoviesLists() {
+    private fun fetchMoviesLists() {
         Log.d("ViewModel", "load data")
 
         val titleCategoryMap = hashMapOf(
@@ -57,7 +57,7 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
             4 to ("Рекомендации" to "upcoming")
         )
 
-        networkSource.fetchSmallMovieList(categoryList, "26f381d6ab8dd659b22d983cab9aa255", "ru")
+       val dis =  networkSource.fetchSmallMovieList(categoryList, "26f381d6ab8dd659b22d983cab9aa255", "ru")
             .subscribe({ collectionList ->
                 val mListMovie = collectionList.mapIndexed { index, list ->
                     ParentListMovie(
@@ -75,6 +75,7 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
                 }
             }
             )
+        disposableBack.add(dis)
     }
 
     fun displayPropertyDetails(movie: SmallMovieList) {

@@ -26,7 +26,6 @@ class SaveInUserAdapter(private val onClickListener: ClickListener) : ListAdapte
 
     inner class SaveInUserHolder(private val binding: ItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: SmallMovieList) {
-
             binding.movie = movie
         }
     }
