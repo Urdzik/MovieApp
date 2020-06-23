@@ -3,6 +3,8 @@ package com.example.movieapp.model.network
 import com.example.movieapp.model.network.data.movie.ListMovie
 import com.example.movieapp.model.network.data.movie.MovieInfo
 import com.example.movieapp.model.network.data.movie.SmallMovieList
+import com.example.movieapp.model.network.data.search.Genre
+import com.example.movieapp.model.network.data.search.GenreResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
@@ -18,7 +20,9 @@ class MovieListSource @Inject constructor(private val api: MovieApi) {
     }
 }
 
-class SmallMovieListSource @Inject constructor(private val api: MovieApi) {
+class SmallMovieListSource @Inject constructor(
+    private val api: MovieApi
+) {
     fun fetchSmallMovieList(
         categories: List<String>,
         key: String,
@@ -35,6 +39,12 @@ class SmallMovieListSource @Inject constructor(private val api: MovieApi) {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun fetchGenres(language: String): Single<List<Genre>> {
+        return api.getGenres(language = language)
+            .map(GenreResponse::genres)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }
 
 class MovieDetailSource @Inject constructor(private val api: MovieApi) {
@@ -44,6 +54,3 @@ class MovieDetailSource @Inject constructor(private val api: MovieApi) {
             .observeOn(AndroidSchedulers.mainThread())
     }
 }
-
-
-

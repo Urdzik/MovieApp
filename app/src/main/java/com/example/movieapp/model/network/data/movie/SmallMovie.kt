@@ -18,7 +18,9 @@ data class  SmallMovieList constructor(
     @SerializedName("poster_path") val posterPath: String,
     @SerializedName("title") val title: String,
     @SerializedName("vote_average")val voteAverage: Float,
-    @SerializedName("backdrop_path") val backdropPath: String
+    @SerializedName("backdrop_path") val backdropPath: String,
+    @SerializedName("genre_ids") var genreIds: List<Int> = emptyList(),
+    var genres: List<String> = emptyList()
 ):Parcelable{
-    constructor(): this(0,"","", 0.0F, "")
+    constructor(): this(0,"","", 0.0F, "", emptyList(), emptyList())
 }

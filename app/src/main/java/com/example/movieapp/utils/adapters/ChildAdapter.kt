@@ -11,6 +11,7 @@ import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.databinding.ItemCustomBinding
 import com.example.movieapp.model.network.data.movie.SmallMovieList
 import com.example.movieapp.ui.home.overview.OverviewFragmentDirections
+import com.google.android.material.chip.Chip
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -88,6 +89,13 @@ class ChildAdapter(private val clickListener: MovieListener) :
 
         fun bind(item: SmallMovieList) {
             binding.movie = item
+            item.genres.forEach { genre ->
+                val chip = Chip(binding.root.context)
+                chip.text = genre
+                chip.width = 1
+                chip.textSize = 10f
+                binding.genresChipGroup.addView(chip)
+            }
             binding.executePendingBindings()
         }
 

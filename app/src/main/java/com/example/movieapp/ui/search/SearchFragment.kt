@@ -56,8 +56,8 @@ class SearchFragment : DaggerFragment() {
 
         binding.edit.toFlowable()
             .withParams(
-                minLength = 3,
-                debounce = 300,
+                minLength = 2,
+                debounce = 500,
                 switchMapper = ::apiRequest,
                 doOnNext = ::showProgress
             )

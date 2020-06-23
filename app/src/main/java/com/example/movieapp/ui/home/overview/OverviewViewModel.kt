@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModel
 import com.example.movieapp.model.network.SmallMovieListSource
 import com.example.movieapp.model.network.data.movie.ParentListMovie
 import com.example.movieapp.model.network.data.movie.SmallMovieList
+import com.example.movieapp.model.network.data.search.Genre
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -41,11 +44,13 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
 
     val errorClickListener = View.OnClickListener { fetchMoviesLists() }
 
+    private lateinit var allGenres: List<Genre>
+
     init {
         println("initialization viewModel")
         fetchMoviesLists()
     }
-
+ 
 
     private fun fetchMoviesLists() {
         Log.d("ViewModel", "load data")
@@ -57,13 +62,13 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
             4 to ("Рекомендации" to "upcoming")
         )
 
-       val dis =  networkSource.fetchSmallMovieList(categoryList, "26f381d6ab8dd659b22d983cab9aa255", "ru")
+       val dis =  fetchGenresFlowable().concatWith(networkSource.fetchSmallMovieList(categoryList, "26f381d6ab8dd659b22d983cab9aa255", "ru"))
             .subscribe({ collectionList ->
                 val mListMovie = collectionList.mapIndexed { index, list ->
                     ParentListMovie(
                         titleCategoryMap[index]?.first ?: "",
                         titleCategoryMap[index]?.second ?: "",
-                        list
+                        list.withGenres(allGenres)
                     )
                 }
                 _eventNetworkError.value = false
@@ -76,6 +81,13 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
             }
             )
         disposableBack.add(dis)
+    }
+
+    fun fetchGenresFlowable(): Flowable<List<List<SmallMovieList>>> {
+        return networkSource.fetchGenres("ru")
+            .doOnSuccess { allGenres = it }
+            .toFlowable()
+            .flatMap { Flowable.empty<List<List<SmallMovieList>>>() }
     }
 
     fun displayPropertyDetails(movie: SmallMovieList) {
@@ -93,5 +105,16 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     override fun onCleared() {
         super.onCleared()
         disposableBack.dispose()
+    }
+}
+
+
+fun List<SmallMovieList>.withGenres(allGenres: List<Genre>): List<SmallMovieList> {
+    return map { item ->
+        item.apply {
+            genres = genreIds.map { id ->
+                allGenres.find { genre -> genre.id == id }?.name ?: ""
+            }.filterNot(String::isNullOrEmpty)
+        }
     }
 }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.SearchItemBinding
 import com.example.movieapp.model.network.data.search.SearchItem
+import com.google.android.material.chip.Chip
 
 class SearchAdapter(private val onClickListener: ClickListener) :
     ListAdapter<SearchItem, SearchViewHolder>(SearchDiffUtil()) {
@@ -28,13 +29,23 @@ class SearchAdapter(private val onClickListener: ClickListener) :
     }
 }
 
-class SearchViewHolder(private val binding: SearchItemBinding): RecyclerView.ViewHolder(binding.root) {
+class SearchViewHolder(private val binding: SearchItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+
     fun bind(searchItem: SearchItem) {
         binding.movie = searchItem
+
+//        searchItem.genres.forEach { genre ->
+//            val chip = Chip(binding.root.context).apply {
+//                text = genre
+//            }
+//            binding.genresChipGroup.addView(chip)
+//        }
+//        binding.genres.text = searchItem.genres.joinToString(separator = " ") { it }
     }
 }
 
-class SearchDiffUtil: DiffUtil.ItemCallback<SearchItem>() {
+class SearchDiffUtil : DiffUtil.ItemCallback<SearchItem>() {
     override fun areItemsTheSame(oldItem: SearchItem, newItem: SearchItem): Boolean {
         return oldItem.id == newItem.id
     }
