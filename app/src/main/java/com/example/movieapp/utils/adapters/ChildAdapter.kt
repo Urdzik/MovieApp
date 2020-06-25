@@ -93,8 +93,6 @@ class ChildAdapter(private val clickListener: MovieListener) :
                 item.genres.first().let { genre ->
                     val chip = Chip(binding.root.context)
                     chip.text = genre
-                    chip.width = 1
-                    chip.textSize = 10f
                     binding.genresChipGroup.addView(chip)
                 }
             }
