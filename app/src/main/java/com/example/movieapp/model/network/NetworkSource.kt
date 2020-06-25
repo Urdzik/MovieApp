@@ -25,12 +25,11 @@ class SmallMovieListSource @Inject constructor(
 ) {
     fun fetchSmallMovieList(
         categories: List<String>,
-        key: String,
         language: String
     ): Single<List<List<SmallMovieList>>> {
         return Flowable.fromIterable(categories)
             .concatMap { category ->
-                api.getListOfPosters(category, key, language)
+                api.getListOfPosters(category = category, language = language)
                     .toFlowable()
                     .subscribeOn(Schedulers.io())
             }

@@ -12,6 +12,7 @@ import com.example.movieapp.model.network.data.search.Genre
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.functions.BiFunction
 import javax.inject.Inject
 
 class OverviewViewModel @Inject constructor(private val networkSource: SmallMovieListSource) :
@@ -44,36 +45,41 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
 
     val errorClickListener = View.OnClickListener { fetchMoviesLists() }
 
-    private lateinit var allGenres: List<Genre>
-
     init {
         println("initialization viewModel")
         fetchMoviesLists()
     }
- 
+
+    private val genresSource: Single<List<Genre>>
+        get() = networkSource.fetchGenres("ru")
+
+    private val moviesSource: Single<List<List<SmallMovieList>>>
+    get() = networkSource.fetchSmallMovieList(categoryList, "ru")
+
+    private val titleCategoryMap = hashMapOf(
+        1 to ("Сейчас в кино" to "now_playing"),
+        2 to ("Топ рейтинг" to "top_rated"),
+        3 to ("Популярное" to "popular"),
+        4 to ("Рекомендации" to "upcoming")
+    )
 
     private fun fetchMoviesLists() {
         Log.d("ViewModel", "load data")
 
-        val titleCategoryMap = hashMapOf(
-            1 to ("Сейчас в кино" to "now_playing"),
-            2 to ("Топ рейтинг" to "top_rated"),
-            3 to ("Популярное" to "popular"),
-            4 to ("Рекомендации" to "upcoming")
-        )
-
-       val dis =  fetchGenresFlowable().concatWith(networkSource.fetchSmallMovieList(categoryList, "26f381d6ab8dd659b22d983cab9aa255", "ru"))
-            .subscribe({ collectionList ->
-                val mListMovie = collectionList.mapIndexed { index, list ->
-                    ParentListMovie(
-                        titleCategoryMap[index]?.first ?: "",
-                        titleCategoryMap[index]?.second ?: "",
-                        list.withGenres(allGenres)
-                    )
-                }
+        val dis =
+            moviesSource.zipWith(genresSource,
+                BiFunction { movies: List<List<SmallMovieList>>, genres: List<Genre> ->
+                    movies.mapIndexed { index, list ->
+                        ParentListMovie(
+                            titleCategoryMap[index]?.first ?: "",
+                            titleCategoryMap[index]?.second ?: "",
+                            list.withGenres(genres)
+                        )
+                    }
+                }).subscribe({ parentMoviesList ->
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
-                _parentListMovie.value = mListMovie
+                _parentListMovie.value = parentMoviesList
             }, {
                 if (parentListMovie.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true
@@ -81,13 +87,6 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
             }
             )
         disposableBack.add(dis)
-    }
-
-    fun fetchGenresFlowable(): Flowable<List<List<SmallMovieList>>> {
-        return networkSource.fetchGenres("ru")
-            .doOnSuccess { allGenres = it }
-            .toFlowable()
-            .flatMap { Flowable.empty<List<List<SmallMovieList>>>() }
     }
 
     fun displayPropertyDetails(movie: SmallMovieList) {

@@ -89,12 +89,14 @@ class ChildAdapter(private val clickListener: MovieListener) :
 
         fun bind(item: SmallMovieList) {
             binding.movie = item
-            item.genres.forEach { genre ->
-                val chip = Chip(binding.root.context)
-                chip.text = genre
-                chip.width = 1
-                chip.textSize = 10f
-                binding.genresChipGroup.addView(chip)
+            if (binding.genresChipGroup.childCount == 0) {
+                item.genres.first().let { genre ->
+                    val chip = Chip(binding.root.context)
+                    chip.text = genre
+                    chip.width = 1
+                    chip.textSize = 10f
+                    binding.genresChipGroup.addView(chip)
+                }
             }
             binding.executePendingBindings()
         }
