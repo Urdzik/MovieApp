@@ -1,7 +1,7 @@
-package com.example.movieapp.model.network
+package com.example.movieapp.api
 
-import com.example.movieapp.model.network.data.search.GenreResponse
-import com.example.movieapp.model.network.data.search.SearchResponse
+import com.example.movieapp.model.network.search.GenreResponse
+import com.example.movieapp.model.network.search.SearchResponse
 import com.example.movieapp.utils.API_KEY
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET

@@ -4,9 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.model.network.MovieDetailSource
-import com.example.movieapp.model.network.data.movie.MovieInfo
-import com.example.movieapp.model.network.data.movie.SmallMovieList
+import com.example.movieapp.model.network.movie.MovieInfo
+import com.example.movieapp.model.network.movie.SmallMovieList
+import com.example.movieapp.repository.NetworkRepository
+import com.example.movieapp.repository.NetworkRepositoryImpl
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -16,7 +17,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
-class DetailViewModel @Inject constructor(private val movieDetailSource: MovieDetailSource) :
+class DetailViewModel @Inject constructor(private val movieDetailSource: NetworkRepository) :
     ViewModel() {
 
     //LiveData object of movie

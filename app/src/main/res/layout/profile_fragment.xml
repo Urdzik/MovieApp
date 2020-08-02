@@ -9,12 +9,16 @@
             type="com.example.movieapp.ui.user.profile.ProfileViewModel" />
     </data>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.user.profile.ProfileFragment">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/user_fragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/google_login_btn"
             app:layout_constraintTop_toTopOf="parent"
@@ -71,7 +75,7 @@
 
 
 
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/google_login_btn"
@@ -95,38 +99,126 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_fragment" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.333"
-                app:layout_constraintStart_toStartOf="@+id/save_text"
-                app:layout_constraintTop_toBottomOf="@+id/imageAvatar"
-                app:layout_constraintVertical_bias="0.13999999"
-                tools:listitem="@layout/item" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/save_text"
+            app:layout_constraintTop_toBottomOf="@+id/save_text"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/item" />
 
-            <ProgressBar
-                android:id="@+id/prograssBar"
-                style="@style/progressBarStyle"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:foregroundGravity="center"
-                android:indeterminateTint="@color/appColor"
-                android:indeterminateTintMode="src_in"
-                app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"
-                app:layout_constraintBottom_toBottomOf="@+id/recycler_save"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/recycler_save"
-                app:layout_constraintVertical_bias="0.334"
-                app:playlist="@{viewModel.movieOfSave}" />
+        <ProgressBar
+            android:id="@+id/prograssBar"
+            style="@style/progressBarStyle"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:foregroundGravity="center"
+            android:indeterminateTint="@color/appColor"
+            android:indeterminateTintMode="src_in"
+            app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:playlist="@{viewModel.movieOfSave}" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+
+    <!--        <com.twitter.sdk.android.core.identity.TwitterLoginButton-->
+    <!--            android:id="@+id/twitter_login_btn"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="8dp"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/google_login_btn" />-->
+
+
+    <!--        <androidx.cardview.widget.CardView-->
+
+    <!--            android:id="@+id/login_with_email"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="45dp"-->
+    <!--            android:layout_marginTop="8dp"-->
+    <!--            android:background="#F44336"-->
+    <!--            android:backgroundTint="#F44336"-->
+    <!--            app:cardBackgroundColor="#F44336"-->
+    <!--            app:layout_constraintEnd_toEndOf="@+id/twitter_login_btn"-->
+    <!--            app:layout_constraintStart_toStartOf="@+id/twitter_login_btn"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/twitter_login_btn">-->
+
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal">-->
+
+    <!--                <ImageView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:layout_marginStart="16dp"-->
+    <!--                    android:src="@drawable/ic_email_black_24dp" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:layout_marginStart="8dp"-->
+    <!--                    android:text="Login with email"-->
+    <!--                    android:textColor="#fff"-->
+    <!--                    android:textSize="18sp"-->
+    <!--                    android:textStyle="bold" />-->
+
+    <!--            </LinearLayout>-->
+
+
+    <!--        </androidx.cardview.widget.CardView>-->
+
+    <!--        <androidx.cardview.widget.CardView-->
+    <!--            android:id="@+id/login_with_phone"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="45dp"-->
+    <!--            android:layout_marginTop="8dp"-->
+    <!--            android:background="#10E381"-->
+    <!--            android:backgroundTint="#10E381"-->
+    <!--            app:cardBackgroundColor="#10E381"-->
+    <!--            app:layout_constraintEnd_toEndOf="@+id/twitter_login_btn"-->
+    <!--            app:layout_constraintStart_toStartOf="@+id/twitter_login_btn"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/login_with_email">-->
+
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal">-->
+
+    <!--                <ImageView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:layout_marginStart="16dp"-->
+    <!--                    android:src="@drawable/ic_local_phone_black_24dp" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:layout_marginStart="8dp"-->
+    <!--                    android:text="Login with phone"-->
+    <!--                    android:textColor="#fff"-->
+    <!--                    android:textSize="18sp"-->
+    <!--                    android:textStyle="bold" />-->
+
+    <!--            </LinearLayout>-->
+
+
+    <!--        </androidx.cardview.widget.CardView>-->

@@ -6,7 +6,7 @@
 
         <variable
             name="movie"
-            type="com.example.movieapp.model.network.data.search.SearchItem" />
+            type="com.example.movieapp.model.network.search.SearchItem" />
 
         <import type="android.view.View" />
 

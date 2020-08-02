@@ -1,11 +1,9 @@
 package com.example.movieapp.ui.search
 
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.model.network.SearchApi
-import com.example.movieapp.model.network.data.search.Genre
-import com.example.movieapp.model.network.data.search.SearchItem
-import com.example.movieapp.model.network.data.search.SearchResponse
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.example.movieapp.api.SearchApi
+import com.example.movieapp.model.network.search.SearchItem
+import com.example.movieapp.model.network.search.SearchResponse
 import rx.Single
 import javax.inject.Inject
 

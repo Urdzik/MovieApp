@@ -1,4 +1,4 @@
-package com.example.movieapp.model.network.data.search
+package com.example.movieapp.model.network.search
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

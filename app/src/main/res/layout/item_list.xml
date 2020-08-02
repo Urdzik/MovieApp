@@ -5,7 +5,7 @@
     <data>
         <variable
             name="movie"
-            type="com.example.movieapp.model.network.data.movie.ListMovie" />
+            type="com.example.movieapp.model.network.movie.ListMovie" />
     </data>
 
 

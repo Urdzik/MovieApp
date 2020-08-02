@@ -1,8 +1,8 @@
-package com.example.movieapp.model.network
+package com.example.movieapp.api
 
-import com.example.movieapp.model.network.data.movie.MovieInfo
-import com.example.movieapp.model.network.data.movie.Results
-import com.example.movieapp.model.network.data.movie.SmallMovie
+import com.example.movieapp.model.network.movie.MovieInfo
+import com.example.movieapp.model.network.movie.Results
+import com.example.movieapp.model.network.movie.SmallMovie
 import com.example.movieapp.utils.API_KEY
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET

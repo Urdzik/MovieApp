@@ -1,4 +1,4 @@
-package com.example.movieapp.utils.adapters
+package com.example.movieapp.ui.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,13 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.SearchItemBinding
-import com.example.movieapp.model.network.data.search.SearchItem
+import com.example.movieapp.model.network.search.SearchItem
 
 class SearchAdapter(private val onClickListener: ClickListener) :
-    ListAdapter<SearchItem, SearchViewHolder>(SearchDiffUtil()) {
+    ListAdapter<SearchItem, SearchViewHolder>(
+        SearchDiffUtil()
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        return SearchViewHolder(SearchItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return SearchViewHolder(
+            SearchItemBinding.inflate(
+                LayoutInflater.from(parent.context)
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {

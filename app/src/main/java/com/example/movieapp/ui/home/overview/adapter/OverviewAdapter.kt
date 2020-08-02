@@ -1,4 +1,4 @@
-package com.example.movieapp.utils.adapters.overview
+package com.example.movieapp.ui.home.overview.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemParentBinding
 import com.example.movieapp.databinding.ItemRecBinding
-import com.example.movieapp.model.network.data.movie.ParentListMovie
+import com.example.movieapp.model.network.movie.ParentListMovie
 import com.example.movieapp.ui.home.overview.OverviewFragmentDirections
 import com.example.movieapp.ui.home.overview.OverviewViewModel
-import com.example.movieapp.utils.adapters.ChildAdapter
 
 const val UPCOMING_HOLDER = 0
 const val DEFAULT_HOLDER = 1
@@ -59,9 +58,10 @@ class CollectionHolder(
 
     fun bind(parentListMovie: ParentListMovie) {
         val adapter =
-            ChildAdapter(ChildAdapter.MovieListener {
-                viewModel.displayPropertyDetails(it)
-            })
+            ChildAdapter(
+                ChildAdapter.MovieListener {
+                    viewModel.displayPropertyDetails(it)
+                })
 
         binding.title.text = parentListMovie.title
         recyclerView.adapter = adapter
@@ -75,9 +75,16 @@ class UpcomingHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(parentListMovie: ParentListMovie) {
-        val adapter = UpcomingAdapter(UpcomingAdapter.ClickListener{
-                binding.root.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it.id))
-            })
+        val adapter =
+            UpcomingAdapter(
+                UpcomingAdapter.ClickListener {
+                    binding.root.findNavController()
+                        .navigate(
+                            OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(
+                                it.id
+                            )
+                        )
+                })
         binding.piker.adapter = adapter
         adapter.submitList(parentListMovie.movieList)
     }

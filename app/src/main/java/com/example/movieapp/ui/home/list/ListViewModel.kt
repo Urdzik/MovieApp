@@ -4,13 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.model.network.MovieListSource
-import com.example.movieapp.model.network.data.movie.ListMovie
+import com.example.movieapp.model.network.movie.ListMovie
+import com.example.movieapp.repository.NetworkRepository
 import io.reactivex.rxjava3.disposables.Disposable
 import javax.inject.Inject
 
 
-class ListViewModel @Inject constructor(private  val networkSource: MovieListSource): ViewModel(){
+class ListViewModel @Inject constructor(private  val networkSource: NetworkRepository): ViewModel(){
 
     private lateinit var disposable: Disposable
 

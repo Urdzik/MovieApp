@@ -1,4 +1,4 @@
-package com.example.movieapp.utils.adapters
+package com.example.movieapp.ui.user.profile
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
-import com.example.movieapp.model.network.data.movie.SmallMovieList
+import com.example.movieapp.model.network.movie.SmallMovieList
 
-class SaveInUserAdapter(private val onClickListener: ClickListener) : ListAdapter<SmallMovieList, SaveInUserAdapter.SaveInUserHolder>(SaveInUserDiffCallback()) {
+class SaveInUserAdapter(private val onClickListener: ClickListener) : ListAdapter<SmallMovieList, SaveInUserAdapter.SaveInUserHolder>(
+    SaveInUserDiffCallback()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaveInUserHolder {
         return SaveInUserHolder(ItemBinding.inflate(LayoutInflater.from(parent.context)))

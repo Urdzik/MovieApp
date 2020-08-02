@@ -1,11 +1,10 @@
-package com.example.movieapp.utils.adapters
+package com.example.movieapp.ui.home.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.databinding.ItemListBinding
-import com.example.movieapp.model.network.data.movie.ListMovie
+import com.example.movieapp.model.network.movie.ListMovie
 
 class ListMovieAdapter(
     private val onClickListener: ClickListener,

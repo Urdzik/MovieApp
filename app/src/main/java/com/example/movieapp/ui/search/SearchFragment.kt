@@ -5,15 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.SearchFragmentBinding
-import com.example.movieapp.model.network.data.search.SearchItem
-import com.example.movieapp.utils.adapters.SearchAdapter
+import com.example.movieapp.model.network.search.SearchItem
 import com.example.movieapp.utils.injectViewModel
 import com.jakewharton.rxbinding.widget.RxTextView
 import dagger.android.support.DaggerFragment
@@ -40,13 +36,14 @@ class SearchFragment : DaggerFragment() {
 
         viewModel = injectViewModel(viewModelFactory)
         binding = SearchFragmentBinding.inflate(inflater)
-        adapter = SearchAdapter(SearchAdapter.ClickListener {
-            findNavController().navigate(
-                SearchFragmentDirections.actionSearchFragmentToDetailFragment2(
-                    it.id
+        adapter =
+            SearchAdapter(SearchAdapter.ClickListener {
+                findNavController().navigate(
+                    SearchFragmentDirections.actionSearchFragmentToDetailFragment2(
+                        it.id
+                    )
                 )
-            )
-        })
+            })
         binding.lifecycleOwner = viewLifecycleOwner
         with(binding.searchRv) {
             layoutManager = LinearLayoutManager(context)

@@ -1,6 +1,4 @@
-package com.example.movieapp.model.network.data.search
-
-import io.reactivex.Observable
+package com.example.movieapp.model.network.search
 
 data class SearchResponse(
     val page: Int,

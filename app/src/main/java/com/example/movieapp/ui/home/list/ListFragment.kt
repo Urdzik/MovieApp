@@ -4,17 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
-import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.ListFragmentBinding
-import com.example.movieapp.utils.adapters.ListMovieAdapter
 import com.example.movieapp.utils.injectViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
@@ -93,9 +89,10 @@ class ListFragment : DaggerFragment() {
 
     //Work with RV
     private fun setMovieListToRV() {
-        binding.recyclerList.adapter = ListMovieAdapter(ListMovieAdapter.ClickListener {
-            viewModel.displayPropertyDetails(it)
-        }, mutableListOf())
+        binding.recyclerList.adapter =
+            ListMovieAdapter(ListMovieAdapter.ClickListener {
+                viewModel.displayPropertyDetails(it)
+            }, mutableListOf())
 
         adapter = binding.recyclerList.adapter as ListMovieAdapter
 

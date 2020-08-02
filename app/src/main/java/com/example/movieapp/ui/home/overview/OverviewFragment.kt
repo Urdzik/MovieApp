@@ -4,16 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapp.R
-import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
-import com.example.movieapp.utils.adapters.overview.OverviewAdapter
+import com.example.movieapp.ui.home.overview.adapter.OverviewAdapter
 import com.example.movieapp.utils.injectViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
@@ -43,7 +40,10 @@ class OverviewFragment : DaggerFragment() {
         binding.viewModel = viewModel
 
         binding.mainRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        adapter = OverviewAdapter(viewModel)
+        adapter =
+            OverviewAdapter(
+                viewModel
+            )
         binding.mainRv.adapter = adapter
 
         return binding.root

@@ -1,4 +1,4 @@
-package com.example.movieapp.model.network.data.movie
+package com.example.movieapp.model.network.movie
 
 /** Data class for Retrofit request from DetailActivity */
 data class MovieInfo (

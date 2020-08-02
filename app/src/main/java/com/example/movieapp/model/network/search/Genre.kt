@@ -1,4 +1,4 @@
-package com.example.movieapp.model.network.data.search
+package com.example.movieapp.model.network.search
 
 data class Genre(
     val id: Int,

@@ -8,7 +8,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.movieapp.R
-import com.example.movieapp.model.network.data.movie.Genres
+import com.example.movieapp.model.network.movie.Genres
 import com.example.movieapp.utils.IMAGE_BASE_PATH
 
 //Binding adapter used to display images from URL using Glide

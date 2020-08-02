@@ -1,4 +1,4 @@
-package com.example.movieapp.utils.adapters.overview
+package com.example.movieapp.ui.home.overview.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemRecViewingBinding
-import com.example.movieapp.model.network.data.movie.ListMovie
-import com.example.movieapp.model.network.data.movie.SmallMovieList
-import com.example.movieapp.utils.adapters.ListMovieAdapter
+import com.example.movieapp.model.network.movie.SmallMovieList
 
-class UpcomingAdapter(private val onClickListener: ClickListener) : ListAdapter<SmallMovieList, UpcomingAdapter.UpcomingInnerHolder>(MovieRecDiffCallback()) {
+class UpcomingAdapter(private val onClickListener: ClickListener) : ListAdapter<SmallMovieList, UpcomingAdapter.UpcomingInnerHolder>(
+    MovieRecDiffCallback()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpcomingInnerHolder {
         return UpcomingInnerHolder(

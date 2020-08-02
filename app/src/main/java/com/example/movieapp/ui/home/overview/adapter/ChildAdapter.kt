@@ -1,4 +1,4 @@
-package com.example.movieapp.utils.adapters
+package com.example.movieapp.ui.home.overview.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ItemBinding
 import com.example.movieapp.databinding.ItemCustomBinding
-import com.example.movieapp.model.network.data.movie.SmallMovieList
+import com.example.movieapp.model.network.movie.SmallMovieList
 import com.example.movieapp.ui.home.overview.OverviewFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +20,9 @@ private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
 
 class ChildAdapter(private val clickListener: MovieListener) :
-    ListAdapter<DataItemChild, RecyclerView.ViewHolder>(ChildDiffCallback()) {
+    ListAdapter<DataItemChild, RecyclerView.ViewHolder>(
+        ChildDiffCallback()
+    ) {
 
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -29,7 +31,11 @@ class ChildAdapter(private val clickListener: MovieListener) :
         adapterScope.launch {
             val items = when (list) {
                 null -> listOf(DataItemChild.Header)
-                else -> list.map { DataItemChild.MovieItem(it) } + listOf(DataItemChild.Header)
+                else -> list.map {
+                    DataItemChild.MovieItem(
+                        it
+                    )
+                } + listOf(DataItemChild.Header)
             }
             withContext(Dispatchers.Main) {
                 submitList(items)
@@ -57,8 +63,12 @@ class ChildAdapter(private val clickListener: MovieListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
-            ITEM_VIEW_TYPE_ITEM -> MovieViewHolder.from(parent)
+            ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(
+                parent
+            )
+            ITEM_VIEW_TYPE_ITEM -> MovieViewHolder.from(
+                parent
+            )
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }
@@ -76,9 +86,15 @@ class ChildAdapter(private val clickListener: MovieListener) :
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemCustomBinding.inflate(layoutInflater)
                 binding.button.setOnClickListener {
-                    binding.root.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToListFragment("now_playing"))
+                    binding.root.findNavController().navigate(
+                        OverviewFragmentDirections.actionOverviewFragmentToListFragment(
+                            "now_playing"
+                        )
+                    )
                 }
-                return TextViewHolder(binding)
+                return TextViewHolder(
+                    binding
+                )
             }
         }
     }
@@ -95,7 +111,9 @@ class ChildAdapter(private val clickListener: MovieListener) :
             fun from(parent: ViewGroup): MovieViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemBinding.inflate(layoutInflater, parent, false)
-                return MovieViewHolder(binding)
+                return MovieViewHolder(
+                    binding
+                )
             }
         }
     }
