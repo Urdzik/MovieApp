@@ -11,11 +11,13 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
+@HiltViewModel
 class DetailViewModel @Inject constructor(private val movieDetailSource: MovieDetailSource) :
     ViewModel() {
 

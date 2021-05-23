@@ -9,16 +9,17 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
-class MovieListSource @Inject constructor(private val api: MovieApi) {
+class MovieListSource @Inject constructor(val api: MovieApi) {
+
+
     fun fetchMovieList(category: String, key: String, language: String, page: Int): Single<List<ListMovie>> {
         return api.getPropertyAsync(category, key, language, page)
             .map { it.networkMovie }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
-}
 
-class SmallMovieListSource @Inject constructor(private val api: MovieApi) {
+
     fun fetchSmallMovieList(
         categories: List<String>,
         key: String,
@@ -35,15 +36,10 @@ class SmallMovieListSource @Inject constructor(private val api: MovieApi) {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-}
-
-class MovieDetailSource @Inject constructor(private val api: MovieApi) {
     fun fetchDetailInformationOfMovie(id: Int): Single<MovieInfo> {
         return api.getMovieByID(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 }
-
-
 

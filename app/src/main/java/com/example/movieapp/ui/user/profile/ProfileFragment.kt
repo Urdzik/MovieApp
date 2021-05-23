@@ -9,14 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.movieapp.R
-import com.example.movieapp.dagger.App
-import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.ProfileFragmentBinding
-import com.example.movieapp.ui.home.overview.OverviewFragmentDirections
 import com.example.movieapp.utils.LOGIN_TAG
 import com.example.movieapp.utils.RC_SIGN_IN
 import com.example.movieapp.utils.SHARED_KEY
@@ -30,15 +28,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+@AndroidEntryPoint
+class ProfileFragment : Fragment() {
 
-class ProfileFragment : DaggerFragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
-    private val viewModel: ProfileViewModel by navGraphViewModels(R.id.user) { viewModelFactory }
+    private val viewModel: ProfileViewModel by hiltNavGraphViewModels(R.id.user)
     private lateinit var binding: ProfileFragmentBinding
 
     private lateinit var googleSignInClient: GoogleSignInClient

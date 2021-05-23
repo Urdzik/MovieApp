@@ -6,10 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapp.model.network.MovieListSource
 import com.example.movieapp.model.network.data.movie.ListMovie
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.disposables.Disposable
 import javax.inject.Inject
 
-
+@HiltViewModel
 class ListViewModel @Inject constructor(private  val networkSource: MovieListSource): ViewModel(){
 
     private lateinit var disposable: Disposable

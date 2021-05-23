@@ -7,21 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.navGraphViewModels
 import com.example.movieapp.R
-import com.example.movieapp.dagger.App
-import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.SettingsFragmentBinding
 import com.example.movieapp.ui.user.profile.ProfileViewModel
 import com.example.movieapp.utils.SHARED_KEY
-import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class SettingsFragment : DaggerFragment() {
+class SettingsFragment : Fragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-    private val viewModel: ProfileViewModel by navGraphViewModels(R.id.user) { viewModelFactory }
+
+    private val viewModel: ProfileViewModel by hiltNavGraphViewModels(R.id.user)
     private lateinit var binding: SettingsFragmentBinding
 
     private lateinit var sharedPreferences: SharedPreferences

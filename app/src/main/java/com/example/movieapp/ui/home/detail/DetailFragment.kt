@@ -8,23 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.movieapp.dagger.App
-import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.DetailFragmentBinding
 import com.example.movieapp.utils.SHARED_KEY
-import com.example.movieapp.utils.injectViewModel
 import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailFragment : DaggerFragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-    lateinit var viewModel: DetailViewModel
+   private val viewModel: DetailViewModel by viewModels()
     lateinit var binding: DetailFragmentBinding
     lateinit var sharedPreferences: SharedPreferences
 
@@ -36,7 +32,6 @@ class DetailFragment : DaggerFragment() {
 
 
         binding = DetailFragmentBinding.inflate(inflater)
-        viewModel = injectViewModel(viewModelFactory)
 
         val args = DetailFragmentArgs.fromBundle(requireArguments()).id
 

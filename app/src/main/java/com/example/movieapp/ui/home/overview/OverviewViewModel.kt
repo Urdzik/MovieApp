@@ -5,13 +5,14 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapp.model.network.SmallMovieListSource
+import com.example.movieapp.model.network.MovieListSource
 import com.example.movieapp.model.network.data.movie.ParentListMovie
 import com.example.movieapp.model.network.data.movie.SmallMovieList
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
-
-class OverviewViewModel @Inject constructor(private val networkSource: SmallMovieListSource) :
+@HiltViewModel
+class OverviewViewModel @Inject constructor(private val networkSource: MovieListSource) :
     ViewModel() {
 
     private var disposableBack = CompositeDisposable()

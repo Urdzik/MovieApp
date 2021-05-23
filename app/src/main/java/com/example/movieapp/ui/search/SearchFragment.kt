@@ -6,29 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.movieapp.dagger.App
-import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.SearchFragmentBinding
 import com.example.movieapp.model.network.data.search.SearchItem
 import com.example.movieapp.utils.adapters.SearchAdapter
-import com.example.movieapp.utils.injectViewModel
 import com.jakewharton.rxbinding.widget.RxTextView
-import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.search_fragment.*
+import dagger.hilt.android.AndroidEntryPoint
 import rx.Single
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
-class SearchFragment : DaggerFragment() {
+@AndroidEntryPoint
+class SearchFragment : Fragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-    lateinit var viewModel: SearchViewModel
+    private val viewModel: SearchViewModel by viewModels()
     lateinit var binding: SearchFragmentBinding
     lateinit var adapter: SearchAdapter
 
@@ -38,7 +32,6 @@ class SearchFragment : DaggerFragment() {
     ): View? {
 
 
-        viewModel = injectViewModel(viewModelFactory)
         binding = SearchFragmentBinding.inflate(inflater)
         adapter = SearchAdapter(SearchAdapter.ClickListener {
             findNavController().navigate(
@@ -88,12 +81,12 @@ class SearchFragment : DaggerFragment() {
     }
 
     private fun showProgress() {
-        searchProgressBar.visibility = View.VISIBLE
-        search_rv.visibility = View.INVISIBLE
+//        searchProgressBar.visibility = View.VISIBLE
+//        search_rv.visibility = View.INVISIBLE
     }
 
     private fun hideProgress() {
-        searchProgressBar.visibility = View.INVISIBLE
-        search_rv.visibility = View.VISIBLE
+//        searchProgressBar.visibility = View.INVISIBLE
+//        search_rv.visibility = View.VISIBLE
     }
 }

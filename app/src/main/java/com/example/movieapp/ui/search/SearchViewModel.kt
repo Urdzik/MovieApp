@@ -5,11 +5,13 @@ import com.example.movieapp.model.network.SearchApi
 import com.example.movieapp.model.network.data.search.Genre
 import com.example.movieapp.model.network.data.search.SearchItem
 import com.example.movieapp.model.network.data.search.SearchResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.schedulers.Schedulers
 import rx.Single
 import javax.inject.Inject
 
-class SearchViewModel @Inject constructor(private val api: SearchApi) : ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject constructor() : ViewModel() {
 
 //    val genres: io.reactivex.rxjava3.core.Single<List<Genre>>
 //        get() = api.getGenres().map { it.genres }.cache().subscribeOn(Schedulers.io())
@@ -17,8 +19,8 @@ class SearchViewModel @Inject constructor(private val api: SearchApi) : ViewMode
     fun getSearchResult(query: String): Single<List<SearchItem>> {
         return Single.create<List<SearchItem>> { s ->
 
-            api.getListOfPosters(query)
-                .map(SearchResponse::results)
+//            api.getListOfPosters(query)
+//                .map(SearchResponse::results)
 
 //                .flattenAsFlowable { it.results }
 //                .flatMap { r ->
@@ -33,11 +35,11 @@ class SearchViewModel @Inject constructor(private val api: SearchApi) : ViewMode
 //                        }
 //                }
 //                .toList()
-                .subscribe({
-                    s.onSuccess(it)
-                }, {
-                    s.onError(it)
-                })
+//                .subscribe({
+//                    s.onSuccess(it)
+//                }, {
+//                    s.onError(it)
+//                })
         }
     }
 }

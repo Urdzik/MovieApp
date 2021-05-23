@@ -5,27 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapp.R
-import com.example.movieapp.dagger.App
-import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.OverviewFragmentBinding
 import com.example.movieapp.utils.adapters.overview.OverviewAdapter
-import com.example.movieapp.utils.injectViewModel
 import com.google.android.material.snackbar.Snackbar
-import dagger.android.support.DaggerFragment
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class OverviewFragment : Fragment() {
 
 
-class OverviewFragment : DaggerFragment() {
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    lateinit var viewModel: OverviewViewModel
+    private val viewModel: OverviewViewModel by viewModels()
     lateinit var binding: OverviewFragmentBinding
     lateinit var adapter: OverviewAdapter
 
@@ -37,12 +31,12 @@ class OverviewFragment : DaggerFragment() {
     ): View? {
 
         binding = OverviewFragmentBinding.inflate(inflater)
-        viewModel = injectViewModel(viewModelFactory)
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        binding.mainRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.mainRv.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         adapter = OverviewAdapter(viewModel)
         binding.mainRv.adapter = adapter
 
@@ -69,7 +63,7 @@ class OverviewFragment : DaggerFragment() {
         })
 
         //Looking for the internet connection
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer {
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, {
             if (it) onNetworkError()
         })
     }
