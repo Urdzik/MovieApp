@@ -4,11 +4,13 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.movieapp.MainActivity
 import com.example.movieapp.R
+import kotlinx.coroutines.delay
 
-import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
 
@@ -16,6 +18,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        val iv = findViewById<ImageView>(R.id.iv)
         //Image by mode in system
         when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_NO -> iv.setImageResource(R.drawable.day)
@@ -23,9 +26,10 @@ class SplashActivity : AppCompatActivity() {
             Configuration.UI_MODE_NIGHT_UNDEFINED -> iv.setImageResource(R.drawable.day)
         }
 
-        Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+        lifecycleScope.launchWhenCreated {
+            delay(1000)
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
-        }, 1000L)
+        }
     }
 }

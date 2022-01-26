@@ -1,20 +1,16 @@
 package com.example.movieapp.di.module
 
-import android.app.Application
 import android.content.Context
 import com.example.movieapp.model.network.MovieApi
-
-import com.example.movieapp.model.network.MovieListSource
-import com.example.movieapp.model.network.SearchApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.*
@@ -22,13 +18,14 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     @Provides
-     fun provideOkHttpClient(context: Context): OkHttpClient {
+    @Singleton
+     fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BASIC
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val cacheDir = File(context.cacheDir, UUID.randomUUID().toString())
 
@@ -42,17 +39,16 @@ object NetworkModule {
             .build() }
 
     @Provides
+    @Singleton
      fun provideRetrofitInterface(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .baseUrl("https://api.themoviedb.org/3/")
         .client(okHttpClient)
         .build()
 
     @Provides
-     fun provideMovieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
+    @Singleton
+    fun provideMovieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
 
-//    @Provides
-//     fun provideSearchApi(retrofit: Retrofit): SearchApi = retrofit.create(SearchApi::class.java)
 
 }

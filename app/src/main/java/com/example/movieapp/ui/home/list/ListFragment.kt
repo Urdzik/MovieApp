@@ -35,7 +35,7 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = ListFragmentBinding.inflate(inflater)
         movieCategory = ListFragmentArgs.fromBundle(requireArguments()).category
@@ -48,7 +48,6 @@ class ListFragment : Fragment() {
             if (it) onNetworkError()
         })
 
-        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
     }

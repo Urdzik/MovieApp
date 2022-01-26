@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <data/>
-<com.yarolegovich.discretescrollview.DiscreteScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/piker"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:dsv_orientation="horizontal"
-    app:layout_constraintBottom_toTopOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:listitem="@layout/item_rec_viewing" />
+   app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    android:orientation="horizontal"/>
 
-</layout>

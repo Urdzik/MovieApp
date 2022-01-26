@@ -29,7 +29,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
 
         binding = SearchFragmentBinding.inflate(inflater)
@@ -40,7 +40,6 @@ class SearchFragment : Fragment() {
                 )
             )
         })
-        binding.lifecycleOwner = viewLifecycleOwner
         with(binding.searchRv) {
             layoutManager = LinearLayoutManager(context)
             adapter = this@SearchFragment.adapter

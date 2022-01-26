@@ -12,16 +12,18 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
+@HiltViewModel
 class ProfileViewModel @Inject constructor() : ViewModel() {
 
 
-    private var _navigateToSelectSaveProperty = MutableLiveData<SmallMovieList>()
-    val navigateToSelectSaveProperty: LiveData<SmallMovieList>
+    private var _navigateToSelectSaveProperty = MutableLiveData<SmallMovieList?>()
+    val navigateToSelectSaveProperty: LiveData<SmallMovieList?>
         get() = _navigateToSelectSaveProperty
 
     private var _movieOfSave = MutableLiveData<List<SmallMovieList>>()

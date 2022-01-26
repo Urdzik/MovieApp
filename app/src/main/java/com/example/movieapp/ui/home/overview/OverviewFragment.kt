@@ -28,7 +28,7 @@ class OverviewFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = OverviewFragmentBinding.inflate(inflater)
 
@@ -63,9 +63,9 @@ class OverviewFragment : Fragment() {
         })
 
         //Looking for the internet connection
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, {
+        viewModel.eventNetworkError.observe(viewLifecycleOwner) {
             if (it) onNetworkError()
-        })
+        }
     }
 
     //Function will show a toast when there is no internet

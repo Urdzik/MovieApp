@@ -1,19 +1,17 @@
 package com.example.movieapp.ui.home.list
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.movieapp.model.network.MovieListSource
 import com.example.movieapp.model.network.data.movie.ListMovie
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.rxjava3.disposables.Disposable
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(private  val networkSource: MovieListSource): ViewModel(){
-
-    private lateinit var disposable: Disposable
+class ListViewModel @Inject constructor(private val networkSource: MovieListSource) : ViewModel() {
 
     //LiveData object of movie
     private val _navigateToSelectProperty = MutableLiveData<ListMovie>()
@@ -36,22 +34,22 @@ class ListViewModel @Inject constructor(private  val networkSource: MovieListSou
         get() = _playList
 
 
-
-    fun errorClickListener(category: String){
-      getMovieList(category, 1)
+    fun errorClickListener(category: String) {
+        getMovieList(category, 1)
     }
 
-     fun getMovieList(category: String, page: Int) {
-              disposable = networkSource.fetchMovieList(category, "26f381d6ab8dd659b22d983cab9aa255", "ru", page)
-                    .subscribe({
-                    _playList.value = it
-                     _eventNetworkError.value = false
-                    _isNetworkErrorShown.value = false
-                },{
-                    Log.e("tag", it.toString())
-                    if (playList.value.isNullOrEmpty()) {
-                    _eventNetworkError.value = true
-                }})
+    fun getMovieList(category: String, page: Int) {
+        viewModelScope.launch {
+            val value = networkSource.fetchMovieList(
+                category,
+                "26f381d6ab8dd659b22d983cab9aa255",
+                "ru",
+                page
+            )
+            _playList.value = value
+            _eventNetworkError.value = false
+            _isNetworkErrorShown.value = false
+        }
     }
 
     fun displayPropertyDetails(movie: ListMovie) {
@@ -66,8 +64,4 @@ class ListViewModel @Inject constructor(private  val networkSource: MovieListSou
         _isNetworkErrorShown.value = true
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        disposable.dispose()
-    }
 }

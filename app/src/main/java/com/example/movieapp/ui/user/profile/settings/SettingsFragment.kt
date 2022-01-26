@@ -13,8 +13,10 @@ import com.example.movieapp.R
 import com.example.movieapp.databinding.SettingsFragmentBinding
 import com.example.movieapp.ui.user.profile.ProfileViewModel
 import com.example.movieapp.utils.SHARED_KEY
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment() {
 
 
@@ -27,7 +29,7 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
 
         binding = SettingsFragmentBinding.inflate(inflater)

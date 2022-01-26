@@ -19,7 +19,7 @@ class LoginWithEmailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         viewModel = ViewModelProvider(this).get(LoginWithEmailViewModel::class.java)
 

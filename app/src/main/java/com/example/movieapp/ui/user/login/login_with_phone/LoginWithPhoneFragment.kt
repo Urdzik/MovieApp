@@ -17,7 +17,7 @@ class LoginWithPhoneFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         viewModel = ViewModelProvider(this).get(LoginWithPhoneViewModel::class.java)
         return inflater.inflate(R.layout.login_with_phone_fragment, container, false)
