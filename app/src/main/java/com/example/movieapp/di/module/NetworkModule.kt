@@ -1,7 +1,7 @@
 package com.example.movieapp.di.module
 
 import android.content.Context
-import com.example.movieapp.model.network.MovieApi
+import com.example.movieapp.data.api.MovieApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,9 +26,7 @@ object NetworkModule {
      fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
-
         val cacheDir = File(context.cacheDir, UUID.randomUUID().toString())
-
         val cache = Cache(cacheDir, 15 * 1024 * 1024)
         return OkHttpClient.Builder()
             .cache(cache)
@@ -49,6 +47,4 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideMovieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
-
-
 }

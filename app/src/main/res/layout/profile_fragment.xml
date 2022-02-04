@@ -6,10 +6,8 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.movieapp.ui.user.profile.ProfileViewModel" />
+            type="com.example.movieapp.presentation.ui.user.profile.ProfileViewModel" />
     </data>
-
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/user_fragment"
@@ -51,11 +49,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:tint="?android:attr/textColorSecondaryNoDisable"
                 app:layout_constraintBottom_toBottomOf="@+id/user_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/user_name"
-                app:srcCompat="@drawable/ic_settings_black_24dp" />
+                app:srcCompat="@drawable/ic_settings_black_24dp"
+                app:tint="?android:attr/textColorSecondaryNoDisable" />
 
             <ImageView
                 android:id="@+id/imageAvatar"
@@ -73,14 +71,7 @@
 
 
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/google_login_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/save_text"
@@ -127,6 +118,14 @@
                 app:layout_constraintVertical_bias="0.334"
                 app:playlist="@{viewModel.movieOfSave}" />
 
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/google_login_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

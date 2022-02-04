@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.movieapp.ui.home.detail.DetailViewModel" />
+            type="com.example.movieapp.presentation.ui.home.detail.DetailViewModel" />
     </data>
 
     <ScrollView
@@ -24,7 +24,7 @@
                 android:id="@+id/frameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".ui.home.detail.DetailFragment">
+                tools:context=".presentation.ui.home.detail.DetailFragment">
 
                 <ImageView
                     android:id="@+id/imageView"

@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-        <variable
-            name="viewModel"
-            type="com.example.movieapp.ui.home.overview.OverviewViewModel" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+ <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -26,20 +18,5 @@
             tools:listitem="@layout/item_parent"
             android:orientation="vertical"/>
 
-<!--        <ProgressBar-->
-<!--        style="@style/progressBarStyle"-->
-<!--        android:foregroundGravity="center"-->
-<!--        android:layout_width="64dp"-->
-<!--        android:layout_height="64dp"-->
-<!--        android:indeterminateTint="@color/appColor"-->
-<!--        android:indeterminateTintMode="src_in"-->
-<!--        app:isNetworkError="@{safeUnbox(viewModel.eventNetworkError)}"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:playlist="@{viewModel.parentListMovie}" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>

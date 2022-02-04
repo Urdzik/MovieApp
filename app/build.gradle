@@ -55,9 +55,8 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 
-
     // UI
-    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
 
     // Navigation
@@ -70,15 +69,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
 
-    //Rx
-    implementation "io.reactivex.rxjava3:rxjava:3.0.3"
-    implementation"io.reactivex.rxjava3:rxkotlin:3.0.0"
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
-    implementation 'com.jakewharton.rxbinding:rxbinding-support-v4:0.4.0'
-    implementation 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
-    implementation 'com.github.pwittchen:reactivenetwork-rx2:3.0.0'
-
     //Parsing the JSON format
     implementation 'com.google.code.gson:gson:2.8.6'
 
@@ -89,9 +79,12 @@ dependencies {
 
 
     //Firebase
-    implementation 'com.google.firebase:firebase-auth:21.0.1'
-    implementation 'com.google.android.gms:play-services-auth:20.0.1'
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.0.1'
+    implementation platform('com.google.firebase:firebase-bom:29.0.4')
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+
 
     // Arch components
     // ViewModel and LiveData
