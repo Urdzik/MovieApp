@@ -3,7 +3,6 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
-        <item name="colorPrimaryDark">#121212</item>
-        <item name="colorPrimary">@color/appColor</item>
+        <item name="android:statusBarColor">#FF191c1a</item>
     </style>
 </resources>
