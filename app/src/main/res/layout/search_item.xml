@@ -55,16 +55,25 @@
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView" />
 
-        <TextView
-            android:id="@+id/genres"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+<!--        <TextView-->
+<!--            android:id="@+id/genres"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="10dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/name"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/name"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/name" />-->
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/genresChipGroup"
             app:layout_constraintEnd_toEndOf="@+id/name"
             app:layout_constraintStart_toStartOf="@+id/name"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            app:layout_constraintTop_toBottomOf="@+id/name"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <RatingBar
             android:id="@+id/rating"
@@ -80,7 +89,7 @@
             android:secondaryProgressTint="@color/appColor"
             android:stepSize="0.5"
             app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/genres" />
+            app:layout_constraintTop_toBottomOf="@+id/genresChipGroup" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

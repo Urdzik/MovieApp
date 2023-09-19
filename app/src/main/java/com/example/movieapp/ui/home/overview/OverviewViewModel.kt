@@ -11,8 +11,9 @@ import com.example.movieapp.model.network.data.movie.SmallMovieList
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class OverviewViewModel @Inject constructor(private val networkSource: SmallMovieListSource) :
-    ViewModel() {
+class OverviewViewModel @Inject constructor(
+    private val networkSource: SmallMovieListSource
+) : ViewModel() {
 
     private var disposableBack = CompositeDisposable()
     private val categoryList = listOf("upcoming", "top_rated", "popular", "now_playing")
@@ -50,32 +51,16 @@ class OverviewViewModel @Inject constructor(private val networkSource: SmallMovi
     private fun fetchMoviesLists() {
         Log.d("ViewModel", "load data")
 
-        val titleCategoryMap = hashMapOf(
-            1 to ("Сейчас в кино" to "now_playing"),
-            2 to ("Топ рейтинг" to "top_rated"),
-            3 to ("Популярное" to "popular"),
-            4 to ("Рекомендации" to "upcoming")
-        )
-
-       val dis =  networkSource.fetchSmallMovieList(categoryList, "26f381d6ab8dd659b22d983cab9aa255", "ru")
-            .subscribe({ collectionList ->
-                val mListMovie = collectionList.mapIndexed { index, list ->
-                    ParentListMovie(
-                        titleCategoryMap[index]?.first ?: "",
-                        titleCategoryMap[index]?.second ?: "",
-                        list
-                    )
-                }
+        networkSource.fetchSmallMovieList(categoryList, "ru")
+            .subscribe({ parentMoviesList ->
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
-                _parentListMovie.value = mListMovie
+                _parentListMovie.value = parentMoviesList
             }, {
                 if (parentListMovie.value.isNullOrEmpty()) {
                     _eventNetworkError.value = true
                 }
-            }
-            )
-        disposableBack.add(dis)
+            }).let(disposableBack::add)
     }
 
     fun displayPropertyDetails(movie: SmallMovieList) {

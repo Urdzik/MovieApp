@@ -5,23 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.movieapp.dagger.App
 import com.example.movieapp.dagger.module.viewModule.ViewModelFactory
 import com.example.movieapp.databinding.SearchFragmentBinding
 import com.example.movieapp.model.network.data.search.SearchItem
 import com.example.movieapp.utils.adapters.SearchAdapter
 import com.example.movieapp.utils.injectViewModel
-import com.jakewharton.rxbinding.widget.RxTextView
+import com.example.movieapp.utils.toFlowable
+import com.example.movieapp.utils.withParams
 import dagger.android.support.DaggerFragment
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.search_fragment.*
-import rx.Single
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SearchFragment : DaggerFragment() {
@@ -31,12 +27,12 @@ class SearchFragment : DaggerFragment() {
     lateinit var viewModel: SearchViewModel
     lateinit var binding: SearchFragmentBinding
     lateinit var adapter: SearchAdapter
+    private val disposables = CompositeDisposable()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
 
         viewModel = injectViewModel(viewModelFactory)
         binding = SearchFragmentBinding.inflate(inflater)
@@ -57,34 +53,28 @@ class SearchFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        RxTextView.textChanges(binding.edit)
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .filter {
-                it.length > 2
-            }
-            .debounce(300, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { showProgress() }
-            .observeOn(Schedulers.io())
-            .switchMap {
-                apiRequest(it).toObservable()
-            }
+
+        binding.edit.toFlowable()
+            .withParams(
+                minLength = 2,
+                debounce = 500,
+                switchMapper = ::apiRequest,
+                doOnNext = ::showProgress
+            )
             .map { resp ->
-                resp
-                    .filterNot { it.name == null || it.name == "null" }
+                resp.filterNot { it.name.isNullOrEmpty() || it.name == "null" }
             }
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d("response", "result: $it")
                 hideProgress()
                 adapter.submitList(it)
             }, {
                 Log.d("response", "error: $it")
-            })
+            }
+            ).let(disposables::add)
     }
 
-    private fun apiRequest(chars: CharSequence): Single<List<SearchItem>> {
-        return viewModel.getSearchResult(chars.toString())
+    private fun apiRequest(chars: CharSequence): Flowable<List<SearchItem>> {
+        return viewModel.getSearchResult(chars.toString()).toFlowable()
     }
 
     private fun showProgress() {
@@ -95,5 +85,10 @@ class SearchFragment : DaggerFragment() {
     private fun hideProgress() {
         searchProgressBar.visibility = View.INVISIBLE
         search_rv.visibility = View.VISIBLE
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposables.clear()
     }
 }
